@@ -1,0 +1,48 @@
+ul.ui-autocomplete{
+  @include border-radius(0 0 4px 4px);
+
+  @include paddingbox(365px, auto);
+  @include rgba-background(rgba(0, 0, 0, 0.8));
+
+  @include iPodWebappPortrait{
+   @include paddingbox(245px, auto);
+  }
+
+  @include iPodSafariPortrait{
+   @include paddingbox(245px, auto);
+  }
+
+  @include iPodSafariLandscapeFullscrren{
+   @include paddingbox(405px, auto);
+  }
+
+  @include iPodWebappLandscape{
+  @include paddingbox(405px, auto);
+  }
+
+  @include iPodSafariLandscape{
+   @include paddingbox(405px, auto);
+  }
+
+  margin-top:-2px;
+  border:solid 1px #fff;
+  border-top:none;
+  padding:0 $def_margin_unit / 4 $def_margin_unit / 4 $def_margin_unit / 4;
+
+  li{
+    display:block;
+
+    a{
+      color:$lightgrey;
+      font-size:$small;
+     }
+
+     a.ui-state-focus{
+       color:$white;
+     }
+  }
+}
+
+.ui-helper-hidden-accessible{
+  display:none !important;
+}
