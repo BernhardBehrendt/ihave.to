@@ -1,5 +1,5 @@
 Author:
-iHave.to is written by Bernhard Bezdek bernhard.bezdek@googlemail.com all rights reserved.
+iHave.to is written by Bernhard Bezdek all rights reserved.
 
 Released under MIT License
 
