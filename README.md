@@ -8,8 +8,10 @@ Released under MIT License
 
 Startup:
 
+
 To run the application a node runtime is required (http://nodejs.org/)
 
+Create the folder boards (if not exists) on same level as server and public folder
 Ensure that hte boards folder has write permissions for nodejs running user.
 
 Now there are two ways possible to run the application:
