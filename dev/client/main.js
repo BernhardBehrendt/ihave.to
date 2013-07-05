@@ -1,54 +1,77 @@
 $(document).ready(function() {
-	CONF.DOM.UIWINDOW.trigger('showUi');
-	CONF.DOM.UIWINDOW.children('.cmd').html(new Template(new Login()).toHtml());
+    CONF.DOM.UIWINDOW.trigger('showUi');
 
-	var aBoards = new Array();
-	var sLastBoard = '';
+    CONF.DOM.UIWINDOW.children('.cmd').html(new Template({
+        LINK : {
+            URL : 'https://github.com/BernhardBezdek/ihave.to',
+            TARGET:'_blank',
+            CONTENT : {
+                IMG : {
+                    SRC : 'https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png',
+                    ALT : 'Fork me on GitHub',
+                    STYLE : 'position: absolute; top: 0; right: 0; border: 0;'
+                }
+            }
+        }
+    }).toHtml() + new Template(new Login()).toHtml());
 
-	if ( typeof (Storage) != CONF.PROPS.STRING.UD) {
-		CONF.PROPS.OBJECT.STORAGE = localStorage;
-		if (CONF.PROPS.OBJECT.STORAGE.getItem("boards") == null) {
-			CONF.PROPS.OBJECT.STORAGE.setItem("boards", '');
+    var aBoards = new Array();
+    var sLastBoard = '';
 
-		}
+    if ( typeof (Storage) != CONF.PROPS.STRING.UD) {
+        CONF.PROPS.OBJECT.STORAGE = localStorage;
+        if (CONF.PROPS.OBJECT.STORAGE.getItem("boards") == null) {
+            CONF.PROPS.OBJECT.STORAGE.setItem("boards", '');
 
-		if (CONF.PROPS.OBJECT.STORAGE.getItem("lastboard") != null) {
-			sLastBoard = CONF.PROPS.OBJECT.STORAGE.getItem("lastboard");
-		}
+        }
 
-		aBoards = CONF.PROPS.OBJECT.STORAGE.getItem("boards").split('-').filter(String);
+        if (CONF.PROPS.OBJECT.STORAGE.getItem("lastboard") != null) {
+            sLastBoard = CONF.PROPS.OBJECT.STORAGE.getItem("lastboard");
+        }
 
-		if (sLastBoard.length > 0)
-			$('#boardname').val(sLastBoard);
+        aBoards = CONF.PROPS.OBJECT.STORAGE.getItem("boards").split('-').filter(String);
 
-	}
+        if (sLastBoard.length > 0)
+            $('#boardname').val(sLastBoard);
 
-	$('#boardpw').passStrength({
-		userid : "#boardname"
-	});
+    }
 
-	$('#boardpw').trigger('keyup');
+    $('#boardpw').passStrength({
+        userid : "#boardname"
+    });
 
-	$('#boardname').autocomplete({
-		source : aBoards
-	});
+    $('#boardpw').trigger('keyup');
 
-	// Update the title for mobile devices
-	if (isMobile())
-		setTimeout(function() {
-			$('title').text('MOBILE_TITLE'.translate());
-		}, 2000);
-	else {
-		$('#login-window').css({
-			position : 'absolute',
-			left : (($(window).width() - $('#login-window').outerWidth()) / 2),
-			top : (($(window).height() - $('#login-window').outerHeight()) / 3),
-		});
+    $('#boardname').autocomplete({
+        source : aBoards
+    });
 
-		$('#cmd').css({
-			float : 'none',
-			margin : '0 auto'
-		});
-	}
+    function handleScreenResize() {
+
+        // Update the title for mobile devices
+        if (isMobile())
+            setTimeout(function() {
+                $('title').text('MOBILE_TITLE'.translate());
+            }, 2000);
+        else {
+            $('#login-window').css({
+                position : 'absolute',
+                left : (($(window).width() - $('#login-window').outerWidth()) / 2),
+                top : (($(window).height() - $('#login-window').outerHeight()) / 3),
+            });
+
+            $('#cmd').css({
+                float : 'none',
+                margin : '0 auto'
+            });
+        }
+    }
+
+    handleScreenResize();
+
+    $(window).resize(function() {
+        handleScreenResize();
+    });
+
 });
 
