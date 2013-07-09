@@ -1,4 +1,5 @@
 var sLang = ((navigator.language) ? navigator.language : navigator.userLanguage).toUpperCase().slice(0, 2);
+sLang = 'EN';
 var CONF = {
     BOARD : null,
     DOM : {

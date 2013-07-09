@@ -43,4 +43,4 @@ uglifyjs \
 ./client/interactions/ui.js \
 ./client/interactions/window.js \
 ./client/main.js \
--m -c -o ./public/js/client.js
+-c -m  -o ./public/js/client.js

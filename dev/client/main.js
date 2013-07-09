@@ -4,10 +4,10 @@ $(document).ready(function() {
     CONF.DOM.UIWINDOW.children('.cmd').html(new Template({
         LINK : {
             URL : 'https://github.com/BernhardBezdek/ihave.to',
-            TARGET:'_blank',
+            TARGET : '_blank',
             CONTENT : {
                 IMG : {
-                    SRC : 'https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png',
+                    SRC : 'https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png',
                     ALT : 'Fork me on GitHub',
                     STYLE : 'position: absolute; top: 0; right: 0; border: 0;'
                 }
@@ -47,23 +47,24 @@ $(document).ready(function() {
     });
 
     function handleScreenResize() {
+        if ($('#login-window').length > 0) {
+            // Update the title for mobile devices
+            if (isMobile())
+                setTimeout(function() {
+                    $('title').text('MOBILE_TITLE'.translate());
+                }, 2000);
+            else {
+                $('#login-window').css({
+                    position : 'absolute',
+                    left : (($(window).width() - $('#login-window').outerWidth()) / 2),
+                    top : (($(window).height() - $('#login-window').outerHeight()) / 3),
+                });
 
-        // Update the title for mobile devices
-        if (isMobile())
-            setTimeout(function() {
-                $('title').text('MOBILE_TITLE'.translate());
-            }, 2000);
-        else {
-            $('#login-window').css({
-                position : 'absolute',
-                left : (($(window).width() - $('#login-window').outerWidth()) / 2),
-                top : (($(window).height() - $('#login-window').outerHeight()) / 3),
-            });
-
-            $('#cmd').css({
-                float : 'none',
-                margin : '0 auto'
-            });
+                $('#cmd').css({
+                    float : 'none',
+                    margin : '0 auto'
+                });
+            }
         }
     }
 
