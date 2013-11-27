@@ -1,5 +1,6 @@
 grunt/node_modules/
 server/node_modules/
+boards
 .DS_Store
 .project
 .git
