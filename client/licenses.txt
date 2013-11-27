@@ -1,0 +1,83 @@
+/*
+ * Copyright (c) 2012-2013 Bernhard Bezdek http://www.ihave.to/
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ *
+ * INCLUDES:
+ *--------------------------------------------------------------------------------------------------------------------
+ * jQuery v1.9.0 | (c) 2005, 2012 jQuery Foundation, Inc. | jquery.org/license
+ * --------------------------------------------------------------------------------------------------------------------
+ * ! jQuery UI - v1.9.2 - 2012-11-23
+ * http://jqueryui.com
+ *
+ * Copyright 2012 jQuery Foundation and other contributors; Licensed MIT
+ * --------------------------------------------------------------------------------------------------------------------
+ * jQuery UI Touch Punch 0.2.2
+ *
+ * Copyright 2011, Dave Furfero
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * --------------------------------------------------------------------------------------------------------------------
+ * TinySort 1.4.29
+ * Copyright (c) 2008-2012 Ron Valstar http://www.sjeiti.com/
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ * --------------------------------------------------------------------------------------------------------------------
+ * Add to Homescreen v2.0.5 ~ Copyright (c) 2013 Matteo Spinelli, http://cubiq.org
+ * Released under MIT license, http://cubiq.org/license
+ * --------------------------------------------------------------------------------------------------------------------
+ * jQuery Color Animations v@VERSION
+ * https://github.com/jquery/jquery-color
+ *
+ * Copyright 2013 jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * Date: @DATE
+ * --------------------------------------------------------------------------------------------------------------------
+ * password_strength_plugin.js
+ * Copyright (c) 20010 myPocket technologies (www.mypocket-technologies.com)
+ *
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @author Darren Mason (djmason9@gmail.com)
+ * @date 3/13/2009
+ * @projectDescription Password Strength Meter is a jQuery plug-in provide you smart algorithm to detect a password strength.
+ * Based on Firas Kassem orginal plugin - http://phiras.wordpress.com/2007/04/08/password-strength-meter-a-jquery-plugin/
+ *
+ * @version 1.0.1
+ *
+ * ____________________________________________________________________________________________________________________
+ * crypto-js
+ *
+ * © 2009–2013 by Jeff Mott. All rights reserved.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS," AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
+ * BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+ * OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+ * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ */

@@ -1,0 +1,15 @@
+{
+  "name": "node_plataform",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-macreload": "*",
+    "grunt-contrib-compass": "*",
+    "grunt-nodemon": "*",
+    "grunt-concurrent": "*",
+    "grunt-shell-spawn": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-notify": "*"
+  }
+}
