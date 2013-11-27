@@ -1,4 +1,0 @@
-@mixin opacity($intensity:1){
-  opacity:$intensity;
-  filter: alpha(opacity=$intensity * 100);
-}

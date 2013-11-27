@@ -1,5 +1,0 @@
-@mixin paddingbox($width:0, $height:0, $pad_top:0, $pad_right:0, $pad_bottom:0, $pad_left:0){
-  width: $width - ($pad_right + $pad_left);
-  height: $height - ($pad_top + $pad_bottom);
-  padding: $pad_top $pad_right $pad_bottom $pad_left;
-}
