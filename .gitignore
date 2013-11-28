@@ -4,5 +4,5 @@ boards
 .DS_Store
 .project
 .git
-.idea/
+.idea/*
 LAYOUT
