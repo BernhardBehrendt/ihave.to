@@ -5,4 +5,5 @@ boards
 .project
 .git
 LAYOUT
-.idea/
+./.idea
+./.sass-cache
