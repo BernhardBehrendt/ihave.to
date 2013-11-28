@@ -1,88 +1,139 @@
-module.exports = function(grunt) {'use strict';
+module.exports = function (grunt) {
+    'use strict';
 
     grunt.initConfig({
-        pkg : grunt.file.readJSON('package.json'),
-        notify : {
-            styles : {
-                options : {
-                    title : 'Task Complete', // optional
-                    message : 'SASS and Uglify finished running' //required
+        pkg: grunt.file.readJSON('package.json'),
+        notify: {
+            styles: {
+                options: {
+                    title: 'Task Complete', // optional
+                    message: 'SASS and Uglify finished running' //required
                 }
             },
-            nodemon : {
-                options : {
-                    message : 'Server restarted'
+            nodemon: {
+                options: {
+                    message: 'Server restarted'
                 }
             }
         },
-        macreload : {
-            firefox : {
-                browser : 'firefox'
+        macreload: {
+            firefox: {
+                browser: 'firefox'
             }
         },
-        compass : {
-            dist : {
-                options : {
-                    basePath : '../sass/'
+        compass: {
+            dist: {
+                options: {
+                    basePath: '../sass/'
                 }
             }
         },
-        nodemon : {
-            dev : {
-                options : {
-                    file : 'server/app.js',
-                    nodeArgs : ['--debug'],
-                    ignoredFiles : ['grunt/**', 'public/**', 'server/node_modules/**', 'server/components/**/migration/**', 'components/**/migration/**', 'server/i18n/**'],
-                    watchedExtensions : ['js', 'json', 'ejs'],
-                    cwd : '../'
+        nodemon: {
+            dev: {
+                options: {
+                    file: 'server/server-standalone.js',
+                    nodeArgs: [],
+                    ignoredFiles: ['grunt/**', 'public/**', 'server/node_modules/**'],
+                    watchedExtensions: ['js', 'json'],
+                    cwd: '../'
                 }
             }
         },
-        shell : {
-            sleep1sec : {
-                command : 'sleep 1'
+        shell: {
+            sleep1sec: {
+                command: 'sleep 1'
             },
-            sleep2sec : {
-                command : 'sleep 2'
+            sleep2sec: {
+                command: 'sleep 2'
             }
         },
-        watch : {
-            styles : {
-                files : '../sass/**/*.scss',
-                tasks : ['compass', 'notify:styles', 'macreload']
+        watch: {
+            styles: {
+                files: '../sass/**/*.scss',
+                tasks: ['compass', 'notify:styles', 'macreload']
             },
-            nodemonrestart : {
-                files : '../nodemonrestart.tmp',
-                tasks : ['notify:nodemon', 'macreload']
+            nodemonrestart: {
+                files: '../nodemonrestart.tmp',
+                tasks: ['notify:nodemon', 'macreload']
+            },
+            client: {
+                files: '../client/**/*.js',
+                tasks: ['uglify', 'macreload']
             }
         },
-        jshint : {
-            files : ['../**/*.js'],
-            options : {
-                ignores : ['../grunt/**', '../public/**', '../server/node_modules/**', '../frontend_modules/**', '../api-reference/**', '../yuidoc_template/**'],
-                curly : true,
-                unused : false,
-                eqeqeq : true,
-                eqnull : true,
-                plusplus : false,
-                newcap : false,
-                node : true,
-                jquery : true,
-                yui : true,
-                devel : true,
-                globals : {
-                    jQuery : true
+        jshint: {
+            files: ['../**/*.js'],
+            options: {
+                ignores: ['../grunt/**', '../public/**', '../server/node_modules/**', '../frontend_modules/**', '../api-reference/**', '../yuidoc_template/**'],
+                curly: true,
+                unused: false,
+                eqeqeq: true,
+                eqnull: true,
+                plusplus: false,
+                newcap: false,
+                node: true,
+                jquery: true,
+                yui: true,
+                devel: true,
+                globals: {
+                    jQuery: true
                 }
             }
         },
-        concurrent : {
-            target : {
-                tasks : ['nodemon', 'watch', 'jshint'],
-                options : {
-                    logConcurrentOutput : true
+        concurrent: {
+            target: {
+                tasks: ['nodemon', 'watch', 'jshint'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
+        },
+        uglify: {
+             options: {
+                 //beautify:true,
+                 compress: {
+                     global_defs: {
+                         "DEBUG": false
+                     },
+                     dead_code: true
+                 }
+             },
+            my_target: {
+                files: {
+                    '../public/js/client.js': [
+                                                '../client/static/language.js',
+                                                '../client/static/config.js',
+                                                '../client/static/templates.js',
+
+                                                '../client/classes/extends/object.js',
+                                                '../client/classes/extends/string.js',
+                                                '../client/classes/*.js',
+
+                                                '../client/vendor/jquery/jquery.min.js',
+                                                '../client/vendor/jquery/jquery-ui.min.js',
+                                                '../client/vendor/jquery/jquery-ui.touchpunch.js',
+                                                '../client/vendor/jquery/jquery.color.js',
+                                                '../client/vendor/jquery/jquery.cursorposition.js',
+                                                '../client/vendor/jquery/jquery.pstrength.js',
+                                                '../client/vendor/jquery/jquerytinysort.js',
+
+                                                '../client/vendor/apprise/apprise-v2.js',
+
+                                                '../client/vendor/cubic/add2home.js',
+
+                                                '../client/vendor/crypto/rollups/aes.js',
+                                                '../client/vendor/crypto/rollups/sha3.js',
+
+                                                '../client/vendor/socket.io/socket.io.js',
+
+                                                '../client/functions/*.js',
+                                                '../client/init/*.js',
+                                                '../client/interactions/*.js',
+                                                '../client/main.js']
                 }
             }
         }
+
     });
 
     grunt.loadNpmTasks('grunt-notify');
@@ -93,6 +144,7 @@ module.exports = function(grunt) {'use strict';
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // grunt.task.run('notify_hooks');
 

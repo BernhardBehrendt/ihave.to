@@ -64,7 +64,7 @@ $(document).on(CONF.EVENTS.CLICK, '#ui > .controls > .close', function() {
             CONF.PROPS.OBJECT.STORAGE.setItem("lastboard", sBoardName);
         }
 
-        $('#login-loader, #login-message').remove()
+        $('#login-loader, #login-message').remove();
         $('#login-content').children('h1, p, #login-form').hide();
         $('#login-content').prepend(new Template({
             IMG : {

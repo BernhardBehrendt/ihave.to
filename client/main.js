@@ -1,6 +1,5 @@
 $(document).ready(function() {
     CONF.DOM.UIWINDOW.trigger('showUi');
-
     CONF.DOM.UIWINDOW.children('.cmd').html(new Template({
         LINK : {
             URL : 'https://github.com/BernhardBezdek/ihave.to',

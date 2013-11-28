@@ -14,4 +14,4 @@ exports.get = function() {
 			OBJECT : {}
 		}
 	};
-}
+};

@@ -104,7 +104,7 @@ CONF.DOM.BOARD.bind('uiBoard', function() {
 				var oDiff = JSON.parse('{"PRIVATE" : {"SCREENS" : {"' + sActiveScreen + '":{"POSTS":{"' + iTime + '":{}}}}}}');
 
 				// Assign change to diff and board
-				oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTime] = oChange
+				oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTime] = oChange;
 				CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS[iTime] = oChange;
 
 				CONF.COM.SOCKET.saveChanges(oDiff);

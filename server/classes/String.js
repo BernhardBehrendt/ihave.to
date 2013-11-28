@@ -9,7 +9,7 @@ Strings.prototype.reverse = function() {
 	this.string = this.string.replace(grapheme_extend, '$2$1');
 
 	return this.string.split('').reverse().join('');
-}
+};
 
 module.exports = Strings;
 
