@@ -1,195 +1,207 @@
-/**
- * Creates defined menues
- */
-Menu = function() {
+/*global CONF*/
+var Menu;
+(function () {
+    "use strict";
+    /**
+     * Creates defined menues
+     */
+    Menu = function () {
 
-};
-/**
- * The menue corpus
- */
-Menu.prototype.getMenuCorpus = function() {
-	return {
-		UL : {
-			CONTENT : {
-				LI : null
-			}
-		}
-	}
-};
-/**
- * The finalisation of the menu items
- * @param {Array} aCmds
- */
-Menu.prototype.getMenuCmds = function(aCmds) {
-	var oMenuCorpus = this.getMenuCorpus();
+    };
+    /**
+     * The menue corpus
+     */
+    Menu.prototype.getMenuCorpus = function () {
+        return {
+            UL: {
+                CONTENT: {
+                    LI: null
+                }
+            }
+        };
+    };
+    /**
+     * The finalisation of the menu items
+     * @param {Array} aCmds
+     */
+    Menu.prototype.getMenuCmds = function (aCmds) {
+        var oMenuCorpus = this.getMenuCorpus();
 
-	aCmds[aCmds.length] = {
-		CLASSES : 'fixline',
-		AFTER : ' '
-	};
+        aCmds[aCmds.length] = {
+            CLASSES: 'fixline',
+            AFTER: ' '
+        };
 
-	oMenuCorpus.UL.CONTENT.LI = aCmds;
+        oMenuCorpus.UL.CONTENT.LI = aCmds;
 
-	return oMenuCorpus;
-};
-/**
- * The login menue before start
- * @param {String} the Actice menu item
- */
-Menu.prototype.getLoginsMenue = function(sActiveOne) {
-	if ( typeof (sActiveOne) == CONF.PROPS.STRING.UD)
-		sActiveOne = '';
+        return oMenuCorpus;
+    };
+    /**
+     * The login menue before start
+     * @param {String} sActiveOne the Actice menu item
+     */
+    Menu.prototype.getLoginsMenue = function (sActiveOne) {
+        if (sActiveOne === undefined) {
+            sActiveOne = '';
+        }
 
-	var aMenuCmds =  [];  // ['home', 'login', 'help', 'system'];
-	var aCmds = new Array();
+        var aMenuCmds = [];  // ['home', 'login', 'help', 'system'];
+        var aCmds = [];
 
-	for (var i = 0; i < aMenuCmds.length; i++) {
-		aCmds[i] = {
-			CONTENT : {
-				LINK : {
-					URL : '#',
-					ID : aMenuCmds[i],
-					CLASSES : ((aMenuCmds[i] == sActiveOne) ? 'active' : '')
-				}
-			},
-			AFTER : ' '
-		}
-	}
+        for (var i = 0; i < aMenuCmds.length; i++) {
+            aCmds[i] = {
+                CONTENT: {
+                    LINK: {
+                        URL: '#',
+                        ID: aMenuCmds[i],
+                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
+                    }
+                },
+                AFTER: ' '
+            };
+        }
 
-	return aCmds;
-};
-/**
- * The main menue after start
- * @param {String} the Actice menu item
- */
-Menu.prototype.getPrivateMain = function(sActiveOne) {
+        return aCmds;
+    };
+    /**
+     * The main menue after start
+     * @param {String} sActiveOne the Actice menu item
+     */
+    Menu.prototype.getPrivateMain = function (sActiveOne) {
 
-	if ( typeof (sActiveOne) == CONF.PROPS.STRING.UD)
-		sActiveOne = '';
-    // 'timeline'
-	var aMenuCmds = ['new_post', 'chrono', 'screen', 'settings'];
-	var aCmds = new Array();
+        if (sActiveOne === undefined) {
+            sActiveOne = '';
+        }
+        // 'timeline'
+        var i;
+        var aMenuCmds = ['new_post', 'chrono', 'screen', 'settings'];
+        var aCmds = [];
 
-	for (var i = 0; i < aMenuCmds.length; i++) {
-		aCmds[i] = {
-			CONTENT : {
-				LINK : {
-					URL : '#',
-					ID : aMenuCmds[i],
-					CLASSES : ((aMenuCmds[i] == sActiveOne) ? 'active' : '')
-				}
-			},
-			AFTER : ' '
-		}
-	}
+        for (i = 0; i < aMenuCmds.length; i += 1) {
+            aCmds[i] = {
+                CONTENT: {
+                    LINK: {
+                        URL: '#',
+                        ID: aMenuCmds[i],
+                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
+                    }
+                },
+                AFTER: ' '
+            };
+        }
 
-	return aCmds;
-};
-/**
- * The Navigation for the post view
- * @param {String} the Actice menu item
- */
-Menu.prototype.getPostMenue = function(sActiveOne) {
+        return aCmds;
+    };
+    /**
+     * The Navigation for the post view
+     * @param {String} sActiveOne the Actice menu item
+     */
+    Menu.prototype.getPostMenue = function (sActiveOne) {
 
-	if ( typeof (sActiveOne) == CONF.PROPS.STRING.UD)
-		sActiveOne = '';
+        if (sActiveOne === undefined) {
+            sActiveOne = '';
+        }
+        var i;
+        var aMenuCmds = ['back', 'store_post', 'cancel'];
+        var aCmds = [];
 
-	var aMenuCmds = ['back', 'store_post', 'cancel'];
-	var aCmds = new Array();
+        for (i = 0; i < aMenuCmds.length; i += 1) {
+            aCmds[i] = {
+                CONTENT: {
+                    LINK: {
+                        URL: '#',
+                        ID: aMenuCmds[i],
+                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
+                    }
+                },
+                AFTER: ' '
+            };
+        }
 
-	for (var i = 0; i < aMenuCmds.length; i++) {
-		aCmds[i] = {
-			CONTENT : {
-				LINK : {
-					URL : '#',
-					ID : aMenuCmds[i],
-					CLASSES : ((aMenuCmds[i] == sActiveOne) ? 'active' : '')
-				}
-			},
-			AFTER : ' '
-		}
-	}
+        return aCmds;
+    };
+    /**
+     * The Navigation for the post edit view
+     * @param {String} sActiveOne the Actice menu item
+     */
+    Menu.prototype.getPostEdit = function (sActiveOne) {
 
-	return aCmds;
-};
-/**
- * The Navigation for the post edit view
- * @param {String} the Actice menu item
- */
-Menu.prototype.getPostEdit = function(sActiveOne) {
+        if (typeof (sActiveOne) === CONF.PROPS.STRING.UD) {
+            sActiveOne = '';
+        }
+        var i;
+        var aMenuCmds = ['edit', 'delete'];
+        var aCmds = [];
 
-	if ( typeof (sActiveOne) == CONF.PROPS.STRING.UD)
-		sActiveOne = '';
+        for (i = 0; i < aMenuCmds.length; i += 1) {
+            aCmds[i] = {
+                CONTENT: {
+                    LINK: {
+                        URL: '#',
+                        ID: aMenuCmds[i],
+                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
+                    }
+                },
+                AFTER: ' '
+            };
+        }
 
-	var aMenuCmds = ['edit', 'delete'];
-	var aCmds = new Array();
+        return aCmds;
+    };
+    /**
+     * The Navigation for the screen view
+     * @param {String} sActiveOne the Actice menu item
+     */
+    Menu.prototype.getScreenMenue = function (sActiveOne) {
 
-	for (var i = 0; i < aMenuCmds.length; i++) {
-		aCmds[i] = {
-			CONTENT : {
-				LINK : {
-					URL : '#',
-					ID : aMenuCmds[i],
-					CLASSES : ((aMenuCmds[i] == sActiveOne) ? 'active' : '')
-				}
-			},
-			AFTER : ' '
-		}
-	}
+        if (sActiveOne === undefined) {
+            sActiveOne = '';
+        }
 
-	return aCmds;
-};
-/**
- * The Navigation for the screen view
- * @param {String} the Actice menu item
- */
-Menu.prototype.getScreenMenue = function(sActiveOne) {
+        var aMenuCmds = ['back', 'new_screen', 'trash_empty'];
+        var aCmds = [];
 
-	if ( typeof (sActiveOne) == CONF.PROPS.STRING.UD)
-		sActiveOne = '';
+        for (var i = 0; i < aMenuCmds.length; i++) {
+            aCmds[i] = {
+                CONTENT: {
+                    LINK: {
+                        URL: '#',
+                        ID: aMenuCmds[i],
+                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
+                    }
+                },
+                AFTER: ' '
+            };
+        }
 
-	var aMenuCmds = ['back', 'new_screen', 'trash_empty'];
-	var aCmds = new Array();
+        return aCmds;
+    };
+    /**
+     * The Navigation for the screen view
+     * @param {String} sActiveOne the Actice menu item
+     */
+    Menu.prototype.getSettingsMenue = function (sActiveOne) {
 
-	for (var i = 0; i < aMenuCmds.length; i++) {
-		aCmds[i] = {
-			CONTENT : {
-				LINK : {
-					URL : '#',
-					ID : aMenuCmds[i],
-					CLASSES : ((aMenuCmds[i] == sActiveOne) ? 'active' : '')
-				}
-			},
-			AFTER : ' '
-		}
-	}
+        if (sActiveOne === undefined) {
+            sActiveOne = '';
+        }
 
-	return aCmds;
-};
-/**
- * The Navigation for the screen view
- * @param {String} the Actice menu item
- */
-Menu.prototype.getSettingsMenue = function(sActiveOne) {
+        var aMenuCmds = ['back'];
+        var aCmds = [];
 
-	if ( typeof (sActiveOne) == CONF.PROPS.STRING.UD)
-		sActiveOne = '';
+        for (var i = 0; i < aMenuCmds.length; i++) {
+            aCmds[i] = {
+                CONTENT: {
+                    LINK: {
+                        URL: '#',
+                        ID: aMenuCmds[i],
+                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
+                    }
+                },
+                AFTER: ' '
+            };
+        }
 
-	var aMenuCmds = ['back'];
-	var aCmds = new Array();
-
-	for (var i = 0; i < aMenuCmds.length; i++) {
-		aCmds[i] = {
-			CONTENT : {
-				LINK : {
-					URL : '#',
-					ID : aMenuCmds[i],
-					CLASSES : ((aMenuCmds[i] == sActiveOne) ? 'active' : '')
-				}
-			},
-			AFTER : ' '
-		}
-	}
-
-	return aCmds;
-};
+        return aCmds;
+    };
+})();
