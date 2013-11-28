@@ -287,7 +287,7 @@ $(document).on('mouseover', 'nav#cmd > ul > li > a', function() {
                                     CONF.BOARD.TRASH = {};
 
                                 // Create a backup if there is any post on screen (including deleted screens)
-                                if (Object.size(CONF.BOARD.PRIVATE.SCREENS[sScreenName].POSTS) > 0) {
+                                if (Object.keys(CONF.BOARD.PRIVATE.SCREENS[sScreenName].POSTS).length > 0) {
 
                                     var oChange = {
                                         BY : CONF.PROPS.INT.WHO,

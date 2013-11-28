@@ -1,150 +1,152 @@
+/*global $*/
+/*global log*/
+/*global CONF*/
+/*global Board*/
+/*global Template*/
+/*global setTimeout*/
+/*global isMobile*/
+/*global parseInt*/
+(function () {
+    "use strict";
 // Instance of the board
-CONF.DOM.BOARD = $('#board');
+    CONF.DOM.BOARD = $('#board');
 
-/**
- * Translate the generated board into a webview
- *
- */
-CONF.DOM.BOARD.bind('setupBoard', function(event, oActiveScreen) {
+    /**
+     * Translate the generated board into a webview
+     *
+     */
+    CONF.DOM.BOARD.bind('setupBoard', function (event, oActiveScreen) {
 
-	CONF.DOM.BOARDPOSTS = $(this).children('.posts');
-	CONF.DOM.BOARDSCREENS = CONF.DOM.BOARDPOSTS.children('.screen');
+        CONF.DOM.BOARDPOSTS = $(this).children('.posts');
+        CONF.DOM.BOARDSCREENS = CONF.DOM.BOARDPOSTS.children('.screen');
 
-	CONF.DOM.BOARD.height($(document).height() - CONF.DOM.CMD.height());
-	CONF.DOM.BOARD.width($(document).width());
+        CONF.DOM.BOARD.height($(document).height() - CONF.DOM.CMD.height());
+        CONF.DOM.BOARD.width($(document).width());
 
-	if ( typeof (oActiveScreen) != CONF.PROPS.STRING.UD)
-		CONF.DOM.BOARD.trigger('loadPosts', oActiveScreen);
+        if (oActiveScreen !== undefined) {
+            CONF.DOM.BOARD.trigger('loadPosts', oActiveScreen);
+        }
 
-	$(this).fadeIn(CONF.PROPS.INT.MASTERCLOCK);
+        $(this).fadeIn(CONF.PROPS.INT.MASTERCLOCK);
 
-	log('Boards height was set to ' + CONF.DOM.BOARD.height());
-	log('Boards width was set to ' + CONF.DOM.BOARD.width() * CONF.DOM.BOARDSCREENS.length);
+        log('Boards height was set to ' + CONF.DOM.BOARD.height());
+        log('Boards width was set to ' + CONF.DOM.BOARD.width() * CONF.DOM.BOARDSCREENS.length);
 
-});
+    });
 
-/**
- * Places the Active Screens posts onto screen
- */
-CONF.DOM.BOARD.bind('loadPosts', function(event, oActiveScreen) {
+    /**
+     * Places the Active Screens posts onto screen
+     */
+    CONF.DOM.BOARD.bind('loadPosts', function (event, oActiveScreen) {
 
-	if ( typeof (oActiveScreen) != CONF.PROPS.STRING.UD) {
+        if (oActiveScreen !== undefined) {
 
-		if (( typeof (oActiveScreen.FROMTIME) == CONF.PROPS.STRING.UD || !oActiveScreen.FROMTIME) && ( typeof (oActiveScreen.SCREEN.POSTS) != CONF.PROPS.STRING.UD)) {
+            if (( oActiveScreen.FROMTIME === undefined || !oActiveScreen.FROMTIME) && ( oActiveScreen.SCREEN.POSTS !== undefined)) {
+                oActiveScreen.FROMTIME = Object.keys(oActiveScreen.SCREEN.POSTS)[0];
+            }
 
-			for (var iFromTime in oActiveScreen.SCREEN.POSTS)
-			break;
+            if (oActiveScreen.SCREEN.POSTS !== undefined) {
+                CONF.DOM.BOARDPOSTS.data('activescreen', oActiveScreen.NAME);
 
-			oActiveScreen.FROMTIME = iFromTime;
-		}
+                var oBoard = new Board(oActiveScreen);
+                var oCurrentScreen = oBoard.getTemplate();
 
-		if ( typeof (oActiveScreen.SCREEN.POSTS) != CONF.PROPS.STRING.UD) {
-			CONF.DOM.BOARDPOSTS.data('activescreen', oActiveScreen.NAME);
+                CONF.DOM.BOARDSCREENS.html(new Template(oCurrentScreen).toHtml());
+                CONF.DOM.BOARD.trigger('uiBoard');
+            }
+        }
+    });
+    /**
+     * Hanles drag&drop of the posts for manual reordering
+     */
+    CONF.DOM.BOARD.bind('uiBoard', function () {
+        CONF.DOM.POST = CONF.DOM.BOARDSCREENS.find('.post');
 
-			//TODO ITERATE POSTITS HERE FROM GIVEN POSITION (EQ / GT THAN GIVEN TIME)
-			var oBoard = new Board(oActiveScreen);
+        CONF.DOM.POST.draggable({
+            delay: 150,
+            containment: '.screen',
+            start: function (event, ui) {
 
-			//similar to getCurentTemplate but with timeline support
-			//oBoard.goTo(oActiveScreen.FROMTIME);
-			var oCurrentScreen = oBoard.getTemplate();
+                $(this).data('start', $(this).attr('style'));
 
-			CONF.DOM.BOARDSCREENS.html(new Template(oCurrentScreen).toHtml());
+                ui.helper.children('.content').trigger(CONF.EVENTS.CLICK);
 
-			CONF.DOM.BOARD.trigger('uiBoard');
-		}
-	}
-});
-/**
- * Hanles drag&drop of the posts for manual reordering
- */
-CONF.DOM.BOARD.bind('uiBoard', function() {
-	CONF.DOM.POST = CONF.DOM.BOARDSCREENS.find('.post');
+                if (CONF.DOM.UIWINDOW.is('.opened')) {
+                    CONF.DOM.UIWINDOW.find('.close').trigger(CONF.EVENTS.CLICK);
+                }
 
-	CONF.DOM.POST.draggable({
-		delay : 150,
-		containment : '.screen',
-		start : function(event, ui) {
+            },
+            stop: function (event, ui) {
+                if (!$(this).is('.mobile')) {
+                    var iCurWidth = ui.helper.closest('.screen').width();
+                    var iCurHeight = ui.helper.closest('.screen').height();
+                    var iLeft = parseInt(ui.helper.css('left'), 10);
+                    var iTop = parseInt(ui.helper.css('top'), 10);
 
-			$(this).data('start', $(this).attr('style'));
+                    var iLeftValue = (iLeft * 100 / iCurWidth);
+                    var iTopValue = (iTop * 100 / iCurHeight);
 
-			ui.helper.children('.content').trigger(CONF.EVENTS.CLICK);
+                    var oPercentagePosition = {
+                        left: iLeftValue + '%',
+                        top: iTopValue + '%'
+                    };
 
-			if (CONF.DOM.UIWINDOW.is('.opened')) {
-				CONF.DOM.UIWINDOW.find('.close').trigger(CONF.EVENTS.CLICK);
-			}
+                    // Create an object for the change
+                    var oChange = {
+                        BY: CONF.PROPS.INT.WHO,
+                        TGT: $(this).attr('id'),
+                        ACN: 'position',
+                        TO: [iLeftValue, iTopValue]
+                    };
 
-		},
-		stop : function(event, ui) {
-			if (!$(this).is('.mobile')) {
-				var iCurWidth = ui.helper.closest('.screen').width();
-				var iCurHeight = ui.helper.closest('.screen').height();
-				var iLeft = parseInt(ui.helper.css('left'));
-				var iTop = parseInt(ui.helper.css('top'));
+                    var iTime = new Date().getTime();
+                    var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
 
-				var iLeftValue = (iLeft * 100 / iCurWidth);
-				var iTopValue = (iTop * 100 / iCurHeight);
+                    // Create a prototype diff structure for current case
+                    var oDiff = JSON.parse('{"PRIVATE" : {"SCREENS" : {"' + sActiveScreen + '":{"POSTS":{"' + iTime + '":{}}}}}}');
 
-				var oPercentagePosition = {
-					left : iLeftValue + '%',
-					top : iTopValue + '%'
-				};
+                    // Assign change to diff and board
+                    oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTime] = oChange;
+                    CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS[iTime] = oChange;
 
-				// Create an object for the change
-				var oChange = {
-					BY : CONF.PROPS.INT.WHO,
-					TGT : $(this).attr('id'),
-					ACN : 'position',
-					TO : new Array(iLeftValue, iTopValue)
-				};
+                    CONF.COM.SOCKET.saveChanges(oDiff);
 
-				var iTime = new Date().getTime();
-				var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
+                    ui.helper.css(oPercentagePosition);
 
-				// Create a prototype diff structure for current case
-				var oDiff = JSON.parse('{"PRIVATE" : {"SCREENS" : {"' + sActiveScreen + '":{"POSTS":{"' + iTime + '":{}}}}}}');
+                    // Remove focus after drag on mobile
+                    if (isMobile()) {
+                        $(this).removeClass('focused');
+                    }
 
-				// Assign change to diff and board
-				oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTime] = oChange;
-				CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS[iTime] = oChange;
+                } else {
+                    $(this).attr('style', $(this).data('start'));
+                }
 
-				CONF.COM.SOCKET.saveChanges(oDiff);
+                $(this).removeData('start');
+            }
+        });
+    });
 
-				ui.helper.css(oPercentagePosition);
+    /**
+     * Disable the drag&drop
+     */
+    CONF.DOM.BOARD.bind('tinySortBoard', function () {
+        CONF.DOM.POST.draggable({
+            disabled: true
+        });
+    });
 
-				// Remove focus after drag on mobile
-				if (isMobile()) {
-					$(this).removeClass('focused');
-				}
+    /**
+     * Enable drag&drop
+     */
+    CONF.DOM.BOARD.bind('normalBoard', function () {
+        CONF.DOM.POST.draggable("enable");
+    });
 
-			} else {
-				$(this).attr('style', $(this).data('start'));
-			}
-
-			$(this).removeData('start');
-		}
-	});
-});
-
-/**
- * Disable the drag&drop
- */
-CONF.DOM.BOARD.bind('tinySortBoard', function() {
-	CONF.DOM.POST.draggable({
-		disabled : true
-	});
-});
-
-/**
- * Enable drag&drop
- */
-CONF.DOM.BOARD.bind('normalBoard', function() {
-	CONF.DOM.POST.draggable("enable");
-});
-
-/*
- * Fit board params on resize
- */
-$(window).resize(function() {
-	CONF.DOM.BOARD.trigger('setupBoard');
-});
-
+    /*
+     * Fit board params on resize
+     */
+    $(window).resize(function () {
+        CONF.DOM.BOARD.trigger('setupBoard');
+    });
+})();

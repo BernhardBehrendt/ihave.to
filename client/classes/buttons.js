@@ -42,6 +42,4 @@ Buttons = function(aButtonset, sPanel) {
 			}
 		};
 	}
-
-	return '';
 };

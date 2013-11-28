@@ -105,7 +105,6 @@ module.exports = function (grunt) {
                                                 '../client/static/config.js',
                                                 '../client/static/templates.js',
 
-                                                '../client/classes/extends/object.js',
                                                 '../client/classes/extends/string.js',
                                                 '../client/classes/*.js',
 
