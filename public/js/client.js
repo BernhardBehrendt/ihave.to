@@ -409,61 +409,62 @@ var oTpl = {
             loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
         }
     };
-}(), Board = function(a) {
-    this._oScreen = a, this.iFromTime = !1, this._oScreenPost = {}, this._setDeleted = {};
-}, Board.prototype.getTemplate = function() {
-    this.setBackground();
-    var a = {
-        DIV: this._createTemplate()
-    };
-    return a;
-}, Board.prototype.goTo = function(a) {
-    return this.iFromTime = parseInt(a), this.getTemplate();
-}, Board.prototype._createTemplate = function() {
-    if (typeof this.iFromTime !== CONF.PROPS.STRING.NUM && (this.iFromTime = Object.keys(this._oScreen.SCREEN.POSTS)[0]), 
-    typeof this._oScreen.SCREEN.POSTS === CONF.PROPS.STRING.OBJ) {
-        var a, b, c = this._oScreen.SCREEN.POSTS;
-        for (a in c) if (b = c[a], b instanceof Array) for (var d = 0; d < b.length; d++) this._addPost(this._createPost(b[d])); else this._addPost(this._createPost(b));
-    }
-    var e = new Array();
-    for (var f in this._oScreenPost) this._setDeleted[f] === !0 && delete this._oScreenPost[f];
-    for (var f in this._oScreenPost) e[e.length] = this._oScreenPost[f];
-    return e;
-}, Board.prototype._createPost = function(a) {
-    var b = !1, c = "", d = "", e = !1, f = !1;
-    return typeof a.TGT != CONF.PROPS.STRING.UD && (e = a.TGT), "color" == a.ACN && (d = a.TO), 
-    "content" == a.ACN && (b = a.TO), "position" == a.ACN && (f = "left:" + a.TO[0] + "%; top:" + a.TO[1] + "%;"), 
-    "deleted" == a.ACN && (c = "deleted"), {
-        ID: e,
-        CLASSES: "post " + d + c,
-        STYLE: f,
-        CONTENT: {
-            DIV: {
-                CLASSES: "content",
-                CONTENT: {
-                    P: {
-                        CONTENT: b
+}();
+
+var Board;
+
+!function() {
+    "use strict";
+    Board = function(a) {
+        this._oScreen = a, this.iFromTime = !1, this._oScreenPost = {}, this._setDeleted = {};
+    }, Board.prototype.getTemplate = function() {
+        return this.setBackground(), {
+            DIV: this._createTemplate()
+        };
+    }, Board.prototype._createTemplate = function() {
+        var a, b, c;
+        if (void 0 !== this.iFromTime && (this.iFromTime = Object.keys(this._oScreen.SCREEN.POSTS)[0]), 
+        void 0 !== this._oScreen.SCREEN.POSTS) {
+            b = this._oScreen.SCREEN.POSTS;
+            for (c in b) if (b.hasOwnProperty(c)) if (a = b[c], a instanceof Array) for (var d = 0; d < a.length; d += 1) this._addPost(this._createPost(a[d])); else this._addPost(this._createPost(a));
+        }
+        var e, f = [], g = this._oScreenPost;
+        for (e in g) if (g.hasOwnProperty(e)) {
+            if (this._setDeleted[e] === !0) {
+                delete g[e];
+                continue;
+            }
+            f.push(this._oScreenPost[e]);
+        }
+        return f;
+    }, Board.prototype._createPost = function(a) {
+        var b = !1, c = "", d = "", e = !1, f = !1;
+        return void 0 !== a.TGT && (e = a.TGT), "color" === a.ACN && (d = a.TO), "content" === a.ACN && (b = a.TO), 
+        "position" === a.ACN && (f = "left:" + a.TO[0] + "%; top:" + a.TO[1] + "%;"), "deleted" === a.ACN && (c = "deleted"), 
+        {
+            ID: e,
+            CLASSES: "post " + d + c,
+            STYLE: f,
+            CONTENT: {
+                DIV: {
+                    CLASSES: "content",
+                    CONTENT: {
+                        P: {
+                            CONTENT: b
+                        }
                     }
                 }
             }
-        }
+        };
+    }, Board.prototype._addPost = function(a) {
+        void 0 === this._oScreenPost[a.ID] ? this._oScreenPost[a.ID] = a : (a.CONTENT.DIV.CONTENT.P.CONTENT !== !1 && (this._oScreenPost[a.ID].CONTENT.DIV.CONTENT.P.CONTENT = a.CONTENT.DIV.CONTENT.P.CONTENT, 
+        void 0 !== this._setDeleted[a.ID] && delete this._setDeleted[a.ID]), a.CLASSES.length > 5 && (-1 !== a.CLASSES.indexOf("deleted") ? this._setDeleted[a.ID] = !0 : (this._oScreenPost[a.ID].CLASSES = a.CLASSES, 
+        void 0 !== this._setDeleted[a.ID] && delete this._setDeleted[a.ID])), a.STYLE !== !1 && void 0 !== this._oScreenPost[a.ID] && (this._oScreenPost[a.ID].STYLE = a.STYLE, 
+        void 0 !== this._setDeleted[a.ID] && delete this._setDeleted[a.ID]));
+    }, Board.prototype.setBackground = function() {
+        $("body").css("background-image", "url(" + this._oScreen.SCREEN.META.BG + ")");
     };
-}, Board.prototype._parseYoutube = function(a) {
-    return a;
-}, Board.prototype._parseLink = function(a) {
-    return a;
-}, Board.prototype.parseIcal = function(a) {
-    return a;
-}, Board.prototype._addPost = function(a) {
-    typeof this._oScreenPost[a.ID] === CONF.PROPS.STRING.UD ? this._oScreenPost[a.ID] = a : (a.CONTENT.DIV.CONTENT.P.CONTENT !== !1 && (this._oScreenPost[a.ID].CONTENT.DIV.CONTENT.P.CONTENT = a.CONTENT.DIV.CONTENT.P.CONTENT, 
-    typeof this._setDeleted[a.ID] != CONF.PROPS.STRING.UD && delete this._setDeleted[a.ID]), 
-    a.CLASSES.length > 5 && (-1 != a.CLASSES.indexOf("deleted") ? this._setDeleted[a.ID] = !0 : (this._oScreenPost[a.ID].CLASSES = a.CLASSES, 
-    typeof this._setDeleted[a.ID] != CONF.PROPS.STRING.UD && delete this._setDeleted[a.ID])), 
-    a.STYLE !== !1 && "undefined" != typeof this._oScreenPost[a.ID] && (this._oScreenPost[a.ID].STYLE = a.STYLE, 
-    typeof this._setDeleted[a.ID] != CONF.PROPS.STRING.UD && delete this._setDeleted[a.ID]));
-}, Board.prototype.setBackground = function() {
-    $("body").css("background-image", "url(" + this._oScreen.SCREEN.META.BG + ")");
-}, Buttons = function(a, b) {
+}(), Buttons = function(a, b) {
     if (typeof b == CONF.PROPS.STRING.UD && (b = "slim"), typeof a != CONF.PROPS.STRING.UD) {
         for (var c = new Array(), d = 0; d < a.length; d++) c[d] = {
             CLASSES: "button " + a[d].TYPE,
@@ -484,164 +485,160 @@ var oTpl = {
             }
         };
     }
-}, Connection = function() {
-    this.socket = io.connect(), this.__encryption = null, this.__data = null, this.__verifier = null, 
-    this.__board = null, this.socket.on("disconnect", function() {
-        showMessage("RECONNECTING".translate(), "error"), $(".screen, #cmd").empty(), CONF.COM.SOCKET.connect();
-    });
-}, Connection.prototype.socket = null, Connection.prototype.connect = function(a) {
-    if (typeof a != CONF.PROPS.STRING.UD) this.__board = a; else if (null === this.__board) return !1;
-    this.socket.emit("connect", this.__board);
-    var b = this;
-    this.socket.on("connected", function(a) {
-        $("#cmd").removeAttr("style"), b.setData(a), b.handleData();
-    }), this.socket.on("notify", function() {});
-}, Connection.prototype.initBroadcast = function(a) {
-    var b = this;
-    this.socket.on("enter-" + a, function(a) {
-        showMessage(b.decrypt(a) + " " + "ENTERED_BOARD".translate());
-    }), this.socket.on("goodbye-" + a, function(a) {
-        showMessage(b.decrypt(a) + " " + "LEFT_BOARD".translate(), "error");
-    }), this.socket.on("bc-" + a, function(a) {
-        function b(a) {
-            var c = !1;
-            if (a instanceof Array) for (var d = 0; d < a.length; d++) c ? b(a[d]) : c = b(a[d]); else if (typeof a.TGT != CONF.PROPS.STRING.UD) {
-                var e = $("#board > .posts > .screen > #" + a.TGT), f = "";
-                if (1 == e.length) {
-                    if (c = !0, "position" == a.ACN && ($(e).animate({
-                        left: a.TO[0] + "%",
-                        top: a.TO[1] + "%"
-                    }, 750), f = "POSTS_POSITION"), "content" == a.ACN && ($(e).find(".content").children("p").html(a.TO), 
-                    f = "POSTS_CONTENT"), "deleted" == a.ACN && ($(e).fadeOut(250, function() {
-                        $(this).remove();
-                    }), f = "DELETED_POST"), "color" == a.ACN) {
-                        var g = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(" ").toLowerCase();
-                        g = g.replace(a.TO, ""), $(e).removeClass(g).addClass(a.TO), f = "POSTS_COLOR";
-                    }
-                    for (var h in CONF.BOARD.USERS) if (CONF.BOARD.USERS[h] == a.BY) break;
-                    showMessage(h + " " + f.translate(), "warning");
-                }
-            }
-            return c;
+};
+
+var Connection;
+
+!function() {
+    "use strict";
+    Connection = function() {
+        this.socket = io.connect(), this.__encryption = null, this.__data = null, this.__verifier = null, 
+        this.__board = null, this.socket.on("disconnect", function() {
+            showMessage("RECONNECTING".translate(), "error"), $(".screen, #cmd").empty(), CONF.COM.SOCKET.connect();
+        });
+    }, Connection.prototype.socket = null, Connection.prototype.connect = function(a) {
+        if (this.__board = a, null !== this.__board) {
+            this.socket.emit("connect", this.__board);
+            var b = this;
+            this.socket.on("connected", function(a) {
+                $("#cmd").removeAttr("style"), b.setData(a), b.handleData();
+            }), this.socket.on("notify", function() {});
         }
-        var c = JSON.parse(CONF.COM.SOCKET.decrypt(a));
-        $.extend(!0, CONF.BOARD, c);
-        var d = !1, e = CONF.DOM.BOARDPOSTS.data("activescreen");
-        if (typeof c.PRIVATE != CONF.PROPS.STRING.UD && typeof c.PRIVATE.SCREENS != CONF.PROPS.STRING.UD) {
-            for (var f in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS[f] || delete CONF.BOARD.PRIVATE.SCREENS[f];
-            if (typeof c.PRIVATE.SCREENS[e] != CONF.PROPS.STRING.UD) if (typeof CONF.BOARD.PRIVATE.SCREENS[e] != CONF.PROPS.STRING.UD) {
-                var g = !1;
-                for (var h in c.PRIVATE.SCREENS[e].POSTS) {
-                    var i = c.PRIVATE.SCREENS[e].POSTS[h];
-                    g = b(i);
+    }, Connection.prototype.initBroadcast = function(a) {
+        var b = this;
+        this.socket.on("enter-" + a, function(a) {
+            showMessage(b.decrypt(a) + " " + "ENTERED_BOARD".translate());
+        }), this.socket.on("goodbye-" + a, function(a) {
+            showMessage(b.decrypt(a) + " " + "LEFT_BOARD".translate(), "error");
+        }), this.socket.on("bc-" + a, function(a) {
+            function b(a) {
+                var c = !1;
+                if (a instanceof Array) for (var d = 0; d < a.length; d++) c ? b(a[d]) : c = b(a[d]); else if (void 0 !== a.TGT) {
+                    var e = $("#" + a.TGT), f = "";
+                    if (1 === e.length) {
+                        if (c = !0, "position" === a.ACN && ($(e).animate({
+                            left: a.TO[0] + "%",
+                            top: a.TO[1] + "%"
+                        }, 750), f = "POSTS_POSITION"), "content" === a.ACN && ($(e).find(".content").children("p").html(a.TO), 
+                        f = "POSTS_CONTENT"), "deleted" === a.ACN && ($(e).fadeOut(250, function() {
+                            $(this).remove();
+                        }), f = "DELETED_POST"), "color" === a.ACN) {
+                            var g = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(" ").toLowerCase();
+                            g = g.replace(a.TO, ""), $(e).removeClass(g).addClass(a.TO), f = "POSTS_COLOR";
+                        }
+                        var h;
+                        for (h in CONF.BOARD.USERS) if (CONF.BOARD.USERS.hasOwnProperty(h) && CONF.BOARD.USERS[h] === a.BY) break;
+                        showMessage(h + " " + f.translate(), "warning");
+                    }
                 }
-                if (!g) {
-                    var d = CONF.BOARD.PRIVATE.SCREENS[e];
-                    showMessage("RESTORE_CONSISTENCY_NOW");
-                    var j = new Board({
-                        NAME: e,
-                        SCREEN: d,
+                return c;
+            }
+            var c, d, e, f, g = JSON.parse(CONF.COM.SOCKET.decrypt(a));
+            if ($.extend(!0, CONF.BOARD, g), f = CONF.DOM.BOARDPOSTS.data("activescreen"), void 0 !== g.PRIVATE && void 0 !== g.PRIVATE.SCREENS) {
+                for (e in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(e) && !CONF.BOARD.PRIVATE.SCREENS[e] && delete CONF.BOARD.PRIVATE.SCREENS[e];
+                if (void 0 !== g.PRIVATE.SCREENS[f]) if (void 0 !== CONF.BOARD.PRIVATE.SCREENS[f]) {
+                    var h = !1;
+                    for (d in g.PRIVATE.SCREENS[f].POSTS) if (g.PRIVATE.SCREENS[f].POSTS.hasOwnProperty(d)) {
+                        var i = g.PRIVATE.SCREENS[f].POSTS[d];
+                        h = b(i);
+                    }
+                    h || (c = CONF.BOARD.PRIVATE.SCREENS[f], showMessage("RESTORE_CONSISTENCY_NOW"), 
+                    k = new Board({
+                        NAME: f,
+                        SCREEN: c,
+                        FROMTIME: !1
+                    }), CONF.DOM.BOARDSCREENS.html(new Template(k.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard"));
+                } else {
+                    var j = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
+                    CONF.DOM.BOARDPOSTS.data("activescreen", j), c = CONF.BOARD.PRIVATE.SCREENS[j], 
+                    showMessage("A_USER_DELETED_THIS_SCREEN_CHANGE_NOW"), $("#back, .mobile").trigger("click"), 
+                    1 === $("#edit").length && CONF.DOM.CMD.trigger("setMainNav");
+                    var k = new Board({
+                        NAME: j,
+                        SCREEN: c,
                         FROMTIME: !1
                     });
-                    CONF.DOM.BOARDSCREENS.html(new Template(j.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
-                }
-            } else {
-                for (var k in CONF.BOARD.PRIVATE.SCREENS) break;
-                CONF.DOM.BOARDPOSTS.data("activescreen", k), d = CONF.BOARD.PRIVATE.SCREENS[k], 
-                showMessage("A_USER_DELETED_THIS_SCREEN_CHANGE_NOW"), $("#back, .mobile").trigger("click"), 
-                1 == $("#edit").length && CONF.DOM.CMD.trigger("setMainNav");
-                var j = new Board({
-                    NAME: k,
-                    SCREEN: d,
-                    FROMTIME: !1
-                });
-                CONF.DOM.BOARDSCREENS.html(new Template(j.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
-            } else showMessage("RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN");
-        }
-        if (typeof c.USERS != CONF.PROPS.STRING.UD) {
-            for (var l in c.USERS) break;
-            showMessage(l + " " + "WAS_ADDED_TO_BOARD".translate());
-        }
-    });
-}, Connection.prototype.handleData = function() {
-    if (-1 == this.getData().indexOf("{")) {
-        CONF.BOARD = JSON.parse(this.decrypt()), this.initBroadcast(CONF.BOARD.META.VERIFIER), 
-        window.lock || this.personalize(), CONF.DOM.UIWINDOW.trigger("hideUi"), CONF.DOM.CMD.trigger("setMainNav"), 
-        showMessage("BOARD_WAS_ENCRYPTED");
-        var a = void 0;
-        null != CONF.DOM.BOARDPOSTS && (a = CONF.DOM.BOARDPOSTS.data("activescreen"));
-        var b = !1;
-        for (b in CONF.BOARD.PRIVATE.SCREENS) break;
-        typeof a != CONF.PROPS.STRING.UD && CONF.BOARD.PRIVATE.SCREENS[a] != CONF.PROPS.STRING.UD && (b = a), 
-        CONF.DOM.BOARD.trigger("setupBoard", {
-            NAME: b,
-            SCREEN: CONF.BOARD.PRIVATE.SCREENS[b],
-            FROMTIME: !1
+                    CONF.DOM.BOARDSCREENS.html(new Template(k.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
+                } else showMessage("RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN");
+            }
+            if (void 0 !== g.USERS) {
+                var l = Object.keys(g.USERS)[0];
+                showMessage(l + " " + "WAS_ADDED_TO_BOARD".translate());
+            }
         });
-    } else {
-        var c = JSON.parse(this.getData()), d = "WORKSPACE".translate(), e = new Date().getTime();
-        c.PRIVATE.SCREENS[d] = {
-            META: {
-                BG: CONF.PROPS.STRING.SCREEN_DEFAULT_BG
-            },
-            POSTS: {}
-        }, c.PRIVATE.SCREENS[d].POSTS[e] = [ {
-            TGT: e,
-            ACN: "color",
-            TO: "blue"
-        }, {
-            TGT: e,
-            ACN: "content",
-            TO: "EXAMPLE_TEXT".translate()
-        }, {
-            TGT: e,
-            ACN: "position",
-            TO: [ 10, 10 ]
-        } ], CONF.COM.SOCKET.setData(JSON.stringify(c)), this.setVerifier(c.META.VERIFIER), 
-        this.socket.emit(this.getVerifier(), this.encrypt().toString()), $("#do-login").trigger(CONF.EVENTS.CLICK);
-    }
-}, Connection.prototype.saveChanges = function(a) {
-    this.setData(JSON.stringify(CONF.BOARD)), this.socket.emit(CONF.BOARD.META.VERIFIER, this.encrypt().toString()), 
-    typeof a != CONF.PROPS.STRING.UD && this.socket.emit("sync", this.encrypt(JSON.stringify(a)).toString());
-}, Connection.prototype.setEncryptionPhrase = function(a) {
-    this.__encryption = a;
-}, Connection.prototype.getEncryptionPhrase = function() {
-    return this.__encryption;
-}, Connection.prototype.encrypt = function(a) {
-    var b = a;
-    return typeof b == CONF.PROPS.STRING.UD && (b = this.getData()), CryptoJS.AES.encrypt(b, this.getEncryptionPhrase());
-}, Connection.prototype.decrypt = function(a) {
-    var b = a;
-    typeof b == CONF.PROPS.STRING.UD && (b = this.getData());
-    for (var c = null, d = !1; !d; ) try {
-        c = CryptoJS.AES.decrypt(b, this.getEncryptionPhrase()).toString(CryptoJS.enc.Utf8), 
-        d = !0;
-    } catch (e) {
-        d = !1;
-    }
-    return c;
-}, Connection.prototype.setData = function(a) {
-    this.__data = a;
-}, Connection.prototype.getData = function() {
-    return this.__data;
-}, Connection.prototype.setVerifier = function(a) {
-    this.__verifier = a;
-}, Connection.prototype.getVerifier = function() {
-    return this.__verifier;
-}, Connection.prototype.personalize = function() {
-    var a = this.__board, b = CONF.PROPS.OBJECT.STORAGE.getItem(a), c = this;
-    if (null == b) {
-        window.lock = !0;
-        var c = this;
-        Apprise("ENTER_YOUR_NAME".translate(), {
+    }, Connection.prototype.handleData = function() {
+        if (-1 === this.getData().indexOf("{")) {
+            CONF.BOARD = JSON.parse(this.decrypt()), this.initBroadcast(CONF.BOARD.META.VERIFIER), 
+            window.lock || this.personalize(), CONF.DOM.UIWINDOW.trigger("hideUi"), CONF.DOM.CMD.trigger("setMainNav"), 
+            showMessage("BOARD_WAS_ENCRYPTED");
+            var a;
+            null !== CONF.DOM.BOARDPOSTS && (a = CONF.DOM.BOARDPOSTS.data("activescreen"));
+            var b = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
+            void 0 !== a && void 0 !== CONF.BOARD.PRIVATE.SCREENS[a] && (b = a), CONF.DOM.BOARD.trigger("setupBoard", {
+                NAME: b,
+                SCREEN: CONF.BOARD.PRIVATE.SCREENS[b],
+                FROMTIME: !1
+            });
+        } else {
+            var c = JSON.parse(this.getData()), d = "WORKSPACE".translate(), e = new Date().getTime();
+            c.PRIVATE.SCREENS[d] = {
+                META: {
+                    BG: CONF.PROPS.STRING.SCREEN_DEFAULT_BG
+                },
+                POSTS: {}
+            }, c.PRIVATE.SCREENS[d].POSTS[e] = [ {
+                TGT: e,
+                ACN: "color",
+                TO: "blue"
+            }, {
+                TGT: e,
+                ACN: "content",
+                TO: "EXAMPLE_TEXT".translate()
+            }, {
+                TGT: e,
+                ACN: "position",
+                TO: [ 10, 10 ]
+            } ], CONF.COM.SOCKET.setData(JSON.stringify(c)), this.setVerifier(c.META.VERIFIER), 
+            this.socket.emit(this.getVerifier(), this.encrypt().toString()), $("#do-login").trigger(CONF.EVENTS.CLICK);
+        }
+    }, Connection.prototype.saveChanges = function(a) {
+        this.setData(JSON.stringify(CONF.BOARD)), this.socket.emit(CONF.BOARD.META.VERIFIER, this.encrypt().toString()), 
+        void 0 !== a && this.socket.emit("sync", this.encrypt(JSON.stringify(a)).toString());
+    }, Connection.prototype.setEncryptionPhrase = function(a) {
+        this.__encryption = a;
+    }, Connection.prototype.getEncryptionPhrase = function() {
+        return this.__encryption;
+    }, Connection.prototype.encrypt = function(a) {
+        var b = a;
+        return void 0 === b && (b = this.getData()), CryptoJS.AES.encrypt(b, this.getEncryptionPhrase());
+    }, Connection.prototype.decrypt = function(a) {
+        var b = null, c = !1, d = a;
+        for (void 0 === d && (d = this.getData()); !c; ) try {
+            b = CryptoJS.AES.decrypt(d, this.getEncryptionPhrase()).toString(CryptoJS.enc.Utf8), 
+            c = !0;
+        } catch (e) {
+            c = !1;
+        }
+        return b;
+    }, Connection.prototype.setData = function(a) {
+        this.__data = a;
+    }, Connection.prototype.getData = function() {
+        return this.__data;
+    }, Connection.prototype.setVerifier = function(a) {
+        this.__verifier = a;
+    }, Connection.prototype.getVerifier = function() {
+        return this.__verifier;
+    }, Connection.prototype.personalize = function() {
+        var a = this.__board, b = CONF.PROPS.OBJECT.STORAGE.getItem(a), c = this;
+        if (null === b) window.lock = !0, Apprise("ENTER_YOUR_NAME".translate(), {
             animation: 250,
             buttons: {
                 confirm: {
                     action: function(b) {
                         $("input").blur(), delete window.lock;
-                        var d = null != b.input && b.input.length > 0 ? b.input : "Anonymous";
-                        if (CONF.PROPS.OBJECT.STORAGE.setItem(a, d), typeof CONF.BOARD.USERS[d] == CONF.PROPS.STRING.UD) {
-                            var e = parseInt(Object.keys(CONF.BOARD.USERS).length), f = JSON.parse('{"USERS":{}}');
+                        var d = null !== b.input && b.input.length > 0 ? b.input : "Anonymous";
+                        if (CONF.PROPS.OBJECT.STORAGE.setItem(a, d), void 0 === CONF.BOARD.USERS[d]) {
+                            var e = Object.keys(CONF.BOARD.USERS).length, f = JSON.parse('{"USERS":{}}');
                             f.USERS[d] = e, CONF.BOARD.USERS[d] = e, c.saveChanges(f);
                         }
                         CONF.PROPS.INT.WHO = CONF.BOARD.USERS[d], setTimeout(function() {
@@ -655,16 +652,16 @@ var oTpl = {
             },
             input: !0,
             override: !0
-        });
-    } else if (typeof CONF.BOARD.USERS[b] == CONF.PROPS.STRING.UD) CONF.PROPS.OBJECT.STORAGE.removeItem(a), 
-    this.personalize(); else for (var d in CONF.BOARD.USERS) if (b == d) {
-        CONF.PROPS.INT.WHO = CONF.BOARD.USERS[d], CONF.COM.SOCKET.socket.emit("enter", this.encrypt(b).toString()), 
-        setTimeout(function() {
-            showMessage("WELCOME_BACK".translate() + " " + b);
-        }, 5e3);
-        break;
-    }
-};
+        }); else if (void 0 === CONF.BOARD.USERS[b]) CONF.PROPS.OBJECT.STORAGE.removeItem(a), 
+        this.personalize(); else {
+            var d;
+            for (d in CONF.BOARD.USERS) if (CONF.BOARD.USERS.hasOwnProperty(d) && b === d) {
+                CONF.PROPS.INT.WHO = CONF.BOARD.USERS[d], CONF.COM.SOCKET.socket.emit("enter", this.encrypt(b).toString());
+                break;
+            }
+        }
+    };
+}();
 
 var Login;
 
@@ -1019,7 +1016,7 @@ var Settings;
         this.oSettings = a;
     }, Settings.prototype.getTemplate = function() {
         var a;
-        typeof this.oSettings === CONF.PROPS.STRING.UD && (this.oSettings = {}), typeof this.oSettings.COLORS === CONF.PROPS.STRING.UD && (this.oSettings.COLORS = {});
+        void 0 === this.oSettings && (this.oSettings = {}), void 0 === this.oSettings.COLORS && (this.oSettings.COLORS = {});
         var b = {
             DIV: []
         };

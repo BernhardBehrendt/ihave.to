@@ -51,14 +51,13 @@ var Board;
             this.iFromTime = (Object.keys(this._oScreen.SCREEN.POSTS)[0]);
         }
         // Start screen posts preprocess
-        if (this._oScreen.SCREEN.POSTS === undefined) {
+        if (this._oScreen.SCREEN.POSTS !== undefined) {
 
             oTimeline = this._oScreen.SCREEN.POSTS;
 
             for (iTimestamp in oTimeline) {
                 if (oTimeline.hasOwnProperty(iTimestamp)) {
                     oCurPost = oTimeline[iTimestamp];
-
                     if (oCurPost instanceof Array) {
                         for (var i = 0; i < oCurPost.length; i += 1) {
                             this._addPost(this._createPost(oCurPost[i]));

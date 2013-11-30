@@ -50,10 +50,8 @@ if (cluster.isMaster) {
      * Initialize the socket connection
      */
     io.sockets.on('connection', function (socket) {
-
         // The initial connector for the board api
         socket.on('connect', function (sBoardName) {
-
             // Initialize Board (and create if not exist)
             var oBoard = new Board(sBoardName, socket);
 
