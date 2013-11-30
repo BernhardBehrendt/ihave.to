@@ -1,5 +1,5 @@
 
-iHave.to is a memoboard with realtime support and client side AES encription running on node.js.
+iHave.to is a memoboard with realtime support and client side AES en/decryption running on node.js.
 ================================================================================================
 [ ![Image](http://cdn.alternativeto.net/s/baa06179-4709-e211-a334-0025902c7e73_6_full.png "Image title") ](http://www.ihave.to/do/)
 

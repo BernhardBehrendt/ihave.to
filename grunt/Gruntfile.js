@@ -90,13 +90,7 @@ module.exports = function (grunt) {
         },
         uglify: {
              options: {
-                 //beautify:true,
-                 compress: {
-                     global_defs: {
-                         "DEBUG": false
-                     },
-                     dead_code: true
-                 }
+                beautify:true
              },
             my_target: {
                 files: {
