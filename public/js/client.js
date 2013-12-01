@@ -724,7 +724,7 @@ var Menu;
         return d;
     }, Menu.prototype.getPostMenue = function(a) {
         void 0 === a && (a = "");
-        var b, c = [ "back", "store_post", "cancel" ], d = [];
+        var b, c = [ "back", "store_post" ], d = [];
         for (b = 0; b < c.length; b += 1) d[b] = {
             CONTENT: {
                 LINK: {
@@ -12553,18 +12553,7 @@ var showMessage;
     CONF.DOM.UIWINDOW = $("#ui"), CONF.DOM.UIWINDOW.bind("showUi", function() {
         $(this).removeClass("closed").addClass("opened");
     }), CONF.DOM.UIWINDOW.bind("hideUi", function() {
-        CONF.DOM.UIWINDOW.children(".cmd").empty(), $(this).removeClass("opened").addClass("closed"), 
-        0 === CONF.DOM.UIWINDOW.find(".controls").length && CONF.DOM.UIWINDOW.prepend(new Template({
-            DIV: {
-                CLASSES: "controls",
-                CONTENT: {
-                    LINK: {
-                        CLASSES: "close",
-                        URL: "#"
-                    }
-                }
-            }
-        }).toHtml());
+        CONF.DOM.UIWINDOW.children(".cmd").empty(), $(this).removeClass("opened").addClass("closed");
     }), CONF.DOM.UIWINDOW.bind("cleanUi", function() {
         $(this).empty();
     }), CONF.DOM.UIWINDOW.bind("setupUi", function() {
@@ -12670,7 +12659,8 @@ var showMessage;
     }).on(CONF.EVENTS.CLICK, "nav#cmd > ul > li > a.active", function() {
         $(this).removeClass(CONF.PROPS.STRING.ACTIVE);
     }).on(CONF.EVENTS.CLICK, "#back", function() {
-        CONF.DOM.CMD.trigger("setMainNav"), CONF.DOM.UIWINDOW.children(".controls").find(".close").trigger(CONF.EVENTS.CLICK);
+        CONF.DOM.CMD.trigger("setMainNav"), CONF.DOM.CMD.find(".active").trigger(CONF.EVENTS.CLICK), 
+        CONF.DOM.CMD.find("#back").trigger(CONF.EVENTS.CLICK), CONF.DOM.UIWINDOW.trigger("hideUi");
     }).on(CONF.EVENTS.CLICK, "#cancel", function() {
         $("#ui").find(".close").trigger(CONF.EVENTS.CLICK);
     }).on(CONF.EVENTS.CLICK, "#new_post", function(a, b) {
@@ -12694,7 +12684,7 @@ var showMessage;
             g.val(g.val().toString().br2nl()), g.focus();
         }
     }).on(CONF.EVENTS.CLICK, "#chrono", function() {
-        var a = $(".screen.normal");
+        var a = $(".screen");
         $(this).hasClass("active") ? (a.addClass("tinysort").removeClass("normal"), CONF.DOM.BOARD.trigger("tinySortBoard"), 
         CONF.DOM.UIWINDOW.trigger("hideUi"), a.tsort("", {
             order: "desc",
@@ -12855,10 +12845,7 @@ var Post;
 
 !function() {
     "use strict";
-    $(document).on(CONF.EVENTS.CLICK, "#ui > .controls > .close", function() {
-        CONF.DOM.CMD.find(".active").trigger(CONF.EVENTS.CLICK), CONF.DOM.CMD.find("#back").trigger(CONF.EVENTS.CLICK), 
-        CONF.DOM.UIWINDOW.trigger("hideUi");
-    }).on("focusin", "input", function() {
+    $(document).on("focusin", "input", function() {
         $(this).data("val", $(this).val()), $(this).val("");
     }).on("focusout", "input", function() {
         0 === $(this).val().trim().length && $(this).val($(this).data("val"));

@@ -17,11 +17,7 @@ var Post;
     // General interactions
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Close ui view
-    $(document).on(CONF.EVENTS.CLICK, '#ui > .controls > .close', function () {
-        CONF.DOM.CMD.find('.active').trigger(CONF.EVENTS.CLICK);
-        CONF.DOM.CMD.find('#back').trigger(CONF.EVENTS.CLICK);
-        CONF.DOM.UIWINDOW.trigger('hideUi');
-    })
+    $(document)
         // Handle input focuses
         .on('focusin', 'input', function () {
             $(this).data('val', $(this).val());

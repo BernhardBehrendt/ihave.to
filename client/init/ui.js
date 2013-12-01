@@ -17,22 +17,6 @@
     CONF.DOM.UIWINDOW.bind('hideUi', function () {
         CONF.DOM.UIWINDOW.children('.cmd').empty();
         $(this).removeClass('opened').addClass('closed');
-
-        if (CONF.DOM.UIWINDOW.find('.controls').length === 0) {
-
-            CONF.DOM.UIWINDOW.prepend(new Template({
-                DIV: {
-                    CLASSES: 'controls',
-                    CONTENT: {
-                        LINK: {
-                            CLASSES: 'close',
-                            URL: '#'
-                        }
-                    }
-                }
-            }).toHtml());
-        }
-
     });
 
     // Empty the actually inserted UI Elements

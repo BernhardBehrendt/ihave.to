@@ -48,7 +48,11 @@
         // Leave subnavigation level
         .on(CONF.EVENTS.CLICK, '#back', function () {
             CONF.DOM.CMD.trigger('setMainNav');
-            CONF.DOM.UIWINDOW.children('.controls').find('.close').trigger(CONF.EVENTS.CLICK);
+            //CONF.DOM.UIWINDOW.children('.controls').find('.close').trigger(CONF.EVENTS.CLICK);
+
+            CONF.DOM.CMD.find('.active').trigger(CONF.EVENTS.CLICK);
+            CONF.DOM.CMD.find('#back').trigger(CONF.EVENTS.CLICK);
+            CONF.DOM.UIWINDOW.trigger('hideUi');
 
         })
         // Cancel current view action and go back to main view
@@ -107,7 +111,7 @@
         // Sort posts chronological
         .on(CONF.EVENTS.CLICK, '#chrono', function () {
 
-            var oNormalScreen = $('.screen.normal');
+            var oNormalScreen = $('.screen');
 
             if ($(this).hasClass('active')) {
 

@@ -9,8 +9,7 @@ var Menu;
      * @class Menu
      * @constructor
      */
-    Menu = function () {
-    };
+    Menu = function () {};
 
     /**
      * The menu holding template
@@ -120,7 +119,7 @@ var Menu;
             sActiveOne = '';
         }
         var i;
-        var aMenuCmds = ['back', 'store_post', 'cancel'];
+        var aMenuCmds = ['back', 'store_post'];
         var aCmds = [];
 
         for (i = 0; i < aMenuCmds.length; i += 1) {
