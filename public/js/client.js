@@ -57,16 +57,6 @@ function Apprise(a, b) {
     }), g.input && f.focus(), void 0);
 }
 
-function animateColorByClass(a, b, c) {
-    var d = "", e = a.attr("style"), f = a.css("backgroundColor");
-    typeof c == CONF.PROPS.STRING.UD && (c = 250), a.removeAttr("class").addClass(b), 
-    d = a.css("backgroundColor"), a.css("backgroundColor", f).animate({
-        backgroundColor: d
-    }, c, function() {
-        $(this).removeAttr("style").removeAttr("class").addClass(b), typeof e != CONF.PROPS.STRING.UD && $(this).attr("style", e);
-    });
-}
-
 var LANGUAGE = {
     DE: {
         MOBILE_TITLE: "iHave.to",
@@ -370,7 +360,7 @@ var oTpl = {
             var b = "GERMAN";
             log("No language was set"), log("Set language to " + b), CONF.PROPS.STRING.LANGUAGE = b;
         }
-        return typeof a[CONF.PROPS.STRING.LANGUAGE] !== CONF.PROPS.STRING.UD ? typeof a[CONF.PROPS.STRING.LANGUAGE][this] !== CONF.PROPS.STRING.UD ? a[CONF.PROPS.STRING.LANGUAGE][this].toString() : (CONF.PROPS.BOOLEAN.LOG && log("No translation found for " + this + " in language " + CONF.PROPS.STRING.LANGUAGE), 
+        return void 0 !== a[CONF.PROPS.STRING.LANGUAGE] ? void 0 !== a[CONF.PROPS.STRING.LANGUAGE][this] ? a[CONF.PROPS.STRING.LANGUAGE][this].toString() : (CONF.PROPS.BOOLEAN.LOG && log("No translation found for " + this + " in language " + CONF.PROPS.STRING.LANGUAGE), 
         this.toString()) : (log("No translation object was given"), "");
     }, String.prototype.isImageURL = function() {
         var a = /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:jpg|gif|png))(?:\?([^#]*))?(?:#(.*))?/;
@@ -464,28 +454,36 @@ var Board;
     }, Board.prototype.setBackground = function() {
         $("body").css("background-image", "url(" + this._oScreen.SCREEN.META.BG + ")");
     };
-}(), Buttons = function(a, b) {
-    if (typeof b == CONF.PROPS.STRING.UD && (b = "slim"), typeof a != CONF.PROPS.STRING.UD) {
-        for (var c = new Array(), d = 0; d < a.length; d++) c[d] = {
-            CLASSES: "button " + a[d].TYPE,
-            CONTENT: {
-                LINK: {
-                    ID: a[d].ID,
-                    URL: "#",
-                    CONTENT: a[d].LABEL.translate()
-                }
-            }
-        };
-        return {
-            UL: {
-                CLASSES: "buttons " + b,
+}();
+
+var Buttons;
+
+!function() {
+    "use strict";
+    Buttons = function(a, b) {
+        if (void 0 === b && (b = "slim"), void 0 !== a) {
+            var c, d = [];
+            for (c = 0; c < a.length; c += 1) d[c] = {
+                CLASSES: "button " + a[c].TYPE,
                 CONTENT: {
-                    LI: c
+                    LINK: {
+                        ID: a[c].ID,
+                        URL: "#",
+                        CONTENT: a[c].LABEL.translate()
+                    }
                 }
-            }
-        };
-    }
-};
+            };
+            return {
+                UL: {
+                    CLASSES: "buttons " + b,
+                    CONTENT: {
+                        LI: d
+                    }
+                }
+            };
+        }
+    };
+}();
 
 var Connection;
 
@@ -511,61 +509,60 @@ var Connection;
         }), this.socket.on("goodbye-" + a, function(a) {
             showMessage(b.decrypt(a) + " " + "LEFT_BOARD".translate(), "error");
         }), this.socket.on("bc-" + a, function(a) {
-            function b(a) {
-                var c = !1;
-                if (a instanceof Array) for (var d = 0; d < a.length; d++) c ? b(a[d]) : c = b(a[d]); else if (void 0 !== a.TGT) {
-                    var e = $("#" + a.TGT), f = "";
-                    if (1 === e.length) {
-                        if (c = !0, "position" === a.ACN && ($(e).animate({
-                            left: a.TO[0] + "%",
-                            top: a.TO[1] + "%"
-                        }, 750), f = "POSTS_POSITION"), "content" === a.ACN && ($(e).find(".content").children("p").html(a.TO), 
-                        f = "POSTS_CONTENT"), "deleted" === a.ACN && ($(e).fadeOut(250, function() {
-                            $(this).remove();
-                        }), f = "DELETED_POST"), "color" === a.ACN) {
-                            var g = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(" ").toLowerCase();
-                            g = g.replace(a.TO, ""), $(e).removeClass(g).addClass(a.TO), f = "POSTS_COLOR";
-                        }
-                        var h;
-                        for (h in CONF.BOARD.USERS) if (CONF.BOARD.USERS.hasOwnProperty(h) && CONF.BOARD.USERS[h] === a.BY) break;
-                        showMessage(h + " " + f.translate(), "warning");
+            var b, c, d, e, f = JSON.parse(CONF.COM.SOCKET.decrypt(a));
+            if ($.extend(!0, CONF.BOARD, f), e = CONF.DOM.BOARDPOSTS.data("activescreen"), void 0 !== f.PRIVATE && void 0 !== f.PRIVATE.SCREENS) {
+                for (d in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(d) && !CONF.BOARD.PRIVATE.SCREENS[d] && delete CONF.BOARD.PRIVATE.SCREENS[d];
+                if (void 0 !== f.PRIVATE.SCREENS[e]) if (void 0 !== CONF.BOARD.PRIVATE.SCREENS[e]) {
+                    var g = !1;
+                    for (c in f.PRIVATE.SCREENS[e].POSTS) if (f.PRIVATE.SCREENS[e].POSTS.hasOwnProperty(c)) {
+                        var h = f.PRIVATE.SCREENS[e].POSTS[c];
+                        g = this.updateScreen(h);
                     }
-                }
-                return c;
-            }
-            var c, d, e, f, g = JSON.parse(CONF.COM.SOCKET.decrypt(a));
-            if ($.extend(!0, CONF.BOARD, g), f = CONF.DOM.BOARDPOSTS.data("activescreen"), void 0 !== g.PRIVATE && void 0 !== g.PRIVATE.SCREENS) {
-                for (e in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(e) && !CONF.BOARD.PRIVATE.SCREENS[e] && delete CONF.BOARD.PRIVATE.SCREENS[e];
-                if (void 0 !== g.PRIVATE.SCREENS[f]) if (void 0 !== CONF.BOARD.PRIVATE.SCREENS[f]) {
-                    var h = !1;
-                    for (d in g.PRIVATE.SCREENS[f].POSTS) if (g.PRIVATE.SCREENS[f].POSTS.hasOwnProperty(d)) {
-                        var i = g.PRIVATE.SCREENS[f].POSTS[d];
-                        h = b(i);
-                    }
-                    h || (c = CONF.BOARD.PRIVATE.SCREENS[f], showMessage("RESTORE_CONSISTENCY_NOW"), 
-                    k = new Board({
-                        NAME: f,
-                        SCREEN: c,
+                    g || (b = CONF.BOARD.PRIVATE.SCREENS[e], showMessage("RESTORE_CONSISTENCY_NOW"), 
+                    j = new Board({
+                        NAME: e,
+                        SCREEN: b,
                         FROMTIME: !1
-                    }), CONF.DOM.BOARDSCREENS.html(new Template(k.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard"));
+                    }), CONF.DOM.BOARDSCREENS.html(new Template(j.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard"));
                 } else {
-                    var j = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
-                    CONF.DOM.BOARDPOSTS.data("activescreen", j), c = CONF.BOARD.PRIVATE.SCREENS[j], 
+                    var i = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
+                    CONF.DOM.BOARDPOSTS.data("activescreen", i), b = CONF.BOARD.PRIVATE.SCREENS[i], 
                     showMessage("A_USER_DELETED_THIS_SCREEN_CHANGE_NOW"), $("#back, .mobile").trigger("click"), 
                     1 === $("#edit").length && CONF.DOM.CMD.trigger("setMainNav");
-                    var k = new Board({
-                        NAME: j,
-                        SCREEN: c,
+                    var j = new Board({
+                        NAME: i,
+                        SCREEN: b,
                         FROMTIME: !1
                     });
-                    CONF.DOM.BOARDSCREENS.html(new Template(k.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
+                    CONF.DOM.BOARDSCREENS.html(new Template(j.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
                 } else showMessage("RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN");
             }
-            if (void 0 !== g.USERS) {
-                var l = Object.keys(g.USERS)[0];
-                showMessage(l + " " + "WAS_ADDED_TO_BOARD".translate());
+            if (void 0 !== f.USERS) {
+                var k = Object.keys(f.USERS)[0];
+                showMessage(k + " " + "WAS_ADDED_TO_BOARD".translate());
             }
         });
+    }, Connection.prototype.updateScreen = function(a) {
+        var b = !1;
+        if (a instanceof Array) for (var c = 0; c < a.length; c += 1) b ? this.updateScreen(a[c]) : b = this.updateScreen(a[c]); else if (void 0 !== a.TGT) {
+            var d = $("#" + a.TGT), e = "";
+            if (1 === d.length) {
+                if (b = !0, "position" === a.ACN && ($(d).animate({
+                    left: a.TO[0] + "%",
+                    top: a.TO[1] + "%"
+                }, 750), e = "POSTS_POSITION"), "content" === a.ACN && ($(d).find(".content").children("p").html(a.TO), 
+                e = "POSTS_CONTENT"), "deleted" === a.ACN && ($(d).fadeOut(250, function() {
+                    $(this).remove();
+                }), e = "DELETED_POST"), "color" === a.ACN) {
+                    var f = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(" ").toLowerCase();
+                    f = f.replace(a.TO, ""), $(d).removeClass(f).addClass(a.TO), e = "POSTS_COLOR";
+                }
+                var g;
+                for (g in CONF.BOARD.USERS) if (CONF.BOARD.USERS.hasOwnProperty(g) && CONF.BOARD.USERS[g] === a.BY) break;
+                showMessage(g + " " + e.translate(), "warning");
+            }
+        }
+        return b;
     }, Connection.prototype.handleData = function() {
         if (-1 === this.getData().indexOf("{")) {
             CONF.BOARD = JSON.parse(this.decrypt()), this.initBroadcast(CONF.BOARD.META.VERIFIER), 
@@ -744,7 +741,7 @@ var Menu;
         }, b.UL.CONTENT.LI = a, b;
     }, Menu.prototype.getLoginsMenue = function(a) {
         void 0 === a && (a = "");
-        for (var b = [], c = [], d = 0; d < b.length; d++) c[d] = {
+        for (var b = [], c = [], d = 0; d < b.length; d += 1) c[d] = {
             CONTENT: {
                 LINK: {
                     URL: "#",
@@ -784,7 +781,7 @@ var Menu;
         };
         return d;
     }, Menu.prototype.getPostEdit = function(a) {
-        typeof a === CONF.PROPS.STRING.UD && (a = "");
+        void 0 === a && (a = "");
         var b, c = [ "edit", "delete" ], d = [];
         for (b = 0; b < c.length; b += 1) d[b] = {
             CONTENT: {
@@ -799,7 +796,7 @@ var Menu;
         return d;
     }, Menu.prototype.getScreenMenue = function(a) {
         void 0 === a && (a = "");
-        for (var b = [ "back", "new_screen", "trash_empty" ], c = [], d = 0; d < b.length; d++) c[d] = {
+        for (var b = [ "back", "new_screen", "trash_empty" ], c = [], d = 0; d < b.length; d += 1) c[d] = {
             CONTENT: {
                 LINK: {
                     URL: "#",
@@ -812,7 +809,7 @@ var Menu;
         return c;
     }, Menu.prototype.getSettingsMenue = function(a) {
         void 0 === a && (a = "");
-        for (var b = [ "back" ], c = [], d = 0; d < b.length; d++) c[d] = {
+        for (var b = [ "back" ], c = [], d = 0; d < b.length; d += 1) c[d] = {
             CONTENT: {
                 LINK: {
                     URL: "#",
@@ -890,7 +887,7 @@ var PostWindow;
             origin: ""
         } : (void 0 === a.origin && (a.origin = ""), void 0 === a.defaultcolor && (a.defaultcolor = "yellow"), 
         void 0 === a.content && (a.content = ""), void 0 === a.headline && (a.headline = "NEW_POST".translate()));
-        for (var b = [], c = 0; c < CONF.PROPS.ARRAY.COLORS.length; c++) {
+        for (var b = [], c = 0; c < CONF.PROPS.ARRAY.COLORS.length; c += 1) {
             var d = "", e = CONF.BOARD.SETTINGS.COLORS[CONF.PROPS.ARRAY.COLORS[c].toUpperCase()];
             null !== e && (d = CONF.PROPS.ARRAY.COLORS[c].toUpperCase().translate() + " " + "IS_MARKED_AS".translate() + " " + e), 
             b[b.length] = CONF.PROPS.ARRAY.COLORS[c] === a.defaultcolor ? {
@@ -1221,26 +1218,20 @@ var Template;
                 for (c in this.config[a]) this.config[a].hasOwnProperty(c) && "object" == typeof this.config[a][c] && (this.config[a][c] = new Template(this.config[a][c]).setTpls(this.getTpls()).toHtml());
                 d += this.render(this.oTpls[a], this.config[a]);
             }
-            return this.cleanUp(d);
         } catch (e) {
             this.debug && log(e);
         }
+        return this.cleanUp(d);
     }, Template.prototype.render = function(a, b) {
         var c, d;
-        if (b instanceof Object) {
-            for (c in b) b.hasOwnProperty(c) && (d = new RegExp("{" + c + "}", "g"), a = a.replace(d, b[c]));
-            return a;
-        }
-        this.debug && log("Cant render data of type " + typeof b, "error");
+        for (c in b) b.hasOwnProperty(c) && (d = new RegExp("{" + c + "}", "g"), a = a.replace(d, b[c]));
+        return this.debug && log("Cant render data of type " + typeof b, "error"), a;
     }, Template.prototype.cleanUp = function(a) {
         return a = a.replace(/\{[A-Z_]*\}/gi, ""), a = a.replace(/[a-z]+="\s*"/gi, ""), 
         a = a.replace(/\s{2,}/g, " "), a = a.replace(/ >/g, ">"), a.toString();
     }, Template.prototype.setConfig = function(a) {
         return a instanceof Object ? this.config = a : this.debug && log("The given configuration was invalid (Object required)", "notice"), 
         this;
-    }, Template.prototype.getConfig = function() {
-        return this.config instanceof Object ? this.config : (this.debug && log("Theres actually just an empty configuration", "notice"), 
-        {});
     };
 }(), function(a, b) {
     function c(a) {
@@ -11891,6 +11882,21 @@ var io = "undefined" == typeof module ? {} : module.exports;
     });
 }();
 
+var animateColorByClass;
+
+!function() {
+    "use strict";
+    animateColorByClass = function(a, b, c) {
+        var d, e = a.attr("style"), f = a.css("backgroundColor");
+        void 0 === c && (c = 250), a.removeAttr("class").addClass(b), d = a.css("backgroundColor"), 
+        a.css("backgroundColor", f).animate({
+            backgroundColor: d
+        }, c, function() {
+            $(this).removeAttr("style").removeAttr("class").addClass(b), void 0 !== e && $(this).attr("style", e);
+        });
+    };
+}();
+
 var isMobile;
 
 !function() {
@@ -12278,7 +12284,7 @@ var showMessage;
                                         NAME: b,
                                         POSTS: CONF.BOARD.PRIVATE.SCREENS[b]
                                     };
-                                    d.TRASH[e] = g, CONF.BOARD.TRASH[e] = g, e++;
+                                    d.TRASH[e] = g, CONF.BOARD.TRASH[e] = g, e += 1;
                                 }
                                 d.PRIVATE.SCREENS[b] = !1, delete CONF.BOARD.PRIVATE.SCREENS[b];
                             }

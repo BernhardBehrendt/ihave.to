@@ -11,35 +11,42 @@
  * @param {Array} aButtonset an Array with objects
  * @param {String} sPanel the layouts of the panel
  */
-Buttons = function(aButtonset, sPanel) {
-	// Set the default with of an button
-	if ( typeof (sPanel) == CONF.PROPS.STRING.UD)
-		sPanel = 'slim';
+var Buttons;
+(function () {
+    "use strict";
 
-	// Process the Buttonset
-	if ( typeof (aButtonset) != CONF.PROPS.STRING.UD) {
-		var aButtons = new Array();
+    Buttons = function (aButtonset, sPanel) {
+        // Set the default with of an button
+        if (sPanel === undefined) {
+            sPanel = 'slim';
+        }
 
-		for (var i = 0; i < aButtonset.length; i++) {
-			aButtons[i] = {
-				CLASSES : 'button ' + aButtonset[i].TYPE,
-				CONTENT : {
-					LINK : {
-						ID : aButtonset[i].ID,
-						URL : '#',
-						CONTENT : aButtonset[i].LABEL.translate()
-					}
-				}
-			}
-		}
+        // Process the Buttonset
+        if (aButtonset !== undefined) {
+            var i;
+            var aButtons = [];
 
-		return {
-			UL : {
-				CLASSES : 'buttons ' + sPanel,
-				CONTENT : {
-					LI : aButtons
-				}
-			}
-		};
-	}
-};
+            for (i = 0; i < aButtonset.length; i += 1) {
+                aButtons[i] = {
+                    CLASSES: 'button ' + aButtonset[i].TYPE,
+                    CONTENT: {
+                        LINK: {
+                            ID: aButtonset[i].ID,
+                            URL: '#',
+                            CONTENT: aButtonset[i].LABEL.translate()
+                        }
+                    }
+                };
+            }
+
+            return {
+                UL: {
+                    CLASSES: 'buttons ' + sPanel,
+                    CONTENT: {
+                        LI: aButtons
+                    }
+                }
+            };
+        }
+    };
+})();

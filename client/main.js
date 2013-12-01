@@ -26,8 +26,8 @@
         var aBoards;
         var sLastBoard = '';
 
-        //if (typeof (Storage) !== CONF.PROPS.STRING.UD) {
         CONF.PROPS.OBJECT.STORAGE = localStorage;
+
         if (CONF.PROPS.OBJECT.STORAGE.getItem("boards") === null) {
             CONF.PROPS.OBJECT.STORAGE.setItem("boards", '');
 

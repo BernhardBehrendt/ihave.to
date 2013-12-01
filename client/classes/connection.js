@@ -114,85 +114,7 @@ var Connection;
                             if (oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS.hasOwnProperty(iTimeEntry)) {
                                 var oItem = oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTimeEntry];
 
-
-                                /**
-                                 * A fucntion to also patch the board with multichanges (e.g. content & color in one action)
-                                 * Then function is called recursivley
-                                 */
-                                function updateScreen(oItem) {
-                                    var bUpdated = false;
-
-                                    // Array means new Post (content and color)
-                                    if (!( oItem instanceof Array)) {
-                                        if (oItem.TGT !== undefined) {
-                                            // The target to update
-                                            //var oTarget = $('#board > .posts > .screen > #' + oItem.TGT);
-
-                                            var oTarget = $('#' + oItem.TGT);
-                                            var sChange = '';
-
-                                            // If Target exists
-                                            if (oTarget.length === 1) {
-
-                                                // Tell further process no further consistency operations are required
-                                                bUpdated = true;
-
-                                                // Update Position
-                                                if (oItem.ACN === 'position') {
-                                                    $(oTarget).animate({
-                                                        left: oItem.TO[0] + '%',
-                                                        top: oItem.TO[1] + '%'
-                                                    }, 750);
-                                                    sChange = 'POSTS_POSITION';
-                                                }
-
-                                                // Update the Content
-                                                if (oItem.ACN === 'content') {
-                                                    $(oTarget).find('.content').children('p').html(oItem.TO);
-                                                    sChange = 'POSTS_CONTENT';
-                                                }
-
-                                                // Handle Post deletion (if an update comes after the postit willl be recreated)
-                                                if (oItem.ACN === 'deleted') {
-                                                    $(oTarget).fadeOut(250, function () {
-                                                        $(this).remove();
-                                                    });
-                                                    sChange = 'DELETED_POST';
-                                                }
-
-                                                if (oItem.ACN === 'color') {
-                                                    var sRMClasses = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(' ').toLowerCase();
-                                                    // Remove class to change to from string
-                                                    sRMClasses = sRMClasses.replace(oItem.TO, '');
-                                                    $(oTarget).removeClass(sRMClasses).addClass(oItem.TO);
-                                                    sChange = 'POSTS_COLOR';
-                                                }
-                                                var sUser;
-                                                for (sUser in CONF.BOARD.USERS) {
-                                                    if (CONF.BOARD.USERS.hasOwnProperty(sUser) && CONF.BOARD.USERS[sUser] === oItem.BY) {
-                                                        break;
-                                                    }
-                                                }
-
-                                                showMessage(sUser + ' ' + sChange.translate(), 'warning');
-                                            }
-                                        }
-                                    } else {
-                                        for (var i = 0; i < oItem.length; i++) {
-                                            if (!bUpdated) {
-                                                bUpdated = updateScreen(oItem[i]);
-                                            }
-                                            else {
-                                                updateScreen(oItem[i]);
-                                            }
-
-                                        }
-                                    }
-
-                                    return bUpdated;
-                                }
-
-                                bUpdated = updateScreen(oItem);
+                                bUpdated = this.updateScreen(oItem);
                             }
                         }
 
@@ -250,6 +172,84 @@ var Connection;
             }
         });
     };
+
+    /**
+     * A fucntion to also patch the board with multichanges (e.g. content & color in one action)
+     * Then function is called recursivley
+     */
+    Connection.prototype.updateScreen = function updateScreen(oItem) {
+        var bUpdated = false;
+
+        // Array means new Post (content and color)
+        if (!( oItem instanceof Array)) {
+            if (oItem.TGT !== undefined) {
+                // The target to update
+                //var oTarget = $('#board > .posts > .screen > #' + oItem.TGT);
+
+                var oTarget = $('#' + oItem.TGT);
+                var sChange = '';
+
+                // If Target exists
+                if (oTarget.length === 1) {
+
+                    // Tell further process no further consistency operations are required
+                    bUpdated = true;
+
+                    // Update Position
+                    if (oItem.ACN === 'position') {
+                        $(oTarget).animate({
+                            left: oItem.TO[0] + '%',
+                            top: oItem.TO[1] + '%'
+                        }, 750);
+                        sChange = 'POSTS_POSITION';
+                    }
+
+                    // Update the Content
+                    if (oItem.ACN === 'content') {
+                        $(oTarget).find('.content').children('p').html(oItem.TO);
+                        sChange = 'POSTS_CONTENT';
+                    }
+
+                    // Handle Post deletion (if an update comes after the postit willl be recreated)
+                    if (oItem.ACN === 'deleted') {
+                        $(oTarget).fadeOut(250, function () {
+                            $(this).remove();
+                        });
+                        sChange = 'DELETED_POST';
+                    }
+
+                    if (oItem.ACN === 'color') {
+                        var sRMClasses = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(' ').toLowerCase();
+                        // Remove class to change to from string
+                        sRMClasses = sRMClasses.replace(oItem.TO, '');
+                        $(oTarget).removeClass(sRMClasses).addClass(oItem.TO);
+                        sChange = 'POSTS_COLOR';
+                    }
+                    var sUser;
+                    for (sUser in CONF.BOARD.USERS) {
+                        if (CONF.BOARD.USERS.hasOwnProperty(sUser) && CONF.BOARD.USERS[sUser] === oItem.BY) {
+                            break;
+                        }
+                    }
+
+                    showMessage(sUser + ' ' + sChange.translate(), 'warning');
+                }
+            }
+        } else {
+            for (var i = 0; i < oItem.length; i += 1) {
+                if (!bUpdated) {
+                    bUpdated = this.updateScreen(oItem[i]);
+                }
+                else {
+                    this.updateScreen(oItem[i]);
+                }
+
+            }
+        }
+
+        return bUpdated;
+    };
+
     /**
      * Handle the data to get synced to server and other online clients
      */

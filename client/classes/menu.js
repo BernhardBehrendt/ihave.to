@@ -48,7 +48,7 @@ var Menu;
         var aMenuCmds = [];  // ['home', 'login', 'help', 'system'];
         var aCmds = [];
 
-        for (var i = 0; i < aMenuCmds.length; i++) {
+        for (var i = 0; i < aMenuCmds.length; i+=1) {
             aCmds[i] = {
                 CONTENT: {
                     LINK: {
@@ -126,7 +126,7 @@ var Menu;
      */
     Menu.prototype.getPostEdit = function (sActiveOne) {
 
-        if (typeof (sActiveOne) === CONF.PROPS.STRING.UD) {
+        if (sActiveOne === undefined) {
             sActiveOne = '';
         }
         var i;
@@ -161,7 +161,7 @@ var Menu;
         var aMenuCmds = ['back', 'new_screen', 'trash_empty'];
         var aCmds = [];
 
-        for (var i = 0; i < aMenuCmds.length; i++) {
+        for (var i = 0; i < aMenuCmds.length; i+=1) {
             aCmds[i] = {
                 CONTENT: {
                     LINK: {
@@ -189,7 +189,7 @@ var Menu;
         var aMenuCmds = ['back'];
         var aCmds = [];
 
-        for (var i = 0; i < aMenuCmds.length; i++) {
+        for (var i = 0; i < aMenuCmds.length; i+=1) {
             aCmds[i] = {
                 CONTENT: {
                     LINK: {

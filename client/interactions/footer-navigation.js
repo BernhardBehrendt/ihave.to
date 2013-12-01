@@ -335,7 +335,7 @@
                                             CONF.BOARD.TRASH[iTime] = oChange;
 
                                             // Update time if software is too fast ;-)
-                                            iTime++;
+                                            iTime += 1;
                                         }
 
                                         oDiff.PRIVATE.SCREENS[sScreenName] = false;

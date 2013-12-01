@@ -55,8 +55,8 @@
                 CONF.PROPS.STRING.LANGUAGE = sDefaultLanguage;
             }
         }
-        if (typeof (TRANSLATIONS[CONF.PROPS.STRING.LANGUAGE]) !== CONF.PROPS.STRING.UD) {
-            if (typeof (TRANSLATIONS[CONF.PROPS.STRING.LANGUAGE][this]) !== CONF.PROPS.STRING.UD) {
+        if (TRANSLATIONS[CONF.PROPS.STRING.LANGUAGE] !== undefined) {
+            if (TRANSLATIONS[CONF.PROPS.STRING.LANGUAGE][this] !== undefined) {
                 return TRANSLATIONS[CONF.PROPS.STRING.LANGUAGE][this].toString();
             }
             else {

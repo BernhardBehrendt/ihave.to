@@ -47,7 +47,7 @@ var PostWindow;
         var aColorList = [];
 
         // Processs the existing colors for colorselection
-        for (var i = 0; i < CONF.PROPS.ARRAY.COLORS.length; i++) {
+        for (var i = 0; i < CONF.PROPS.ARRAY.COLORS.length; i+=1) {
             var sColorTitle = '';
             var sPrioName = CONF.BOARD.SETTINGS.COLORS[CONF.PROPS.ARRAY.COLORS[i].toUpperCase()];
 
