@@ -83,8 +83,7 @@ var Connection;
     Connection.prototype.connect = function (board) {
         var self = this;
         this._board = board;
-
-        if (this._board !== null) {
+        if (this._board !== undefined) {
             // console.log('connect now');
             this.socket.emit('connect', this._board);
 
@@ -98,6 +97,8 @@ var Connection;
             //this.socket.on('notify', function (data) {
             //showMessage(data.message, data.type);
             //});
+        } else {
+            window.location.reload();
         }
     };
 

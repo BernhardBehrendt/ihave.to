@@ -3,10 +3,30 @@ var Strings = null;
 (function () {
     "use strict";
 
+    /**
+     * Class for string operations
+     * @module Server
+     * @submodule Classes
+     * @class Strings
+     * @param {String} string
+     * @constructor
+     */
     Strings = function (string) {
         this.string = string;
     };
 
+    /**
+     * The String to work with
+     * @property sString
+     * @type {String}
+     */
+    Strings.prototype.string = null;
+
+    /**
+     * Reverse the string to work with
+     * @method reverse
+     * @return {String} The reversed string
+     */
     Strings.prototype.reverse = function () {
         this.string = this.string + '';
 

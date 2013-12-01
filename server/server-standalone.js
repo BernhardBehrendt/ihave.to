@@ -5,19 +5,19 @@
 (function () {
     "use strict";
 
+    var i;
+    var fs = require('fs');
+    var Store = require('socket.io-clusterhub');
     var cluster = require('cluster');
     var numCPUs = require('os').cpus().length;
-    var fs = require('fs');
+    var SETTINGS = require(__dirname + '/settings/config');
 
-    if (!fs.existsSync(__dirname + '/../boards/')) {
-        fs.mkdirSync(__dirname + '/../boards/');
+    if (!fs.existsSync(SETTINGS.ROOT + '../boards/')) {
+        fs.mkdirSync(SETTINGS.ROOT + '../boards/');
     }
 
-// store must be initialized for master/worker processes
-    var Store = require('socket.io-clusterhub');
-
     if (cluster.isMaster) {
-        var i;
+
         // Fork workers.
         for (i = 0; i < numCPUs; i += 1) {
             cluster.fork();
@@ -26,28 +26,27 @@
         cluster.on('exit', function (worker) {
             console.log('worker ' + worker.process.pid + ' died');
         });
+
     } else {
         // Board instande
-        var Board = require(__dirname + '/classes/Board');
+        var Board = require(SETTINGS.ROOT + 'classes/Board');
         var http = require('http');
         var express = require('express');
         var app = express();
         var server = http.createServer(app);
         var io = require('socket.io').listen(server);
+
         io.configure(function () {
             io.set('store', new Store());
         });
 
-        app.use(express.static(__dirname + '/../public/'));
+        app.use(express.static(SETTINGS.ROOT + '../public/'));
 
         app.use(function (req, res) {
             res.redirect(302, '/404.html');
         });
 
-        io.enable('browser client minification');
-        // send minified client
         io.enable('browser client etag');
-        // apply etag caching logic based on version number
         io.enable('browser client gzip');
         io.set('log level', 1);
 
@@ -63,11 +62,15 @@
                 // Handle conection lost delete board object
                 socket.on('disconnect', function () {
                     oBoard.goodBye();
+
+                    // Seems to be wrong but necessary to cleanup memory or done by garbage collection???
+                    //delete oBoard;
                 });
             });
         });
 
-        server.listen(3000);
-        console.log('iHave.to was started on port 3000 (http://localhost:3000)');
+        server.listen(SETTINGS.PORT);
+
+        console.log('iHave.to was started on port ' + SETTINGS.PORT);
     }
 })();

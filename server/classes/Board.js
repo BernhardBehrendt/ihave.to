@@ -7,36 +7,97 @@ var Board = null;
     "use strict";
 
     /**
-     *The iHave.to
-     *Board Class which requires to be called inside the sockt.io framework
-     *@author Bernhard Bezdek
+     * The iHave.to
+     * Board Class which requires to be called inside the sockt.io framework
+     * @author Bernhard Bezdek
+     * @module Server
+     * @submodule Classes
+     * @class Board
+     * @contructor
+     * @param {String} sBoard The computet name of the requested board
+     * @param {Object} oSocket The created socket connection
      */
     Board = function (sBoard, oSocket) {
-        // Fetch the security class
-        this.__oSecurity = require(__dirname + '/Security');
-        // Initialize the board class properties
+        //this._verifier = false;
 
-        //this.bIsNew = false;
-        this.__verifier = false;
-        this.__oSocket = oSocket;
-        this.__oFs = require('fs');
+        this.oSocket = oSocket;
+
         this.sBoardFolder = __dirname + '/../../boards/' + sBoard + '/';
         this.sVerifierFile = this.sBoardFolder + 'VERIFIER';
         this.sBoardFile = this.sBoardFolder + 'BOARD';
-        this.who = null;
-        // Starts board change listener
-        this.initialize(new this.__oSecurity().createVerifier(sBoard));
+
+        this.initialize(new this._oSecurity().createVerifier(sBoard));
     };
 
     /**
+     * Node js filesystem opartion class
+     * @property fs
+     * @type {Function}
+     */
+    Board.prototype.fs = require('fs');
+
+    /**
+     * The socket connection
+     * @property oSocket
+     * @type {Object}
+     */
+    Board.prototype.oSocket = null;
+
+
+    /**
+     * The name of the current board fiolder on filesystem
+     * @property sBoardFolder
+     * @type {String}
+     */
+    Board.prototype.sBoardFolder = null;
+
+    /**
+     * The filename of the verifier
+     * @property sVerifierFile
+     * @type {String}
+     */
+    Board.prototype.sVerifierFile = null;
+
+    /**
+     * The boards file name
+     * @property sBoardFile
+     * @type {String}
+     */
+    Board.prototype.sBoardFile = null;
+
+    /**
+     * The name of the acting user (only required for multiuser purposes)
+     * @property who
+     * @type {null}
+     */
+    Board.prototype.who = null;
+
+    /**
+     * The verifier which is required to accept write operations
+     * @property _verifier
+     * @type {String}
+     * @private
+     */
+    Board.prototype._verifier = false;
+
+    /**
+     * The security instance for the current board context
+     * @property _oSecurity
+     * @type {Function}
+     * @private
+     */
+    Board.prototype._oSecurity = require(__dirname + '/Security');
+
+    /**
      * Read the verifier which was stored in file and set as property
+     * @method setVerifier
      */
     Board.prototype.setVerifier = function () {
         // Create a temporary copy of that class
         var oProxBoardObj = this;
 
-        this.__oFs.readFile(this.sVerifierFile, 'UTF-8', function (error, data) {
-            oProxBoardObj.__verifier = data;
+        this.fs.readFile(this.sVerifierFile, 'UTF-8', function (error, data) {
+            oProxBoardObj._verifier = data;
 
             oProxBoardObj.getBoard();
             // Starts the storage change listener
@@ -46,28 +107,30 @@ var Board = null;
 
     /**
      * Read the file
+     * @method getBoard
      */
     Board.prototype.getBoard = function () {
         // Create a temporary copy of that class
-        var oProxBoardObj = this;
+        var self = this;
 
         // Read the File
-        this.__oFs.readFile(this.sBoardFile, 'UTF-8', function (error, data) {
+        this.fs.readFile(this.sBoardFile, 'UTF-8', function (error, data) {
             // Emmit data to client
-            oProxBoardObj.__oSocket.emit('connected', data);
+            self.oSocket.emit('connected', data);
         });
     };
 
     /**
      * Put changes into the boardfile
+     * @method setBoard
      * @param {String} sBoardData the Board string data
      */
     Board.prototype.setBoard = function (sBoardData) {
         // Create a temporary copy of that class
-        var oProxBoardObj = this;
+        var self = this;
 
-        this.__oFs.writeFile(this.sBoardFile, sBoardData, 'UTF-8', function () {
-            oProxBoardObj.__oSocket.emit('notify', {
+        this.fs.writeFile(this.sBoardFile, sBoardData, 'UTF-8', function () {
+            self.oSocket.emit('notify', {
                 message: 'SYNC_FINISHED',
                 type: 'notice'
             });
@@ -76,24 +139,24 @@ var Board = null;
 
     /**
      * Initialize the board connection and create a new board if there is no one or the given userdata
+     * @method initialize
      * @param {String} verifier the verifier SHA-3 checksum
      */
     Board.prototype.initialize = function (verifier) {
         // Create a temporary copy of that class
-        var oProxBoardObj = this;
+        var self = this;
 
         // Check if the requested boardfile already exists
-        this.__oFs.exists(this.sBoardFolder, function (exists) {
+        this.fs.exists(this.sBoardFolder, function (exists) {
             // Exists not so we create a new one
             if (!exists) {
-
                 // Create boardfolder
-                oProxBoardObj.__oFs.mkdir(oProxBoardObj.sBoardFolder, '0777', function () {
+                self.fs.mkdir(self.sBoardFolder, '0777', function () {
                     // Create verfier file
-                    oProxBoardObj.__oFs.writeFile(oProxBoardObj.sVerifierFile, verifier, 'UTF-8', function () {
+                    self.fs.writeFile(self.sVerifierFile, verifier, 'UTF-8', function () {
 
                         // Create Board file
-                        oProxBoardObj.__oFs.writeFile(oProxBoardObj.sBoardFile, JSON.stringify({
+                        self.fs.writeFile(self.sBoardFile, JSON.stringify({
                             META: {
                                 CREATED: new Date().getTime(),
                                 MODIFIED: null,
@@ -125,27 +188,28 @@ var Board = null;
                             console.log('New Board created');
 
                             // Start running board in regulary mode
-                            oProxBoardObj.setVerifier();
+                            self.setVerifier();
                         });
                     });
                 });
             } else {
                 // Start running board in regulary mode
-                oProxBoardObj.setVerifier();
+                self.setVerifier();
             }
         });
     };
 
     /**
      * The listener which is stores the updated version to server
+     * @method listenBoard
      */
     Board.prototype.listenBoard = function () {
         // Create a temporary copy of that class
-        var oProxBoardObj = this;
+        var self = this;
 
         // Listen for the verifier
-        this.__oSocket.on(this.__verifier, function (board) {
-            oProxBoardObj.setBoard(board);
+        this.oSocket.on(this._verifier, function (board) {
+            self.setBoard(board);
         });
 
         // Enable the broadcast for further clients
@@ -156,28 +220,31 @@ var Board = null;
      * The pusher to send new commits to other clients
      * Note it's not final because the whole board is sent on change
      * In future only the diff should be placed here
+     * @method pushChanges
      */
     Board.prototype.pushChanges = function () {
         // Create a temporary copy of that class
-        var oProxBoardObj = this;
+        var self = this;
 
         // Send broadcast to other clients on that board
-        this.__oSocket.on('sync', function (data) {
-            oProxBoardObj.__oSocket.broadcast.emit('bc-' + oProxBoardObj.__verifier, data);
+        this.oSocket.on('sync', function (data) {
+            self.oSocket.broadcast.emit('bc-' + self._verifier, data);
         });
 
         // Listen for new users to inform other people curently online
-        this.__oSocket.on('enter', function (data) {
-            oProxBoardObj.who = data;
-            oProxBoardObj.__oSocket.broadcast.emit('enter-' + oProxBoardObj.__verifier, data);
+        this.oSocket.on('enter', function (data) {
+            self.who = data;
+            self.oSocket.broadcast.emit('enter-' + self._verifier, data);
         });
     };
 
+    /**
+     * Shutdown the current board instance after user has disconnected
+     * @method goodBye
+     */
     Board.prototype.goodBye = function () {
-        var oProxBoardObj = this;
-
-        if (oProxBoardObj.who !== null) {
-            oProxBoardObj.__oSocket.broadcast.emit('goodbye-' + oProxBoardObj.__verifier, oProxBoardObj.who);
+        if (this.who !== null) {
+            this.oSocket.broadcast.emit('goodbye-' + this._verifier, this.who);
         }
     };
 })();

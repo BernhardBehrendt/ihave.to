@@ -471,10 +471,10 @@ var Connection;
     Connection.prototype._data = null, Connection.prototype._verifier = null, Connection.prototype._board = null, 
     Connection.prototype.connect = function(a) {
         var b = this;
-        this._board = a, null !== this._board && (this.socket.emit("connect", this._board), 
+        this._board = a, void 0 !== this._board ? (this.socket.emit("connect", this._board), 
         this.socket.on("connected", function(a) {
             $("#cmd").removeAttr("style"), b.setData(a), b.handleData();
-        }));
+        })) : window.location.reload();
     }, Connection.prototype.initBroadcast = function(a) {
         var b = this;
         this.socket.on("enter-" + a, function(a) {

@@ -6,10 +6,17 @@
     "use strict";
 
     var i;
+    var fs = require('fs');
     var Store = require('socket.io-clusterhub');
     var cluster = require('cluster');
-    var Os = require('os');
-    var numCpus = Os.cpus().length;
+    var numCPUs = require('os').cpus().length;
+    var SETTINGS = require(__dirname + '/settings/config');
+
+    if (!fs.existsSync(SETTINGS.ROOT + '../boards/')) {
+        fs.mkdirSync(SETTINGS.ROOT + '../boards/');
+    }
+
+
     if (cluster.isMaster) {
         // Fork workers.
         for (i = 0; i < numCpus; i += 1) {
@@ -22,16 +29,13 @@
     } else {
         var Board = require(__dirname + '/classes/Board');
 
-        var io = require('socket.io').listen(3000);
+        var io = require('socket.io').listen(SETTINGS.PORT);
 
         io.configure(function () {
             io.set('store', new Store());
         });
 
-        io.enable('browser client minification');
-        // send minified client
         io.enable('browser client etag');
-        // apply etag caching logic based on version number
         io.enable('browser client gzip');
         io.set('log level', 1);
 
@@ -49,6 +53,9 @@
                 // Handle conection lost delete board object
                 socket.on('disconnect', function () {
                     oBoard.goodBye();
+
+                    // Seems to be wrong but necessary to cleanup memory or done by garbage collection???
+                    //delete oBoard;
                 });
             });
         });
