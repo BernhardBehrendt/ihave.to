@@ -48,17 +48,13 @@
         // Leave subnavigation level
         .on(CONF.EVENTS.CLICK, '#back', function () {
             CONF.DOM.CMD.trigger('setMainNav');
-            //CONF.DOM.UIWINDOW.children('.controls').find('.close').trigger(CONF.EVENTS.CLICK);
 
             CONF.DOM.CMD.find('.active').trigger(CONF.EVENTS.CLICK);
             CONF.DOM.CMD.find('#back').trigger(CONF.EVENTS.CLICK);
             CONF.DOM.UIWINDOW.trigger('hideUi');
 
         })
-        // Cancel current view action and go back to main view
-        .on(CONF.EVENTS.CLICK, '#cancel', function () {
-            $('#ui').find('.close').trigger(CONF.EVENTS.CLICK);
-        })
+
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Main Navigaton
@@ -258,7 +254,7 @@
 
                     }
 
-                    $('#ui').find('.close').trigger(CONF.EVENTS.CLICK);
+                    $('#back').trigger('click');
 
                     CONF.COM.SOCKET.saveChanges(oDiff);
 

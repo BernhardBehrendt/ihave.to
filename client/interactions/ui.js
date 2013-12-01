@@ -5,7 +5,6 @@
 /*global Template*/
 /*global Connection*/
 /*global showMessage*/
-/*global animateColorByClass*/
 var Post;
 (function () {
     "use strict";
@@ -127,7 +126,7 @@ var Post;
                 var oPostWin = $('#post-window');
                 var sPostWinId = oPostWin.children('textarea').attr('id');
                 var bListenChange = (sPostWinId !== undefined && sPostWinId.indexOf('origin-') !== -1);
-                var oTextarea = $(this).closest('#post-window').children('textarea');
+                var oTextarea = oPostWin.children('textarea');
                 var sAddClassFinal = $(this).closest('li').attr('class');
                 var oColorSelect = oPostWin.children('.color_select');
 
@@ -135,7 +134,7 @@ var Post;
                     oColorSelect.data('beforechange', oSelected.parent().attr('class'));
                 }
 
-                animateColorByClass(oTextarea, sAddClassFinal);
+                oTextarea.removeAttr('class').addClass(sAddClassFinal);
 
                 oSelected.removeClass('selected');
 
@@ -147,11 +146,11 @@ var Post;
                     }
                     else {
                         CONF.DOM.CMD.find('#store_post').addClass('hidden');
-                        oPostWin.children('textarea').trigger('keyup');
+
+                        oTextarea.trigger('keyup');
                     }
                 }
             }
-
         })
 
         // Store the initial content of textarea in edit mode

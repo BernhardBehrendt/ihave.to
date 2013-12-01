@@ -122,6 +122,7 @@ module.exports = function (grunt) {
                                                 '../client/vendor/socket.io/socket.io.js',
 
                                                 '../client/functions/*.js',
+
                                                 '../client/init/*.js',
                                                 '../client/interactions/*.js',
                                                 '../client/main.js']

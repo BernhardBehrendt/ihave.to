@@ -12372,21 +12372,6 @@ var io = "undefined" == typeof module ? {} : module.exports;
     });
 }();
 
-var animateColorByClass;
-
-!function() {
-    "use strict";
-    animateColorByClass = function(a, b, c) {
-        var d, e = a.attr("style"), f = a.css("backgroundColor");
-        void 0 === c && (c = 250), a.removeAttr("class").addClass(b), d = a.css("backgroundColor"), 
-        a.css("backgroundColor", f).animate({
-            backgroundColor: d
-        }, c, function() {
-            $(this).removeAttr("style").removeAttr("class").addClass(b), void 0 !== e && $(this).attr("style", e);
-        });
-    };
-}();
-
 var isMobile;
 
 !function() {
@@ -12427,7 +12412,7 @@ var log;
             containment: ".screen",
             start: function(a, b) {
                 $(this).data("start", $(this).attr("style")), b.helper.children(".content").trigger(CONF.EVENTS.CLICK), 
-                CONF.DOM.UIWINDOW.is(".opened") && CONF.DOM.UIWINDOW.find(".close").trigger(CONF.EVENTS.CLICK);
+                CONF.DOM.UIWINDOW.is(".opened") && $("#back").trigger("click");
             },
             stop: function(a, b) {
                 if ($(this).is(".mobile")) $(this).attr("style", $(this).data("start")); else {
@@ -12661,8 +12646,6 @@ var showMessage;
     }).on(CONF.EVENTS.CLICK, "#back", function() {
         CONF.DOM.CMD.trigger("setMainNav"), CONF.DOM.CMD.find(".active").trigger(CONF.EVENTS.CLICK), 
         CONF.DOM.CMD.find("#back").trigger(CONF.EVENTS.CLICK), CONF.DOM.UIWINDOW.trigger("hideUi");
-    }).on(CONF.EVENTS.CLICK, "#cancel", function() {
-        $("#ui").find(".close").trigger(CONF.EVENTS.CLICK);
     }).on(CONF.EVENTS.CLICK, "#new_post", function(a, b) {
         var c, d = !1, e = {
             left: 0,
@@ -12733,7 +12716,7 @@ var showMessage;
                     TO: [ f.data("postposition").left, f.data("postposition").top ]
                 } ], h.PRIVATE.SCREENS[g].POSTS[d] = a, CONF.BOARD.PRIVATE.SCREENS[g].POSTS[d] = a, 
                 showMessage("STRORE_NEW_POST");
-                $("#ui").find(".close").trigger(CONF.EVENTS.CLICK), CONF.COM.SOCKET.saveChanges(h);
+                $("#back").trigger("click"), CONF.COM.SOCKET.saveChanges(h);
                 var l = new Board({
                     NAME: CONF.DOM.BOARDPOSTS.data("activescreen"),
                     SCREEN: CONF.BOARD.PRIVATE.SCREENS[CONF.DOM.BOARDPOSTS.data("activescreen")],
@@ -12883,11 +12866,11 @@ var Post;
         isMobile() || a.focus());
     }).on(CONF.EVENTS.CLICK, "#post-window > .color_select li > a", function() {
         if (!$(this).hasClass("selected")) {
-            var a = $(this).closest("ul").find(".selected"), b = $("#post-window"), c = b.children("textarea").attr("id"), d = void 0 !== c && -1 !== c.indexOf("origin-"), e = $(this).closest("#post-window").children("textarea"), f = $(this).closest("li").attr("class"), g = b.children(".color_select");
+            var a = $(this).closest("ul").find(".selected"), b = $("#post-window"), c = b.children("textarea").attr("id"), d = void 0 !== c && -1 !== c.indexOf("origin-"), e = b.children("textarea"), f = $(this).closest("li").attr("class"), g = b.children(".color_select");
             d && void 0 === g.data("beforechange") && g.data("beforechange", a.parent().attr("class")), 
-            animateColorByClass(e, f), a.removeClass("selected"), $(this).addClass("selected"), 
+            e.removeAttr("class").addClass(f), a.removeClass("selected"), $(this).addClass("selected"), 
             d && ($(this).parent().attr("class") !== g.data("beforechange") ? CONF.DOM.CMD.find("#store_post").removeClass("hidden") : (CONF.DOM.CMD.find("#store_post").addClass("hidden"), 
-            b.children("textarea").trigger("keyup")));
+            e.trigger("keyup")));
         }
     }).on("focusin", "#post-window > textarea", function() {
         void 0 !== $(this).attr("id") && -1 !== $(this).attr("id").indexOf("origin-") && ($(this).val($(this).val() + " "), 

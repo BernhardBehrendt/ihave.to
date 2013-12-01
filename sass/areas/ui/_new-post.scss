@@ -11,7 +11,8 @@
     @include rgba-background($yellow);
     @include box-shadow(1px 1px 8px $black inset);
     @include border-radius(4px);
-
+    @include transition-property("background-color");
+    @include transition-duration("0.2s");
 
 
     margin:$def_margin_unit / 2 0 0 0;
@@ -52,6 +53,8 @@
     }
 
   }
+
+
 
   textarea.blue{
     @include rgba-background($blue);

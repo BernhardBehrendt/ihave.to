@@ -72,7 +72,7 @@
                 ui.helper.children('.content').trigger(CONF.EVENTS.CLICK);
 
                 if (CONF.DOM.UIWINDOW.is('.opened')) {
-                    CONF.DOM.UIWINDOW.find('.close').trigger(CONF.EVENTS.CLICK);
+                    $('#back').trigger('click');
                 }
 
             },
