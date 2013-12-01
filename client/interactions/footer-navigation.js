@@ -70,9 +70,9 @@
             if (oSettings === undefined) {
                 oSettings = {};
             }
-
             if (oSettings.origin !== undefined) {
                 oOrigin = oSettings.origin;
+
             }
 
             if (oSettings.left !== undefined) {
@@ -85,7 +85,6 @@
 
             if (oOrigin) {
                 var oPost = new Post(oOrigin);
-
                 oPostConfig = {
                     defaultcolor: oPost.getColor(),
                     content: oPost.getContent(),
@@ -98,7 +97,9 @@
                 CONF.DOM.UIWINDOW.trigger('showUi');
                 CONF.DOM.CMD.trigger('setPostNav', oPostPos);
                 CONF.DOM.UIWINDOW.children('.cmd').html(new PostWindow(oPostConfig).deliver());
-                CONF.DOM.UIWINDOW.find('textarea').focus();
+                var oTextarea = CONF.DOM.UIWINDOW.find('textarea');
+                oTextarea.val(oTextarea.val().toString().br2nl());
+                oTextarea.focus();
             }
         })
 
@@ -164,12 +165,10 @@
                     // Modified post
 
                     if (oTextarea.attr('id') !== undefined && oTextarea.attr('id').indexOf('origin') === 0) {
-
                         var iTarget = parseInt(oTextarea.attr('id').replace('origin-', ''), 10);
                         var oSelectedColrVal = $('.color_select').data('beforechange');
                         var sPostSelectedClass = oPostWindow.find('a.selected').parent().attr('class');
-
-                        if (iTarget === CONF.PROPS.STRING.NUM) {
+                        if (typeof(iTarget) === CONF.PROPS.STRING.NUM) {
 
                             if (oSelectedColrVal !== undefined && sPostSelectedClass !== oSelectedColrVal) {
                                 oColorchange = {
@@ -187,6 +186,8 @@
                                     ACN: "content",
                                     TO: oTextarea.val().trim().escapeHtml().nl2br().urlToLink()
                                 };
+
+
                             }
 
                             // If only color changed set change color object

@@ -47,7 +47,7 @@ var PostWindow;
         var aColorList = [];
 
         // Processs the existing colors for colorselection
-        for (var i = 0; i < CONF.PROPS.ARRAY.COLORS.length; i+=1) {
+        for (var i = 0; i < CONF.PROPS.ARRAY.COLORS.length; i += 1) {
             var sColorTitle = '';
             var sPrioName = CONF.BOARD.SETTINGS.COLORS[CONF.PROPS.ARRAY.COLORS[i].toUpperCase()];
 
@@ -79,6 +79,7 @@ var PostWindow;
                 };
             }
         }
+        //console.log(config.content);
         // create the structure for the template engine
         this.postTemplate = new Template({
             DIV: {
@@ -90,8 +91,8 @@ var PostWindow;
                     },
                     TEXTAREA: {
                         ID: ((config.origin.length > 0) ? 'origin-' + config.origin : ''),
-                        CLASSES: config.defaultcolor,
-                        CONTENT: config.content
+                        CLASS: config.defaultcolor,
+                        INSERT: config.content
                     },
                     UL: {
                         CLASSES: 'color_select',
@@ -102,7 +103,6 @@ var PostWindow;
                 }
             }
         }).toHtml();
-
     };
     /**
      * Gives back the templates engine required object

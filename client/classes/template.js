@@ -225,7 +225,7 @@ var Template;
             SPAN: '<span id="{ID}" class="{CLASSES}">{CONTENT}</span>',
             P: '<p class="{CLASSES}">{CONTENT}</p>',
             STRONG: '<strong class="{CLASSES}">{CONTENT}</strong>',
-            TEXTAREA: '<textarea id="{ID}" class="{CLASSES}">{CONTENT}</textarea>',
+          //  TEXTAREA: '<textarea id="{ID}" class="{CLASSES}">{CONTENT}</textarea>',
 
             UL: '<ul id="{ID}" class="{CLASSES}">{CONTENT}</ul>',
             LI: '{BEFORE}<li id="{ID}" class="{CLASSES}">{CONTENT}</li>{AFTER}',

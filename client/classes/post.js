@@ -39,13 +39,17 @@ var Post;
              * Get the ASCII Text content from a postit
              */
             this.getContent = function () {
-                var oContent = this.oPost.children('.content').find('p');
-                var oTempContent = $('#temp_content_grep');
+                var oContent = this.oPost.children('.content').children('p');
+                var sContent = oContent.html().toString().br2nl();
+
+
 
                 $('<div/>', {
                     id: 'temp_content_grep',
                     html: oContent.html()
                 }).appendTo(oContent);
+
+                var oTempContent = $('#temp_content_grep');
 
                 $.each(oTempContent.find('a'), function () {
                     $(this).after($(this).attr('href'));
@@ -57,9 +61,8 @@ var Post;
                     $(this).remove();
                 });
 
-                var sHtml = oTempContent.text().br2nl();
+                var sHtml = oTempContent.html();
                 oTempContent.remove();
-
                 return sHtml;
             };
 

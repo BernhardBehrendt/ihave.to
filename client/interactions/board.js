@@ -64,7 +64,7 @@
                 }
             }
         }).on(CONF.EVENTS.CLICK, '#edit', function () {
-            var oPost = false;
+            var oPost;
             var oFocusedPost = $('.screen .focused:eq(0)');
 
             if (!isMobile()) {
@@ -76,7 +76,6 @@
                 oFocusedPost.removeClass('mobile');
                 oFocusedPost.removeClass('focused');
             }
-
             $('#new_post').trigger(CONF.EVENTS.CLICK, {
                 origin: oPost
             });

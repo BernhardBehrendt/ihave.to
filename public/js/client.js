@@ -807,16 +807,21 @@ var Post;
             for (a = 0; a < CONF.PROPS.ARRAY.COLORS.length; a += 1) this.oPost.hasClass(CONF.PROPS.ARRAY.COLORS[a]) && (b = CONF.PROPS.ARRAY.COLORS[a]);
             return b;
         }, this.getContent = function() {
-            var a = this.oPost.children(".content").find("p"), b = $("#temp_content_grep");
+            {
+                var a = this.oPost.children(".content").children("p");
+                a.html().toString().br2nl();
+            }
             $("<div/>", {
                 id: "temp_content_grep",
                 html: a.html()
-            }).appendTo(a), $.each(b.find("a"), function() {
+            }).appendTo(a);
+            var b = $("#temp_content_grep");
+            $.each(b.find("a"), function() {
                 $(this).after($(this).attr("href")), $(this).remove();
             }), $.each(b.find("iframe"), function() {
                 $(this).after($(this).attr("src")), $(this).remove();
             });
-            var c = b.text().br2nl();
+            var c = b.html();
             return b.remove(), c;
         }, this.getId = function() {
             return this.oPost.attr("id");
@@ -893,8 +898,8 @@ var PostWindow;
                     },
                     TEXTAREA: {
                         ID: a.origin.length > 0 ? "origin-" + a.origin : "",
-                        CLASSES: a.defaultcolor,
-                        CONTENT: a.content
+                        CLASS: a.defaultcolor,
+                        INSERT: a.content
                     },
                     UL: {
                         CLASSES: "color_select",
@@ -1150,7 +1155,6 @@ var Template;
             TITLE: "{BEFORE}<title >{INSERT}</title>{AFTER}",
             TR: '{BEFORE}<tr accesskey="{ACCESSKEY}" hidden="{HIDDEN}" itemtype="{ITEMTYPE}" class="{CLASS}" id="{ID}" lang="{LANG}" contenteditable="{CONTENTEDITABLE}" inert="{INERT}" spellcheck="{SPELLCHECK}" contextmenu="{CONTEXTMENU}" itemid="{ITEMID}" style="{STYLE}" dir="{DIR}" itemprop="{ITEMPROP}" tabindex="{TABINDEX}" draggable="{DRAGGABLE}" itemref="{ITEMREF}" title="{TITLE}" dropzone="{DROPZONE}" itemscope="{ITEMSCOPE}" translate="{TRANSLATE}" >{INSERT}</tr>{AFTER}',
             TRACK: '{BEFORE}<track kind="{KIND}" src="{SRC}" srclang="{SRCLANG}" label="{LABEL}" default="{DEFAULT}" accesskey="{ACCESSKEY}" hidden="{HIDDEN}" itemtype="{ITEMTYPE}" class="{CLASS}" id="{ID}" lang="{LANG}" contenteditable="{CONTENTEDITABLE}" inert="{INERT}" spellcheck="{SPELLCHECK}" contextmenu="{CONTEXTMENU}" itemid="{ITEMID}" style="{STYLE}" dir="{DIR}" itemprop="{ITEMPROP}" tabindex="{TABINDEX}" draggable="{DRAGGABLE}" itemref="{ITEMREF}" title="{TITLE}" dropzone="{DROPZONE}" itemscope="{ITEMSCOPE}" translate="{TRANSLATE}" />{AFTER}',
-            U: '{BEFORE}<u accesskey="{ACCESSKEY}" hidden="{HIDDEN}" itemtype="{ITEMTYPE}" class="{CLASS}" id="{ID}" lang="{LANG}" contenteditable="{CONTENTEDITABLE}" inert="{INERT}" spellcheck="{SPELLCHECK}" contextmenu="{CONTEXTMENU}" itemid="{ITEMID}" style="{STYLE}" dir="{DIR}" itemprop="{ITEMPROP}" tabindex="{TABINDEX}" draggable="{DRAGGABLE}" itemref="{ITEMREF}" title="{TITLE}" dropzone="{DROPZONE}" itemscope="{ITEMSCOPE}" translate="{TRANSLATE}" >{INSERT}</u>{AFTER}',
             UL: '{BEFORE}<ul accesskey="{ACCESSKEY}" hidden="{HIDDEN}" itemtype="{ITEMTYPE}" class="{CLASS}" id="{ID}" lang="{LANG}" contenteditable="{CONTENTEDITABLE}" inert="{INERT}" spellcheck="{SPELLCHECK}" contextmenu="{CONTEXTMENU}" itemid="{ITEMID}" style="{STYLE}" dir="{DIR}" itemprop="{ITEMPROP}" tabindex="{TABINDEX}" draggable="{DRAGGABLE}" itemref="{ITEMREF}" title="{TITLE}" dropzone="{DROPZONE}" itemscope="{ITEMSCOPE}" translate="{TRANSLATE}" >{INSERT}</ul>{AFTER}',
             VAR: '{BEFORE}<var accesskey="{ACCESSKEY}" hidden="{HIDDEN}" itemtype="{ITEMTYPE}" class="{CLASS}" id="{ID}" lang="{LANG}" contenteditable="{CONTENTEDITABLE}" inert="{INERT}" spellcheck="{SPELLCHECK}" contextmenu="{CONTEXTMENU}" itemid="{ITEMID}" style="{STYLE}" dir="{DIR}" itemprop="{ITEMPROP}" tabindex="{TABINDEX}" draggable="{DRAGGABLE}" itemref="{ITEMREF}" title="{TITLE}" dropzone="{DROPZONE}" itemscope="{ITEMSCOPE}" translate="{TRANSLATE}" >{INSERT}</var>{AFTER}',
             VIDEO: '{BEFORE}<video src="{SRC}" crossorigin="{CROSSORIGIN}" poster="{POSTER}" preload="{PRELOAD}" autoplay="{AUTOPLAY}" mediagroup="{MEDIAGROUP}" loop="{LOOP}" muted="{MUTED}" controls="{CONTROLS}" width="{WIDTH}" height="{HEIGHT}" accesskey="{ACCESSKEY}" hidden="{HIDDEN}" itemtype="{ITEMTYPE}" class="{CLASS}" id="{ID}" lang="{LANG}" contenteditable="{CONTENTEDITABLE}" inert="{INERT}" spellcheck="{SPELLCHECK}" contextmenu="{CONTEXTMENU}" itemid="{ITEMID}" style="{STYLE}" dir="{DIR}" itemprop="{ITEMPROP}" tabindex="{TABINDEX}" draggable="{DRAGGABLE}" itemref="{ITEMREF}" title="{TITLE}" dropzone="{DROPZONE}" itemscope="{ITEMSCOPE}" translate="{TRANSLATE}" >{INSERT}</video>{AFTER}',
@@ -1171,7 +1175,6 @@ var Template;
             SPAN: '<span id="{ID}" class="{CLASSES}">{CONTENT}</span>',
             P: '<p class="{CLASSES}">{CONTENT}</p>',
             STRONG: '<strong class="{CLASSES}">{CONTENT}</strong>',
-            TEXTAREA: '<textarea id="{ID}" class="{CLASSES}">{CONTENT}</textarea>',
             UL: '<ul id="{ID}" class="{CLASSES}">{CONTENT}</ul>',
             LI: '{BEFORE}<li id="{ID}" class="{CLASSES}">{CONTENT}</li>{AFTER}',
             PIPE: "{CONTENT}"
@@ -12084,7 +12087,7 @@ var showMessage;
         CONF.DOM.CMD.trigger("setMainNav")) : (b.addClass("mobile"), CONF.DOM.BOARD.trigger("tinySortBoard"), 
         CONF.DOM.CMD.trigger("setPostEditNav")) : 0 === $(this).parent().children("#post-functions").length ? $(this).parent().prepend(new Post().getTools()) : $(this).parent().children("#post-functions").remove();
     }).on(CONF.EVENTS.CLICK, "#edit", function() {
-        var a = !1, b = $(".screen .focused:eq(0)");
+        var a, b = $(".screen .focused:eq(0)");
         isMobile() ? (CONF.DOM.CMD.trigger("setMainNav"), CONF.DOM.BOARD.trigger("normalBoard"), 
         b.removeClass("mobile"), b.removeClass("focused")) : a = $(this).closest(".post"), 
         $("#new_post").trigger(CONF.EVENTS.CLICK, {
@@ -12172,8 +12175,11 @@ var showMessage;
                 origin: f.getId()
             };
         }
-        $(this).hasClass("active") && (CONF.DOM.UIWINDOW.trigger("showUi"), CONF.DOM.CMD.trigger("setPostNav", e), 
-        CONF.DOM.UIWINDOW.children(".cmd").html(new PostWindow(c).deliver()), CONF.DOM.UIWINDOW.find("textarea").focus());
+        if ($(this).hasClass("active")) {
+            CONF.DOM.UIWINDOW.trigger("showUi"), CONF.DOM.CMD.trigger("setPostNav", e), CONF.DOM.UIWINDOW.children(".cmd").html(new PostWindow(c).deliver());
+            var g = CONF.DOM.UIWINDOW.find("textarea");
+            g.val(g.val().toString().br2nl()), g.focus();
+        }
     }).on(CONF.EVENTS.CLICK, "#chrono", function() {
         var a = $(".screen.normal");
         $(this).hasClass("active") ? (a.addClass("tinysort").removeClass("normal"), CONF.DOM.BOARD.trigger("tinySortBoard"), 
@@ -12194,7 +12200,7 @@ var showMessage;
             if (f.val().trim().length > 0) {
                 if (void 0 !== f.attr("id") && 0 === f.attr("id").indexOf("origin")) {
                     var i = parseInt(f.attr("id").replace("origin-", ""), 10), j = $(".color_select").data("beforechange"), k = e.find("a.selected").parent().attr("class");
-                    i === CONF.PROPS.STRING.NUM && (void 0 !== j && k !== j && (b = {
+                    typeof i === CONF.PROPS.STRING.NUM && (void 0 !== j && k !== j && (b = {
                         BY: CONF.PROPS.INT.WHO,
                         TGT: i,
                         ACN: "color",
@@ -12406,7 +12412,11 @@ var Post;
     }).on("click", "a", function(a) {
         "#" === $(this).attr("href") && (a.preventDefault(), a.stopPropagation());
     });
-}(), function() {
+}();
+
+var x = 4;
+
+!function() {
     "use strict";
     $(document).ready(function() {
         function a() {
