@@ -1,4 +1,5 @@
 /*global module*/
+/*global __dirname*/
 var CONF = null;
 
 (function () {

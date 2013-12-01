@@ -52,7 +52,6 @@ var Post;
     Post.prototype.getContent = function () {
         var oTempContent;
         var oContent = this.oPost.children('.content').children('p');
-        var sContent = oContent.html().toString().br2nl();
 
         $('<div/>', {
             id: 'temp_content_grep',

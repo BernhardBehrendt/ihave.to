@@ -19,7 +19,7 @@
 
     if (cluster.isMaster) {
         // Fork workers.
-        for (i = 0; i < numCpus; i += 1) {
+        for (i = 0; i < numCPUs; i += 1) {
             cluster.fork();
         }
 

@@ -30,7 +30,7 @@ var Menu;
     /**
      * Create the menu command icons
      * @method getMenuCmds
-     * @param {Array} aCmdsThe Commands to show in menu
+     * @param {Array} aCmds The Commands to show in menu
      * @return {Object} The complete menu tempate
      */
     Menu.prototype.getMenuCmds = function (aCmds) {
@@ -48,7 +48,7 @@ var Menu;
 
     /**
      * The login menue before start
-     * @param getLoginsMenue
+     * @method getLoginsMenue
      * @param {String} sActiveOne the Actice menu item
      * @return {Array} The commands for menubar
      */
@@ -185,7 +185,7 @@ var Menu;
             sActiveOne = '';
         }
 
-        for (var i = 0; i < aMenuCmds.length; i += 1) {
+        for (i = 0; i < aMenuCmds.length; i += 1) {
             aCmds[i] = {
                 CONTENT: {
                     LINK: {

@@ -382,7 +382,7 @@ var Board;
 !function() {
     "use strict";
     Board = function(a) {
-        this._oScreen = a, this._setDeleted = {}, this._oScreenPost = {}, this.iFromTime = !1;
+        this._oScreen = a, this._setDeleted = {}, this._oScreenPost = {};
     }, Board.prototype.iFromTime = !1, Board.prototype._oScreen = null, Board.prototype._oScreen = null, 
     Board.prototype._oScreenPost = null, Board.prototype.getTemplate = function() {
         return this.setBackground(), {
@@ -390,7 +390,7 @@ var Board;
         };
     }, Board.prototype._createTemplate = function() {
         var a, b, c, d, e, f = [];
-        if (this.iFromTime = Object.keys(this._oScreen.SCREEN.POSTS)[0], void 0 !== this._oScreen.SCREEN.POSTS) {
+        if (void 0 !== this._oScreen.SCREEN.POSTS) {
             c = this._oScreen.SCREEN.POSTS;
             for (d in c) if (c.hasOwnProperty(d)) if (b = c[d], b instanceof Array) for (var g = 0; g < b.length; g += 1) this._addPost(this._createPost(b[g])); else this._addPost(this._createPost(b));
         }
@@ -752,8 +752,7 @@ var Menu;
         return d;
     }, Menu.prototype.getScreenMenue = function(a) {
         var b, c = [ "back", "new_screen", "trash_empty" ], d = [];
-        void 0 === a && (a = "");
-        for (var b = 0; b < c.length; b += 1) d[b] = {
+        for (void 0 === a && (a = ""), b = 0; b < c.length; b += 1) d[b] = {
             CONTENT: {
                 LINK: {
                     URL: "#",
@@ -793,10 +792,7 @@ var Post;
             return this.oPost.attr("id");
         });
     }, Post.prototype.getContent = function() {
-        {
-            var a, b = this.oPost.children(".content").children("p");
-            b.html().toString().br2nl();
-        }
+        var a, b = this.oPost.children(".content").children("p");
         $("<div/>", {
             id: "temp_content_grep",
             html: b.html()

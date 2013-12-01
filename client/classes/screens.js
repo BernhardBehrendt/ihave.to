@@ -21,7 +21,6 @@ var Screens;
      * @return {Number} The number of visible posts on given screen
      */
     Screens.prototype.countPosts = function (oScreen) {
-        var sPreCount = '';
         var aPreCount = [];
         var iIndex;
         var oTs;
