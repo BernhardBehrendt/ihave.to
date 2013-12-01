@@ -3,8 +3,9 @@
 /*global Post*/
 /*global window*/
 /*global isMobile*/
-/*global showMessage*/
 /*global Apprise*/
+/*global window*/
+/*global showMessage*/
 (function () {
     "use strict";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,7 +24,7 @@
             if (!isMobile()) {
                 window.open($(this).attr('href'));
             } else {
-                if (window.navigator.standalone === true) {
+                if (window.navigator.standalone !== undefined && window.navigator.standalone === true) {
                     showMessage('IOS_ERROR_OPENWINDOW');
                 }
                 else {

@@ -16,16 +16,14 @@ var Buttons;
     "use strict";
 
     Buttons = function (aButtonset, sPanel) {
-        // Set the default with of an button
+        var i;
+        var aButtons = [];
+
         if (sPanel === undefined) {
             sPanel = 'slim';
         }
 
-        // Process the Buttonset
         if (aButtonset !== undefined) {
-            var i;
-            var aButtons = [];
-
             for (i = 0; i < aButtonset.length; i += 1) {
                 aButtons[i] = {
                     CLASSES: 'button ' + aButtonset[i].TYPE,
@@ -38,15 +36,15 @@ var Buttons;
                     }
                 };
             }
-
-            return {
-                UL: {
-                    CLASSES: 'buttons ' + sPanel,
-                    CONTENT: {
-                        LI: aButtons
-                    }
-                }
-            };
         }
+
+        return {
+            UL: {
+                CLASSES: 'buttons ' + sPanel,
+                CONTENT: {
+                    LI: aButtons
+                }
+            }
+        };
     };
 })();

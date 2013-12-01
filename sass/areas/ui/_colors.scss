@@ -6,20 +6,12 @@ ul.color_select{
   margin-left:2px;
   text-align: justify;
 
-
-
-
-
-
-
-
    // DEVICE
   @include desktopClient{
     @include paddingbox(616px, 30px, 0, 0, 0, 0);
   }
   @include iPodWebappPortrait{
     @include paddingbox(308px, 30px, 0, 0, 0, 0);
-
     margin-left:3px;
   }
 

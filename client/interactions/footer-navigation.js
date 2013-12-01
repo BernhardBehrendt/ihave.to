@@ -48,7 +48,7 @@
 // Leave subnavigation level
         .on(CONF.EVENTS.CLICK, '#back', function () {
             CONF.DOM.CMD.trigger('setMainNav');
-            CONF.DOM.UIWINDOW.children('.controls').children('.close').trigger(CONF.EVENTS.CLICK);
+            CONF.DOM.UIWINDOW.children('.controls').find('.close').trigger(CONF.EVENTS.CLICK);
 
         })
 // Cancel current view action and go back to main view

@@ -164,7 +164,7 @@ var Post;
                     // Add Whitespace
                     $(this).val($(this).val() + ' ');
 
-                    if (typeof ($(this).data('beforechange')) === undefined) {
+                    if ($(this).data('beforechange') === undefined) {
                         $(this).data('beforechange', $(this).val());
                         // Set cursor at the end
                         $(this).setCursorPosition($(this).val().length);

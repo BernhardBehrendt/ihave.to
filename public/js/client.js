@@ -316,31 +316,7 @@ var LANGUAGE = {
             }
         }
     };
-}();
-
-var oTpl = {
-    H: '{BEFORE}<h{NO} id="{ID}" class="{CLASSES}">{CONTENT}</h{NO}>{AFTER}',
-    LINK: '<a id="{ID}" class="{CLASSES}" href="{URL}" title="{TITLE}">{CONTENT}</a>',
-    FORM: '<form method="{METHOD}" action="{ACTION}" id="{ID}">{CONTENT}</form>',
-    INPUT: '<input type="{TYPE}" value="{VALUE}" id="{ID}" name="{NAME}" class="{CLASSES}" maxlength="{MAXLENGTH}"/>',
-    LABEL: '{BEFORE}<label for="{FOR}" classes="{CLASSES}">{CONTENT}</label>{AFTER}',
-    HEADLINE_1: '<h1 id="{ID}" class="{CLASSES}">{TEXT}</h1>',
-    TABLE: '<table id="{ID}" class="{CLASSES}"><thead>{HEAD}</thead><tbody>{BODY}</tbody></table>',
-    TABLE_TR: '<tr class="{CLASSES}">{TABLE_TDS}</tr>',
-    TABLE_TH: '<th class="{CLASSES}">{CONTENT}</th>',
-    TABLE_TD: '<td class="{CLASSES}">{CONTENT}</td>',
-    IMG: '<img id="{ID}" class="{CLASSES}" alt="{ALT}" src="{SRC}" style="{STYLE}"/>',
-    DIV: '<div id="{ID}" class="{CLASSES}" style="{STYLE}">{CONTENT}</div>',
-    SPAN: '<span id="{ID}" class="{CLASSES}">{CONTENT}</span>',
-    P: '<p class="{CLASSES}">{CONTENT}</p>',
-    STRONG: '<strong class="{CLASSES}">{CONTENT}</strong>',
-    TEXTAREA: '<textarea id="{ID}" class="{CLASSES}">{CONTENT}</textarea>',
-    UL: '<ul id="{ID}" class="{CLASSES}">{CONTENT}</ul>',
-    LI: '{BEFORE}<li id="{ID}" class="{CLASSES}">{CONTENT}</li>{AFTER}',
-    PIPE: "{CONTENT}"
-};
-
-!function() {
+}(), function() {
     "use strict";
     function a(b) {
         for (var c = a.options, d = c.parser[c.strictMode ? "strict" : "loose"].exec(b.toString()), e = {}, f = 14; f--; ) e[c.key[f]] = d[f] || "";
@@ -375,8 +351,8 @@ var oTpl = {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }, String.prototype.urlToLink = function() {
         var b = this;
-        b = b.replace(/Www/g, "www").replace(/WWw/g, "www").replace(/WWW/, "www"), (null !== b.match("https://") || null !== b.match("http://") || null !== b.match("www.")) && (b = b.replace(/https:\/\//g, "http://"), 
-        null !== b.match("www.") && (b = b.replace(/www./g, "http://www.")), b = b.replace(/http:\/\/http:\/\/http:\/\/http:\/\/http:\/\//g, "http://"), 
+        b = b.replace(/Www/g, "www").replace(/WWw/g, "www").replace(/WWW/, "www"), (null !== b.match(/https:\/\//) || null !== b.match(/http:\/\//) || null !== b.match(/www\./)) && (b = b.replace(/https:\/\//g, "http://"), 
+        null !== b.match(/www\./) && (b = b.replace(/www./g, "http://www.")), b = b.replace(/http:\/\/http:\/\/http:\/\/http:\/\/http:\/\//g, "http://"), 
         b = b.replace(/http:\/\/http:\/\/http:\/\/http:\/\//g, "http://"), b = b.replace(/http:\/\/http:\/\/http:\/\//g, "http://"), 
         b = b.replace(/http:\/\/http:\/\//g, "http://"));
         var c = /\b((http:\/\/|https:\/\/)[\S]*)/g;
@@ -461,27 +437,25 @@ var Buttons;
 !function() {
     "use strict";
     Buttons = function(a, b) {
-        if (void 0 === b && (b = "slim"), void 0 !== a) {
-            var c, d = [];
-            for (c = 0; c < a.length; c += 1) d[c] = {
-                CLASSES: "button " + a[c].TYPE,
+        var c, d = [];
+        if (void 0 === b && (b = "slim"), void 0 !== a) for (c = 0; c < a.length; c += 1) d[c] = {
+            CLASSES: "button " + a[c].TYPE,
+            CONTENT: {
+                LINK: {
+                    ID: a[c].ID,
+                    URL: "#",
+                    CONTENT: a[c].LABEL.translate()
+                }
+            }
+        };
+        return {
+            UL: {
+                CLASSES: "buttons " + b,
                 CONTENT: {
-                    LINK: {
-                        ID: a[c].ID,
-                        URL: "#",
-                        CONTENT: a[c].LABEL.translate()
-                    }
+                    LI: d
                 }
-            };
-            return {
-                UL: {
-                    CLASSES: "buttons " + b,
-                    CONTENT: {
-                        LI: d
-                    }
-                }
-            };
-        }
+            }
+        };
     };
 }();
 
@@ -833,7 +807,7 @@ var Post;
             for (a = 0; a < CONF.PROPS.ARRAY.COLORS.length; a += 1) this.oPost.hasClass(CONF.PROPS.ARRAY.COLORS[a]) && (b = CONF.PROPS.ARRAY.COLORS[a]);
             return b;
         }, this.getContent = function() {
-            var a = this.oPost.children(".content").children("p"), b = $("#temp_content_grep");
+            var a = this.oPost.children(".content").find("p"), b = $("#temp_content_grep");
             $("<div/>", {
                 id: "temp_content_grep",
                 html: a.html()
@@ -12101,7 +12075,7 @@ var showMessage;
         a.stopPropagation(), a.preventDefault(), $(this).closest(".screen").find(".focused").removeClass("focused"), 
         $(this).parent(".post").addClass("focused");
     }).on(CONF.EVENTS.CLICK, ".post > .content > p > a", function(a) {
-        a.preventDefault(), a.stopPropagation(), isMobile() ? window.navigator.standalone === !0 ? showMessage("IOS_ERROR_OPENWINDOW") : window.open($(this).attr("href")) : window.open($(this).attr("href"));
+        a.preventDefault(), a.stopPropagation(), isMobile() ? void 0 !== window.navigator.standalone && window.navigator.standalone === !0 ? showMessage("IOS_ERROR_OPENWINDOW") : window.open($(this).attr("href")) : window.open($(this).attr("href"));
     }).on(CONF.EVENTS.FORCED_CLICK, ".focused > .content", function(a) {
         a.preventDefault();
         var b = $(this);
@@ -12180,7 +12154,7 @@ var showMessage;
     }).on(CONF.EVENTS.CLICK, "nav#cmd > ul > li > a.active", function() {
         $(this).removeClass(CONF.PROPS.STRING.ACTIVE);
     }).on(CONF.EVENTS.CLICK, "#back", function() {
-        CONF.DOM.CMD.trigger("setMainNav"), CONF.DOM.UIWINDOW.children(".controls").children(".close").trigger(CONF.EVENTS.CLICK);
+        CONF.DOM.CMD.trigger("setMainNav"), CONF.DOM.UIWINDOW.children(".controls").find(".close").trigger(CONF.EVENTS.CLICK);
     }).on(CONF.EVENTS.CLICK, "#cancel", function() {
         $("#ui").find(".close").trigger(CONF.EVENTS.CLICK);
     }).on(CONF.EVENTS.CLICK, "#new_post", function(a, b) {
@@ -12411,7 +12385,7 @@ var Post;
         }
     }).on("focusin", "#post-window > textarea", function() {
         void 0 !== $(this).attr("id") && -1 !== $(this).attr("id").indexOf("origin-") && ($(this).val($(this).val() + " "), 
-        void 0 === typeof $(this).data("beforechange") && ($(this).data("beforechange", $(this).val()), 
+        void 0 === $(this).data("beforechange") && ($(this).data("beforechange", $(this).val()), 
         $(this).setCursorPosition($(this).val().length)));
     }).on("keyup", "#post-window > textarea", function() {
         var a = $(this).attr("id");

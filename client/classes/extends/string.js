@@ -39,7 +39,7 @@
      * }
      *
      * @param {Object} TRANSLATIONS An object with the translations
-     * @return the translated string
+     * @return {String} the translated string
      */
     String.prototype.translate = function (TRANSLATIONS) {
         if (TRANSLATIONS === undefined) {
@@ -82,7 +82,7 @@
     /**
      * Escapes HTML into readable code text (Required if some html should be "human" readable and not parsed as HTML)
      *
-     * @return the escaped html
+     * @return {String} the escaped html
      */
     String.prototype.escapeHtml = function () {
         return this.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
@@ -116,9 +116,9 @@
 
         var text = this;
         text = text.replace(/Www/g, 'www').replace(/WWw/g, 'www').replace(/WWW/, 'www');
-        if (text.match('https://') !== null || text.match('http://') !== null || text.match('www.') !== null) {
+        if (text.match(/https:\/\//) !== null || text.match(/http:\/\//) !== null || text.match(/www\./) !== null) {
             text = text.replace(/https:\/\//g, 'http://');
-            if (text.match('www.') !== null) {
+            if (text.match(/www\./) !== null) {
                 text = text.replace(/www./g, 'http://www.');
             }
             text = text.replace(/http:\/\/http:\/\/http:\/\/http:\/\/http:\/\//g, 'http://');

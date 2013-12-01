@@ -39,9 +39,8 @@ var Post;
              * Get the ASCII Text content from a postit
              */
             this.getContent = function () {
-                var oContent = this.oPost.children('.content').children('p');
+                var oContent = this.oPost.children('.content').find('p');
                 var oTempContent = $('#temp_content_grep');
-                //oContent.append($('')'<div id="temp_content_grep">' + oContent.html() + '</div>');
 
                 $('<div/>', {
                     id: 'temp_content_grep',

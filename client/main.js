@@ -4,7 +4,7 @@
 /*global Template*/
 /*global setTimeout*/
 /*global isMobile*/
-
+var x = 4;
 (function () {
     "use strict";
     $(document).ready(function () {
