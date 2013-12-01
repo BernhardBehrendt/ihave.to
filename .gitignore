@@ -4,6 +4,7 @@ boards
 .DS_Store
 .project
 .git
+./documentation
 LAYOUT
 ./.idea
 ./.sass-cache
