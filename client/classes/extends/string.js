@@ -4,13 +4,25 @@
 /*global LANGUAGE*/
 (function () {
     "use strict";
+
+    if (typeof String === 'undefined') {
+        /**
+         * @module Extends
+         * @submodule Datatype
+         * @class String
+         * @constructor
+         * @type {Object}
+         */
+        String = {};
+    }
+
     /**
-     * Lightweight templating "engine" for client side html rendering
+     * Lightweight templating for client side html rendering
      * Replaces each locastring found in sTpl variable with it's replacement
      *
-     * Copyright 2012, Bernhard Bezdek
-     * Dual licensed under the MIT or GPL Version 2 licenses.
+     * @method toHtml
      * @param {Object} INSERTS an object with the key(s) as the locastring to replace and the value(s) for the replacement
+     * @return {String} The rendered HTML String
      */
     String.prototype.toHtml = function (INSERTS) {
         var LOCA;
@@ -37,7 +49,7 @@
      *         WORLD:'Welt'
      *         }
      * }
-     *
+     * @method translate
      * @param {Object} TRANSLATIONS An object with the translations
      * @return {String} the translated string
      */
@@ -72,6 +84,7 @@
     };
     /**
      * Detect if given string is an Url to an Image
+     * @method isImageURL
      * @return boolean is / is not an image url
      */
     String.prototype.isImageURL = function () {
@@ -81,7 +94,7 @@
     };
     /**
      * Escapes HTML into readable code text (Required if some html should be "human" readable and not parsed as HTML)
-     *
+     * @method escapeHtml
      * @return {String} the escaped html
      */
     String.prototype.escapeHtml = function () {
@@ -90,12 +103,16 @@
     /**
      * Convert linebreaks into HTML Linebreaks
      * e.g. required if the linbreaks sould be kept in html code
+     * @method br2nl
+     * @return {String} The String without html line breaks
      */
     String.prototype.br2nl = function () {
         return this.toString().replace(/<br\/>/g, "\n").replace(/<br>/g, "\n");
     };
     /**
      * Converts html linebreaks (<br/>) into linebreaks
+     * @method nl2br
+     * @return {String} The string without ASCII Linebreaks
      */
     String.prototype.nl2br = function () {
         return this.toString().replace(/\n/g, "<br/>");
@@ -103,18 +120,23 @@
 
     /**
      * The first char to upper case
+     * @method capitalize
+     * @return {String} The capitalized String
      */
     String.prototype.capitalize = function () {
         return this.charAt(0).toUpperCase() + this.slice(1);
     };
 
-    String.prototype.urlToLink = /**
+    /**
      * Converts an string into a clickable link
-     * NOTCE (youtube Links are converted into an embed video)
+     * NOTCE (youtube Links are converted into an embed video) iframe
+     * @method urlToLink
+     * @returns {String} The HTML representation containing links and iframes
      */
-        function urlToLink() {
+    String.prototype.urlToLink = function urlToLink() {
 
         var text = this;
+
         text = text.replace(/Www/g, 'www').replace(/WWw/g, 'www').replace(/WWW/, 'www');
         if (text.match(/https:\/\//) !== null || text.match(/http:\/\//) !== null || text.match(/www\./) !== null) {
             text = text.replace(/https:\/\//g, 'http://');
@@ -131,12 +153,15 @@
         text = text.replace(exp, function ($1) {
             var oUri = parseUri($1);
             var sReturn = '$1';
-            if ($1.match('youtube.com') !== null || $1.match('youtu.be') !== null) {
+            if ($1.match('http://youtube.com') !== null || $1.match('http://youtu.be') !== null || $1.match('http://www.youtube.com') !== null || $1.match('http://www.youtu.be') !== null) {
                 sReturn = ($1.match('&')) ? $1.substr(0, $1.search(/&/)) + ' ' + $1.substr($1.search(/&/), $1.length) : $1;
                 sReturn = sReturn.replace(/&[\S]*/, '');
                 sReturn = sReturn.replace('youtube.com/watch?v=', 'youtube.com/embed/');
                 sReturn = sReturn.replace('youtu.be', 'youtube.com/embed/');
-                sReturn = sReturn.replace(exp, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>');
+
+                if ($1.indexOf('http://youtube.com') === 0 || $1.indexOf('http://www.youtube.com') === 0 || $1.indexOf('http://youtu.be') === 0 || $1.indexOf('http://www.youtu.be') === 0) {
+                    sReturn = sReturn.replace(exp, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>');
+                }
             } else {
                 sReturn = "<a href=\"" + $1 + "\" target=\"_blank\" title=\"" + $1 + "\" style=\"background-image:url(" + (oUri.protocol + '://' + oUri.host) + "/favicon.ico)\"></a>";
             }

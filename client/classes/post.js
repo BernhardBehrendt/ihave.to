@@ -7,11 +7,13 @@ var Post;
     /**
      * The Post handles extends round a post on screen masterclass
      * Creates the Templates engine required object to create the postwindow with all required bindings (Plugins later...)
-     * @requires Template The default TEmplate engine
+     * @module Client
+     * @submodule Classes
+     * @class Post
+     * @constructor
      * @param {Object} oPost
      */
     Post = function (oPost) {
-
 
         this.oPost = ( oPost !== undefined) ? oPost : false;
 
@@ -35,36 +37,6 @@ var Post;
                 return sMatchedColor;
             };
 
-            /**
-             * Get the ASCII Text content from a postit
-             */
-            this.getContent = function () {
-                var oContent = this.oPost.children('.content').children('p');
-                var sContent = oContent.html().toString().br2nl();
-
-
-
-                $('<div/>', {
-                    id: 'temp_content_grep',
-                    html: oContent.html()
-                }).appendTo(oContent);
-
-                var oTempContent = $('#temp_content_grep');
-
-                $.each(oTempContent.find('a'), function () {
-                    $(this).after($(this).attr('href'));
-                    $(this).remove();
-                });
-
-                $.each(oTempContent.find('iframe'), function () {
-                    $(this).after($(this).attr('src'));
-                    $(this).remove();
-                });
-
-                var sHtml = oTempContent.html();
-                oTempContent.remove();
-                return sHtml;
-            };
 
             this.getId = function () {
                 return this.oPost.attr('id');
@@ -72,10 +44,48 @@ var Post;
         }
     };
 
+    /**
+     * Get the ASCII Text content from a postit
+     * @method getContent
+     * @return {String} The content of a post
+     */
+    Post.prototype.getContent = function () {
+        var oTempContent;
+        var oContent = this.oPost.children('.content').children('p');
+        var sContent = oContent.html().toString().br2nl();
+
+        $('<div/>', {
+            id: 'temp_content_grep',
+            html: oContent.html()
+        }).appendTo(oContent);
+
+        oTempContent = $('#temp_content_grep');
+
+        $.each(oTempContent.find('a'), function () {
+            $(this).after($(this).attr('href'));
+            $(this).remove();
+        });
+
+        $.each(oTempContent.find('iframe'), function () {
+            $(this).after($(this).attr('src'));
+            $(this).remove();
+        });
+
+        var sHtml = oTempContent.html();
+        oTempContent.remove();
+        return sHtml;
+    };
+
+    /**
+     * Create the toolbar for a visible post
+     * @method getTools
+     * @return {String|*} The rendered toolbar
+     */
     Post.prototype.getTools = function () {
 
         // Remove functions which was placed before (uniquity required)
         $('#post-functions').remove();
+
         return new Template({
             DIV: {
                 ID: 'post-functions',

@@ -5,6 +5,13 @@ var isMobile;
     "use strict";
     /**
      * Detect device type and operating system (in mobile case)
+     * @module Client
+     * @submodule Functions
+     * @class isMobile
+     * @constructor
+     * @param {String} not The device where rule react negotiated
+     * @return {Boolean}
+     * @TODO Implement not as an array
      */
     isMobile = function (not) {
         var i;

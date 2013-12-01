@@ -11,19 +11,18 @@ var Connection;
     "use strict";
 
     /**
-     * The handler for persistence (websocket connection and sync)
+     * The handler for websocket connection and sync
      * The initial creating of an board and further security usages are placed here
-     * Genrerally the data is encrypted in AES and will be pushed onto the server
+     * After init a new board the data is encrypted in AES before push them to server
      *
-     * Further the Integration of push to members shuould be placed here and should autopush the dif to other online users
+     * @module Client
+     * @submodule Classes
+     * @class Connection
+     * @constructor
      */
     Connection = function () {
 
         this.socket = io.connect();
-        this.__encryption = null;
-        this.__data = null;
-        this.__verifier = null;
-        this.__board = null;
 
         this.socket.on('disconnect', function () {
 
@@ -33,63 +32,103 @@ var Connection;
         });
 
     };
+
     /**
-     * The socket handler
-     * Maybae a real class property makes or sense if there are multiple connections
-     * @FINDOUT
+     * The socket.io connection
+     * @property socket
+     * @type {null}
      */
     Connection.prototype.socket = null;
+
     /**
-     * Connect to Socket server and set initial listeners/emiters
+     * Here the encryption phrase is stored
+     * @param _encryption
+     * @type {null}
+     * @private
+     */
+    Connection.prototype._encryption = null;
+
+    /**
+     * The whole board as AES encrypted string
+     * AES encryption is enabled after first initialisation of a board
+     * @param _data
+     * @type {String}
+     * @private
+     */
+    Connection.prototype._data = null;
+
+    /**
+     * The verifier which is required for write permissins after handshake
+     * and need to be decrypted out of the requested boardfile
+     * @type {String}
+     * @private
+     */
+    Connection.prototype._verifier = null;
+
+    /**
+     * The SHA-3 hashed name of the board
+     *
+     * @param _board
+     * @type {String}
+     * @private
+     */
+    Connection.prototype._board = null;
+
+    /**
+     * Connect to Socket.io server
+     *
+     * @method connect
      * @param {Object} board
      */
     Connection.prototype.connect = function (board) {
+        var self = this;
+        this._board = board;
 
-        this.__board = board;
-
-        if (this.__board !== null) {
+        if (this._board !== null) {
             // console.log('connect now');
-            this.socket.emit('connect', this.__board);
-
-            // Created a temporary copy because I dont know where the real instance is
-            var oThis = this;
+            this.socket.emit('connect', this._board);
 
             this.socket.on('connected', function (data) {
                 $('#cmd').removeAttr('style');
                 // regulary this._data is an crypted string and need to be decrypted for further use
-                oThis.setData(data);
-                oThis.handleData();
+                self.setData(data);
+                self.handleData();
             });
 
-            this.socket.on('notify', function (data) {
-                //showMessage(data.message, data.type);
-            });
+            //this.socket.on('notify', function (data) {
+            //showMessage(data.message, data.type);
+            //});
         }
     };
+
     /**
-     * broadcast listener
-     * patch the current board instance to new version from server by integrating the
-     * received diff and do that also on frontend if received diff affected current screen
+     * Initialize all listeners to merge diffs on change on other clients which have the same
+     * board openened and do a change on it
+     *
+     * @method initBroadcast
+     * @param {String} sVerifier
      */
     Connection.prototype.initBroadcast = function (sVerifier) {
-        var oSelf = this;
+        var self = this;
 
         // Notify about entrance of person
         this.socket.on('enter-' + sVerifier, function (data) {
-            showMessage(oSelf.decrypt(data) + ' ' + 'ENTERED_BOARD'.translate());
+            showMessage(self.decrypt(data) + ' ' + 'ENTERED_BOARD'.translate());
         });
 
         // Notify about exit of person
         this.socket.on('goodbye-' + sVerifier, function (data) {
-            showMessage(oSelf.decrypt(data) + ' ' + 'LEFT_BOARD'.translate(), 'error');
+            showMessage(self.decrypt(data) + ' ' + 'LEFT_BOARD'.translate(), 'error');
         });
 
         this.socket.on('bc-' + sVerifier, function (data) {
             var oScreen;
             var iTimeEntry;
             var sScreenName;
+            var sFirstScreen;
             var sActiveScreen;
             var oDiff = JSON.parse(CONF.COM.SOCKET.decrypt(data));
+
             // Patch the local board representation
             $.extend(true, CONF.BOARD, oDiff);
 
@@ -114,13 +153,14 @@ var Connection;
                             if (oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS.hasOwnProperty(iTimeEntry)) {
                                 var oItem = oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTimeEntry];
 
-                                bUpdated = this.updateScreen(oItem);
+                                bUpdated = self.updateScreen(oItem);
                             }
                         }
 
                         // Only handle a fully recreation if there are new Posts
                         if (!bUpdated) {
                             oScreen = CONF.BOARD.PRIVATE.SCREENS[sActiveScreen];
+
                             showMessage('RESTORE_CONSISTENCY_NOW');
 
                             oBoard = new Board({
@@ -130,14 +170,14 @@ var Connection;
                             });
 
                             CONF.DOM.BOARDSCREENS.html(new Template(oBoard.getTemplate()).toHtml());
-
                             CONF.DOM.BOARD.trigger('uiBoard');
                         }
 
                     } else {
-                        var sFirstScreen = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
+                        sFirstScreen = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
 
                         CONF.DOM.BOARDPOSTS.data('activescreen', sFirstScreen);
+
                         oScreen = CONF.BOARD.PRIVATE.SCREENS[sFirstScreen];
 
                         showMessage('A_USER_DELETED_THIS_SCREEN_CHANGE_NOW');
@@ -174,20 +214,25 @@ var Connection;
     };
 
     /**
-     * A fucntion to also patch the board with multichanges (e.g. content & color in one action)
-     * Then function is called recursivley
+     * Update the curretn screen if theres an incoming change
+     * @method updateScreen
+     * @param {Object} oItem
+     * @returns {Boolean}
      */
     Connection.prototype.updateScreen = function updateScreen(oItem) {
+        var i;
+        var sUser;
+        var oTarget;
+        var sChange;
+        var sRMClasses;
         var bUpdated = false;
 
         // Array means new Post (content and color)
         if (!( oItem instanceof Array)) {
             if (oItem.TGT !== undefined) {
-                // The target to update
-                //var oTarget = $('#board > .posts > .screen > #' + oItem.TGT);
 
-                var oTarget = $('#' + oItem.TGT);
-                var sChange = '';
+                oTarget = $('#' + oItem.TGT);
+                sChange = '';
 
                 // If Target exists
                 if (oTarget.length === 1) {
@@ -219,13 +264,13 @@ var Connection;
                     }
 
                     if (oItem.ACN === 'color') {
-                        var sRMClasses = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(' ').toLowerCase();
+                        sRMClasses = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(' ').toLowerCase();
                         // Remove class to change to from string
                         sRMClasses = sRMClasses.replace(oItem.TO, '');
                         $(oTarget).removeClass(sRMClasses).addClass(oItem.TO);
                         sChange = 'POSTS_COLOR';
                     }
-                    var sUser;
+
                     for (sUser in CONF.BOARD.USERS) {
                         if (CONF.BOARD.USERS.hasOwnProperty(sUser) && CONF.BOARD.USERS[sUser] === oItem.BY) {
                             break;
@@ -236,7 +281,7 @@ var Connection;
                 }
             }
         } else {
-            for (var i = 0; i < oItem.length; i += 1) {
+            for (i = 0; i < oItem.length; i += 1) {
                 if (!bUpdated) {
                     bUpdated = this.updateScreen(oItem[i]);
                 }
@@ -252,8 +297,15 @@ var Connection;
 
     /**
      * Handle the data to get synced to server and other online clients
+     * @method handleData
      */
     Connection.prototype.handleData = function () {
+        var sActiveScreen;
+        var sFirstScreen;
+        var oInitialBoard;
+        var sInitScreenName;
+        var iTargetId;
+
         // Will fail if get data is already aes crypte
         if (this.getData().indexOf('{') === -1) {
             // Actually aes crypted so encrypt it with the before entered password
@@ -273,7 +325,6 @@ var Connection;
 
             showMessage('BOARD_WAS_ENCRYPTED');
 
-            var sActiveScreen;
 
             if (CONF.DOM.BOARDPOSTS !== null) {
                 sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
@@ -281,7 +332,7 @@ var Connection;
 
             // Get the First screen name on Board
             //@LOCALSTORAGE (the last screen used on this machine)
-            var sFirstScreen = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
+            sFirstScreen = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
 
             // If the board is reconnecting get the currently active screen
             if (sActiveScreen !== undefined) {
@@ -298,11 +349,11 @@ var Connection;
         } else {
             // If parsing as json wil not fail its a new Board and
             // further execution is ensured
-            var oInitialBoard = JSON.parse(this.getData());
+            oInitialBoard = JSON.parse(this.getData());
 
             // Here the initial settings could be made
-            var sInitScreenName = 'WORKSPACE'.translate();
-            var iTargetId = new Date().getTime();
+            sInitScreenName = 'WORKSPACE'.translate();
+            iTargetId = new Date().getTime();
 
             // Setup the First Workspace with a First postit on it
             oInitialBoard.PRIVATE.SCREENS[sInitScreenName] = {
@@ -336,19 +387,21 @@ var Connection;
             this.setVerifier(oInitialBoard.META.VERIFIER);
             this.socket.emit(this.getVerifier(), this.encrypt().toString());
 
-            // Trigger a Second click to open new created Board
-            //@OPTIMIZE
+
             $('#do-login').trigger(CONF.EVENTS.CLICK);
         }
     };
+
     /**
      * Saves the changes and push it on the server (after encryption)
+     *
+     * @method saveChanges
+     * @param {Object} oDiff (optional) The difference to share with all current viewers
      */
     Connection.prototype.saveChanges = function (oDiff) {
 
         this.setData(JSON.stringify(CONF.BOARD));
 
-        //showMessage('START_SYNC_NOW');
         // Push to server
         this.socket.emit(CONF.BOARD.META.VERIFIER, this.encrypt().toString());
 
@@ -357,22 +410,28 @@ var Connection;
             this.socket.emit('sync', this.encrypt(JSON.stringify(oDiff)).toString());
         }
     };
+
     /**
      * Set the Passphrase for decrypt/encrypt the board
+     * @method setEncryptionPhrase
      * @param {String} sEncryption
      */
     Connection.prototype.setEncryptionPhrase = function (sEncryption) {
-        this.__encryption = sEncryption;
+        this._encryption = CryptoJS.SHA3(sEncryption).toString();
     };
+
     /**
-     * Get the userdefined password
+     * Get the user defined password
+     * @method getEncryptionPhrase
      * @return {String} the useres selected password
      */
     Connection.prototype.getEncryptionPhrase = function () {
-        return this.__encryption;
+        return this._encryption;
     };
+
     /**
      * Encrypt the diffdata or if no diff given the complete board code (JSON reperesentation)
+     * @method encrypt
      * @param {String} diffdata (only required if not the complete board should be crypted e.g. the diffdata)
      * @return {String} the AES crypted Board representation
      */
@@ -385,8 +444,10 @@ var Connection;
 
         return CryptoJS.AES.encrypt(diffInternal, this.getEncryptionPhrase());
     };
+
     /**
      * Decrypt the diffdata or the complete board
+     * @method decrypt
      * @param {String} diffdata
      */
     Connection.prototype.decrypt = function (diffdata) {
@@ -407,52 +468,60 @@ var Connection;
             } catch (e) {
                 bSuccess = false;
             }
+
         }
 
         return sJson;
     };
+
     /**
      * Fill the holder for the board representation
      * Note:
      * Normally this string is the AES crypted representation of the whole board BUT initially it's the unencrypted initial Board
-     *
+     * @method setData
      * @param {String} data
      */
     Connection.prototype.setData = function (data) {
-        this.__data = data;
+        this._data = data;
     };
+
     /**
      * Return the AES crypted representation of the board
+     * @method getData
      * @return {String} the representation of the Board normally AES crypted
      */
     Connection.prototype.getData = function () {
-        return this.__data;
+        return this._data;
     };
+
     /**
      * The Verifier of the Board (the file the is stored in)
      * The verifier is generated on the serverside and will be stored inside the crypted boardfile
      * So a successfull decryption is required to get write privileges
-     *
+     * @method setVerifier
      * @param {String} verifier is a SHA3 representation
      */
     Connection.prototype.setVerifier = function (verifier) {
-        this.__verifier = verifier;
+        this._verifier = verifier;
     };
+
     /**
      * Gives the verifier back wich was generated on the server and stored inside the Boardfile
+     * @method getVerifier
      * @return {String} the verifier
      */
     Connection.prototype.getVerifier = function () {
-        return this.__verifier;
+        return this._verifier;
     };
 
     /**
      * Get the username
+     * @method personalize
      */
     Connection.prototype.personalize = function () {
-        var sBoardName = this.__board;
+        var sBoardName = this._board;
         var sUserName = CONF.PROPS.OBJECT.STORAGE.getItem(sBoardName);
-        var oSelf = this;
+        var self = this;
 
         if (sUserName === null) {
             window.lock = true;
@@ -462,33 +531,30 @@ var Connection;
                 buttons: {
                     confirm: {
                         action: function (e) {
-
+                            var sName;
+                            var iIdUser;
+                            var oDiff;
                             // For better mobile integration
                             $('input').blur();
                             delete window.lock;
 
-                            var sName = (e.input !== null && e.input.length > 0) ? e.input : 'Anonymous';
+                            sName = (e.input !== null && e.input.length > 0) ? e.input : 'Anonymous';
 
                             CONF.PROPS.OBJECT.STORAGE.setItem(sBoardName, sName);
 
                             if (CONF.BOARD.USERS[sName] === undefined) {
-                                var iIdUser = Object.keys(CONF.BOARD.USERS).length;
-                                var oDiff = JSON.parse('{"USERS":{}}');
+                                iIdUser = Object.keys(CONF.BOARD.USERS).length;
+                                oDiff = JSON.parse('{"USERS":{}}');
 
                                 oDiff.USERS[sName] = iIdUser;
 
                                 CONF.BOARD.USERS[sName] = iIdUser;
 
-                                oSelf.saveChanges(oDiff);
+                                self.saveChanges(oDiff);
                             }
 
                             // Set the User ID
                             CONF.PROPS.INT.WHO = CONF.BOARD.USERS[sName];
-
-                            // Show Welcome message
-                            setTimeout(function () {
-                                showMessage('WELCOME_ON_IHAVETO'.translate() + ' ' + sName);
-                            }, 5000);
 
                             Apprise('close');
                         },
@@ -501,6 +567,7 @@ var Connection;
                 override: true
             });
         } else {
+            var sStoredName;
             // reset if a user comes back with name from deleted board
             if (CONF.BOARD.USERS[sUserName] === undefined) {
                 CONF.PROPS.OBJECT.STORAGE.removeItem(sBoardName);
@@ -508,7 +575,6 @@ var Connection;
             }
             // If user is known set User id and send welcome message
             else {
-                var sStoredName;
                 for (sStoredName in CONF.BOARD.USERS) {
                     if (CONF.BOARD.USERS.hasOwnProperty(sStoredName)) {
                         if (sUserName === sStoredName) {

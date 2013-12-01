@@ -8,7 +8,9 @@
         if (!$('.tinysort').has($(e.target)).length && !$('#ui').has($(e.target)).length && !$('.focused').has($(e.target)).length) {
             e.preventDefault();
         }
-    }).on('keydown', 'body', function (event) {
+    })
+
+        .on('keydown', 'body', function (event) {
 
             if ($('#login-window').length === 0) {
                 if (event.keyCode === 27) {
@@ -19,6 +21,7 @@
                 }
             }
         })
+
         // Globla emptylink eventDefault preventer
         .on('click', 'a', function (event) {
             if ($(this).attr('href') === '#') {

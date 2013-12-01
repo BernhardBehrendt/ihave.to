@@ -4,12 +4,18 @@ var Menu;
     "use strict";
     /**
      * Creates defined menues
+     * @module Client
+     * @submodule Classes
+     * @class Menu
+     * @constructor
      */
     Menu = function () {
-
     };
+
     /**
-     * The menue corpus
+     * The menu holding template
+     * @method getMenuCorpus
+     * @return {Object} The menu parent element
      */
     Menu.prototype.getMenuCorpus = function () {
         return {
@@ -20,9 +26,12 @@ var Menu;
             }
         };
     };
+
     /**
-     * The finalisation of the menu items
-     * @param {Array} aCmds
+     * Create the menu command icons
+     * @method getMenuCmds
+     * @param {Array} aCmdsThe Commands to show in menu
+     * @return {Object} The complete menu tempate
      */
     Menu.prototype.getMenuCmds = function (aCmds) {
         var oMenuCorpus = this.getMenuCorpus();
@@ -36,46 +45,21 @@ var Menu;
 
         return oMenuCorpus;
     };
+
     /**
      * The login menue before start
+     * @param getLoginsMenue
      * @param {String} sActiveOne the Actice menu item
+     * @return {Array} The commands for menubar
      */
     Menu.prototype.getLoginsMenue = function (sActiveOne) {
-        if (sActiveOne === undefined) {
-            sActiveOne = '';
-        }
-
+        var i;
         var aMenuCmds = [];  // ['home', 'login', 'help', 'system'];
         var aCmds = [];
 
-        for (var i = 0; i < aMenuCmds.length; i+=1) {
-            aCmds[i] = {
-                CONTENT: {
-                    LINK: {
-                        URL: '#',
-                        ID: aMenuCmds[i],
-                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
-                    }
-                },
-                AFTER: ' '
-            };
-        }
-
-        return aCmds;
-    };
-    /**
-     * The main menue after start
-     * @param {String} sActiveOne the Actice menu item
-     */
-    Menu.prototype.getPrivateMain = function (sActiveOne) {
-
         if (sActiveOne === undefined) {
             sActiveOne = '';
         }
-        // 'timeline'
-        var i;
-        var aMenuCmds = ['new_post', 'chrono', 'screen', 'settings'];
-        var aCmds = [];
 
         for (i = 0; i < aMenuCmds.length; i += 1) {
             aCmds[i] = {
@@ -92,9 +76,43 @@ var Menu;
 
         return aCmds;
     };
+
+    /**
+     * The main menue after start
+     * @method getPrivateMain
+     * @param {String} sActiveOne the Actice menu item
+     * @return {Array} The commands for menubar
+     */
+    Menu.prototype.getPrivateMain = function (sActiveOne) {
+        var i;
+        var aMenuCmds = ['new_post', 'chrono', 'screen', 'settings'];
+        var aCmds = [];
+
+        if (sActiveOne === undefined) {
+            sActiveOne = '';
+        }
+
+        for (i = 0; i < aMenuCmds.length; i += 1) {
+            aCmds[i] = {
+                CONTENT: {
+                    LINK: {
+                        URL: '#',
+                        ID: aMenuCmds[i],
+                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
+                    }
+                },
+                AFTER: ' '
+            };
+        }
+
+        return aCmds;
+    };
+
     /**
      * The Navigation for the post view
+     * @method getPostMenue
      * @param {String} sActiveOne the Actice menu item
+     * @return {Array} The commands for menubar
      */
     Menu.prototype.getPostMenue = function (sActiveOne) {
 
@@ -120,9 +138,12 @@ var Menu;
 
         return aCmds;
     };
+
     /**
      * The Navigation for the post edit view
+     * @method getPostEdit
      * @param {String} sActiveOne the Actice menu item
+     * @return {Array} The commands for menubar
      */
     Menu.prototype.getPostEdit = function (sActiveOne) {
 
@@ -148,20 +169,23 @@ var Menu;
 
         return aCmds;
     };
+
     /**
      * The Navigation for the screen view
+     * @method getScreenMenue
      * @param {String} sActiveOne the Actice menu item
+     * @return {Array} The commands for menubar
      */
     Menu.prototype.getScreenMenue = function (sActiveOne) {
+        var i;
+        var aMenuCmds = ['back', 'new_screen', 'trash_empty'];
+        var aCmds = [];
 
         if (sActiveOne === undefined) {
             sActiveOne = '';
         }
 
-        var aMenuCmds = ['back', 'new_screen', 'trash_empty'];
-        var aCmds = [];
-
-        for (var i = 0; i < aMenuCmds.length; i+=1) {
+        for (var i = 0; i < aMenuCmds.length; i += 1) {
             aCmds[i] = {
                 CONTENT: {
                     LINK: {
@@ -176,9 +200,12 @@ var Menu;
 
         return aCmds;
     };
+
     /**
      * The Navigation for the screen view
+     * @method getSettingsMenue
      * @param {String} sActiveOne the Actice menu item
+     * @return {Array} The commands for menubar
      */
     Menu.prototype.getSettingsMenue = function (sActiveOne) {
 
@@ -189,7 +216,7 @@ var Menu;
         var aMenuCmds = ['back'];
         var aCmds = [];
 
-        for (var i = 0; i < aMenuCmds.length; i+=1) {
+        for (var i = 0; i < aMenuCmds.length; i += 1) {
             aCmds[i] = {
                 CONTENT: {
                     LINK: {

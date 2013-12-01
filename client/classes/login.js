@@ -3,7 +3,13 @@ var Login;
 (function () {
     "use strict";
     /**
-     * The login class without any methods
+     * The login window template
+     * 
+     * @module Client
+     * @submodule Classes
+     * @class Login
+     * @constructor
+     * @return {Object} The Loginwindow template instance
      */
     Login = function () {
         return {

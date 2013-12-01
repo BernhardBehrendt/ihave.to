@@ -186,7 +186,7 @@ var LANGUAGE = {
         ENTERED_BOARD: "entered Board",
         LEFT_BOARD: "left Board",
         RESTORE_CONSISTENCY_NOW: "synchronizing Board",
-        RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN: "Boar was synchronized",
+        RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN: "Board was synchronized",
         A_USER_DELETED_THIS_SCREEN_CHANGE_NOW: "The board you're staying on was deleted ",
         REMOVE_POST: "Memo was removed",
         CANT_DELETE_ACTIVE_SCREEN: "You cannot delete Boards you're actually staying on",
@@ -324,7 +324,7 @@ var LANGUAGE = {
             b && (e[c.q.name][b] = d);
         }), e;
     }
-    String.prototype.toHtml = function(a) {
+    "undefined" == typeof String && (String = {}), String.prototype.toHtml = function(a) {
         var b, c = this;
         if ("object" == typeof a) for (b in a) if (a.hasOwnProperty(b)) {
             var d = new RegExp("{" + b + "}", "g");
@@ -358,9 +358,9 @@ var LANGUAGE = {
         var c = /\b((http:\/\/|https:\/\/)[\S]*)/g;
         return b = b.replace(c, function(b) {
             var d = a(b), e = "$1";
-            return null !== b.match("youtube.com") || null !== b.match("youtu.be") ? (e = b.match("&") ? b.substr(0, b.search(/&/)) + " " + b.substr(b.search(/&/), b.length) : b, 
+            return null !== b.match("http://youtube.com") || null !== b.match("http://youtu.be") || null !== b.match("http://www.youtube.com") || null !== b.match("http://www.youtu.be") ? (e = b.match("&") ? b.substr(0, b.search(/&/)) + " " + b.substr(b.search(/&/), b.length) : b, 
             e = e.replace(/&[\S]*/, ""), e = e.replace("youtube.com/watch?v=", "youtube.com/embed/"), 
-            e = e.replace("youtu.be", "youtube.com/embed/"), e = e.replace(c, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>')) : e = '<a href="' + b + '" target="_blank" title="' + b + '" style="background-image:url(' + (d.protocol + "://" + d.host) + '/favicon.ico)"></a>', 
+            e = e.replace("youtu.be", "youtube.com/embed/"), (0 === b.indexOf("http://youtube.com") || 0 === b.indexOf("http://www.youtube.com") || 0 === b.indexOf("http://youtu.be") || 0 === b.indexOf("http://www.youtu.be")) && (e = e.replace(c, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>'))) : e = '<a href="' + b + '" target="_blank" title="' + b + '" style="background-image:url(' + (d.protocol + "://" + d.host) + '/favicon.ico)"></a>', 
             e;
         });
     }, a.options = {
@@ -382,25 +382,25 @@ var Board;
 !function() {
     "use strict";
     Board = function(a) {
-        this._oScreen = a, this.iFromTime = !1, this._oScreenPost = {}, this._setDeleted = {};
-    }, Board.prototype.getTemplate = function() {
+        this._oScreen = a, this._setDeleted = {}, this._oScreenPost = {}, this.iFromTime = !1;
+    }, Board.prototype.iFromTime = !1, Board.prototype._oScreen = null, Board.prototype._oScreen = null, 
+    Board.prototype._oScreenPost = null, Board.prototype.getTemplate = function() {
         return this.setBackground(), {
             DIV: this._createTemplate()
         };
     }, Board.prototype._createTemplate = function() {
-        var a, b, c;
-        if (void 0 !== this.iFromTime && (this.iFromTime = Object.keys(this._oScreen.SCREEN.POSTS)[0]), 
-        void 0 !== this._oScreen.SCREEN.POSTS) {
-            b = this._oScreen.SCREEN.POSTS;
-            for (c in b) if (b.hasOwnProperty(c)) if (a = b[c], a instanceof Array) for (var d = 0; d < a.length; d += 1) this._addPost(this._createPost(a[d])); else this._addPost(this._createPost(a));
+        var a, b, c, d, e, f = [];
+        if (this.iFromTime = Object.keys(this._oScreen.SCREEN.POSTS)[0], void 0 !== this._oScreen.SCREEN.POSTS) {
+            c = this._oScreen.SCREEN.POSTS;
+            for (d in c) if (c.hasOwnProperty(d)) if (b = c[d], b instanceof Array) for (var g = 0; g < b.length; g += 1) this._addPost(this._createPost(b[g])); else this._addPost(this._createPost(b));
         }
-        var e, f = [], g = this._oScreenPost;
-        for (e in g) if (g.hasOwnProperty(e)) {
-            if (this._setDeleted[e] === !0) {
-                delete g[e];
+        e = this._oScreenPost;
+        for (a in e) if (e.hasOwnProperty(a)) {
+            if (this._setDeleted[a] === !0) {
+                delete e[a];
                 continue;
             }
-            f.push(this._oScreenPost[e]);
+            f.push(this._oScreenPost[a]);
         }
         return f;
     }, Board.prototype._createPost = function(a) {
@@ -464,18 +464,17 @@ var Connection;
 !function() {
     "use strict";
     Connection = function() {
-        this.socket = io.connect(), this.__encryption = null, this.__data = null, this.__verifier = null, 
-        this.__board = null, this.socket.on("disconnect", function() {
+        this.socket = io.connect(), this.socket.on("disconnect", function() {
             showMessage("RECONNECTING".translate(), "error"), $(".screen, #cmd").empty(), CONF.COM.SOCKET.connect();
         });
-    }, Connection.prototype.socket = null, Connection.prototype.connect = function(a) {
-        if (this.__board = a, null !== this.__board) {
-            this.socket.emit("connect", this.__board);
-            var b = this;
-            this.socket.on("connected", function(a) {
-                $("#cmd").removeAttr("style"), b.setData(a), b.handleData();
-            }), this.socket.on("notify", function() {});
-        }
+    }, Connection.prototype.socket = null, Connection.prototype._encryption = null, 
+    Connection.prototype._data = null, Connection.prototype._verifier = null, Connection.prototype._board = null, 
+    Connection.prototype.connect = function(a) {
+        var b = this;
+        this._board = a, null !== this._board && (this.socket.emit("connect", this._board), 
+        this.socket.on("connected", function(a) {
+            $("#cmd").removeAttr("style"), b.setData(a), b.handleData();
+        }));
     }, Connection.prototype.initBroadcast = function(a) {
         var b = this;
         this.socket.on("enter-" + a, function(a) {
@@ -483,102 +482,91 @@ var Connection;
         }), this.socket.on("goodbye-" + a, function(a) {
             showMessage(b.decrypt(a) + " " + "LEFT_BOARD".translate(), "error");
         }), this.socket.on("bc-" + a, function(a) {
-            var b, c, d, e, f = JSON.parse(CONF.COM.SOCKET.decrypt(a));
-            if ($.extend(!0, CONF.BOARD, f), e = CONF.DOM.BOARDPOSTS.data("activescreen"), void 0 !== f.PRIVATE && void 0 !== f.PRIVATE.SCREENS) {
-                for (d in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(d) && !CONF.BOARD.PRIVATE.SCREENS[d] && delete CONF.BOARD.PRIVATE.SCREENS[d];
-                if (void 0 !== f.PRIVATE.SCREENS[e]) if (void 0 !== CONF.BOARD.PRIVATE.SCREENS[e]) {
-                    var g = !1;
-                    for (c in f.PRIVATE.SCREENS[e].POSTS) if (f.PRIVATE.SCREENS[e].POSTS.hasOwnProperty(c)) {
-                        var h = f.PRIVATE.SCREENS[e].POSTS[c];
-                        g = this.updateScreen(h);
+            var c, d, e, f, g, h = JSON.parse(CONF.COM.SOCKET.decrypt(a));
+            if ($.extend(!0, CONF.BOARD, h), g = CONF.DOM.BOARDPOSTS.data("activescreen"), void 0 !== h.PRIVATE && void 0 !== h.PRIVATE.SCREENS) {
+                for (e in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(e) && !CONF.BOARD.PRIVATE.SCREENS[e] && delete CONF.BOARD.PRIVATE.SCREENS[e];
+                if (void 0 !== h.PRIVATE.SCREENS[g]) if (void 0 !== CONF.BOARD.PRIVATE.SCREENS[g]) {
+                    var i = !1;
+                    for (d in h.PRIVATE.SCREENS[g].POSTS) if (h.PRIVATE.SCREENS[g].POSTS.hasOwnProperty(d)) {
+                        var j = h.PRIVATE.SCREENS[g].POSTS[d];
+                        i = b.updateScreen(j);
                     }
-                    g || (b = CONF.BOARD.PRIVATE.SCREENS[e], showMessage("RESTORE_CONSISTENCY_NOW"), 
-                    j = new Board({
-                        NAME: e,
-                        SCREEN: b,
+                    i || (c = CONF.BOARD.PRIVATE.SCREENS[g], showMessage("RESTORE_CONSISTENCY_NOW"), 
+                    k = new Board({
+                        NAME: g,
+                        SCREEN: c,
                         FROMTIME: !1
-                    }), CONF.DOM.BOARDSCREENS.html(new Template(j.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard"));
+                    }), CONF.DOM.BOARDSCREENS.html(new Template(k.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard"));
                 } else {
-                    var i = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
-                    CONF.DOM.BOARDPOSTS.data("activescreen", i), b = CONF.BOARD.PRIVATE.SCREENS[i], 
-                    showMessage("A_USER_DELETED_THIS_SCREEN_CHANGE_NOW"), $("#back, .mobile").trigger("click"), 
-                    1 === $("#edit").length && CONF.DOM.CMD.trigger("setMainNav");
-                    var j = new Board({
-                        NAME: i,
-                        SCREEN: b,
+                    f = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0], CONF.DOM.BOARDPOSTS.data("activescreen", f), 
+                    c = CONF.BOARD.PRIVATE.SCREENS[f], showMessage("A_USER_DELETED_THIS_SCREEN_CHANGE_NOW"), 
+                    $("#back, .mobile").trigger("click"), 1 === $("#edit").length && CONF.DOM.CMD.trigger("setMainNav");
+                    var k = new Board({
+                        NAME: f,
+                        SCREEN: c,
                         FROMTIME: !1
                     });
-                    CONF.DOM.BOARDSCREENS.html(new Template(j.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
+                    CONF.DOM.BOARDSCREENS.html(new Template(k.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
                 } else showMessage("RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN");
             }
-            if (void 0 !== f.USERS) {
-                var k = Object.keys(f.USERS)[0];
-                showMessage(k + " " + "WAS_ADDED_TO_BOARD".translate());
+            if (void 0 !== h.USERS) {
+                var l = Object.keys(h.USERS)[0];
+                showMessage(l + " " + "WAS_ADDED_TO_BOARD".translate());
             }
         });
     }, Connection.prototype.updateScreen = function(a) {
-        var b = !1;
-        if (a instanceof Array) for (var c = 0; c < a.length; c += 1) b ? this.updateScreen(a[c]) : b = this.updateScreen(a[c]); else if (void 0 !== a.TGT) {
-            var d = $("#" + a.TGT), e = "";
-            if (1 === d.length) {
-                if (b = !0, "position" === a.ACN && ($(d).animate({
-                    left: a.TO[0] + "%",
-                    top: a.TO[1] + "%"
-                }, 750), e = "POSTS_POSITION"), "content" === a.ACN && ($(d).find(".content").children("p").html(a.TO), 
-                e = "POSTS_CONTENT"), "deleted" === a.ACN && ($(d).fadeOut(250, function() {
-                    $(this).remove();
-                }), e = "DELETED_POST"), "color" === a.ACN) {
-                    var f = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(" ").toLowerCase();
-                    f = f.replace(a.TO, ""), $(d).removeClass(f).addClass(a.TO), e = "POSTS_COLOR";
-                }
-                var g;
-                for (g in CONF.BOARD.USERS) if (CONF.BOARD.USERS.hasOwnProperty(g) && CONF.BOARD.USERS[g] === a.BY) break;
-                showMessage(g + " " + e.translate(), "warning");
-            }
+        var b, c, d, e, f, g = !1;
+        if (a instanceof Array) for (b = 0; b < a.length; b += 1) g ? this.updateScreen(a[b]) : g = this.updateScreen(a[b]); else if (void 0 !== a.TGT && (d = $("#" + a.TGT), 
+        e = "", 1 === d.length)) {
+            g = !0, "position" === a.ACN && ($(d).animate({
+                left: a.TO[0] + "%",
+                top: a.TO[1] + "%"
+            }, 750), e = "POSTS_POSITION"), "content" === a.ACN && ($(d).find(".content").children("p").html(a.TO), 
+            e = "POSTS_CONTENT"), "deleted" === a.ACN && ($(d).fadeOut(250, function() {
+                $(this).remove();
+            }), e = "DELETED_POST"), "color" === a.ACN && (f = Object.keys(CONF.BOARD.SETTINGS.COLORS).join(" ").toLowerCase(), 
+            f = f.replace(a.TO, ""), $(d).removeClass(f).addClass(a.TO), e = "POSTS_COLOR");
+            for (c in CONF.BOARD.USERS) if (CONF.BOARD.USERS.hasOwnProperty(c) && CONF.BOARD.USERS[c] === a.BY) break;
+            showMessage(c + " " + e.translate(), "warning");
         }
-        return b;
+        return g;
     }, Connection.prototype.handleData = function() {
-        if (-1 === this.getData().indexOf("{")) {
-            CONF.BOARD = JSON.parse(this.decrypt()), this.initBroadcast(CONF.BOARD.META.VERIFIER), 
-            window.lock || this.personalize(), CONF.DOM.UIWINDOW.trigger("hideUi"), CONF.DOM.CMD.trigger("setMainNav"), 
-            showMessage("BOARD_WAS_ENCRYPTED");
-            var a;
-            null !== CONF.DOM.BOARDPOSTS && (a = CONF.DOM.BOARDPOSTS.data("activescreen"));
-            var b = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0];
-            void 0 !== a && void 0 !== CONF.BOARD.PRIVATE.SCREENS[a] && (b = a), CONF.DOM.BOARD.trigger("setupBoard", {
-                NAME: b,
-                SCREEN: CONF.BOARD.PRIVATE.SCREENS[b],
-                FROMTIME: !1
-            });
-        } else {
-            var c = JSON.parse(this.getData()), d = "WORKSPACE".translate(), e = new Date().getTime();
-            c.PRIVATE.SCREENS[d] = {
-                META: {
-                    BG: CONF.PROPS.STRING.SCREEN_DEFAULT_BG
-                },
-                POSTS: {}
-            }, c.PRIVATE.SCREENS[d].POSTS[e] = [ {
-                TGT: e,
-                ACN: "color",
-                TO: "blue"
-            }, {
-                TGT: e,
-                ACN: "content",
-                TO: "EXAMPLE_TEXT".translate()
-            }, {
-                TGT: e,
-                ACN: "position",
-                TO: [ 10, 10 ]
-            } ], CONF.COM.SOCKET.setData(JSON.stringify(c)), this.setVerifier(c.META.VERIFIER), 
-            this.socket.emit(this.getVerifier(), this.encrypt().toString()), $("#do-login").trigger(CONF.EVENTS.CLICK);
-        }
+        var a, b, c, d, e;
+        -1 === this.getData().indexOf("{") ? (CONF.BOARD = JSON.parse(this.decrypt()), this.initBroadcast(CONF.BOARD.META.VERIFIER), 
+        window.lock || this.personalize(), CONF.DOM.UIWINDOW.trigger("hideUi"), CONF.DOM.CMD.trigger("setMainNav"), 
+        showMessage("BOARD_WAS_ENCRYPTED"), null !== CONF.DOM.BOARDPOSTS && (a = CONF.DOM.BOARDPOSTS.data("activescreen")), 
+        b = Object.keys(CONF.BOARD.PRIVATE.SCREENS)[0], void 0 !== a && void 0 !== CONF.BOARD.PRIVATE.SCREENS[a] && (b = a), 
+        CONF.DOM.BOARD.trigger("setupBoard", {
+            NAME: b,
+            SCREEN: CONF.BOARD.PRIVATE.SCREENS[b],
+            FROMTIME: !1
+        })) : (c = JSON.parse(this.getData()), d = "WORKSPACE".translate(), e = new Date().getTime(), 
+        c.PRIVATE.SCREENS[d] = {
+            META: {
+                BG: CONF.PROPS.STRING.SCREEN_DEFAULT_BG
+            },
+            POSTS: {}
+        }, c.PRIVATE.SCREENS[d].POSTS[e] = [ {
+            TGT: e,
+            ACN: "color",
+            TO: "blue"
+        }, {
+            TGT: e,
+            ACN: "content",
+            TO: "EXAMPLE_TEXT".translate()
+        }, {
+            TGT: e,
+            ACN: "position",
+            TO: [ 10, 10 ]
+        } ], CONF.COM.SOCKET.setData(JSON.stringify(c)), this.setVerifier(c.META.VERIFIER), 
+        this.socket.emit(this.getVerifier(), this.encrypt().toString()), $("#do-login").trigger(CONF.EVENTS.CLICK));
     }, Connection.prototype.saveChanges = function(a) {
         this.setData(JSON.stringify(CONF.BOARD)), this.socket.emit(CONF.BOARD.META.VERIFIER, this.encrypt().toString()), 
         void 0 !== a && this.socket.emit("sync", this.encrypt(JSON.stringify(a)).toString());
     }, Connection.prototype.setEncryptionPhrase = function(a) {
-        this.__encryption = a;
+        this._encryption = CryptoJS.SHA3(a).toString();
     }, Connection.prototype.getEncryptionPhrase = function() {
-        return this.__encryption;
+        return this._encryption;
     }, Connection.prototype.encrypt = function(a) {
         var b = a;
         return void 0 === b && (b = this.getData()), CryptoJS.AES.encrypt(b, this.getEncryptionPhrase());
@@ -592,29 +580,25 @@ var Connection;
         }
         return b;
     }, Connection.prototype.setData = function(a) {
-        this.__data = a;
+        this._data = a;
     }, Connection.prototype.getData = function() {
-        return this.__data;
+        return this._data;
     }, Connection.prototype.setVerifier = function(a) {
-        this.__verifier = a;
+        this._verifier = a;
     }, Connection.prototype.getVerifier = function() {
-        return this.__verifier;
+        return this._verifier;
     }, Connection.prototype.personalize = function() {
-        var a = this.__board, b = CONF.PROPS.OBJECT.STORAGE.getItem(a), c = this;
+        var a = this._board, b = CONF.PROPS.OBJECT.STORAGE.getItem(a), c = this;
         if (null === b) window.lock = !0, Apprise("ENTER_YOUR_NAME".translate(), {
             animation: 250,
             buttons: {
                 confirm: {
                     action: function(b) {
-                        $("input").blur(), delete window.lock;
-                        var d = null !== b.input && b.input.length > 0 ? b.input : "Anonymous";
-                        if (CONF.PROPS.OBJECT.STORAGE.setItem(a, d), void 0 === CONF.BOARD.USERS[d]) {
-                            var e = Object.keys(CONF.BOARD.USERS).length, f = JSON.parse('{"USERS":{}}');
-                            f.USERS[d] = e, CONF.BOARD.USERS[d] = e, c.saveChanges(f);
-                        }
-                        CONF.PROPS.INT.WHO = CONF.BOARD.USERS[d], setTimeout(function() {
-                            showMessage("WELCOME_ON_IHAVETO".translate() + " " + d);
-                        }, 5e3), Apprise("close");
+                        var d, e, f;
+                        $("input").blur(), delete window.lock, d = null !== b.input && b.input.length > 0 ? b.input : "Anonymous", 
+                        CONF.PROPS.OBJECT.STORAGE.setItem(a, d), void 0 === CONF.BOARD.USERS[d] && (e = Object.keys(CONF.BOARD.USERS).length, 
+                        f = JSON.parse('{"USERS":{}}'), f.USERS[d] = e, CONF.BOARD.USERS[d] = e, c.saveChanges(f)), 
+                        CONF.PROPS.INT.WHO = CONF.BOARD.USERS[d], Apprise("close");
                     },
                     className: null,
                     id: "confirm",
@@ -623,10 +607,9 @@ var Connection;
             },
             input: !0,
             override: !0
-        }); else if (void 0 === CONF.BOARD.USERS[b]) CONF.PROPS.OBJECT.STORAGE.removeItem(a), 
-        this.personalize(); else {
+        }); else {
             var d;
-            for (d in CONF.BOARD.USERS) if (CONF.BOARD.USERS.hasOwnProperty(d) && b === d) {
+            if (void 0 === CONF.BOARD.USERS[b]) CONF.PROPS.OBJECT.STORAGE.removeItem(a), this.personalize(); else for (d in CONF.BOARD.USERS) if (CONF.BOARD.USERS.hasOwnProperty(d) && b === d) {
                 CONF.PROPS.INT.WHO = CONF.BOARD.USERS[d], CONF.COM.SOCKET.socket.emit("enter", this.encrypt(b).toString());
                 break;
             }
@@ -714,22 +697,21 @@ var Menu;
             AFTER: " "
         }, b.UL.CONTENT.LI = a, b;
     }, Menu.prototype.getLoginsMenue = function(a) {
-        void 0 === a && (a = "");
-        for (var b = [], c = [], d = 0; d < b.length; d += 1) c[d] = {
+        var b, c = [], d = [];
+        for (void 0 === a && (a = ""), b = 0; b < c.length; b += 1) d[b] = {
             CONTENT: {
                 LINK: {
                     URL: "#",
-                    ID: b[d],
-                    CLASSES: b[d] === a ? "active" : ""
+                    ID: c[b],
+                    CLASSES: c[b] === a ? "active" : ""
                 }
             },
             AFTER: " "
         };
-        return c;
+        return d;
     }, Menu.prototype.getPrivateMain = function(a) {
-        void 0 === a && (a = "");
         var b, c = [ "new_post", "chrono", "screen", "settings" ], d = [];
-        for (b = 0; b < c.length; b += 1) d[b] = {
+        for (void 0 === a && (a = ""), b = 0; b < c.length; b += 1) d[b] = {
             CONTENT: {
                 LINK: {
                     URL: "#",
@@ -769,18 +751,19 @@ var Menu;
         };
         return d;
     }, Menu.prototype.getScreenMenue = function(a) {
+        var b, c = [ "back", "new_screen", "trash_empty" ], d = [];
         void 0 === a && (a = "");
-        for (var b = [ "back", "new_screen", "trash_empty" ], c = [], d = 0; d < b.length; d += 1) c[d] = {
+        for (var b = 0; b < c.length; b += 1) d[b] = {
             CONTENT: {
                 LINK: {
                     URL: "#",
-                    ID: b[d],
-                    CLASSES: b[d] === a ? "active" : ""
+                    ID: c[b],
+                    CLASSES: c[b] === a ? "active" : ""
                 }
             },
             AFTER: " "
         };
-        return c;
+        return d;
     }, Menu.prototype.getSettingsMenue = function(a) {
         void 0 === a && (a = "");
         for (var b = [ "back" ], c = [], d = 0; d < b.length; d += 1) c[d] = {
@@ -806,26 +789,24 @@ var Post;
             var a, b = !1;
             for (a = 0; a < CONF.PROPS.ARRAY.COLORS.length; a += 1) this.oPost.hasClass(CONF.PROPS.ARRAY.COLORS[a]) && (b = CONF.PROPS.ARRAY.COLORS[a]);
             return b;
-        }, this.getContent = function() {
-            {
-                var a = this.oPost.children(".content").children("p");
-                a.html().toString().br2nl();
-            }
-            $("<div/>", {
-                id: "temp_content_grep",
-                html: a.html()
-            }).appendTo(a);
-            var b = $("#temp_content_grep");
-            $.each(b.find("a"), function() {
-                $(this).after($(this).attr("href")), $(this).remove();
-            }), $.each(b.find("iframe"), function() {
-                $(this).after($(this).attr("src")), $(this).remove();
-            });
-            var c = b.html();
-            return b.remove(), c;
         }, this.getId = function() {
             return this.oPost.attr("id");
         });
+    }, Post.prototype.getContent = function() {
+        {
+            var a, b = this.oPost.children(".content").children("p");
+            b.html().toString().br2nl();
+        }
+        $("<div/>", {
+            id: "temp_content_grep",
+            html: b.html()
+        }).appendTo(b), a = $("#temp_content_grep"), $.each(a.find("a"), function() {
+            $(this).after($(this).attr("href")), $(this).remove();
+        }), $.each(a.find("iframe"), function() {
+            $(this).after($(this).attr("src")), $(this).remove();
+        });
+        var c = a.html();
+        return a.remove(), c;
     }, Post.prototype.getTools = function() {
         return $("#post-functions").remove(), new Template({
             DIV: {
@@ -859,35 +840,34 @@ var PostWindow;
 !function() {
     "use strict";
     PostWindow = function(a) {
-        void 0 === a ? a = {
+        var b, c, d = [], e = "";
+        for (void 0 === a ? a = {
             defaultcolor: "yellow",
             content: "",
             headline: "NEW_POST".translate(),
             origin: ""
         } : (void 0 === a.origin && (a.origin = ""), void 0 === a.defaultcolor && (a.defaultcolor = "yellow"), 
-        void 0 === a.content && (a.content = ""), void 0 === a.headline && (a.headline = "NEW_POST".translate()));
-        for (var b = [], c = 0; c < CONF.PROPS.ARRAY.COLORS.length; c += 1) {
-            var d = "", e = CONF.BOARD.SETTINGS.COLORS[CONF.PROPS.ARRAY.COLORS[c].toUpperCase()];
-            null !== e && (d = CONF.PROPS.ARRAY.COLORS[c].toUpperCase().translate() + " " + "IS_MARKED_AS".translate() + " " + e), 
-            b[b.length] = CONF.PROPS.ARRAY.COLORS[c] === a.defaultcolor ? {
-                CLASSES: CONF.PROPS.ARRAY.COLORS[c],
-                CONTENT: {
-                    LINK: {
-                        TITLE: d,
-                        CLASSES: "selected",
-                        URL: "#"
-                    }
+        void 0 === a.content && (a.content = ""), void 0 === a.headline && (a.headline = "NEW_POST".translate())), 
+        b = 0; b < CONF.PROPS.ARRAY.COLORS.length; b += 1) c = CONF.BOARD.SETTINGS.COLORS[CONF.PROPS.ARRAY.COLORS[b].toUpperCase()], 
+        null !== c && (e = CONF.PROPS.ARRAY.COLORS[b].toUpperCase().translate() + " " + "IS_MARKED_AS".translate() + " " + c), 
+        d[d.length] = CONF.PROPS.ARRAY.COLORS[b] === a.defaultcolor ? {
+            CLASSES: CONF.PROPS.ARRAY.COLORS[b],
+            CONTENT: {
+                LINK: {
+                    TITLE: e,
+                    CLASSES: "selected",
+                    URL: "#"
                 }
-            } : {
-                CLASSES: CONF.PROPS.ARRAY.COLORS[c],
-                CONTENT: {
-                    LINK: {
-                        TITLE: d,
-                        URL: "#"
-                    }
+            }
+        } : {
+            CLASSES: CONF.PROPS.ARRAY.COLORS[b],
+            CONTENT: {
+                LINK: {
+                    TITLE: e,
+                    URL: "#"
                 }
-            };
-        }
+            }
+        };
         this.postTemplate = new Template({
             DIV: {
                 ID: "post-window",
@@ -904,7 +884,7 @@ var PostWindow;
                     UL: {
                         CLASSES: "color_select",
                         CONTENT: {
-                            LI: b
+                            LI: d
                         }
                     }
                 }
@@ -920,9 +900,10 @@ var Screens;
 !function() {
     "use strict";
     Screens = function() {}, Screens.prototype.countPosts = function(a) {
-        var b, c = "";
-        for (b in a.POSTS) a.POSTS.hasOwnProperty(b) && a.POSTS[b] instanceof Array && (-1 === c.search(a.POSTS[b][0].TGT) ? c += a.POSTS[b][0].TGT + "|" : -1 === c.search(a.POSTS[b].TGT) ? c += a.POSTS[b].TGT + "|" : ("move" === a.POSTS[b].ACN || "deleted" === a.POSTS[b].ACN) && (c = c.replace(a.POSTS[b].TGT + "|", "")));
-        return c.split("|").length - 1;
+        var b, c, d = [];
+        for (c in a.POSTS) a.POSTS.hasOwnProperty(c) && a.POSTS[c] instanceof Array && (-1 === d.indexOf(a.POSTS[c][0].TGT) ? d.push(a.POSTS[c][0].TGT) : -1 === d.indexOf(a.POSTS[c].TGT) ? d.push(a.POSTS[c].TGT) : ("move" === a.POSTS[c].ACN || "deleted" === a.POSTS[c].ACN) && (b = d.indexOf(a.POSTS[c].TGT), 
+        -1 !== b && d.splice(b, 1)));
+        return d.length;
     }, Screens.prototype.getOverview = function() {
         var a, b, c = [];
         for (b in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(b) && (a = CONF.BOARD.PRIVATE.SCREENS[b], 
@@ -990,12 +971,11 @@ var Settings;
     "use strict";
     Settings = function(a) {
         this.oSettings = a;
-    }, Settings.prototype.getTemplate = function() {
-        var a;
-        void 0 === this.oSettings && (this.oSettings = {}), void 0 === this.oSettings.COLORS && (this.oSettings.COLORS = {});
-        var b = {
+    }, Settings.prototype.oSettings = null, Settings.prototype.getTemplate = function() {
+        var a, b = {
             DIV: []
         };
+        void 0 === this.oSettings && (this.oSettings = {}), void 0 === this.oSettings.COLORS && (this.oSettings.COLORS = {});
         for (a in this.oSettings.COLORS) if (this.oSettings.COLORS.hasOwnProperty(a)) {
             var c = null !== this.oSettings.COLORS[a] ? this.oSettings.COLORS[a] : "";
             b.DIV[b.DIV.length] = {
@@ -10389,7 +10369,544 @@ var Template;
     var b = this.length, c = Number(arguments[1]) || 0;
     for (c = 0 > c ? Math.ceil(c) : Math.floor(c), 0 > c && (c += b); b > c; c++) if (c in this && this[c] === a) return c;
     return -1;
-});
+}), function() {
+    var a = this, b = a._, c = {}, d = Array.prototype, e = Object.prototype, f = Function.prototype, g = d.push, h = d.slice, i = d.concat, j = e.toString, k = e.hasOwnProperty, l = d.forEach, m = d.map, n = d.reduce, o = d.reduceRight, p = d.filter, q = d.every, r = d.some, s = d.indexOf, t = d.lastIndexOf, u = Array.isArray, v = Object.keys, w = f.bind, x = function(a) {
+        return a instanceof x ? a : this instanceof x ? (this._wrapped = a, void 0) : new x(a);
+    };
+    "undefined" != typeof exports ? ("undefined" != typeof module && module.exports && (exports = module.exports = x), 
+    exports._ = x) : a._ = x, x.VERSION = "1.5.2";
+    var y = x.each = x.forEach = function(a, b, d) {
+        if (null != a) if (l && a.forEach === l) a.forEach(b, d); else if (a.length === +a.length) {
+            for (var e = 0, f = a.length; f > e; e++) if (b.call(d, a[e], e, a) === c) return;
+        } else for (var g = x.keys(a), e = 0, f = g.length; f > e; e++) if (b.call(d, a[g[e]], g[e], a) === c) return;
+    };
+    x.map = x.collect = function(a, b, c) {
+        var d = [];
+        return null == a ? d : m && a.map === m ? a.map(b, c) : (y(a, function(a, e, f) {
+            d.push(b.call(c, a, e, f));
+        }), d);
+    };
+    var z = "Reduce of empty array with no initial value";
+    x.reduce = x.foldl = x.inject = function(a, b, c, d) {
+        var e = arguments.length > 2;
+        if (null == a && (a = []), n && a.reduce === n) return d && (b = x.bind(b, d)), 
+        e ? a.reduce(b, c) : a.reduce(b);
+        if (y(a, function(a, f, g) {
+            e ? c = b.call(d, c, a, f, g) : (c = a, e = !0);
+        }), !e) throw new TypeError(z);
+        return c;
+    }, x.reduceRight = x.foldr = function(a, b, c, d) {
+        var e = arguments.length > 2;
+        if (null == a && (a = []), o && a.reduceRight === o) return d && (b = x.bind(b, d)), 
+        e ? a.reduceRight(b, c) : a.reduceRight(b);
+        var f = a.length;
+        if (f !== +f) {
+            var g = x.keys(a);
+            f = g.length;
+        }
+        if (y(a, function(h, i, j) {
+            i = g ? g[--f] : --f, e ? c = b.call(d, c, a[i], i, j) : (c = a[i], e = !0);
+        }), !e) throw new TypeError(z);
+        return c;
+    }, x.find = x.detect = function(a, b, c) {
+        var d;
+        return A(a, function(a, e, f) {
+            return b.call(c, a, e, f) ? (d = a, !0) : void 0;
+        }), d;
+    }, x.filter = x.select = function(a, b, c) {
+        var d = [];
+        return null == a ? d : p && a.filter === p ? a.filter(b, c) : (y(a, function(a, e, f) {
+            b.call(c, a, e, f) && d.push(a);
+        }), d);
+    }, x.reject = function(a, b, c) {
+        return x.filter(a, function(a, d, e) {
+            return !b.call(c, a, d, e);
+        }, c);
+    }, x.every = x.all = function(a, b, d) {
+        b || (b = x.identity);
+        var e = !0;
+        return null == a ? e : q && a.every === q ? a.every(b, d) : (y(a, function(a, f, g) {
+            return (e = e && b.call(d, a, f, g)) ? void 0 : c;
+        }), !!e);
+    };
+    var A = x.some = x.any = function(a, b, d) {
+        b || (b = x.identity);
+        var e = !1;
+        return null == a ? e : r && a.some === r ? a.some(b, d) : (y(a, function(a, f, g) {
+            return e || (e = b.call(d, a, f, g)) ? c : void 0;
+        }), !!e);
+    };
+    x.contains = x.include = function(a, b) {
+        return null == a ? !1 : s && a.indexOf === s ? -1 != a.indexOf(b) : A(a, function(a) {
+            return a === b;
+        });
+    }, x.invoke = function(a, b) {
+        var c = h.call(arguments, 2), d = x.isFunction(b);
+        return x.map(a, function(a) {
+            return (d ? b : a[b]).apply(a, c);
+        });
+    }, x.pluck = function(a, b) {
+        return x.map(a, function(a) {
+            return a[b];
+        });
+    }, x.where = function(a, b, c) {
+        return x.isEmpty(b) ? c ? void 0 : [] : x[c ? "find" : "filter"](a, function(a) {
+            for (var c in b) if (b[c] !== a[c]) return !1;
+            return !0;
+        });
+    }, x.findWhere = function(a, b) {
+        return x.where(a, b, !0);
+    }, x.max = function(a, b, c) {
+        if (!b && x.isArray(a) && a[0] === +a[0] && a.length < 65535) return Math.max.apply(Math, a);
+        if (!b && x.isEmpty(a)) return -1/0;
+        var d = {
+            computed: -1/0,
+            value: -1/0
+        };
+        return y(a, function(a, e, f) {
+            var g = b ? b.call(c, a, e, f) : a;
+            g > d.computed && (d = {
+                value: a,
+                computed: g
+            });
+        }), d.value;
+    }, x.min = function(a, b, c) {
+        if (!b && x.isArray(a) && a[0] === +a[0] && a.length < 65535) return Math.min.apply(Math, a);
+        if (!b && x.isEmpty(a)) return 1/0;
+        var d = {
+            computed: 1/0,
+            value: 1/0
+        };
+        return y(a, function(a, e, f) {
+            var g = b ? b.call(c, a, e, f) : a;
+            g < d.computed && (d = {
+                value: a,
+                computed: g
+            });
+        }), d.value;
+    }, x.shuffle = function(a) {
+        var b, c = 0, d = [];
+        return y(a, function(a) {
+            b = x.random(c++), d[c - 1] = d[b], d[b] = a;
+        }), d;
+    }, x.sample = function(a, b, c) {
+        return arguments.length < 2 || c ? a[x.random(a.length - 1)] : x.shuffle(a).slice(0, Math.max(0, b));
+    };
+    var B = function(a) {
+        return x.isFunction(a) ? a : function(b) {
+            return b[a];
+        };
+    };
+    x.sortBy = function(a, b, c) {
+        var d = B(b);
+        return x.pluck(x.map(a, function(a, b, e) {
+            return {
+                value: a,
+                index: b,
+                criteria: d.call(c, a, b, e)
+            };
+        }).sort(function(a, b) {
+            var c = a.criteria, d = b.criteria;
+            if (c !== d) {
+                if (c > d || void 0 === c) return 1;
+                if (d > c || void 0 === d) return -1;
+            }
+            return a.index - b.index;
+        }), "value");
+    };
+    var C = function(a) {
+        return function(b, c, d) {
+            var e = {}, f = null == c ? x.identity : B(c);
+            return y(b, function(c, g) {
+                var h = f.call(d, c, g, b);
+                a(e, h, c);
+            }), e;
+        };
+    };
+    x.groupBy = C(function(a, b, c) {
+        (x.has(a, b) ? a[b] : a[b] = []).push(c);
+    }), x.indexBy = C(function(a, b, c) {
+        a[b] = c;
+    }), x.countBy = C(function(a, b) {
+        x.has(a, b) ? a[b]++ : a[b] = 1;
+    }), x.sortedIndex = function(a, b, c, d) {
+        c = null == c ? x.identity : B(c);
+        for (var e = c.call(d, b), f = 0, g = a.length; g > f; ) {
+            var h = f + g >>> 1;
+            c.call(d, a[h]) < e ? f = h + 1 : g = h;
+        }
+        return f;
+    }, x.toArray = function(a) {
+        return a ? x.isArray(a) ? h.call(a) : a.length === +a.length ? x.map(a, x.identity) : x.values(a) : [];
+    }, x.size = function(a) {
+        return null == a ? 0 : a.length === +a.length ? a.length : x.keys(a).length;
+    }, x.first = x.head = x.take = function(a, b, c) {
+        return null == a ? void 0 : null == b || c ? a[0] : h.call(a, 0, b);
+    }, x.initial = function(a, b, c) {
+        return h.call(a, 0, a.length - (null == b || c ? 1 : b));
+    }, x.last = function(a, b, c) {
+        return null == a ? void 0 : null == b || c ? a[a.length - 1] : h.call(a, Math.max(a.length - b, 0));
+    }, x.rest = x.tail = x.drop = function(a, b, c) {
+        return h.call(a, null == b || c ? 1 : b);
+    }, x.compact = function(a) {
+        return x.filter(a, x.identity);
+    };
+    var D = function(a, b, c) {
+        return b && x.every(a, x.isArray) ? i.apply(c, a) : (y(a, function(a) {
+            x.isArray(a) || x.isArguments(a) ? b ? g.apply(c, a) : D(a, b, c) : c.push(a);
+        }), c);
+    };
+    x.flatten = function(a, b) {
+        return D(a, b, []);
+    }, x.without = function(a) {
+        return x.difference(a, h.call(arguments, 1));
+    }, x.uniq = x.unique = function(a, b, c, d) {
+        x.isFunction(b) && (d = c, c = b, b = !1);
+        var e = c ? x.map(a, c, d) : a, f = [], g = [];
+        return y(e, function(c, d) {
+            (b ? d && g[g.length - 1] === c : x.contains(g, c)) || (g.push(c), f.push(a[d]));
+        }), f;
+    }, x.union = function() {
+        return x.uniq(x.flatten(arguments, !0));
+    }, x.intersection = function(a) {
+        var b = h.call(arguments, 1);
+        return x.filter(x.uniq(a), function(a) {
+            return x.every(b, function(b) {
+                return x.indexOf(b, a) >= 0;
+            });
+        });
+    }, x.difference = function(a) {
+        var b = i.apply(d, h.call(arguments, 1));
+        return x.filter(a, function(a) {
+            return !x.contains(b, a);
+        });
+    }, x.zip = function() {
+        for (var a = x.max(x.pluck(arguments, "length").concat(0)), b = new Array(a), c = 0; a > c; c++) b[c] = x.pluck(arguments, "" + c);
+        return b;
+    }, x.object = function(a, b) {
+        if (null == a) return {};
+        for (var c = {}, d = 0, e = a.length; e > d; d++) b ? c[a[d]] = b[d] : c[a[d][0]] = a[d][1];
+        return c;
+    }, x.indexOf = function(a, b, c) {
+        if (null == a) return -1;
+        var d = 0, e = a.length;
+        if (c) {
+            if ("number" != typeof c) return d = x.sortedIndex(a, b), a[d] === b ? d : -1;
+            d = 0 > c ? Math.max(0, e + c) : c;
+        }
+        if (s && a.indexOf === s) return a.indexOf(b, c);
+        for (;e > d; d++) if (a[d] === b) return d;
+        return -1;
+    }, x.lastIndexOf = function(a, b, c) {
+        if (null == a) return -1;
+        var d = null != c;
+        if (t && a.lastIndexOf === t) return d ? a.lastIndexOf(b, c) : a.lastIndexOf(b);
+        for (var e = d ? c : a.length; e--; ) if (a[e] === b) return e;
+        return -1;
+    }, x.range = function(a, b, c) {
+        arguments.length <= 1 && (b = a || 0, a = 0), c = arguments[2] || 1;
+        for (var d = Math.max(Math.ceil((b - a) / c), 0), e = 0, f = new Array(d); d > e; ) f[e++] = a, 
+        a += c;
+        return f;
+    };
+    var E = function() {};
+    x.bind = function(a, b) {
+        var c, d;
+        if (w && a.bind === w) return w.apply(a, h.call(arguments, 1));
+        if (!x.isFunction(a)) throw new TypeError();
+        return c = h.call(arguments, 2), d = function() {
+            if (!(this instanceof d)) return a.apply(b, c.concat(h.call(arguments)));
+            E.prototype = a.prototype;
+            var e = new E();
+            E.prototype = null;
+            var f = a.apply(e, c.concat(h.call(arguments)));
+            return Object(f) === f ? f : e;
+        };
+    }, x.partial = function(a) {
+        var b = h.call(arguments, 1);
+        return function() {
+            return a.apply(this, b.concat(h.call(arguments)));
+        };
+    }, x.bindAll = function(a) {
+        var b = h.call(arguments, 1);
+        if (0 === b.length) throw new Error("bindAll must be passed function names");
+        return y(b, function(b) {
+            a[b] = x.bind(a[b], a);
+        }), a;
+    }, x.memoize = function(a, b) {
+        var c = {};
+        return b || (b = x.identity), function() {
+            var d = b.apply(this, arguments);
+            return x.has(c, d) ? c[d] : c[d] = a.apply(this, arguments);
+        };
+    }, x.delay = function(a, b) {
+        var c = h.call(arguments, 2);
+        return setTimeout(function() {
+            return a.apply(null, c);
+        }, b);
+    }, x.defer = function(a) {
+        return x.delay.apply(x, [ a, 1 ].concat(h.call(arguments, 1)));
+    }, x.throttle = function(a, b, c) {
+        var d, e, f, g = null, h = 0;
+        c || (c = {});
+        var i = function() {
+            h = c.leading === !1 ? 0 : new Date(), g = null, f = a.apply(d, e);
+        };
+        return function() {
+            var j = new Date();
+            h || c.leading !== !1 || (h = j);
+            var k = b - (j - h);
+            return d = this, e = arguments, 0 >= k ? (clearTimeout(g), g = null, h = j, f = a.apply(d, e)) : g || c.trailing === !1 || (g = setTimeout(i, k)), 
+            f;
+        };
+    }, x.debounce = function(a, b, c) {
+        var d, e, f, g, h;
+        return function() {
+            f = this, e = arguments, g = new Date();
+            var i = function() {
+                var j = new Date() - g;
+                b > j ? d = setTimeout(i, b - j) : (d = null, c || (h = a.apply(f, e)));
+            }, j = c && !d;
+            return d || (d = setTimeout(i, b)), j && (h = a.apply(f, e)), h;
+        };
+    }, x.once = function(a) {
+        var b, c = !1;
+        return function() {
+            return c ? b : (c = !0, b = a.apply(this, arguments), a = null, b);
+        };
+    }, x.wrap = function(a, b) {
+        return function() {
+            var c = [ a ];
+            return g.apply(c, arguments), b.apply(this, c);
+        };
+    }, x.compose = function() {
+        var a = arguments;
+        return function() {
+            for (var b = arguments, c = a.length - 1; c >= 0; c--) b = [ a[c].apply(this, b) ];
+            return b[0];
+        };
+    }, x.after = function(a, b) {
+        return function() {
+            return --a < 1 ? b.apply(this, arguments) : void 0;
+        };
+    }, x.keys = v || function(a) {
+        if (a !== Object(a)) throw new TypeError("Invalid object");
+        var b = [];
+        for (var c in a) x.has(a, c) && b.push(c);
+        return b;
+    }, x.values = function(a) {
+        for (var b = x.keys(a), c = b.length, d = new Array(c), e = 0; c > e; e++) d[e] = a[b[e]];
+        return d;
+    }, x.pairs = function(a) {
+        for (var b = x.keys(a), c = b.length, d = new Array(c), e = 0; c > e; e++) d[e] = [ b[e], a[b[e]] ];
+        return d;
+    }, x.invert = function(a) {
+        for (var b = {}, c = x.keys(a), d = 0, e = c.length; e > d; d++) b[a[c[d]]] = c[d];
+        return b;
+    }, x.functions = x.methods = function(a) {
+        var b = [];
+        for (var c in a) x.isFunction(a[c]) && b.push(c);
+        return b.sort();
+    }, x.extend = function(a) {
+        return y(h.call(arguments, 1), function(b) {
+            if (b) for (var c in b) a[c] = b[c];
+        }), a;
+    }, x.pick = function(a) {
+        var b = {}, c = i.apply(d, h.call(arguments, 1));
+        return y(c, function(c) {
+            c in a && (b[c] = a[c]);
+        }), b;
+    }, x.omit = function(a) {
+        var b = {}, c = i.apply(d, h.call(arguments, 1));
+        for (var e in a) x.contains(c, e) || (b[e] = a[e]);
+        return b;
+    }, x.defaults = function(a) {
+        return y(h.call(arguments, 1), function(b) {
+            if (b) for (var c in b) void 0 === a[c] && (a[c] = b[c]);
+        }), a;
+    }, x.clone = function(a) {
+        return x.isObject(a) ? x.isArray(a) ? a.slice() : x.extend({}, a) : a;
+    }, x.tap = function(a, b) {
+        return b(a), a;
+    };
+    var F = function(a, b, c, d) {
+        if (a === b) return 0 !== a || 1 / a == 1 / b;
+        if (null == a || null == b) return a === b;
+        a instanceof x && (a = a._wrapped), b instanceof x && (b = b._wrapped);
+        var e = j.call(a);
+        if (e != j.call(b)) return !1;
+        switch (e) {
+          case "[object String]":
+            return a == String(b);
+
+          case "[object Number]":
+            return a != +a ? b != +b : 0 == a ? 1 / a == 1 / b : a == +b;
+
+          case "[object Date]":
+          case "[object Boolean]":
+            return +a == +b;
+
+          case "[object RegExp]":
+            return a.source == b.source && a.global == b.global && a.multiline == b.multiline && a.ignoreCase == b.ignoreCase;
+        }
+        if ("object" != typeof a || "object" != typeof b) return !1;
+        for (var f = c.length; f--; ) if (c[f] == a) return d[f] == b;
+        var g = a.constructor, h = b.constructor;
+        if (g !== h && !(x.isFunction(g) && g instanceof g && x.isFunction(h) && h instanceof h)) return !1;
+        c.push(a), d.push(b);
+        var i = 0, k = !0;
+        if ("[object Array]" == e) {
+            if (i = a.length, k = i == b.length) for (;i-- && (k = F(a[i], b[i], c, d)); ) ;
+        } else {
+            for (var l in a) if (x.has(a, l) && (i++, !(k = x.has(b, l) && F(a[l], b[l], c, d)))) break;
+            if (k) {
+                for (l in b) if (x.has(b, l) && !i--) break;
+                k = !i;
+            }
+        }
+        return c.pop(), d.pop(), k;
+    };
+    x.isEqual = function(a, b) {
+        return F(a, b, [], []);
+    }, x.isEmpty = function(a) {
+        if (null == a) return !0;
+        if (x.isArray(a) || x.isString(a)) return 0 === a.length;
+        for (var b in a) if (x.has(a, b)) return !1;
+        return !0;
+    }, x.isElement = function(a) {
+        return !(!a || 1 !== a.nodeType);
+    }, x.isArray = u || function(a) {
+        return "[object Array]" == j.call(a);
+    }, x.isObject = function(a) {
+        return a === Object(a);
+    }, y([ "Arguments", "Function", "String", "Number", "Date", "RegExp" ], function(a) {
+        x["is" + a] = function(b) {
+            return j.call(b) == "[object " + a + "]";
+        };
+    }), x.isArguments(arguments) || (x.isArguments = function(a) {
+        return !(!a || !x.has(a, "callee"));
+    }), "function" != typeof /./ && (x.isFunction = function(a) {
+        return "function" == typeof a;
+    }), x.isFinite = function(a) {
+        return isFinite(a) && !isNaN(parseFloat(a));
+    }, x.isNaN = function(a) {
+        return x.isNumber(a) && a != +a;
+    }, x.isBoolean = function(a) {
+        return a === !0 || a === !1 || "[object Boolean]" == j.call(a);
+    }, x.isNull = function(a) {
+        return null === a;
+    }, x.isUndefined = function(a) {
+        return void 0 === a;
+    }, x.has = function(a, b) {
+        return k.call(a, b);
+    }, x.noConflict = function() {
+        return a._ = b, this;
+    }, x.identity = function(a) {
+        return a;
+    }, x.times = function(a, b, c) {
+        for (var d = Array(Math.max(0, a)), e = 0; a > e; e++) d[e] = b.call(c, e);
+        return d;
+    }, x.random = function(a, b) {
+        return null == b && (b = a, a = 0), a + Math.floor(Math.random() * (b - a + 1));
+    };
+    var G = {
+        escape: {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#x27;"
+        }
+    };
+    G.unescape = x.invert(G.escape);
+    var H = {
+        escape: new RegExp("[" + x.keys(G.escape).join("") + "]", "g"),
+        unescape: new RegExp("(" + x.keys(G.unescape).join("|") + ")", "g")
+    };
+    x.each([ "escape", "unescape" ], function(a) {
+        x[a] = function(b) {
+            return null == b ? "" : ("" + b).replace(H[a], function(b) {
+                return G[a][b];
+            });
+        };
+    }), x.result = function(a, b) {
+        if (null == a) return void 0;
+        var c = a[b];
+        return x.isFunction(c) ? c.call(a) : c;
+    }, x.mixin = function(a) {
+        y(x.functions(a), function(b) {
+            var c = x[b] = a[b];
+            x.prototype[b] = function() {
+                var a = [ this._wrapped ];
+                return g.apply(a, arguments), M.call(this, c.apply(x, a));
+            };
+        });
+    };
+    var I = 0;
+    x.uniqueId = function(a) {
+        var b = ++I + "";
+        return a ? a + b : b;
+    }, x.templateSettings = {
+        evaluate: /<%([\s\S]+?)%>/g,
+        interpolate: /<%=([\s\S]+?)%>/g,
+        escape: /<%-([\s\S]+?)%>/g
+    };
+    var J = /(.)^/, K = {
+        "'": "'",
+        "\\": "\\",
+        "\r": "r",
+        "\n": "n",
+        "	": "t",
+        "\u2028": "u2028",
+        "\u2029": "u2029"
+    }, L = /\\|'|\r|\n|\t|\u2028|\u2029/g;
+    x.template = function(a, b, c) {
+        var d;
+        c = x.defaults({}, c, x.templateSettings);
+        var e = new RegExp([ (c.escape || J).source, (c.interpolate || J).source, (c.evaluate || J).source ].join("|") + "|$", "g"), f = 0, g = "__p+='";
+        a.replace(e, function(b, c, d, e, h) {
+            return g += a.slice(f, h).replace(L, function(a) {
+                return "\\" + K[a];
+            }), c && (g += "'+\n((__t=(" + c + "))==null?'':_.escape(__t))+\n'"), d && (g += "'+\n((__t=(" + d + "))==null?'':__t)+\n'"), 
+            e && (g += "';\n" + e + "\n__p+='"), f = h + b.length, b;
+        }), g += "';\n", c.variable || (g = "with(obj||{}){\n" + g + "}\n"), g = "var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};\n" + g + "return __p;\n";
+        try {
+            d = new Function(c.variable || "obj", "_", g);
+        } catch (h) {
+            throw h.source = g, h;
+        }
+        if (b) return d(b, x);
+        var i = function(a) {
+            return d.call(this, a, x);
+        };
+        return i.source = "function(" + (c.variable || "obj") + "){\n" + g + "}", i;
+    }, x.chain = function(a) {
+        return x(a).chain();
+    };
+    var M = function(a) {
+        return this._chain ? x(a).chain() : a;
+    };
+    x.mixin(x), y([ "pop", "push", "reverse", "shift", "sort", "splice", "unshift" ], function(a) {
+        var b = d[a];
+        x.prototype[a] = function() {
+            var c = this._wrapped;
+            return b.apply(c, arguments), "shift" != a && "splice" != a || 0 !== c.length || delete c[0], 
+            M.call(this, c);
+        };
+    }), y([ "concat", "join", "slice" ], function(a) {
+        var b = d[a];
+        x.prototype[a] = function() {
+            return M.call(this, b.apply(this._wrapped, arguments));
+        };
+    }), x.extend(x.prototype, {
+        chain: function() {
+            return this._chain = !0, this;
+        },
+        value: function() {
+            return this._wrapped;
+        }
+    });
+}.call(this);
 
 var $Apprise = null, $overlay = null, $body = null, $window = null, $cA = null, AppriseQueue = [];
 

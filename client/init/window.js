@@ -4,7 +4,8 @@
 /*global setTimeout*/
 (function () {
     "use strict";
-// Handle device/browser/client specific properties
+
+    // Handle device/browser/client specific properties
     if (isMobile()) {
 
         CONF.EVENTS.CLICK = 'touchstart';

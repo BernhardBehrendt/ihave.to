@@ -1,20 +1,19 @@
-/**
- * Create a buttonpanel with the given configuration:
- * An example configuration is as follow:
- *
- * [{
- *	LABEL : 'fdsfsd',
- *	TYPE : 'ok',
- *	ID : 'create-post'
- * }]
- * @see scss/ui/_buttons.scss
- * @param {Array} aButtonset an Array with objects
- * @param {String} sPanel the layouts of the panel
- */
 var Buttons;
 (function () {
-    "use strict";
 
+    /**
+     * Create the footerbar buttons from a given buttonset
+     *
+     * @module Client
+     * @submodule Classes
+     * @class Buttons
+     * @constructor
+     * @param {Array} aButtonset The buttons to create
+     * @param {String} sPanel The panel style where buttons are rendered ins
+     * @return {Object} The HTML representation of a buttonset
+     *
+     */
+    "use strict";
     Buttons = function (aButtonset, sPanel) {
         var i;
         var aButtons = [];

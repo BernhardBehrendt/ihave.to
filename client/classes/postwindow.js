@@ -8,10 +8,19 @@ var PostWindow;
     /**
      * The Postwindow masterclass
      * Creates the Templates engine required object to create the postwindow with all required bindings (Plugins later...)
-     * @requires Template The default TEmplate engine
-     * @param {Object} config
+     * @requires Template The default Template engine
+     * @module Client
+     * @submodule Classes
+     * @class PostWindow
+     * @constructor
+     * @param {Object} config The configuration for the postwindowinstance
      */
     PostWindow = function (config) {
+        var i;
+        var aColorList = [];
+        var sColorTitle = '';
+        var sPrioName;
+
         // Set default config if no config was given before
         if (config === undefined) {
             config = {
@@ -44,12 +53,9 @@ var PostWindow;
         }
 
 
-        var aColorList = [];
-
         // Processs the existing colors for colorselection
-        for (var i = 0; i < CONF.PROPS.ARRAY.COLORS.length; i += 1) {
-            var sColorTitle = '';
-            var sPrioName = CONF.BOARD.SETTINGS.COLORS[CONF.PROPS.ARRAY.COLORS[i].toUpperCase()];
+        for (i = 0; i < CONF.PROPS.ARRAY.COLORS.length; i += 1) {
+            sPrioName = CONF.BOARD.SETTINGS.COLORS[CONF.PROPS.ARRAY.COLORS[i].toUpperCase()];
 
             if (sPrioName !== null) {
                 sColorTitle = CONF.PROPS.ARRAY.COLORS[i].toUpperCase().translate() + ' ' + 'IS_MARKED_AS'.translate() + ' ' + sPrioName;
@@ -79,8 +85,7 @@ var PostWindow;
                 };
             }
         }
-        //console.log(config.content);
-        // create the structure for the template engine
+
         this.postTemplate = new Template({
             DIV: {
                 ID: 'post-window',
@@ -105,8 +110,9 @@ var PostWindow;
         }).toHtml();
     };
     /**
-     * Gives back the templates engine required object
-     * @return {Object} the representation for the templete engine
+     * Deliver the postwindow HTML View
+     * @method deliver
+     * @return {String} The postwindow HTML String
      */
     PostWindow.prototype.deliver = function () {
         return this.postTemplate;

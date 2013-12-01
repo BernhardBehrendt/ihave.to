@@ -4,21 +4,37 @@ var Settings;
     "use strict";
 
     /**
-     * Here the Settings frontend will be generated but here
-     * Storing values is exiting on wrong place but will be stored here in future
+     * Settings frontend will be generated
+     * @TODO Storing values is exiting on wrong place but will be stored here in future
      *
-     *
-     * @param {Object} oSettings
+     * @module Client
+     * @submodule Classes
+     * @class Settings
+     * @constructor
+     * @param {Object} oSettings The settings object
      */
     Settings = function (oSettings) {
         this.oSettings = oSettings;
     };
+
+    /**
+     * Here the settings are stored
+     * @property oSettings
+     * @type {Object}
+     */
+    Settings.prototype.oSettings = null;
+
     /**
      * Creates the JSON Object for the Settings view
+     * @method getTemplate
      * @return {Object} The Object reuired for the Template Engine
      */
     Settings.prototype.getTemplate = function () {
         var sColor;
+        var aLegendItems = {
+            DIV: []
+        };
+
         // Setup the missing configuration parameters
         if (this.oSettings === undefined) {
             this.oSettings = {};
@@ -28,11 +44,6 @@ var Settings;
         if (this.oSettings.COLORS === undefined) {
             this.oSettings.COLORS = {};
         }
-
-        // Create the legend color inside this Array
-        var aLegendItems = {
-            DIV: []
-        };
 
         // Iterate given colors
         for (sColor in this.oSettings.COLORS) {

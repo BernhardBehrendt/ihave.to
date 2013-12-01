@@ -110,6 +110,8 @@ module.exports = function (grunt) {
                                                 '../client/vendor/jquery/jquery.pstrength.js',
                                                 '../client/vendor/jquery/jquerytinysort.js',
 
+                                                '../client/vendor/underscore.js/underscore.js',
+
                                                 '../client/vendor/apprise/apprise-v2.js',
 
                                                 '../client/vendor/cubic/add2home.js',

@@ -157,7 +157,7 @@ var LANGUAGE = {
         ENTERED_BOARD: 'entered Board',
         LEFT_BOARD: 'left Board',
         RESTORE_CONSISTENCY_NOW: 'synchronizing Board',
-        RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN: 'Boar was synchronized',
+        RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN: 'Board was synchronized',
         A_USER_DELETED_THIS_SCREEN_CHANGE_NOW: 'The board you\'re staying on was deleted ',
         REMOVE_POST: 'Memo was removed',
         CANT_DELETE_ACTIVE_SCREEN: 'You cannot delete Boards you\'re actually staying on',

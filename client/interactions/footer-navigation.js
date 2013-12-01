@@ -21,14 +21,14 @@
             CONF.DOM.CMD_INFO.text(sTranslate.translate()).fadeIn(CONF.PROPS.INT.FAST);
         }
     })
-// Hide navigation Tooltip
+        // Hide navigation Tooltip
         .on('mouseout', 'nav#cmd > ul > li > a', function () {
             // Hide navigation Information layer
             if (CONF.DOM.CMD_INFO.hasClass(CONF.PROPS.STRING.ENABLED)) {
                 CONF.DOM.CMD_INFO.text('').fadeOut(CONF.PROPS.INT.FAST);
             }
         })
-// Activate button on navigation
+        // Activate button on navigation
         .on(CONF.EVENTS.CLICK, 'nav#cmd > ul > li > a', function () {
             // handle comands
             if (!$(this).hasClass(CONF.PROPS.STRING.ACTIVE)) {
@@ -40,25 +40,26 @@
             }
 
         })
-// Disable button on navigation
+        // Disable button on navigation
         .on(CONF.EVENTS.CLICK, 'nav#cmd > ul > li > a.active', function () {
             // remove navigation active state
             $(this).removeClass(CONF.PROPS.STRING.ACTIVE);
         })
-// Leave subnavigation level
+        // Leave subnavigation level
         .on(CONF.EVENTS.CLICK, '#back', function () {
             CONF.DOM.CMD.trigger('setMainNav');
             CONF.DOM.UIWINDOW.children('.controls').find('.close').trigger(CONF.EVENTS.CLICK);
 
         })
-// Cancel current view action and go back to main view
+        // Cancel current view action and go back to main view
         .on(CONF.EVENTS.CLICK, '#cancel', function () {
             $('#ui').find('.close').trigger(CONF.EVENTS.CLICK);
         })
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Main Navigaton
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Open create new post view
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Main Navigaton
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Open create new post view
         .on(CONF.EVENTS.CLICK, '#new_post', function (event, oSettings) {
             var oPostConfig;
             var oOrigin = false;
@@ -103,8 +104,9 @@
             }
         })
 
+        // Sort posts chronological
         .on(CONF.EVENTS.CLICK, '#chrono', function () {
-            // Sort posts chronological
+
             var oNormalScreen = $('.screen.normal');
 
             if ($(this).hasClass('active')) {
@@ -127,15 +129,16 @@
             }
         })
 
+        // Open screen view
         .on(CONF.EVENTS.CLICK, '#screen', function () {
-            // Open screen view
             if ($(this).hasClass('active')) {
                 CONF.DOM.UIWINDOW.trigger('showUi');
                 CONF.DOM.CMD.trigger('setScreenNav');
                 CONF.DOM.UIWINDOW.children('.cmd').html(new Template(new Screens().getOverview()).toHtml());
             }
         })
-// open settongs view
+
+        // open settongs view
         .on(CONF.EVENTS.CLICK, '#settings', function () {
 
             if ($(this).hasClass('active')) {
@@ -144,10 +147,11 @@
                 CONF.DOM.UIWINDOW.children('.cmd').html(new Template(new Settings(CONF.BOARD.SETTINGS).getTemplate()).toHtml());
             }
         })
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// New Post view
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Store created post
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // New Post view
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Store created post
         .on(CONF.EVENTS.CLICK, '#store_post', function () {
 
             if ($(this).hasClass('active')) {
@@ -269,10 +273,11 @@
                 }
             }
         })
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Screen views Navigation
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Create new screen
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Screen views Navigation
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Create new screen
         .on(CONF.EVENTS.CLICK, '#new_screen', function () {
             if ($(this).hasClass('active')) {
                 CONF.DOM.UIWINDOW.children('.cmd').prepend(new Template(new Screens().newScreen()).toHtml());
@@ -282,7 +287,8 @@
                 });
             }
         })
-// Switch in delete screen mode
+
+        // Switch in delete screen mode
         .on(CONF.EVENTS.CLICK, '#trash_empty', function () {
             if ($(this).hasClass('active')) {
                 if (CONF.DOM.UIWINDOW.children('.cmd').find('.screen').length > 1) {
@@ -296,7 +302,8 @@
                 CONF.DOM.UIWINDOW.children('.cmd').find('.screen').removeClass('removable');
             }
         })
-// Remove screens to delete
+
+        // Remove screens to delete
         .on(CONF.EVENTS.CLICK, '#trash_full', function () {
             var oTrash = $(this);
             if (CONF.DOM.UIWINDOW.children('.cmd').find('.do').length > 0) {

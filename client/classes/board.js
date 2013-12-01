@@ -5,33 +5,63 @@ var Board;
     "use strict";
 
     /**
-     * This class converts a screentimline into the currently valid screen
+     * Board converts a screentimline into a valid screen view
      *
-     * @author Bernhard Bezdek
-     */
-
-    /**
-     * Constructor
      *
-     * @param {Object} oScreen the representation and some metadate for workig on one (selected) screen
+     * @author Bernhard Bezdek <bernahrd.bezdek@googlemail.com>
+     * @module Client
+     * @submodule Classes
+     * @class Board
+     * @constructor
+     * @param {Object} oScreen The screen object to render
      */
     Board = function (oScreen) {
         this._oScreen = oScreen;
-        this.iFromTime = false;
-        this._oScreenPost = {};
         this._setDeleted = {};
+        this._oScreenPost = {};
+        this.iFromTime = false;
     };
+
+    /**
+     * The timestamp from where rendering sould begin
+     * @property iFromTime
+     * @type {Boolean}
+     */
+    Board.prototype.iFromTime = false;
+
+    /**
+     * The instance of the screen to render
+     * @property _oScreen
+     * @type {Object}
+     * @private
+     */
+    Board.prototype._oScreen = null;
+
+    /**
+     * Here all deleted memo instances are placed in
+     * @property _setDeleted
+     * @type {Object}
+     * @private
+     */
+    Board.prototype._oScreen = null;
+
+    /**
+     * The posts of the given Screen
+     * @property _oScreenPost
+     * @type {Object}
+     * @private
+     */
+    Board.prototype._oScreenPost = null;
+
     /**
      * Return the template and set the background of the Screen
-     *
-     * @return {Object} the HTML TEmplate representation of the current (selected) screen from given / first timecode
+     * @method getTemplate
+     * @return {Object} The HTML TEmplate representation of the current (selected) screen from given / first timecode
      */
     Board.prototype.getTemplate = function () {
 
-        // A better way must be found because there maybe other use of that method
         this.setBackground();
 
-        // Create the Template code
         return{
             DIV: this._createTemplate()
         };
@@ -39,17 +69,22 @@ var Board;
 
 
     /**
-     * Render the html Tempate structure out of the given timeline representaiton
+     * Create HTML structure out for given timeline representaiton
+     * @method _createTemplate
+     * @return {Array} The template which represent the curent screen
+     * @private
      */
     Board.prototype._createTemplate = function () {
+        var iPostId;
         var oCurPost;
         var oTimeline;
         var iTimestamp;
+        var oScreenPosts;
+        var aPosts = [];
 
         // Detect if an initial time was set before
-        if (this.iFromTime !== undefined) {
-            this.iFromTime = (Object.keys(this._oScreen.SCREEN.POSTS)[0]);
-        }
+        this.iFromTime = (Object.keys(this._oScreen.SCREEN.POSTS)[0]);
+
         // Start screen posts preprocess
         if (this._oScreen.SCREEN.POSTS !== undefined) {
 
@@ -69,11 +104,7 @@ var Board;
             }
         }
 
-        // Start screen posts postprocess (convert to numeric array)
-        var iPostId;
-        var aPosts = [];
-        var oScreenPosts = this._oScreenPost;
-        // Convert the Processed object into a numeric array (for the Template Engine)
+        oScreenPosts = this._oScreenPost;
 
         for (iPostId in oScreenPosts) {
             if (oScreenPosts.hasOwnProperty(iPostId)) {
@@ -87,12 +118,15 @@ var Board;
 
         return aPosts;
     };
+
     /**
      * Creates the Templates required post structure for later working/merging
      * into an existing representation on screen object
      *
+     * @method_createPost
      * @param {Object} oPost the timeline entry to get parsed
-     * @return {Object} the template engines representation to create HTML from it
+     * @return {Object} The template engines representation to create HTML from it
+     * @private
      */
     Board.prototype._createPost = function (oPost) {
         var sContent = false;
@@ -108,7 +142,6 @@ var Board;
         //color/content/position are handled here
         if (oPost.ACN === 'color') {
             sColor = oPost.TO;
-
         }
 
         if (oPost.ACN === 'content') {
@@ -141,10 +174,10 @@ var Board;
     };
 
     /**
-     * Adds a Post to current screen object
-     *
-     * @param {Object} oPost
-     * @return void
+     * Add a post to currently visible screen
+     * @method _addPost
+     * @param {Object} oPost The postobject to add inside the current screen
+     * @private
      */
     Board.prototype._addPost = function (oPost) {
         if (this._oScreenPost[oPost.ID] === undefined) {
@@ -152,11 +185,6 @@ var Board;
             this._oScreenPost[oPost.ID] = oPost;
         }
         else {
-            // Exchange existing values with replacement in oPost object
-
-            // Detect content
-            //alert(oPost.CONTENT.DIV.CONTENT.P.CONTENT);
-
             // Content change
             if (oPost.CONTENT.DIV.CONTENT.P.CONTENT !== false) {
                 this._oScreenPost[oPost.ID].CONTENT.DIV.CONTENT.P.CONTENT = oPost.CONTENT.DIV.CONTENT.P.CONTENT;
@@ -170,6 +198,7 @@ var Board;
                 if (oPost.CLASSES.indexOf('deleted') !== -1) {
                     this._setDeleted[oPost.ID] = true;
                 } else {
+
                     this._oScreenPost[oPost.ID].CLASSES = oPost.CLASSES;
 
                     // If postit was deleted before
@@ -190,12 +219,12 @@ var Board;
             }
         }
     };
+
     /**
      * Set the background image of the current (selected) screen
-     * @requires jQuery
+     * @method setBackground
      */
     Board.prototype.setBackground = function () {
         $('body').css('background-image', 'url(' + this._oScreen.SCREEN.META.BG + ')');
     };
-
 })();

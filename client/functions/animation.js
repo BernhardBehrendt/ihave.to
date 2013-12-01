@@ -13,7 +13,11 @@ var animateColorByClass;
      * https://github.com/jquery/jquery-color
      *
      * @author Bernahrd Bezdek
-     *
+     * @module Client
+     * @submodule Functions
+     * @class animateColorByClass
+     * @constructor
+     * @deprecated
      * @param {Object} oTarget        a jQuery object to animate
      * @param {String} sFinalClass  a class containing the final backgroundColor
      * @param {Number} iDuration    the time in ms animation sould go (default 250ms)

@@ -6,46 +6,55 @@ var Screens;
     /**
      * The screen class corpus
      * No constructor code required actually
+     * @module Client
+     * @submodule Classes
+     * @class Screens
+     * @constructor
      */
     Screens = function () {
 
     };
     /**
-     * Counts the existing posts inside a screen which aren't deleted or moved
+     * Counts the visibe posts inside a screen which aren't deleted or moved
+     * @method countPosts
      * @param {Object} oScreen
+     * @return {Number} The number of visible posts on given screen
      */
     Screens.prototype.countPosts = function (oScreen) {
         var sPreCount = '';
+        var aPreCount = [];
+        var iIndex;
         var oTs;
 
         for (oTs in oScreen.POSTS) {
-            if (oScreen.POSTS.hasOwnProperty(oTs)) {
-                if (oScreen.POSTS[oTs] instanceof Array) {
-                    if (sPreCount.search(oScreen.POSTS[oTs][0].TGT) === -1) {
-                        sPreCount += oScreen.POSTS[oTs][0].TGT + '|';
-                    } else {
-                        if (sPreCount.search(oScreen.POSTS[oTs].TGT) === -1) {
-                            sPreCount += oScreen.POSTS[oTs].TGT + '|';
-                        } else {
-                            if (oScreen.POSTS[oTs].ACN === 'move' || oScreen.POSTS[oTs].ACN === 'deleted') {
-                                sPreCount = sPreCount.replace(oScreen.POSTS[oTs].TGT + '|', '');
-                            }
-                        }
+            if (oScreen.POSTS.hasOwnProperty(oTs) && oScreen.POSTS[oTs] instanceof Array) {
+
+                if (aPreCount.indexOf(oScreen.POSTS[oTs][0].TGT) === -1) {
+                    aPreCount.push(oScreen.POSTS[oTs][0].TGT);
+                } else if (aPreCount.indexOf(oScreen.POSTS[oTs].TGT) === -1) {
+                    aPreCount.push(oScreen.POSTS[oTs].TGT);
+                } else if (oScreen.POSTS[oTs].ACN === 'move' || oScreen.POSTS[oTs].ACN === 'deleted') {
+                    iIndex = aPreCount.indexOf(oScreen.POSTS[oTs].TGT);
+
+                    if (iIndex !== -1) {
+                        aPreCount.splice(iIndex, 1);
                     }
                 }
             }
         }
-
-        return sPreCount.split('|').length - 1;
+        return aPreCount.length;
     };
+
     /**
      * Creates the Object required to create the Overview via template Engine
-     * @return {Object} The JSON Representation of the overview
+     * @method getOverview
+     * @return {Object} The HTML Template object of the overview view
      */
     Screens.prototype.getOverview = function () {
         var oScreen;
-        var aScreens = [];
         var sScreenName;
+        var aScreens = [];
+
         for (sScreenName in CONF.BOARD.PRIVATE.SCREENS) {
             if (CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(sScreenName)) {
 
@@ -76,9 +85,11 @@ var Screens;
             DIV: aScreens
         };
     };
+
     /**
      * Creates the JSON represeantation of the new Screen form
-     * @return {Object} the JSON represeantation of the Screen Form
+     * @method newScreen
+     * @return {Object} the HTML Object  of the Screen form view
      */
     Screens.prototype.newScreen = function () {
         return {
@@ -119,5 +130,4 @@ var Screens;
             }
         };
     };
-})
-    ();
+})();

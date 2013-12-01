@@ -32,7 +32,7 @@
                 }
             }
         })
-// Mobile post fullscreen support
+        // Mobile post fullscreen support
         .on(CONF.EVENTS.FORCED_CLICK, '.focused > .content',function (event) {
             event.preventDefault();
 
@@ -84,7 +84,7 @@
             //$('#store_post').addClass('hidden');
             CONF.DOM.CMD.find('#store_post').addClass('hidden');
         })
-// Delete a postit
+        // Delete a postit
         .on(CONF.EVENTS.CLICK, '#delete', function () {
 
             var oPost = false;
@@ -143,12 +143,12 @@
                 override: true // Override browser navigation while Apprise is visible
             });
         })
-// Prevent open new post window
+        // Prevent open new post window
         .on('dblclick', '.post', function (event) {
             event.preventDefault();
             event.stopPropagation();
         })
-// Create a new post at dblclicked position
+        // Create a new post at dblclicked position
         .on('dblclick', '.posts', function (event) {
             if (!isMobile()) {
                 event.preventDefault();
@@ -182,5 +182,4 @@
                 });
             }
         });
-
 })();
