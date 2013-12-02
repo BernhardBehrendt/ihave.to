@@ -1,61 +1,65 @@
-section#ui{
+section#ui {
   @include clearfix;
   @include paddingbox(100%, $ui-height);
   @include box-shadow($ui-shadow);
   @include rgba-background($ui-background);
 
-  overflow:auto;
-  position:fixed;
-  bottom:$footer-height;
-  left:0px;
-  z-index:4;
-
+  overflow: auto;
+  position: fixed;
+  bottom: $footer-height;
+  left: 0px;
+  z-index: 4;
 
   //DEVICE
-  @include desktopClient{
-      height:400px;
-    }
-
-  @include iPodWebappPortrait{
-    height:408px;
+  @include desktopClient {
+    height: 400px;
   }
 
-  @include iPodSafariPortrait{
-    height:362px;
+  @include iPodWebappPortrait {
+    height: 408px;
   }
 
-  @include iPodSafariLandscapeFullscrren{
-    height:268px;
+  @include iPodSafariPortrait {
+    height: 362px;
   }
 
-  @include iPodWebappLandscape{
-   height:248px;
+  @include iPodSafariLandscapeFullscrren {
+    height: 268px;
   }
 
-  @include iPodSafariLandscape{
-    height:214px;
+  @include iPodWebappLandscape {
+    height: 248px;
   }
 
-  .controls{
+  @include iPodSafariLandscape {
+    height: 214px;
+  }
+
+  .controls {
     @include paddingbox(100%, auto, 0, 1%, 0, 1%);
 
-    margin:($def_margin_unit / 4) 0 ($def_margin_unit / 4) 0;
+    margin: ($def_margin_unit / 4) 0 ($def_margin_unit / 4) 0;
 
-    .close{
+    .close {
       @include sprite-bg('error-default', $x1Icons, $x2Icons);
-      &:hover{
+      &:hover {
         @include sprite-bg('error-hover', $x1Icons, $x2Icons);
       }
     }
   }
 
-  .cmd{
+  .cmd {
     @include clearfix;
     @include paddingbox(100%, 97.6%, 0, 1%, 0, 1%);
 
-    overflow:visible;
-    margin:($def_margin_unit / 4) 0 0 0;
-    max-width:700px;
+    overflow: visible;
+    margin: ($def_margin_unit / 4) 0 0 0;
+    max-width: 700px;
+
+    @include desktopClient {
+      margin: 0 auto;
+      padding: 20px 0 0 50px;
+    }
 
     @import "ui/login";
     @import "ui/new-post";
@@ -67,9 +71,10 @@ section#ui{
   }
 }
 
-section#ui.closed{
-  display:none;
+section#ui.closed {
+  display: none;
 }
-section#ui.opened{
-  display:block;
+
+section#ui.opened {
+  display: block;
 }

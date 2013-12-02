@@ -90,11 +90,9 @@ var Post;
                     }
                 }).toHtml());
 
-                setTimeout(function () {
-                    CONF.COM.SOCKET = new Connection('/');
-                    CONF.COM.SOCKET.setEncryptionPhrase(sPassword);
-                    CONF.COM.SOCKET.connect(sHash.toString());
-                }, 125);
+                CONF.COM.SOCKET = new Connection('/');
+                CONF.COM.SOCKET.setEncryptionPhrase(sPassword);
+                CONF.COM.SOCKET.connect(sHash.toString());
 
             } else {
 

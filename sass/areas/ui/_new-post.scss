@@ -6,10 +6,14 @@
     color:$white;
   }
 
+  @include desktopClient{
+    padding:70px 0 0 0;
+  }
+
   textarea{
     @include paddingbox(616px, 320px, $def_margin_unit / 2 , $def_margin_unit / 2 , $def_margin_unit * 2, $def_margin_unit / 2 );
     @include rgba-background($yellow);
-    @include box-shadow(1px 1px 8px $black inset);
+    //@include box-shadow(1px 1px 8px $black inset);
     @include border-radius(4px);
     @include transition-property("background-color");
     @include transition-duration("0.2s");
@@ -57,38 +61,38 @@
 
 
   textarea.blue{
-    @include rgba-background($blue);
+    @include rgba-background($blue_75);
   }
 
   textarea.turkis{
-    @include rgba-background($turkis);
+    @include rgba-background($turkis_75);
   }
 
   textarea.green{
-    @include rgba-background($green);
+    @include rgba-background($green_75);
   }
 
   textarea.yellow{
-    @include rgba-background($yellow);
+    @include rgba-background($yellow_75);
   }
 
   textarea.orange{
-    @include rgba-background($orange);
+    @include rgba-background($orange_75);
   }
 
   textarea.red{
-    @include rgba-background($red);
+    @include rgba-background($red_75);
   }
 
   textarea.pink{
-    @include rgba-background($pink);
+    @include rgba-background($pink_75);
   }
 
   textarea.grey{
-    @include rgba-background($grey);
+    @include rgba-background($grey_75);
   }
 
   textarea.white{
-    @include rgba-background($white);
+    @include rgba-background($white_75);
   }
 }

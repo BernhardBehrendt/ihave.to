@@ -12444,7 +12444,11 @@ var log;
     "use strict";
     CONF.DOM.CMD = $("#cmd"), CONF.DOM.CMD_INFO = $("#cmdinfo"), CONF.DOM.CMD.bind("setMainNav", function() {
         var a = new Menu();
-        $(this).html(new Template(a.getMenuCmds(a.getPrivateMain())).toHtml()), CONF.DOM.CMD_INFO.empty();
+        $(this).html(new Template(a.getMenuCmds(a.getPrivateMain())).toHtml()), CONF.DOM.CMD_INFO.empty(), 
+        CONF.DOM.CMD.css({
+            "float": "none",
+            margin: "0 auto"
+        });
     }), CONF.DOM.CMD.bind("setPostNav", function(a, b) {
         var c = new Menu();
         $(this).html(new Template(c.getMenuCmds(c.getPostMenue())).toHtml()), setTimeout(function() {
@@ -12858,9 +12862,8 @@ var Post;
                     ID: "login-message",
                     CONTENT: "CONNECTING".translate()
                 }
-            }).toHtml()), setTimeout(function() {
-                CONF.COM.SOCKET = new Connection("/"), CONF.COM.SOCKET.setEncryptionPhrase(e), CONF.COM.SOCKET.connect(f.toString());
-            }, 125);
+            }).toHtml()), CONF.COM.SOCKET = new Connection("/"), CONF.COM.SOCKET.setEncryptionPhrase(e), 
+            CONF.COM.SOCKET.connect(f.toString());
         } else d === "YOUR_PREFERED_BOARDNAME".translate() || 0 === d.length ? (showMessage("PLEASE_ENTER_A_VALID_BOARDNAME", "error"), 
         isMobile() || b.focus()) : (e === "PASSWORD".translate() || e.length < 4) && (showMessage("PLEASE_ENTER_VALID_PASSWORD", "error"), 
         isMobile() || a.focus());
@@ -12895,11 +12898,7 @@ var Post;
     }).on("click", "a", function(a) {
         "#" === $(this).attr("href") && (a.preventDefault(), a.stopPropagation());
     });
-}();
-
-var x = 4;
-
-!function() {
+}(), function() {
     "use strict";
     $(document).ready(function() {
         function a() {

@@ -18,6 +18,11 @@
 
         CONF.DOM.CMD_INFO.empty();
 
+        CONF.DOM.CMD.css({
+            float: 'none',
+            margin: '0 auto'
+        });
+
     });
 
     // The new Post navigation
@@ -49,7 +54,6 @@
     CONF.DOM.CMD.bind('setScreenNav', function () {
         var oMenu = new Menu();
         $(this).html(new Template(oMenu.getMenuCmds(oMenu.getScreenMenue())).toHtml());
-
         CONF.DOM.CMD_INFO.empty();
     });
 

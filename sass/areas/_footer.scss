@@ -1,5 +1,5 @@
   footer{
-  @include rgba-background($ui-background);
+  @include rgba-background($footer-background);
   @include clearfix;
 
   position:fixed;
