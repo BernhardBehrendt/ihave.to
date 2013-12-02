@@ -896,10 +896,9 @@ var Screens;
 !function() {
     "use strict";
     Screens = function() {}, Screens.prototype.countPosts = function(a) {
-        var b, c, d = [];
-        for (c in a.POSTS) a.POSTS.hasOwnProperty(c) && a.POSTS[c] instanceof Array && (-1 === d.indexOf(a.POSTS[c][0].TGT) ? d.push(a.POSTS[c][0].TGT) : -1 === d.indexOf(a.POSTS[c].TGT) ? d.push(a.POSTS[c].TGT) : ("move" === a.POSTS[c].ACN || "deleted" === a.POSTS[c].ACN) && (b = d.indexOf(a.POSTS[c].TGT), 
-        -1 !== b && d.splice(b, 1)));
-        return d.length;
+        var b, c = "";
+        for (b in a.POSTS) a.POSTS[b] instanceof Array ? -1 == c.search(a.POSTS[b][0].TGT) && (c += a.POSTS[b][0].TGT + "|") : -1 == c.search(a.POSTS[b].TGT) ? c += a.POSTS[b].TGT + "|" : ("move" == a.POSTS[b].ACN || "deleted" == a.POSTS[b].ACN) && (c = c.replace(a.POSTS[b].TGT + "|", ""));
+        return c.split("|").length - 1;
     }, Screens.prototype.getOverview = function() {
         var a, b, c = [];
         for (b in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(b) && (a = CONF.BOARD.PRIVATE.SCREENS[b], 

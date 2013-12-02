@@ -21,27 +21,25 @@ var Screens;
      * @return {Number} The number of visible posts on given screen
      */
     Screens.prototype.countPosts = function (oScreen) {
-        var aPreCount = [];
-        var iIndex;
+        var sPreCount = '';
         var oTs;
-
         for (oTs in oScreen.POSTS) {
-            if (oScreen.POSTS.hasOwnProperty(oTs) && oScreen.POSTS[oTs] instanceof Array) {
-
-                if (aPreCount.indexOf(oScreen.POSTS[oTs][0].TGT) === -1) {
-                    aPreCount.push(oScreen.POSTS[oTs][0].TGT);
-                } else if (aPreCount.indexOf(oScreen.POSTS[oTs].TGT) === -1) {
-                    aPreCount.push(oScreen.POSTS[oTs].TGT);
-                } else if (oScreen.POSTS[oTs].ACN === 'move' || oScreen.POSTS[oTs].ACN === 'deleted') {
-                    iIndex = aPreCount.indexOf(oScreen.POSTS[oTs].TGT);
-
-                    if (iIndex !== -1) {
-                        aPreCount.splice(iIndex, 1);
+            if (oScreen.POSTS[oTs] instanceof Array) {
+                if (sPreCount.search(oScreen.POSTS[oTs][0]['TGT']) == -1)
+                    sPreCount += oScreen.POSTS[oTs][0]['TGT'] + '|';
+            } else {
+                if (sPreCount.search(oScreen.POSTS[oTs]['TGT']) == -1)
+                    sPreCount += oScreen.POSTS[oTs]['TGT'] + '|';
+                else {
+                    if (oScreen.POSTS[oTs]['ACN'] == 'move' || oScreen.POSTS[oTs]['ACN'] == 'deleted') {
+                        sPreCount = sPreCount.replace(oScreen.POSTS[oTs]['TGT'] + '|', '');
                     }
                 }
             }
         }
-        return aPreCount.length;
+
+
+        return sPreCount.split('|').length - 1;
     };
 
     /**
