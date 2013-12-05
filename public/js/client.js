@@ -12685,22 +12685,22 @@ var showMessage;
         CONF.DOM.UIWINDOW.children(".cmd").html(new Template(new Settings(CONF.BOARD.SETTINGS).getTemplate()).toHtml()));
     }).on(CONF.EVENTS.CLICK, "#store_post", function() {
         if ($(this).hasClass("active")) {
-            var a, b, c, d = new Date().getTime(), e = $("#post-window"), f = e.children("textarea"), g = CONF.DOM.BOARDPOSTS.data("activescreen"), h = JSON.parse('{"PRIVATE":{"SCREENS":{"' + g + '":{"POSTS":{"' + d + '":{}}}}}}');
+            var a, b, c, d = new Date().getTime(), e = $("#post-window"), f = e.children("textarea"), g = CONF.DOM.BOARDPOSTS.data("activescreen"), h = JSON.parse('{"PRIVATE":{"SCREENS":{"' + g + '":{"POSTS":{"' + d + '":{}}}}}}'), i = $("#back");
             if (f.val().trim().length > 0) {
                 if (void 0 !== f.attr("id") && 0 === f.attr("id").indexOf("origin")) {
-                    var i = parseInt(f.attr("id").replace("origin-", ""), 10), j = $(".color_select").data("beforechange"), k = e.find("a.selected").parent().attr("class");
-                    typeof i === CONF.PROPS.STRING.NUM && (void 0 !== j && k !== j && (b = {
+                    var j = parseInt(f.attr("id").replace("origin-", ""), 10), k = $(".color_select").data("beforechange"), l = e.find("a.selected").parent().attr("class");
+                    typeof j === CONF.PROPS.STRING.NUM && (void 0 !== k && l !== k && (b = {
                         BY: CONF.PROPS.INT.WHO,
-                        TGT: i,
+                        TGT: j,
                         ACN: "color",
                         TO: e.find("a.selected").parent().attr("class")
                     }), f.val().trim() !== f.data("beforechange").trim() && (c = {
                         BY: CONF.PROPS.INT.WHO,
-                        TGT: i,
+                        TGT: j,
                         ACN: "content",
                         TO: f.val().trim().escapeHtml().nl2br().urlToLink()
                     }), void 0 !== b && (a = b), void 0 !== c && (a = c), void 0 !== b && void 0 !== c && (a = [ b, c ]), 
-                    void 0 === a ? (showMessage("NOTHING_CHANGED", "error"), $("#back").trigger("click")) : (h.PRIVATE.SCREENS[g].POSTS[d] = a, 
+                    void 0 === a ? (showMessage("NOTHING_CHANGED", "error"), i.trigger(CONF.EVENTS.CLICK)) : (h.PRIVATE.SCREENS[g].POSTS[d] = a, 
                     CONF.BOARD.PRIVATE.SCREENS[g].POSTS[d] = a)), void 0 !== a && showMessage("STRORE_MODIFIED_POST");
                 } else a = [ {
                     BY: CONF.PROPS.INT.WHO,
@@ -12719,13 +12719,13 @@ var showMessage;
                     TO: [ f.data("postposition").left, f.data("postposition").top ]
                 } ], h.PRIVATE.SCREENS[g].POSTS[d] = a, CONF.BOARD.PRIVATE.SCREENS[g].POSTS[d] = a, 
                 showMessage("STRORE_NEW_POST");
-                $("#back").trigger(CONF.EVENTS.CLICK), CONF.COM.SOCKET.saveChanges(h);
-                var l = new Board({
+                i.trigger(CONF.EVENTS.CLICK), CONF.COM.SOCKET.saveChanges(h);
+                var m = new Board({
                     NAME: CONF.DOM.BOARDPOSTS.data("activescreen"),
                     SCREEN: CONF.BOARD.PRIVATE.SCREENS[CONF.DOM.BOARDPOSTS.data("activescreen")],
                     FROMTIME: !1
                 });
-                CONF.DOM.BOARDSCREENS.html(new Template(l.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
+                CONF.DOM.BOARDSCREENS.html(new Template(m.getTemplate()).toHtml()), CONF.DOM.BOARD.trigger("uiBoard");
             } else showMessage("CANT_STORE_EMPTY_POST", "error"), $(this).removeClass("active");
         }
     }).on(CONF.EVENTS.CLICK, "#new_screen", function() {

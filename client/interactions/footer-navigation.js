@@ -160,6 +160,7 @@
                 var oTextarea = oPostWindow.children('textarea');
                 var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
                 var oDiff = JSON.parse('{"PRIVATE":{"SCREENS":{"' + sActiveScreen + '":{"POSTS":{"' + iTimestamp + '":{}}}}}}');
+                var oBackButton = $('#back');
                 var oChange;
                 var oColorchange;
                 var oContentchange;
@@ -211,7 +212,7 @@
 
                             if (oChange === undefined) {
                                 showMessage('NOTHING_CHANGED', 'error');
-                                $('#back').trigger('click');
+                                oBackButton.trigger(CONF.EVENTS.CLICK);
                             } else {
                                 // Add changes to board
                                 oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTimestamp] = oChange;
@@ -254,7 +255,7 @@
 
                     }
 
-                    $('#back').trigger(CONF.EVENTS.CLICK);
+                    oBackButton.trigger(CONF.EVENTS.CLICK);
 
                     CONF.COM.SOCKET.saveChanges(oDiff);
 
