@@ -12719,7 +12719,7 @@ var showMessage;
                     TO: [ f.data("postposition").left, f.data("postposition").top ]
                 } ], h.PRIVATE.SCREENS[g].POSTS[d] = a, CONF.BOARD.PRIVATE.SCREENS[g].POSTS[d] = a, 
                 showMessage("STRORE_NEW_POST");
-                $("#back").trigger("click"), CONF.COM.SOCKET.saveChanges(h);
+                $("#back").trigger(CONF.EVENTS.CLICK), CONF.COM.SOCKET.saveChanges(h);
                 var l = new Board({
                     NAME: CONF.DOM.BOARDPOSTS.data("activescreen"),
                     SCREEN: CONF.BOARD.PRIVATE.SCREENS[CONF.DOM.BOARDPOSTS.data("activescreen")],

@@ -254,7 +254,7 @@
 
                     }
 
-                    $('#back').trigger('click');
+                    $('#back').trigger(CONF.EVENTS.CLICK);
 
                     CONF.COM.SOCKET.saveChanges(oDiff);
 
