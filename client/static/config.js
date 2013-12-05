@@ -55,7 +55,7 @@ var CONF;
                 OBJ: 'object',
                 NUM: 'number',
                 SALT: '/pC|-}t@Go<gV-8Cs9]S-62lxfIfkp$XsjYqMR%5}7w(,jjoSCe1Z!.~;o?ZH%o;',
-                SCREEN_DEFAULT_BG: 'http://www.ihave.to/do/img/wallpaper/welcome-d.jpg',
+                SCREEN_DEFAULT_BG: 'http://212.224.109.247/img/welcome-d.jpg',
                 BLOCKRESIZE: 'input[type="text"]:focus, textarea'
             },
             ARRAY: {
