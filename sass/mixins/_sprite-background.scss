@@ -19,19 +19,19 @@
  *
  */
 
-@mixin sprite-bg($name,$normal, $retina, $padtop:0px, $center:null, $padleft:0px) {
+@mixin sprite-bg($name, $normal, $retina, $padtop: 0px, $center: null, $padleft: 0px) {
   background-image: sprite-url($normal);
   background-position: sprite-position($normal, $name);
   background-repeat: no-repeat;
   display: block;
-  padding-top:$padtop;
-  padding-left:$padleft;
+  padding-top: $padtop;
+  padding-left: $padleft;
   height: image-height(sprite-file($normal, $name))-$padtop;
   width: image-width(sprite-file($normal, $name))-$padleft;
 
   $width: image-width(sprite-file($normal, $name));
 
-  @media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 2) {
+  @media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 2dppx), (min-device-pixel-ratio: 2) {
     @if (sprite-position($normal, $name) != sprite-position($retina, $name)) {
       $ypos: round(nth(sprite-position($retina, $name), 2) / 2);
       background-position: 0 $ypos;
@@ -42,6 +42,6 @@
   }
 
   @if $center==true{
-   text-align:center;
+    text-align: center;
   }
 }

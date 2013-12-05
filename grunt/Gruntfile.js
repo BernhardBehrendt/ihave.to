@@ -62,7 +62,7 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-            files: ['../**/*.js'],
+            files: ['../**/client/*.js', '../**/client/server/**/*.js'],
             options: {
                 ignores: ['../grunt/**', '../public/**', '../server/node_modules/**', '../frontend_modules/**', '../api-reference/**', '../yuidoc_template/**'],
                 curly: true,

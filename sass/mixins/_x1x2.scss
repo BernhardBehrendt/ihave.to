@@ -6,7 +6,7 @@
   background-size:image-width($x1) image-height($x1);
   background-repeat:no-repeat;
 
-  @media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 2) {
+  @media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 2dppx), (min-device-pixel-ratio: 2) {
     background-image:url($x2);
   }
 }

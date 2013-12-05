@@ -10,6 +10,7 @@
     "grunt-concurrent": "*",
     "grunt-shell-spawn": "*",
     "grunt-contrib-jshint": "*",
-    "grunt-notify": "*"
+    "grunt-notify": "*",
+    "grunt-contrib-uglify":"*"
   }
 }
