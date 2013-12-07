@@ -79,7 +79,7 @@ var Screens;
 
         for (color in oColorSteepening) {
             if (oColorSteepening.hasOwnProperty(color)) {
-                oColorSteepening[color] = Math.round(oColorSteepening[color] * 100 / Object.keys(oColorUsage).length);
+                oColorSteepening[color] = Math.floor(oColorSteepening[color] * 100 / Object.keys(oColorUsage).length);
             }
         }
 

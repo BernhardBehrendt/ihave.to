@@ -902,7 +902,7 @@ var Screens;
         "color" === a.POSTS[c].ACN && (f[a.POSTS[c].TGT] = a.POSTS[c].TO)) : (("move" === a.POSTS[c].ACN || "deleted" === a.POSTS[c].ACN) && (e = e.replace(a.POSTS[c].TGT + "|", "")), 
         "color" === a.POSTS[c].ACN && (f[a.POSTS[c].TGT] = a.POSTS[c].TO), "deleted" === a.POSTS[c].ACN && void 0 !== f[a.POSTS[c].TGT] && delete f[a.POSTS[c].TGT]));
         for (b in f) f.hasOwnProperty(b) && (void 0 === g[f[b]] ? g[f[b]] = 1 : g[f[b]] += 1);
-        for (d in g) g.hasOwnProperty(d) && (g[d] = Math.round(100 * g[d] / Object.keys(f).length));
+        for (d in g) g.hasOwnProperty(d) && (g[d] = Math.floor(100 * g[d] / Object.keys(f).length));
         return {
             items: e.split("|").length - 1,
             steepening: g
