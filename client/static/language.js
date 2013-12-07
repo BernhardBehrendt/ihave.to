@@ -2,6 +2,7 @@ var LANGUAGE = {
     DE: {
         // BASICS
         MOBILE_TITLE: 'iHave.to',
+        POSTS:"Memos",
 
         // LOGIN WINDOW
         SIGN_IN: 'Lege Dein neues Board an.',
@@ -118,6 +119,7 @@ var LANGUAGE = {
     EN: {
         // BASICS
         MOBILE_TITLE: 'iHave.to',
+        POSTS:"Memos",
 
         // LOGIN WINDOW
         SIGN_IN: 'Create your new Board',
