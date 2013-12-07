@@ -60,6 +60,7 @@ function Apprise(a, b) {
 var LANGUAGE = {
     DE: {
         MOBILE_TITLE: "iHave.to",
+        POST: "Memo",
         POSTS: "Memos",
         SIGN_IN: "Lege Dein neues Board an.",
         LOGIN_SHORT_DESC: "Name &amp; Passwort eintragen — Fertig.",
@@ -157,6 +158,7 @@ var LANGUAGE = {
     },
     EN: {
         MOBILE_TITLE: "iHave.to",
+        POST: "Memo",
         POSTS: "Memos",
         SIGN_IN: "Create your new Board",
         LOGIN_SHORT_DESC: "Choose name and password and start your memo taking",
@@ -936,7 +938,7 @@ var Screens;
                     },
                     SPAN: {
                         CLASSES: "screen-posts",
-                        CONTENT: d.items + " " + "POSTS".translate()
+                        CONTENT: d.items + "&nbsp;" + (0 === d.items || d.items > 1 ? "POSTS".translate() : "POST".translate())
                     },
                     DIV: {
                         CLASSES: "screenStats",

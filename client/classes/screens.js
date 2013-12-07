@@ -134,7 +134,7 @@ var Screens;
                         },
                         SPAN: {
                             CLASSES: 'screen-posts',
-                            CONTENT: oScreenStats.items + " " + ("POSTS".translate())
+                            CONTENT: oScreenStats.items + "&nbsp;" + ((oScreenStats.items === 0 || oScreenStats.items > 1) ? "POSTS".translate() : "POST".translate())
                         },
                         DIV: {
                             CLASSES: "screenStats",

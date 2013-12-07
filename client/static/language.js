@@ -2,6 +2,7 @@ var LANGUAGE = {
     DE: {
         // BASICS
         MOBILE_TITLE: 'iHave.to',
+        POST:"Memo",
         POSTS:"Memos",
 
         // LOGIN WINDOW
@@ -119,6 +120,7 @@ var LANGUAGE = {
     EN: {
         // BASICS
         MOBILE_TITLE: 'iHave.to',
+        POST:"Memo",
         POSTS:"Memos",
 
         // LOGIN WINDOW
