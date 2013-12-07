@@ -936,7 +936,7 @@ var Screens;
                     },
                     SPAN: {
                         CLASSES: "screen-posts",
-                        CONTENT: d.items + "POSTS".translate()
+                        CONTENT: d.items + " " + "POSTS".translate()
                     },
                     DIV: {
                         CLASSES: "screenStats",
