@@ -895,35 +895,58 @@ var Screens;
 
 !function() {
     "use strict";
-    Screens = function() {}, Screens.prototype.countPosts = function(a) {
-        var b, c = "";
-        for (b in a.POSTS) a.POSTS[b] instanceof Array ? -1 == c.search(a.POSTS[b][0].TGT) && (c += a.POSTS[b][0].TGT + "|") : -1 == c.search(a.POSTS[b].TGT) ? c += a.POSTS[b].TGT + "|" : ("move" == a.POSTS[b].ACN || "deleted" == a.POSTS[b].ACN) && (c = c.replace(a.POSTS[b].TGT + "|", ""));
-        return c.split("|").length - 1;
-    }, Screens.prototype.getOverview = function() {
-        var a, b, c = [];
-        for (b in CONF.BOARD.PRIVATE.SCREENS) CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(b) && (a = CONF.BOARD.PRIVATE.SCREENS[b], 
-        c[c.length] = {
-            ID: b,
-            CLASSES: "screen " + (CONF.DOM.BOARDPOSTS.data("activescreen") === b ? "curent" : ""),
-            CONTENT: {
-                IMG: {
-                    SRC: "img/textures/onboard.png",
-                    CLASSES: "screen-icon",
-                    STYLE: "background-image:url(" + a.META.BG + ");"
-                },
-                H: {
-                    NO: 4,
-                    CLASSES: "screen-name",
-                    CONTENT: b
-                },
-                SPAN: {
-                    CLASSES: "screen-posts",
-                    CONTENT: this.countPosts(a)
-                }
-            }
-        });
+    Screens = function() {}, Screens.prototype.getStats = function(a) {
+        var b, c, d, e = "", f = {}, g = {};
+        for (c in a.POSTS) a.POSTS.hasOwnProperty(c) && (a.POSTS[c] instanceof Array ? e.search(-1 === a.POSTS[c][0].TGT) && (e += a.POSTS[c][0].TGT + "|", 
+        "color" === a.POSTS[c][0].ACN && (f[a.POSTS[c][0].TGT] = a.POSTS[c][0].TO)) : -1 === e.search(a.POSTS[c].TGT) ? (e += a.POSTS[c].TGT + "|", 
+        "color" === a.POSTS[c].ACN && (f[a.POSTS[c].TGT] = a.POSTS[c].TO)) : (("move" === a.POSTS[c].ACN || "deleted" === a.POSTS[c].ACN) && (e = e.replace(a.POSTS[c].TGT + "|", "")), 
+        "color" === a.POSTS[c].ACN && (f[a.POSTS[c].TGT] = a.POSTS[c].TO), "deleted" === a.POSTS[c].ACN && void 0 !== f[a.POSTS[c].TGT] && delete f[a.POSTS[c].TGT]));
+        for (b in f) f.hasOwnProperty(b) && (void 0 === g[f[b]] ? g[f[b]] = 1 : g[f[b]] += 1);
+        for (d in g) g.hasOwnProperty(d) && (g[d] = Math.round(100 * g[d] / Object.keys(f).length));
         return {
-            DIV: c
+            items: e.split("|").length - 1,
+            steepening: g
+        };
+    }, Screens.prototype.getOverview = function() {
+        var a, b, c, d, e, f = [];
+        for (c in CONF.BOARD.PRIVATE.SCREENS) if (CONF.BOARD.PRIVATE.SCREENS.hasOwnProperty(c)) {
+            b = CONF.BOARD.PRIVATE.SCREENS[c], d = this.getStats(b), e = [];
+            for (a in d.steepening) d.steepening.hasOwnProperty(a) && e.push({
+                PART: d.steepening[a],
+                CLASSES: a,
+                STYLE: "width:" + d.steepening[a] + "%;"
+            });
+            e = _.sortBy(e, function(a) {
+                return a.PART;
+            }), f[f.length] = {
+                ID: c,
+                CLASSES: "screen " + (CONF.DOM.BOARDPOSTS.data("activescreen") === c ? "curent" : ""),
+                CONTENT: {
+                    IMG: {
+                        SRC: "img/textures/onboard.png",
+                        CLASSES: "screen-icon",
+                        STYLE: "background-image:url(" + b.META.BG + ");"
+                    },
+                    H: {
+                        NO: 4,
+                        CLASSES: "screen-name",
+                        CONTENT: c
+                    },
+                    SPAN: {
+                        CLASSES: "screen-posts",
+                        CONTENT: d.items
+                    },
+                    DIV: {
+                        CLASSES: "screenStats",
+                        CONTENT: {
+                            DIV: e.reverse()
+                        }
+                    }
+                }
+            };
+        }
+        return {
+            DIV: f
         };
     }, Screens.prototype.newScreen = function() {
         return {

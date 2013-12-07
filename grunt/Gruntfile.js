@@ -89,43 +89,44 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-             options: {
-                beautify:true
-             },
+            options: {
+                beautify: true,
+                DEVMODE: true
+            },
             my_target: {
                 files: {
                     '../public/js/client.js': [
-                                                '../client/static/language.js',
-                                                '../client/static/config.js',
-                                                '../client/static/templates.js',
+                        '../client/static/language.js',
+                        '../client/static/config.js',
+                        '../client/static/templates.js',
 
-                                                '../client/classes/extends/string.js',
-                                                '../client/classes/*.js',
+                        '../client/classes/extends/string.js',
+                        '../client/classes/*.js',
 
-                                                '../client/vendor/jquery/jquery.min.js',
-                                                '../client/vendor/jquery/jquery-ui.min.js',
-                                                '../client/vendor/jquery/jquery-ui.touchpunch.js',
-                                                '../client/vendor/jquery/jquery.color.js',
-                                                '../client/vendor/jquery/jquery.cursorposition.js',
-                                                '../client/vendor/jquery/jquery.pstrength.js',
-                                                '../client/vendor/jquery/jquerytinysort.js',
+                        '../client/vendor/jquery/jquery.min.js',
+                        '../client/vendor/jquery/jquery-ui.min.js',
+                        '../client/vendor/jquery/jquery-ui.touchpunch.js',
+                        '../client/vendor/jquery/jquery.color.js',
+                        '../client/vendor/jquery/jquery.cursorposition.js',
+                        '../client/vendor/jquery/jquery.pstrength.js',
+                        '../client/vendor/jquery/jquerytinysort.js',
 
-                                                '../client/vendor/underscore.js/underscore.js',
+                        '../client/vendor/underscore.js/underscore.js',
 
-                                                '../client/vendor/apprise/apprise-v2.js',
+                        '../client/vendor/apprise/apprise-v2.js',
 
-                                                '../client/vendor/cubic/add2home.js',
+                        '../client/vendor/cubic/add2home.js',
 
-                                                '../client/vendor/crypto/rollups/aes.js',
-                                                '../client/vendor/crypto/rollups/sha3.js',
+                        '../client/vendor/crypto/rollups/aes.js',
+                        '../client/vendor/crypto/rollups/sha3.js',
 
-                                                '../client/vendor/socket.io/socket.io.js',
+                        '../client/vendor/socket.io/socket.io.js',
 
-                                                '../client/functions/*.js',
+                        '../client/functions/*.js',
 
-                                                '../client/init/*.js',
-                                                '../client/interactions/*.js',
-                                                '../client/main.js']
+                        '../client/init/*.js',
+                        '../client/interactions/*.js',
+                        '../client/main.js']
                 }
             }
         }

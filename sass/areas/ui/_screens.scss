@@ -1,255 +1,333 @@
-#new_screen-ui{
+#new_screen-ui {
   @include clearfix;
-  @include paddingbox(314px, 360px, $def_margin_unit / 2, 0 ,$def_margin_unit / 2, 0);
+  @include paddingbox(314px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
 
-  margin-top:$def_margin_unit;
+  margin-top: $def_margin_unit;
   //////
 
-  input{
+  input {
     @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
 
-    float:left;
-    font-size:$small;
-    margin-bottom:$def_margin_unit;
+    float: left;
+    font-size: $small;
+    margin-bottom: $def_margin_unit;
   }
 
-  img{
+  img {
     @include border-radius(4px);
-    float:left;
-    width:310px;
-    display:block;
-    margin-bottom:$def_margin_unit;
-    border:solid 1px $white / 2;
-    background-size:cover;
-    background-repeat:no-repeat;
+    float: left;
+    width: 310px;
+    display: block;
+    margin-bottom: $def_margin_unit;
+    border: solid 1px $white / 2;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
-  @include desktopClient{
-    @include paddingbox(314px, 360px, $def_margin_unit / 2, 0 ,$def_margin_unit / 2, 0);
+  @include desktopClient {
+    @include paddingbox(314px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
 
-    input{
-     @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
+    input {
+      @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
     }
 
-    img{
-      width:310px;
-    }
-  }
-
-  @include iPodWebappPortrait{
-   @include paddingbox(314px, 360px, $def_margin_unit / 2, 0 ,$def_margin_unit / 2, 0);
-
-   input{
-     @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
-    }
-
-    img{
-      width:310px;
+    img {
+      width: 310px;
     }
   }
 
-  @include iPodSafariPortrait{
-   @include paddingbox(314px, 360px, $def_margin_unit / 2, 0 ,$def_margin_unit / 2, 0);
+  @include iPodWebappPortrait {
+    @include paddingbox(314px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
 
-   input{
-     @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
+    input {
+      @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
     }
 
-    img{
-      width:310px;
-    }
-  }
-
-  @include iPodSafariLandscapeFullscrren{
-    @include paddingbox(476px, 380px, $def_margin_unit / 2, 0 ,$def_margin_unit / 2, 0);
-
-    margin-bottom:$def_margin_unit;
-
-    input{
-     @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
-    }
-
-    input#screen-name{
-      margin-right:$def_margin_unit / 2;
-    }
-
-    img{
-      width:470px;
+    img {
+      width: 310px;
     }
   }
 
-  @include iPodWebappLandscape{
-    @include paddingbox(476px, 380px, $def_margin_unit / 2, 0 ,$def_margin_unit / 2, 0);
+  @include iPodSafariPortrait {
+    @include paddingbox(314px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
 
-    margin-bottom:$def_margin_unit;
-
-    input{
-     @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
+    input {
+      @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
     }
 
-    input#screen-name{
-      margin-right:$def_margin_unit / 2;
-    }
-
-    img{
-      width:470px;
+    img {
+      width: 310px;
     }
   }
 
-  @include iPodSafariLandscape{
-   @include paddingbox(476px, 380px, $def_margin_unit / 2, 0 ,$def_margin_unit / 2, 0);
+  @include iPodSafariLandscapeFullscrren {
+    @include paddingbox(476px, 380px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
 
-    margin-bottom:$def_margin_unit;
+    margin-bottom: $def_margin_unit;
 
-    input{
-     @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
+    input {
+      @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
     }
 
-    input#screen-name{
-      margin-right:$def_margin_unit / 2;
+    input#screen-name {
+      margin-right: $def_margin_unit / 2;
     }
 
-    img{
-      width:470px;
+    img {
+      width: 470px;
+    }
+  }
+
+  @include iPodWebappLandscape {
+    @include paddingbox(476px, 380px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
+
+    margin-bottom: $def_margin_unit;
+
+    input {
+      @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
+    }
+
+    input#screen-name {
+      margin-right: $def_margin_unit / 2;
+    }
+
+    img {
+      width: 470px;
+    }
+  }
+
+  @include iPodSafariLandscape {
+    @include paddingbox(476px, 380px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
+
+    margin-bottom: $def_margin_unit;
+
+    input {
+      @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
+    }
+
+    input#screen-name {
+      margin-right: $def_margin_unit / 2;
+    }
+
+    img {
+      width: 470px;
     }
   }
 
   /////
 
-  a{
+  a {
     @include paddingbox(32px, 32px);
   }
 
-  a#create-screen{
-    float:left;
-     @include x1x2(0 0, '../img/icons/1x/tick-default.png', '../img/icons/2x/tick-default.png');
-     &:hover{
-       @include x1x2(0 0, '../img/icons/1x/tick-hover.png', '../img/icons/2x/tick-hover.png');
+  a#create-screen {
+    float: left;
+    @include x1x2(0 0, '../img/icons/1x/tick-default.png', '../img/icons/2x/tick-default.png');
+    &:hover {
+      @include x1x2(0 0, '../img/icons/1x/tick-hover.png', '../img/icons/2x/tick-hover.png');
     }
   }
 
-  a#abort-create-screen{
-    float:right;
+  a#abort-create-screen {
+    float: right;
     @include x1x2(0 0, '../img/icons/1x/error-default.png', '../img/icons/2x/error-default.png');
 
-    &:hover{
-       @include x1x2(0 0, '../img/icons/1x/error-hover.png', '../img/icons/2x/error-hover.png');
+    &:hover {
+      @include x1x2(0 0, '../img/icons/1x/error-hover.png', '../img/icons/2x/error-hover.png');
     }
   }
 }
-.screen{
+
+.screen {
   @include clearfix;
   @include border-radius(4px);
   @include paddingbox(200px, 64px);
   @include rgba-background(rgba(255, 255, 255, 0.6));
 
+  margin-right: $def_margin_unit / 2;
 
-  margin-right:$def_margin_unit / 2;
-
-  &:nth-of-type(2n){
-    @include desktopClient{}
-
-    @include iPodWebappPortrait{
-      margin-right:0;
+  &:nth-of-type(2n) {
+    @include desktopClient {
     }
 
-    @include iPodSafariPortrait{
-      margin-right:0;
+    @include iPodWebappPortrait {
+      margin-right: 0;
     }
 
-    @include iPodSafariLandscapeFullscrren{
-      margin-right:0;
+    @include iPodSafariPortrait {
+      margin-right: 0;
     }
 
-    @include iPodWebappLandscape{
-      margin-right:0;
+    @include iPodSafariLandscapeFullscrren {
+      margin-right: 0;
+    }
+
+    @include iPodWebappLandscape {
+      margin-right: 0;
     }
   }
 
-  margin-bottom:$def_margin_unit / 2;
-  float:left;
-  cursor:pointer;
+  margin-bottom: $def_margin_unit / 2;
+  float: left;
+  cursor: pointer;
 
   //DEVICE
-  @include desktopClient{
+  @include desktopClient {
     @include paddingbox(200px, 64px);
   }
 
-  @include iPodWebappPortrait{
+  @include iPodWebappPortrait {
     @include paddingbox(308px, 64px);
 
-    img{background-image:url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important}
+    img {
+      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
+    }
   }
 
-  @include iPodSafariPortrait{
+  @include iPodSafariPortrait {
     @include paddingbox(308px, 64px);
 
-    img{background-image:url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important}
+    img {
+      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
+    }
   }
 
-  @include iPodSafariLandscapeFullscrren{
+  @include iPodSafariLandscapeFullscrren {
     @include paddingbox(223px, 64px);
 
-    img{background-image:url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important}
+    img {
+      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
+    }
   }
 
-  @include iPodWebappLandscape{
+  @include iPodWebappLandscape {
     @include paddingbox(231px, 64px);
 
-    img{background-image:url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important}
+    img {
+      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
+    }
   }
 
-  @include iPodSafariLandscape{
+  @include iPodSafariLandscape {
     @include paddingbox(223px, 64px);
 
-    img{background-image:url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important}
-  }
-
-  img{
-    width:64px;
-    height:64px;
-    float:left;
-    margin-right:$def_margin_unit;
-    margin-left:-1px;
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-image:url($backgroundImage);
-  }
-
-  h4{
-    margin-top:$def_margin_unit - 2;
-    font-size:$small;
-    letter-spacing:0.06em;
-    color:#000;
-  }
-
-  span{
-    font-family:$font-light;
-    font-size:$small;
-    letter-spacing:0.06em;
-  }
-}
-
-.screen.curent{
-    @include rgba-background(rgba(255, 255, 255, 0.8));
-
-    h4{
-      color:#000;
+    img {
+      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
     }
-}
+  }
 
-.screen.removable{
-  @include rgba-background($red_50);
-  opacity:0.5;
-  span, h4{
-    color:$white;
+  img {
+    width: 64px;
+    height: 64px;
+    float: left;
+    margin-right: $def_margin_unit;
+    margin-left: -1px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url($backgroundImage);
+  }
+
+  h4 {
+    margin-top: $def_margin_unit - 2;
+    font-size: $small;
+    letter-spacing: 0.06em;
+    color: #000;
+  }
+
+  span {
+    font-family: $font-light;
+    font-size: $small;
+    letter-spacing: 0.06em;
+  }
+
+  div.screenStats {
+    @include clearfix;
+    @include border-radius(2px);
+    @include box-shadow(0px 0px 1px #333);
+
+    overflow: hidden;
+    background-color: #999;
+    height: 4px;
+    margin-left: 80px;
+    margin-top: 6px;
+    width: 112px;
+
+    @include iPodWebappPortrait {
+      width: 216px;
+    }
+
+    @include iPodSafariPortrait {
+      width: 216px;
+    }
+
+    @include iPodSafariLandscapeFullscrren {
+      width: 140px;
+    }
+
+    @include iPodWebappLandscape {
+      width: 140px;
+    }
+
+    @include iPodSafariLandscape {
+      width: 140px;
+    }
+
+    > div {
+      float: left;
+      height: 100%
+
+    }
+
+    > div.blue {
+      background-color: $blue;
+    }
+    > div.turkis {
+      background-color: $turkis;
+    }
+    > div.green {
+      background-color: $green;
+    }
+    > div.yellow {
+      background-color: $yellow;
+    }
+    > div.orange {
+      background-color: $orange;
+    }
+    > div.red {
+      background-color: $red;
+    }
+    > div.pink {
+      background-color: $pink;
+    }
+    > div.grey {
+      background-color: $grey;
+    }
+    > div.white {
+      background-color: $white;
+    }
   }
 }
 
-.screen.removable.do{
-  opacity:1;
+.screen.curent {
+  @include rgba-background(rgba(255, 255, 255, 0.8));
+
+  h4 {
+    color: #000;
+  }
 }
 
-.screen.curent.removable{
-  display:none;
+.screen.removable {
+  @include rgba-background($red_50);
+  opacity: 0.5;
+  span, h4 {
+    color: $white;
+  }
+}
+
+.screen.removable.do {
+  opacity: 1;
+}
+
+.screen.curent.removable {
+  display: none;
 }
