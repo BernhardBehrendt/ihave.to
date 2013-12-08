@@ -16,6 +16,10 @@
         fs.mkdirSync(SETTINGS.ROOT + '../boards/');
     }
 
+    if (!fs.existsSync(SETTINGS.ROOT + '../public/upload')) {
+        fs.mkdirSync(SETTINGS.ROOT + '../public/upload');
+    }
+
     if (cluster.isMaster) {
 
         // Fork workers.

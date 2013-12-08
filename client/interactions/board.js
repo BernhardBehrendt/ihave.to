@@ -26,7 +26,6 @@
             $(this).find('div.post.focused').removeClass('focused');
 
 
-
         })
 
         .on(CONF.EVENTS.CLICK, '.post > .content > p > a', function (event) {
@@ -44,8 +43,9 @@
             }
         })
         // Mobile post fullscreen support
-        .on(CONF.EVENTS.FORCED_CLICK, '.focused > .content',function (event) {
+        .on(CONF.EVENTS.CLICK, '.focused > .content',function (event) {
             event.preventDefault();
+            event.stopPropagation();
 
             var oThis = $(this);
 
@@ -76,16 +76,16 @@
             }
         }).on(CONF.EVENTS.CLICK, '#edit', function () {
             var oPost;
-            var oFocusedPost = $('.screen .focused:eq(0)');
-
             if (!isMobile()) {
                 oPost = $(this).closest('.post');
             } else {
+
                 CONF.DOM.CMD.trigger('setMainNav');
                 CONF.DOM.BOARD.trigger('normalBoard');
 
-                oFocusedPost.removeClass('mobile');
-                oFocusedPost.removeClass('focused');
+                oPost = $('#board').find('div.post.focused');
+                oPost.removeClass('mobile');
+                oPost.removeClass('focused');
             }
             $('#new_post').trigger(CONF.EVENTS.CLICK, {
                 origin: oPost

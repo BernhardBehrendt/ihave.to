@@ -281,18 +281,20 @@
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Create new screen
         .on(CONF.EVENTS.CLICK, '#new_screen', function () {
+            var oScreenButtons;
+            var sCurrentBgVal;
+
             if ($(this).hasClass('active')) {
                 CONF.DOM.UIWINDOW.children('.cmd').prepend(new Template(new Screens().newScreen()).toHtml());
-
-                var oScreenButtons = $('#create-screen, #abort-create-screen');
 
                 // Attach dropzone support
                 $("#dropImage").dropzone({
                     url: "/upload-wp",
                     paramName: "file", // The name that will be used to transfer the file
                     maxFilesize: 10, // MB,
-                    maxFiles: 1,
+                    maxFiles: 10,
                     accept: function (file, done) {
+
                         if (CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(file.name.substring(file.name.length - 4, file.name.length)) === -1) {
 
                             showMessage('FILETYPE_NOT_ALLOWED', 'error');
@@ -300,6 +302,14 @@
                             $('div.dz-preview').remove();
                         }
                         else {
+
+                            oScreenButtons = $('#create-screen, #abort-create-screen');
+                            sCurrentBgVal = $('#screen-bg-url').val().trim().split('/').pop();
+
+                            if (sCurrentBgVal.length > 0) {
+                                $.post('/unlink-wp', {image: sCurrentBgVal});
+                            }
+
                             showMessage('UPLOADING_FILE');
                             done();
 

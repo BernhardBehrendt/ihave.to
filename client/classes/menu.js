@@ -9,7 +9,8 @@ var Menu;
      * @class Menu
      * @constructor
      */
-    Menu = function () {};
+    Menu = function () {
+    };
 
     /**
      * The menu holding template
@@ -84,7 +85,7 @@ var Menu;
      */
     Menu.prototype.getPrivateMain = function (sActiveOne) {
         var i;
-        var aMenuCmds = ['new_post', 'chrono', 'screen', 'settings'];
+        var aMenuCmds = ['new_post', 'screen', 'chrono', 'settings'];
         var aCmds = [];
 
         if (sActiveOne === undefined) {

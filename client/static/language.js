@@ -45,7 +45,7 @@ var LANGUAGE = {
         RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN: 'Dein Board wurde synchronisiert',
         A_USER_DELETED_THIS_SCREEN_CHANGE_NOW: 'Das Board auf dem du gerade bist wurde gelöscht.',
         REMOVE_POST: 'Das Memo wurde gelöscht',
-        CANT_DELETE_ACTIVE_SCREEN: 'Boards auf denen du gerade aktiv bist können nicht gelösct werden',
+        CANT_DELETE_ACTIVE_SCREEN: 'Ein aktiver Workspace kann nicht gelöscht werden',
         SELECT_SCREENS_TO_DELETE: 'Wähle die zu löschenden Boards aus',
         RECONNECTING: 'Verbindung wird wiederhergestellt',
         CANT_STORE_EMPTY_POST: 'Es können keine leeren Memos gespeichert werden',
@@ -62,6 +62,7 @@ var LANGUAGE = {
         CHANGED_PRIO_NAME: 'Farbbedeeutung wurde geändert',
         WAS_ADDED_TO_BOARD: 'wurde zum Board hinzugefügt',
         PLEASE_ENTER_VALID_PASSWORD: 'Dein Passwort ist zu kurz',
+        PLEASE_ENTER_A_VALID_BOARDNAME: 'Es wurde kein Memoboardname gewählt',
 
         // TOOLTIP INFOS
         HOME_INFO: 'Hier gehts zur Starseite von iHave.to',
@@ -170,7 +171,7 @@ var LANGUAGE = {
         RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN: 'Board was synchronized',
         A_USER_DELETED_THIS_SCREEN_CHANGE_NOW: 'The board you\'re staying on was deleted ',
         REMOVE_POST: 'Memo was removed',
-        CANT_DELETE_ACTIVE_SCREEN: 'You cannot delete Boards you\'re actually staying on',
+        CANT_DELETE_ACTIVE_SCREEN: 'You can\'t delete active workspace',
         SELECT_SCREENS_TO_DELETE: 'Choose board(s) to delete',
         RECONNECTING: 'Reconnecting',
         CANT_STORE_EMPTY_POST: 'You can\'t create empty memos',
@@ -187,6 +188,7 @@ var LANGUAGE = {
         CHANGED_PRIO_NAME: 'Colormeaning was changed',
         WAS_ADDED_TO_BOARD: 'was added to board',
         PLEASE_ENTER_VALID_PASSWORD: 'Password to short',
+        PLEASE_ENTER_A_VALID_BOARDNAME: 'Missing memoboard name',
 
         // TOOLTIP INFOS
         HOME_INFO: 'Home',

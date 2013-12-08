@@ -95,7 +95,7 @@ var LANGUAGE = {
         RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN: "Dein Board wurde synchronisiert",
         A_USER_DELETED_THIS_SCREEN_CHANGE_NOW: "Das Board auf dem du gerade bist wurde gelöscht.",
         REMOVE_POST: "Das Memo wurde gelöscht",
-        CANT_DELETE_ACTIVE_SCREEN: "Boards auf denen du gerade aktiv bist können nicht gelösct werden",
+        CANT_DELETE_ACTIVE_SCREEN: "Ein aktiver Workspace kann nicht gelöscht werden",
         SELECT_SCREENS_TO_DELETE: "Wähle die zu löschenden Boards aus",
         RECONNECTING: "Verbindung wird wiederhergestellt",
         CANT_STORE_EMPTY_POST: "Es können keine leeren Memos gespeichert werden",
@@ -112,6 +112,7 @@ var LANGUAGE = {
         CHANGED_PRIO_NAME: "Farbbedeeutung wurde geändert",
         WAS_ADDED_TO_BOARD: "wurde zum Board hinzugefügt",
         PLEASE_ENTER_VALID_PASSWORD: "Dein Passwort ist zu kurz",
+        PLEASE_ENTER_A_VALID_BOARDNAME: "Es wurde kein Memoboardname gewählt",
         HOME_INFO: "Hier gehts zur Starseite von iHave.to",
         LOGIN_INFO: "Hier kannst du auf deine Memoboard zugreifen bzw. ein neues erstellen",
         HELP_INFO: "Hier erfährst du wie iHave.to funktioniert",
@@ -198,7 +199,7 @@ var LANGUAGE = {
         RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN: "Board was synchronized",
         A_USER_DELETED_THIS_SCREEN_CHANGE_NOW: "The board you're staying on was deleted ",
         REMOVE_POST: "Memo was removed",
-        CANT_DELETE_ACTIVE_SCREEN: "You cannot delete Boards you're actually staying on",
+        CANT_DELETE_ACTIVE_SCREEN: "You can't delete active workspace",
         SELECT_SCREENS_TO_DELETE: "Choose board(s) to delete",
         RECONNECTING: "Reconnecting",
         CANT_STORE_EMPTY_POST: "You can't create empty memos",
@@ -215,6 +216,7 @@ var LANGUAGE = {
         CHANGED_PRIO_NAME: "Colormeaning was changed",
         WAS_ADDED_TO_BOARD: "was added to board",
         PLEASE_ENTER_VALID_PASSWORD: "Password to short",
+        PLEASE_ENTER_A_VALID_BOARDNAME: "Missing memoboard name",
         HOME_INFO: "Home",
         LOGIN_INFO: "Here you can create and/or access your memoboard",
         HELP_INFO: "Here yo get information abot iHave.to is working",
@@ -725,7 +727,7 @@ var Menu;
         };
         return d;
     }, Menu.prototype.getPrivateMain = function(a) {
-        var b, c = [ "new_post", "chrono", "screen", "settings" ], d = [];
+        var b, c = [ "new_post", "screen", "chrono", "settings" ], d = [];
         for (void 0 === a && (a = ""), b = 0; b < c.length; b += 1) d[b] = {
             CONTENT: {
                 LINK: {
@@ -13301,17 +13303,17 @@ var showMessage;
         $("#post-functions").remove(), $(this).find("div.post.focused").removeClass("focused");
     }).on(CONF.EVENTS.CLICK, ".post > .content > p > a", function(a) {
         a.preventDefault(), a.stopPropagation(), isMobile() ? void 0 !== window.navigator.standalone && window.navigator.standalone === !0 ? showMessage("IOS_ERROR_OPENWINDOW") : window.open($(this).attr("href")) : window.open($(this).attr("href"));
-    }).on(CONF.EVENTS.FORCED_CLICK, ".focused > .content", function(a) {
-        a.preventDefault();
+    }).on(CONF.EVENTS.CLICK, ".focused > .content", function(a) {
+        a.preventDefault(), a.stopPropagation();
         var b = $(this);
         $(this).hasClass("focused") || (b = $(this).closest(".focused")), isMobile() ? b.hasClass("mobile") ? (b.removeClass("mobile"), 
         b.removeClass("focused"), $(this).closest(".screen").is(".tinysort") || CONF.DOM.BOARD.trigger("normalBoard"), 
         CONF.DOM.CMD.trigger("setMainNav")) : (b.addClass("mobile"), CONF.DOM.BOARD.trigger("tinySortBoard"), 
         CONF.DOM.CMD.trigger("setPostEditNav")) : 0 === $(this).parent().children("#post-functions").length ? $(this).parent().prepend(new Post().getTools()) : $(this).parent().children("#post-functions").remove();
     }).on(CONF.EVENTS.CLICK, "#edit", function() {
-        var a, b = $(".screen .focused:eq(0)");
+        var a;
         isMobile() ? (CONF.DOM.CMD.trigger("setMainNav"), CONF.DOM.BOARD.trigger("normalBoard"), 
-        b.removeClass("mobile"), b.removeClass("focused")) : a = $(this).closest(".post"), 
+        a = $("#board").find("div.post.focused"), a.removeClass("mobile"), a.removeClass("focused")) : a = $(this).closest(".post"), 
         $("#new_post").trigger(CONF.EVENTS.CLICK, {
             origin: a
         }), CONF.DOM.CMD.find("#store_post").addClass("hidden");
@@ -13461,27 +13463,27 @@ var showMessage;
             } else showMessage("CANT_STORE_EMPTY_POST", "error"), $(this).removeClass("active");
         }
     }).on(CONF.EVENTS.CLICK, "#new_screen", function() {
-        if ($(this).hasClass("active")) {
-            CONF.DOM.UIWINDOW.children(".cmd").prepend(new Template(new Screens().newScreen()).toHtml());
-            var a = $("#create-screen, #abort-create-screen");
-            $("#dropImage").dropzone({
-                url: "/upload-wp",
-                paramName: "file",
-                maxFilesize: 10,
-                maxFiles: 1,
-                accept: function(b, c) {
-                    -1 === CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(b.name.substring(b.name.length - 4, b.name.length)) ? (showMessage("FILETYPE_NOT_ALLOWED", "error"), 
-                    $("div.dz-preview").remove()) : (showMessage("UPLOADING_FILE"), c(), $("div.dz-preview").remove(), 
-                    a.fadeOut(250));
-                },
-                success: function(b, c) {
-                    showMessage("UPLOADING_FINISH"), $("#screen-bg-url").val(c), a.fadeIn(250);
-                },
-                error: function() {
-                    showMessage("UPLOADING_ERROR"), a.fadeIn(250);
-                }
-            });
-        } else $("#new_screen-ui").fadeOut(CONF.PROPS.INT.MASTERCLOCK / 4, function() {
+        var a, b;
+        $(this).hasClass("active") ? (CONF.DOM.UIWINDOW.children(".cmd").prepend(new Template(new Screens().newScreen()).toHtml()), 
+        $("#dropImage").dropzone({
+            url: "/upload-wp",
+            paramName: "file",
+            maxFilesize: 10,
+            maxFiles: 10,
+            accept: function(c, d) {
+                -1 === CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(c.name.substring(c.name.length - 4, c.name.length)) ? (showMessage("FILETYPE_NOT_ALLOWED", "error"), 
+                $("div.dz-preview").remove()) : (a = $("#create-screen, #abort-create-screen"), 
+                b = $("#screen-bg-url").val().trim().split("/").pop(), b.length > 0 && $.post("/unlink-wp", {
+                    image: b
+                }), showMessage("UPLOADING_FILE"), d(), $("div.dz-preview").remove(), a.fadeOut(250));
+            },
+            success: function(b, c) {
+                showMessage("UPLOADING_FINISH"), $("#screen-bg-url").val(c), a.fadeIn(250);
+            },
+            error: function() {
+                showMessage("UPLOADING_ERROR"), a.fadeIn(250);
+            }
+        })) : $("#new_screen-ui").fadeOut(CONF.PROPS.INT.MASTERCLOCK / 4, function() {
             $(this).remove();
         });
     }).on(CONF.EVENTS.CLICK, "#trash_empty", function() {

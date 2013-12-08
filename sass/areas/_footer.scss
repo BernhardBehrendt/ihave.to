@@ -76,7 +76,7 @@
 
 
         #settings{
-          @include sprite-bg('tag-default', $x1Icons, $x2Icons);
+          @include sprite-bg('configuration-default', $x1Icons, $x2Icons);
           &:hover{@extend #settings.active;}
         }
 
@@ -176,7 +176,7 @@
         #new_post.active{@include sprite-bg('add-hover', $x1Icons, $x2Icons);}
         #chrono.active{@include sprite-bg('order-hover', $x1Icons, $x2Icons);}
         #screen.active{@include sprite-bg('computer-hover', $x1Icons, $x2Icons);}
-        #settings.active{@include sprite-bg('tag-hover', $x1Icons, $x2Icons);}
+        #settings.active{@include sprite-bg('configuration-hover', $x1Icons, $x2Icons);}
         #timeline.active{@include sprite-bg('timer-hover', $x1Icons, $x2Icons);}
 
         // Login
