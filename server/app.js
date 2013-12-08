@@ -39,12 +39,72 @@
         io.configure(function () {
             io.set('store', new Store());
         });
-
+        app.use(express.bodyParser());
         app.use(express.static(SETTINGS.ROOT + '../public/'));
 
+        app.post('/upload-wp', function (req, res) {
+
+
+            if (['image/png', 'image/jpg', 'image/jpeg', 'image/gif'].indexOf(req.files.file.headers['content-type']) !== -1) {
+                var sTmpPath = req.files.file.path;
+                var sTargetFile = __dirname + '/../public/upload/' + sTmpPath.split('/').pop();
+
+                fs.stat(sTmpPath, function (err, stats) {
+
+                    if (stats.size > (10 * Math.pow(1024, 1))) {
+                        fs.readFile(sTmpPath, function (err, image) {
+                            //fs.createReadStream(sTmpPath).pipe(fs.createWriteStream(sFileName));
+
+                            if (err === null) {
+
+                                // Fix image rotation and save to target
+
+                                fs.writeFile(sTargetFile, image, function (err) {
+                                    if (err === null) {
+                                        res.send('upload/' + sTargetFile.split('/').pop());
+                                    } else {
+                                        res.send('FILE_WRITE_ERROR');
+                                    }
+                                });
+                            } else {
+                                res.send('FILE_READ_ERROR');
+                            }
+
+                        });
+                    } else {
+                        res.send('FILE_TO_LARGE');
+                    }
+
+                });
+            } else {
+                res.send('UPLOAD_ERROR');
+            }
+        });
+
+
+        app.post('/unlink-wp', function (req, res) {
+            var sRemoveFile = req.body.image.split('/').pop();
+
+            fs.exists(__dirname + '/../public/upload/' + sRemoveFile, function (exists) {
+
+                if (exists) {
+                    fs.unlink(__dirname + '/../public/upload/' + sRemoveFile, function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+
+                res.send('done');
+
+            });
+        });
+
+        // handle page not found (404)
         app.use(function (req, res) {
             res.redirect(302, '/404.html');
         });
+
 
         io.enable('browser client etag');
         io.enable('browser client gzip');

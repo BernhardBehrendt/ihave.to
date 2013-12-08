@@ -210,7 +210,7 @@ var Template;
         this.extTpls({
             H: '{BEFORE}<h{NO} id="{ID}" class="{CLASSES}">{CONTENT}</h{NO}>{AFTER}',
             LINK: '<a id="{ID}" class="{CLASSES}" href="{URL}" title="{TITLE}" target="{TARGET}">{CONTENT}</a>',
-            FORM: '<form method="{METHOD}" action="{ACTION}" id="{ID}">{CONTENT}</form>',
+            FORM: '<form method="{METHOD}" action="{ACTION}" id="{ID}" class="{CLASSES}">{CONTENT}</form>',
             INPUT: '<input type="{TYPE}" value="{VALUE}" id="{ID}" name="{NAME}" class="{CLASSES}" maxlength="{MAXLENGTH}"/>',
             LABEL: '{BEFORE}<label for="{FOR}" classes="{CLASSES}">{CONTENT}</label>{AFTER}',
             HEADLINE_1: '<h1 id="{ID}" class="{CLASSES}">{TEXT}</h1>',

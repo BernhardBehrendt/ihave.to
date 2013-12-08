@@ -31,7 +31,7 @@ module.exports = function (grunt) {
         nodemon: {
             dev: {
                 options: {
-                    file: 'server/server-standalone.js',
+                    file: 'server/app.js',
                     nodeArgs: [],
                     ignoredFiles: ['grunt/**', 'public/**', 'server/node_modules/**'],
                     watchedExtensions: ['js', 'json'],
@@ -121,6 +121,8 @@ module.exports = function (grunt) {
                         '../client/vendor/crypto/rollups/sha3.js',
 
                         '../client/vendor/socket.io/socket.io.js',
+
+                        '../client/vendor/dropzone/dropzone.js',
 
                         '../client/functions/*.js',
 

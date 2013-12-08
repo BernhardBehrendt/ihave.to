@@ -2,8 +2,8 @@ var LANGUAGE = {
     DE: {
         // BASICS
         MOBILE_TITLE: 'iHave.to',
-        POST:"Memo",
-        POSTS:"Memos",
+        POST: "Memo",
+        POSTS: "Memos",
 
         // LOGIN WINDOW
         SIGN_IN: 'Lege Dein neues Board an.',
@@ -108,8 +108,14 @@ var LANGUAGE = {
         // DEFAULT VALUES
         NEW_SCREEN_NAME: 'Name des neuen Boards',
         NEW_BG_URL: 'URL zu deinem Hintergrundbild',
+        DROP_IMAGEFILE_HERE: 'Ziehe das Hintergrundbild auf diese Fläche',
+        FILETYPE_NOT_ALLOWED: 'Dieser Datentyp ist nicht erlaubt (Ausschließlich: JPG, PNG, GIF)',
+        UPLOADING_FILE: 'Dateiupload wurde gestartet',
+        UPLOADING_FINISH: 'Datei wurde gespeichert',
+        UPLOADING_ERROR: 'Es ist ein Fehler beim Upload aufgetreten',
 
         // UI SECTION
+
         SET_PRIOTITIES_HERE: 'Hier kannst du den Farben eine Bedeutung geben',
         DESCRIPTION_PRIORITIES_SETTINGS: 'Wenn du den Farben Namen gibst fällt es dir leichter deine Memos zu sortieren und strukturieren',
         NEW_POST: 'Neues Memo anlegen',
@@ -120,8 +126,8 @@ var LANGUAGE = {
     EN: {
         // BASICS
         MOBILE_TITLE: 'iHave.to',
-        POST:"Memo",
-        POSTS:"Memos",
+        POST: "Memo",
+        POSTS: "Memos",
 
         // LOGIN WINDOW
         SIGN_IN: 'Create your new Board',
@@ -227,6 +233,11 @@ var LANGUAGE = {
         // DEFAULT VALUES
         NEW_SCREEN_NAME: 'New boards name',
         NEW_BG_URL: 'url to your custom background image',
+        DROP_IMAGEFILE_HERE: 'Drop wallpaper for new workspace here',
+        FILETYPE_NOT_ALLOWED: 'This filetype is not alowed (JPG, PNG, GIF only)',
+        UPLOADING_FILE: 'Uploading file',
+        UPLOADING_FINISH: 'File was stored',
+        UPLOADING_ERROR: 'An error occurred during file upload ',
 
         // UI SECTION
         SET_PRIOTITIES_HERE: 'Here you can assign a meaning to colors',

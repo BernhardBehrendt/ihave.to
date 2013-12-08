@@ -1,117 +1,82 @@
 #new_screen-ui {
   @include clearfix;
-  @include paddingbox(314px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
+  @include paddingbox(618px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
 
   margin-top: $def_margin_unit;
   //////
-
-  input {
-    @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
+  input[type="hidden"] {
+    display: none;
+  }
+  input#screen-name {
+    @include paddingbox(614px, 60px, 0, 0, 0, $def_margin_unit / 4);
 
     float: left;
-    font-size: $small;
+    font-size: $large;
     margin-bottom: $def_margin_unit;
+
   }
 
-  img {
+  form#dropImage {
+
+    @include paddingbox(614px, 120px, 46px, 0, 0, $def_margin_unit / 4);
     @include border-radius(4px);
+    @include transition-property("background-color");
+    @include transition-property("color");
+    @include transition-duration("0.5s");
+
     float: left;
-    width: 310px;
-    display: block;
-    margin-bottom: $def_margin_unit;
-    border: solid 1px $white / 2;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
+    font-size: $large;
+    margin-bottom: $def_margin_unit * 2;
+    border: solid 1px $white;
+    text-align: center;
+    color: $white;
 
-  @include desktopClient {
-    @include paddingbox(314px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
-
-    input {
-      @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
-    }
-
-    img {
-      width: 310px;
+    div.dz-preview {
+      display: none !important;
     }
   }
 
-  @include iPodWebappPortrait {
-    @include paddingbox(314px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
-
-    input {
-      @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
-    }
-
-    img {
-      width: 310px;
-    }
+  form#dropImage.dz-drag-hover {
+    background-color: $white_25;
+    color: #000;
   }
 
-  @include iPodSafariPortrait {
-    @include paddingbox(314px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
-
-    input {
-      @include paddingbox(310px, 30px, 0, 0, 0, $def_margin_unit / 4);
-    }
-
-    img {
-      width: 310px;
-    }
+  @include iPodSafariPortrait() {
   }
-
-  @include iPodSafariLandscapeFullscrren {
-    @include paddingbox(476px, 380px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
-
-    margin-bottom: $def_margin_unit;
-
-    input {
-      @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
-    }
+  @include iPodWebappPortrait() {
+    @include paddingbox(316px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
 
     input#screen-name {
-      margin-right: $def_margin_unit / 2;
+      @include paddingbox(314px, 30px, 0, 0, 0, $def_margin_unit / 4);
+
+      float: left;
+      font-size: $normal;
+      margin-bottom: $def_margin_unit * 3;
+      margin-top: $def_margin_unit * 3;
+
     }
 
-    img {
-      width: 470px;
-    }
-  }
+    form#dropImage {
 
-  @include iPodWebappLandscape {
-    @include paddingbox(476px, 380px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
+      @include paddingbox(314px, 120px, 46px, 0, 0, $def_margin_unit / 4);
+      @include border-radius(4px);
+      @include transition-property("background-color");
+      @include transition-property("color");
+      @include transition-duration("0.5s");
 
-    margin-bottom: $def_margin_unit;
+      float: left;
+      font-size: $large;
+      display: block;
+      margin-bottom: $def_margin_unit * 2;
+      border: solid 1px $white;
+      text-align: center;
+      color: $white;
 
-    input {
-      @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
-    }
-
-    input#screen-name {
-      margin-right: $def_margin_unit / 2;
-    }
-
-    img {
-      width: 470px;
-    }
-  }
-
-  @include iPodSafariLandscape {
-    @include paddingbox(476px, 380px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
-
-    margin-bottom: $def_margin_unit;
-
-    input {
-      @include paddingbox(230px, 30px, 0, 0, 0, $def_margin_unit / 4);
+      div.dz-preview {
+        display: none !important;
+      }
     }
 
-    input#screen-name {
-      margin-right: $def_margin_unit / 2;
-    }
-
-    img {
-      width: 470px;
-    }
   }
 
   /////

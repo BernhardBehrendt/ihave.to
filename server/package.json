@@ -1,13 +1,13 @@
 {
-	"name": "ihave.to",
-	"version": "0.8.3",
-	"private": false,
-	"scripts": {
-		"start": "node server-standalone.js"
-	},
-	"dependencies": {
-		"express": "*",
-		"socket.io": "*",
-		"socket.io-clusterhub": "*"
-	}
+    "name": "ihave.to",
+    "version": "0.8.3",
+    "private": false,
+    "scripts": {
+        "start": "node server-standalone.js"
+    },
+    "dependencies": {
+        "express": "*",
+        "socket.io": "*",
+        "socket.io-clusterhub": "*"
+    }
 }

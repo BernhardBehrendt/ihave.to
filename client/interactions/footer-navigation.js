@@ -8,6 +8,7 @@
 /*global Template*/
 /*global PostWindow*/
 /*global showMessage*/
+/*global Dropzone*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // General Navigation Handling
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -282,6 +283,43 @@
         .on(CONF.EVENTS.CLICK, '#new_screen', function () {
             if ($(this).hasClass('active')) {
                 CONF.DOM.UIWINDOW.children('.cmd').prepend(new Template(new Screens().newScreen()).toHtml());
+
+                var oScreenButtons = $('#create-screen, #abort-create-screen');
+
+                // Attach dropzone support
+                $("#dropImage").dropzone({
+                    url: "/upload-wp",
+                    paramName: "file", // The name that will be used to transfer the file
+                    maxFilesize: 10, // MB,
+                    maxFiles: 1,
+                    accept: function (file, done) {
+                        if (CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(file.name.substring(file.name.length - 4, file.name.length)) === -1) {
+
+                            showMessage('FILETYPE_NOT_ALLOWED', 'error');
+
+                            $('div.dz-preview').remove();
+                        }
+                        else {
+                            showMessage('UPLOADING_FILE');
+                            done();
+
+                            $('div.dz-preview').remove();
+
+                            oScreenButtons.fadeOut(250);
+                        }
+                    },
+                    success: function (response, data) {
+                        showMessage('UPLOADING_FINISH');
+
+                        $('#screen-bg-url').val(data);
+                        oScreenButtons.fadeIn(250);
+                    },
+                    error: function (error) {
+                        showMessage('UPLOADING_ERROR');
+                        oScreenButtons.fadeIn(250);
+                    }});
+
+
             } else {
                 $('#new_screen-ui').fadeOut(CONF.PROPS.INT.MASTERCLOCK / 4, function () {
                     $(this).remove();
@@ -348,6 +386,10 @@
                                         }
 
                                         oDiff.PRIVATE.SCREENS[sScreenName] = false;
+
+
+                                        $.post('/unlink-wp', {image: CONF.BOARD.PRIVATE.SCREENS[sScreenName].META.BG.split('/').pop()});
+
                                         delete CONF.BOARD.PRIVATE.SCREENS[sScreenName];
                                     }
 

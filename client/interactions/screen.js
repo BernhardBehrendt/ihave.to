@@ -51,7 +51,6 @@
         }
 
     }).on(CONF.EVENTS.CLICK, '#create-screen',function () {
-
             var oScreenName = $('#screen-name');
             var oDiff = JSON.parse('{"PRIVATE":{"SCREENS":{"' + oScreenName.val() + '":{}}}}');
 
@@ -85,25 +84,11 @@
             } else {
                 showMessage('INVALID_SCREEN_NAME'.translate(), 'error');
             }
-        }).on('click', '#abort-create-screen',function () {
+        }).on('click', '#abort-create-screen', function () {
 
             $('#new_screen-ui').fadeOut(CONF.PROPS.INT.MASTERCLOCK / 4, function () {
                 $(this).remove();
                 $('#new_screen').removeClass('active');
             });
-        }).on('focusout', '#screen-bg-url',function () {
-            var sImageUrl = $(this).val().trim();
-
-            if (sImageUrl.isImageURL()) {
-                $('#new_screen-preview').css('background-image', 'url(' + sImageUrl + ')');
-            }
-            else {
-                showMessage('INVALID_IMAGE_URL'.translate(), 'error');
-
-            }
-        }).on('keyup', '#screen-bg-url', function (event) {
-            if (event.which === 13) {
-                $(this).blur();
-            }
         });
 })();

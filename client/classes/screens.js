@@ -90,6 +90,18 @@ var Screens;
     };
 
     /**
+     * Sort the color stats
+     *
+     * @method sortStats
+     * @param {Array} aStats
+     */
+    Screens.prototype.sortStats = function (aStats) {
+        return _.sortBy(aStats, function (arrayElement) {
+            return arrayElement.PART;
+        });
+    };
+
+    /**
      * Creates the Object required to create the Overview via template Engine
      * @method getOverview
      * @return {Object} The HTML Template object of the overview view
@@ -108,15 +120,14 @@ var Screens;
                 oScreen = CONF.BOARD.PRIVATE.SCREENS[sScreenName];
                 oScreenStats = this.getStats(oScreen);
                 aColorStats = [];
+
                 for (sColor in oScreenStats.steepening) {
                     if (oScreenStats.steepening.hasOwnProperty(sColor)) {
                         aColorStats.push({PART: oScreenStats.steepening[sColor], CLASSES: sColor, STYLE: "width:" + oScreenStats.steepening[sColor] + "%;"});
                     }
                 }
 
-                aColorStats = _.sortBy(aColorStats, function (arrayElement) {
-                    return arrayElement.PART;
-                });
+                aColorStats = this.sortStats(aColorStats);
 
                 aScreens[aScreens.length] = {
                     ID: sScreenName,
@@ -162,10 +173,6 @@ var Screens;
             DIV: {
                 ID: 'new_screen-ui',
                 CONTENT: {
-                    IMG: {
-                        ID: 'new_screen-preview',
-                        SRC: 'img/textures/screen-preview.png'
-                    },
                     INPUT: [
                         {
                             TYPE: 'text',
@@ -174,12 +181,17 @@ var Screens;
                             VALUE: 'NEW_SCREEN_NAME'.translate()
                         },
                         {
-                            TYPE: 'text',
+                            TYPE: 'hidden',
                             NAME: 'screen-bg-url',
-                            ID: 'screen-bg-url',
-                            VALUE: 'NEW_BG_URL'.translate()
+                            ID: 'screen-bg-url'
                         }
                     ],
+                    FORM: {
+                        ID: "dropImage",
+                        CLASS: "dropzone",
+                        CONTENT: "DROP_IMAGEFILE_HERE".translate()
+
+                    },
                     LINK: [
                         {
                             ID: 'create-screen',
@@ -196,5 +208,4 @@ var Screens;
             }
         };
     };
-})
-    ();
+})();

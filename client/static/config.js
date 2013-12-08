@@ -59,7 +59,8 @@ var CONF;
                 BLOCKRESIZE: 'input[type="text"]:focus, textarea'
             },
             ARRAY: {
-                COLORS: ['blue', 'turkis', 'green', 'yellow', 'orange', 'red', 'pink', 'grey', 'white']
+                COLORS: ['blue', 'turkis', 'green', 'yellow', 'orange', 'red', 'pink', 'grey', 'white'],
+                ALLOWED_FILES: ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.gif', '.GIF']
             },
             OBJECT: {
                 STORAGE: null
