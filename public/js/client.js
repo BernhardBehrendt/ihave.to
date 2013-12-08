@@ -377,7 +377,7 @@ var LANGUAGE = {
             var d = a(b), e = "$1";
             return null !== b.match("http://youtube.com") || null !== b.match("http://youtu.be") || null !== b.match("http://www.youtube.com") || null !== b.match("http://www.youtu.be") ? (e = b.match("&") ? b.substr(0, b.search(/&/)) + " " + b.substr(b.search(/&/), b.length) : b, 
             e = e.replace(/&[\S]*/, ""), e = e.replace("youtube.com/watch?v=", "youtube.com/embed/"), 
-            e = e.replace("youtu.be", "youtube.com/embed/"), (0 === b.indexOf("http://youtube.com") || 0 === b.indexOf("http://www.youtube.com") || 0 === b.indexOf("http://youtu.be") || 0 === b.indexOf("http://www.youtu.be")) && (e = e.replace(c, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>'))) : e = b.isImageURL() ? '<a class="imageLink" href="' + b + '" target="_blank" title="' + b + '"><img src="' + b + '"/></a>' : '<a href="' + b + '" target="_blank" title="' + b + '" style="background-image:url(' + (d.protocol + "://" + d.host) + '/favicon.ico)"></a>', 
+            e = e.replace("youtu.be", "youtube.com/embed/"), (0 === b.indexOf("http://youtube.com") || 0 === b.indexOf("http://www.youtube.com") || 0 === b.indexOf("http://youtu.be") || 0 === b.indexOf("http://www.youtu.be")) && (e = e.replace(c, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>'))) : e = b.isImageURL() ? '<a class="imageLink" href="' + b + '" target="_blank"><img src="' + b + '"/></a>' : '<a href="' + b + '" target="_blank" style="background-image:url(' + (d.protocol + "://" + d.host) + '/favicon.ico)"></a>', 
             e;
         });
     }, a.options = {

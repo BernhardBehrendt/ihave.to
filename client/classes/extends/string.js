@@ -164,9 +164,9 @@
                 }
             } else {
                 if ($1.isImageURL()) {
-                    sReturn = "<a class=\"imageLink\" href=\"" + $1 + "\" target=\"_blank\" title=\"" + $1 + "\"><img src=\"" + $1 + "\"/></a>";
+                    sReturn = "<a class=\"imageLink\" href=\"" + $1 + "\" target=\"_blank\"><img src=\"" + $1 + "\"/></a>";
                 } else {
-                    sReturn = "<a href=\"" + $1 + "\" target=\"_blank\" title=\"" + $1 + "\" style=\"background-image:url(" + (oUri.protocol + '://' + oUri.host) + "/favicon.ico)\"></a>";
+                    sReturn = "<a href=\"" + $1 + "\" target=\"_blank\" style=\"background-image:url(" + (oUri.protocol + '://' + oUri.host) + "/favicon.ico)\"></a>";
                 }
 
 
