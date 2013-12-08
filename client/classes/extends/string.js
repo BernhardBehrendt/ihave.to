@@ -163,7 +163,13 @@
                     sReturn = sReturn.replace(exp, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>');
                 }
             } else {
-                sReturn = "<a href=\"" + $1 + "\" target=\"_blank\" title=\"" + $1 + "\" style=\"background-image:url(" + (oUri.protocol + '://' + oUri.host) + "/favicon.ico)\"></a>";
+                if ($1.isImageURL()) {
+                    sReturn = "<a class=\"imageLink\" href=\"" + $1 + "\" target=\"_blank\" title=\"" + $1 + "\"><img src=\"" + $1 + "\"/></a>";
+                } else {
+                    sReturn = "<a href=\"" + $1 + "\" target=\"_blank\" title=\"" + $1 + "\" style=\"background-image:url(" + (oUri.protocol + '://' + oUri.host) + "/favicon.ico)\"></a>";
+                }
+
+
             }
             return sReturn;
         });

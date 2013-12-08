@@ -130,6 +130,16 @@
         border: solid 1px #000;
 
       }
+
+      a.imageLink {
+        display:inline;
+        border:none;
+
+        img{
+          width:100%;
+        }
+
+      }
     }
   }
 
