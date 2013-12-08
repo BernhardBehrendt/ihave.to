@@ -13296,7 +13296,9 @@ var showMessage;
     "use strict";
     $(document).on(CONF.EVENTS.FORCED_CLICK, ".post > .content", function(a) {
         a.stopPropagation(), a.preventDefault(), $(this).closest(".screen").find(".focused").removeClass("focused"), 
-        $(this).parent(".post").addClass("focused");
+        $("#post-functions").remove(), $(this).parent(".post").addClass("focused");
+    }).on(CONF.EVENTS.CLICK, ".screen", function() {
+        $("#post-functions").remove(), $(this).find("div.post.focused").removeClass("focused");
     }).on(CONF.EVENTS.CLICK, ".post > .content > p > a", function(a) {
         a.preventDefault(), a.stopPropagation(), isMobile() ? void 0 !== window.navigator.standalone && window.navigator.standalone === !0 ? showMessage("IOS_ERROR_OPENWINDOW") : window.open($(this).attr("href")) : window.open($(this).attr("href"));
     }).on(CONF.EVENTS.FORCED_CLICK, ".focused > .content", function(a) {

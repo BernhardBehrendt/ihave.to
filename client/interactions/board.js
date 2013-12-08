@@ -12,13 +12,24 @@
 // The board current screen interactions
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Handle interactions on the board
-    $(document).on(CONF.EVENTS.FORCED_CLICK, '.post > .content',function (event) {
+    $(document).on(CONF.EVENTS.FORCED_CLICK, '.post > .content', function (event) {
         event.stopPropagation();
         event.preventDefault();
 
         $(this).closest('.screen').find('.focused').removeClass('focused');
+        $('#post-functions').remove();
         $(this).parent('.post').addClass('focused');
-    }).on(CONF.EVENTS.CLICK, '.post > .content > p > a', function (event) {
+    })
+        .on(CONF.EVENTS.CLICK, '.screen', function (event) {
+
+            $('#post-functions').remove();
+            $(this).find('div.post.focused').removeClass('focused');
+
+
+
+        })
+
+        .on(CONF.EVENTS.CLICK, '.post > .content > p > a', function (event) {
             event.preventDefault();
             event.stopPropagation();
             if (!isMobile()) {
