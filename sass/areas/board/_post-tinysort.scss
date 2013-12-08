@@ -1,4 +1,4 @@
-.post{
+.post {
   //@include x1x2(0 0, '../img/backgrounds/1x/paper.png', '../img/backgrounds/2x/paper.png');
 
   @include paddingbox(196px, 196px);
@@ -7,315 +7,429 @@
 
   @import "areas/board/postfunctions";
 
-  transform-origin:0 0; -webkit-transform-origin:0 0; -moz-transform-origin:0 0;
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
 
-  min-height:196px;
-  max-height:408px;
-  height:auto;
-  float:left;
-  margin:0 $def_margin_unit $def_margin_unit 0;
-  cursor:pointer;
-  font-size:$normal;
-  position:relative;
-  left:inherit !important;
-  top:inherit !important;
+  min-height: 196px;
+  max-height: 408px;
+  height: auto;
+  float: left;
+  margin: 0 $def_margin_unit $def_margin_unit 0;
+  cursor: pointer;
+  font-size: $normal;
+  position: relative;
+  left: inherit !important;
+  top: inherit !important;
 
- @include iPodWebappPortrait{
+  @include iPodWebappPortrait {
     @include paddingbox(64px, 64px);
 
-    min-height:64px;
-    height:auto;
-    font-size:$xxsmall;
+    min-height: 64px;
+    height: auto;
+    font-size: $xxsmall;
   }
 
-  @include iPodSafariPortrait{
+  @include iPodSafariPortrait {
     @include paddingbox(64px, 64px);
 
-    min-height:64px;
-    height:auto;
-    font-size:$xxsmall;
+    min-height: 64px;
+    height: auto;
+    font-size: $xxsmall;
   }
 
-  @include iPodSafariLandscapeFullscrren{
+  @include iPodSafariLandscapeFullscrren {
     @include paddingbox(94px, 94px);
 
-    min-height:94px;
-    height:auto;
-    font-size:$small;
+    min-height: 94px;
+    height: auto;
+    font-size: $small;
   }
 
-  @include iPodWebappLandscape{
+  @include iPodWebappLandscape {
     @include paddingbox(94px, 94px);
 
-    min-height:94px;
-    height:auto;
-    font-size:$small;
+    min-height: 94px;
+    height: auto;
+    font-size: $small;
   }
 
-  @include iPodSafariLandscape{
+  @include iPodSafariLandscape {
     @include paddingbox(94px, 94px);
 
-    min-height:94px;
-    height:auto;
-    font-size:$small;
+    min-height: 94px;
+    height: auto;
+    font-size: $small;
   }
 
-  .content{
+  .content {
     @include paddingbox(196px, 196px, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2);
 
-    min-height:196px;
-    max-height:392px;
-    height:auto;
-    overflow:hidden;
-    font-size:$normal - 2;
+    min-height: 196px;
+    max-height: 392px;
+    height: auto;
+    overflow: hidden;
+    font-size: $normal - 2;
 
-
-
-    @include iPodWebappPortrait{
+    @include iPodWebappPortrait {
       @include paddingbox(64px, 64px, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2);
 
-      min-height:64px;
-      max-height:123px;
-      height:auto;
-      font-size:$xxsmall;
+      min-height: 64px;
+      max-height: 123px;
+      height: auto;
+      font-size: $xxsmall;
     }
 
-    @include iPodSafariPortrait{
+    @include iPodSafariPortrait {
       @include paddingbox(64px, 64px, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2);
 
-      min-height:64px;
-      max-height:123px;
-      height:auto;
-      font-size:$xxsmall;
+      min-height: 64px;
+      max-height: 123px;
+      height: auto;
+      font-size: $xxsmall;
     }
 
-    @include iPodSafariLandscapeFullscrren{
+    @include iPodSafariLandscapeFullscrren {
       @include paddingbox(94px, 94px, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2);
 
-      min-height:94px;
-      max-height:184px;
-      height:auto;
-      font-size:$xxsmall;
+      min-height: 94px;
+      max-height: 184px;
+      height: auto;
+      font-size: $xxsmall;
     }
 
-    @include iPodWebappLandscape{
+    @include iPodWebappLandscape {
       @include paddingbox(94px, 94px, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2);
 
-      min-height:94px;
-      max-height:184px;
-      height:auto;
-      font-size:$xxsmall;
+      min-height: 94px;
+      max-height: 184px;
+      height: auto;
+      font-size: $xxsmall;
     }
 
-    @include iPodSafariLandscape{
+    @include iPodSafariLandscape {
       @include paddingbox(94px, 94px, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2, $def_margin_unit / 2);
 
-      min-height:94px;
-      max-height:184px;
-      height:auto;
-      font-size:$xxsmall;
+      min-height: 94px;
+      max-height: 184px;
+      height: auto;
+      font-size: $xxsmall;
     }
 
-    p{
-     color:#000;
+    p {
+      color: #000;
 
-     a{
-       @include x1x2(0 0, '../img/icons/1x/earth-default.png', '../img/icons/2x/earth-default.png');
-       @include border-radius(4px);
-       display:inline-block;
-       width:16px;
-       height:16px;
-       margin-bottom:-3px;
-       background-size:cover;
-       border:solid 1px #000;
-
-     }
-    }
-  }
-
-  h3{
-
-    color:#000;
-    font-weight:bold;
-    margin-bottom:$def_margin_unit / 4;
-  }
-}
-
-.post.focused{
-  z-index:2;
-  cursor:pointer;
-
-  .content{
-    overflow-y:auto;
-  }
-}
-
-.post.focused.mobile{
-  position:absolute;
-  float:none;
-  margin:0;
-
-  @include iPodWebappPortrait{
-    width:320px;
-    height:404px;
-    max-height:404px;
-    left:0px !important;
-    top:0px !important;
-  }
-
-  @include iPodSafariPortrait{
-    width:320px;
-    height:404px;
-    max-height:404px;
-    left:0px !important;
-    top:0px !important;
-  }
-
-  @include iPodSafariLandscapeFullscrren{
-    width:480px;
-    height:268px;
-    max-height:268px;
-    left:0px !important;
-    top:0px !important;
-  }
-
-  @include iPodWebappLandscape{
-    width:480px;
-    height:248px;
-    max-height:248px;
-    left:0px !important;
-    top:0px !important;
-  }
-
-  @include iPodSafariLandscape{
-    width:480px;
-    height:220px;
-    max-height:220px;
-    left:0px !important;
-    top:0px !important;
-  }
-
-  .content{
-    @include iPodWebappPortrait{
-
-    width:308px;
-    height:404px;
-    max-height:404px;
-    color:#fff !important;
-    font-size:$normal;
-    overflow:auto;
-
-    p{
-      padding-top:10px;
-      padding-bottom:20px;
-
-      a{
+      a {
+        @include x1x2(0 0, '../img/icons/1x/earth-default.png', '../img/icons/2x/earth-default.png');
         @include border-radius(4px);
-        width:32px;
-        height:32px;
-        margin-bottom:-3px;
-        border:solid 1px #000;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-bottom: -3px;
+        background-size: cover;
+        border: solid 1px #000;
+
+      }
+
+      a.imageLink {
+        display: inline;
+        border: none;
+        background: none;
+
+        img {
+          width: 100%;
+        }
 
       }
     }
+  }
+
+  h3 {
+
+    color: #000;
+    font-weight: bold;
+    margin-bottom: $def_margin_unit / 4;
+  }
+}
+
+.post.focused {
+  z-index: 2;
+  cursor: pointer;
+
+  .content {
+    overflow-y: auto;
+  }
+}
+
+.post.focused.mobile {
+  position: absolute;
+  float: none;
+  margin: 0;
+
+  @include iPodWebappPortrait {
+    width: 320px;
+    height: 404px;
+    max-height: 404px;
+    left: 0px !important;
+    top: 0px !important;
+  }
+
+  @include iPodSafariPortrait {
+    width: 320px;
+    height: 404px;
+    max-height: 404px;
+    left: 0px !important;
+    top: 0px !important;
+  }
+
+  @include iPodSafariLandscapeFullscrren {
+    width: 480px;
+    height: 268px;
+    max-height: 268px;
+    left: 0px !important;
+    top: 0px !important;
+  }
+
+  @include iPodWebappLandscape {
+    width: 480px;
+    height: 248px;
+    max-height: 248px;
+    left: 0px !important;
+    top: 0px !important;
+  }
+
+  @include iPodSafariLandscape {
+    width: 480px;
+    height: 220px;
+    max-height: 220px;
+    left: 0px !important;
+    top: 0px !important;
+  }
+
+  .content {
+    @include iPodWebappPortrait {
+
+      width: 308px;
+      height: 404px;
+      max-height: 404px;
+      color: #fff !important;
+      font-size: $normal;
+      overflow: auto;
+
+      p {
+        padding-top: 10px;
+        padding-bottom: 20px;
+
+        a {
+          @include border-radius(4px);
+          width: 32px;
+          height: 32px;
+          margin-bottom: -3px;
+          border: solid 1px #000;
+
+        }
+      }
 
     }
 
-    @include iPodSafariPortrait{
-     width:308px;
-     height:404px;
-     max-height:404px;
-     color:#fff !important;
-     font-size:$normal;
-     overflow:auto;
+    @include iPodSafariPortrait {
+      width: 308px;
+      height: 404px;
+      max-height: 404px;
+      color: #fff !important;
+      font-size: $normal;
+      overflow: auto;
 
-     p{
-      padding-top:10px;
-      padding-bottom:60px;
-     }
-    }
-
-    @include iPodSafariLandscapeFullscrren{
-      width:470px;
-      height:268px;
-      max-height:268px;
-
-      p{
-       padding-top:10px;
-       padding-bottom:20px;
+      p {
+        padding-top: 10px;
+        padding-bottom: 60px;
       }
     }
 
-    @include iPodWebappLandscape{
-      width:470px;
-      height:248px;
-      max-height:248px;
+    @include iPodSafariLandscapeFullscrren {
+      width: 470px;
+      height: 268px;
+      max-height: 268px;
 
-      p{
-       padding-top:10px;
-       padding-bottom:20px;
+      p {
+        padding-top: 10px;
+        padding-bottom: 20px;
+      }
+    }
+
+    @include iPodWebappLandscape {
+      width: 470px;
+      height: 248px;
+      max-height: 248px;
+
+      p {
+        padding-top: 10px;
+        padding-bottom: 20px;
       }
 
     }
 
-    @include iPodSafariLandscape{
-      width:468px;
-      height:220px;
-      max-height:220px;
+    @include iPodSafariLandscape {
+      width: 468px;
+      height: 220px;
+      max-height: 220px;
 
-      p{
-       padding-top:10px;
-       padding-bottom:20px;
+      p {
+        padding-top: 10px;
+        padding-bottom: 20px;
       }
     }
   }
 }
 
 // Posts colors
-.post.blue .content{@include rgba-background($blue_75);}
-.post.turkis .content{@include rgba-background($turkis_75);}
-.post.green .content{@include rgba-background($green_75);}
-.post.yellow .content{@include rgba-background($yellow_75);}
-.post.orange .content{@include rgba-background($orange_75);}
-.post.red .content{@include rgba-background($red_75);}
-.post.pink .content{@include rgba-background($pink_75);}
-.post.grey .content{@include rgba-background($grey_75);}
-.post.white .content{@include rgba-background($white_75);}
+.post.blue .content {
+  @include rgba-background($blue_75);
+}
+
+.post.turkis .content {
+  @include rgba-background($turkis_75);
+}
+
+.post.green .content {
+  @include rgba-background($green_75);
+}
+
+.post.yellow .content {
+  @include rgba-background($yellow_75);
+}
+
+.post.orange .content {
+  @include rgba-background($orange_75);
+}
+
+.post.red .content {
+  @include rgba-background($red_75);
+}
+
+.post.pink .content {
+  @include rgba-background($pink_75);
+}
+
+.post.grey .content {
+  @include rgba-background($grey_75);
+}
+
+.post.white .content {
+  @include rgba-background($white_75);
+}
 
 // Posts states
 // Drop active
-.post.dropon_active.blue .content{@include rgba-background($blue_75);}
-.post.dropon_active.turkis .content{@include rgba-background($turkis_75);}
-.post.dropon_active.green .content{@include rgba-background($green_75);}
-.post.dropon_active.yellow .content{@include rgba-background($yellow_75);}
-.post.dropon_active.orange .content{@include rgba-background($orange_75);}
-.post.dropon_active.red .content{@include rgba-background($red_75);}
-.post.dropon_active.pink .content{@include rgba-background($pink_75);}
-.post.dropon_active.grey .content{@include rgba-background($grey_75);}
-.post.dropon_active.white .content{@include rgba-background($white_75);}
+.post.dropon_active.blue .content {
+  @include rgba-background($blue_75);
+}
+
+.post.dropon_active.turkis .content {
+  @include rgba-background($turkis_75);
+}
+
+.post.dropon_active.green .content {
+  @include rgba-background($green_75);
+}
+
+.post.dropon_active.yellow .content {
+  @include rgba-background($yellow_75);
+}
+
+.post.dropon_active.orange .content {
+  @include rgba-background($orange_75);
+}
+
+.post.dropon_active.red .content {
+  @include rgba-background($red_75);
+}
+
+.post.dropon_active.pink .content {
+  @include rgba-background($pink_75);
+}
+
+.post.dropon_active.grey .content {
+  @include rgba-background($grey_75);
+}
+
+.post.dropon_active.white .content {
+  @include rgba-background($white_75);
+}
+
 // focused state
-.post.focused.blue .content{@include rgba-background($blue);}
-.post.focused.turkis .content{@include rgba-background($turkis);}
-.post.focused.green .content{@include rgba-background($green);}
-.post.focused.yellow .content{@include rgba-background($yellow);}
-.post.focused.orange .content{@include rgba-background($orange);}
-.post.focused.red .content{@include rgba-background($red);}
-.post.focused.pink .content{@include rgba-background($pink);}
-.post.focused.grey .content{@include rgba-background($grey);}
-.post.focused.white .content{@include rgba-background($white);}
+.post.focused.blue .content {
+  @include rgba-background($blue);
+}
 
+.post.focused.turkis .content {
+  @include rgba-background($turkis);
+}
 
-.post.blue #post-functions{@include rgba-background($blue);}
-.post.turkis #post-functions{@include rgba-background($turkis);}
-.post.green #post-functions{@include rgba-background($green);}
-.post.yellow #post-functions{@include rgba-background($yellow);}
-.post.orange #post-functions{@include rgba-background($orange);}
-.post.red #post-functions{@include rgba-background($red);}
-.post.pink #post-functions{@include rgba-background($pink);}
-.post.grey #post-functions{@include rgba-background($grey);}
-.post.white #post-functions{@include rgba-background($white);}
+.post.focused.green .content {
+  @include rgba-background($green);
+}
 
+.post.focused.yellow .content {
+  @include rgba-background($yellow);
+}
 
-.post.invisible{
-  visibility:hidden;
+.post.focused.orange .content {
+  @include rgba-background($orange);
+}
+
+.post.focused.red .content {
+  @include rgba-background($red);
+}
+
+.post.focused.pink .content {
+  @include rgba-background($pink);
+}
+
+.post.focused.grey .content {
+  @include rgba-background($grey);
+}
+
+.post.focused.white .content {
+  @include rgba-background($white);
+}
+
+.post.blue #post-functions {
+  @include rgba-background($blue);
+}
+
+.post.turkis #post-functions {
+  @include rgba-background($turkis);
+}
+
+.post.green #post-functions {
+  @include rgba-background($green);
+}
+
+.post.yellow #post-functions {
+  @include rgba-background($yellow);
+}
+
+.post.orange #post-functions {
+  @include rgba-background($orange);
+}
+
+.post.red #post-functions {
+  @include rgba-background($red);
+}
+
+.post.pink #post-functions {
+  @include rgba-background($pink);
+}
+
+.post.grey #post-functions {
+  @include rgba-background($grey);
+}
+
+.post.white #post-functions {
+  @include rgba-background($white);
+}
+
+.post.invisible {
+  visibility: hidden;
 }
