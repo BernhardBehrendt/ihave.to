@@ -1,6 +1,8 @@
 #iHave.to#
 ##AES secured and real time enabled plain memoboard##
-[ ![Image](http://212.224.109.247/img/preview/desktop/8.png "Image title") ](http://212.224.109.247)
+[ ![Image](http://212.224.109.247/img/preview/desktop/8.png "iHave.to memoboard view") ](http://212.224.109.247)
+[ ![Image](http://212.224.109.247/img/preview/desktop/7.png "iHave.to edit view") ](http://212.224.109.247)
+[ ![Image](http://212.224.109.247/img/preview/desktop/6.png "iHave.to workspaces view") ](http://212.224.109.247)
 
 You can find a working demo [here](http://212.224.109.247).
 
