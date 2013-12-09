@@ -240,7 +240,7 @@
                                 BY: CONF.PROPS.INT.WHO,
                                 TGT: iTimestamp,
                                 ACN: "content",
-                                TO: oTextarea.val().escapeHtml().nl2br().urlToLink()
+                                TO: oTextarea.val().escapeHtml().urlToLink().   nl2br()
                             },
                             {
                                 BY: CONF.PROPS.INT.WHO,
