@@ -78,14 +78,14 @@
 
     form#dropImage {
 
-      @include paddingbox(314px, 120px, 46px, 0, 0, $def_margin_unit / 4);
+      @include paddingbox(314px, 110px, 42px, 0, 0, $def_margin_unit / 4);
       @include border-radius(4px);
       @include transition-property("background-color");
       @include transition-property("color");
       @include transition-duration("0.5s");
 
       float: left;
-      font-size: $large;
+      font-size: $normal;
       display: block;
       margin-bottom: $def_margin_unit * 2;
       border: solid 1px $white;
