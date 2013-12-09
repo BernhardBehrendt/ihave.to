@@ -13486,8 +13486,9 @@ var showMessage;
             },
             uploadprogress: function(a, b) {
                 var c = $("#uploadProgress");
-                c.hasClass("active") || c.addClass("active"), c.children("div.bar").css("width", b + "%"), 
-                b >= 100 && (c.removeClass("active"), c.children("div.bar").removeAttr("style"));
+                c.hasClass("active") || (c.addClass("active"), $("#dropImage").hide()), c.children("div.bar").css("width", b + "%"), 
+                b >= 100 && (c.removeClass("active"), c.children("div.bar").removeAttr("style"), 
+                $("#dropImage").show());
             },
             complete: function(a) {
                 this.removeFile(a);

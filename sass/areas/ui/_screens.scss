@@ -38,9 +38,7 @@
 
   div#uploadProgress {
     @include paddingbox(614px, 40px, 0, 0, 0, 0);
-    @include border-radius(10px);
-    @include transition-property("opacity");
-    @include transition-duration("0.25s");
+    @include border-radius(4px);
 
     display:none;
     float: left;
