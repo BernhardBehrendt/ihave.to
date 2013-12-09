@@ -54,9 +54,9 @@ Enter grunt folder from termina and install grunt and dependencies:
 
 ``npm install -l``
 
-You can start application now and let them watching your changes typing only
+You can start application now and let them watching your changes typing following command inside the grunt folder:
 
-``grunt`` inside the grunt folder.
+``grunt``
 
 You now can open iHave.to in browser at ``http://localhost:3000``
 
