@@ -68,8 +68,8 @@ If you need some documentation you can install [yuidoc](https://npmjs.org/packag
 
 ``npm install -g yuidocjs``
 
-After yuidoc was installed just run:
+After yuidoc was installed just run following command inside the apps root folder:
 
 `àpidoc.sh``
 
-Inside iHave.to's root folder and open index.html inside documentation folder.
+Now open index.html file inside documentation folder in your browser.
