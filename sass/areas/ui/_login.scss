@@ -59,7 +59,9 @@
     h1{
       float:left;
       color:$white;
+      font-size: $large;
       margin-bottom:$def_margin_unit / 2;
+      width:100%
     }
 
     p{
@@ -70,6 +72,7 @@
       letter-spacing:0.02em;
       line-height:16px;
       margin-bottom:$def_margin_unit;
+      width:100%;
     }
 
     div#login-form{
@@ -238,11 +241,12 @@
       float:left;
       color:$white;
       font-family:$font-light;
-      font-size:$small;
+      font-size:$normal;
 
       strong{
         color:$red;
         font-family:$font-bold;
+        font-size: $normal;
       }
     }
 

@@ -35,12 +35,12 @@
   }
 
   li.button.ok{
-    @include x1x2(($def_margin_unit / 4) 3px, '../img/icons/1x/tick-default.png', '../img/icons/2x/tick-default.png');
+    //@include x1x2(($def_margin_unit / 4) 3px, '../img/icons/1x/tick-default.png', '../img/icons/2x/tick-default.png');
 
     background-color:$green;
 
     &:hover{
-      @include x1x2(($def_margin_unit / 4) 3px, '../img/icons/1x/tick-hover.png', '../img/icons/2x/tick-hover.png');
+     // @include x1x2(($def_margin_unit / 4) 3px, '../img/icons/1x/tick-hover.png', '../img/icons/2x/tick-hover.png');
     }
   }
 
@@ -111,7 +111,7 @@
     width:150px;
 
     a{
-      @include paddingbox(150px, 38px, 10px, 0, 0, 38px);
+      @include paddingbox(150px, 38px, 10px, 0, 0, 8px);
 
       display:block;
     }
@@ -124,7 +124,7 @@
     width:180px;
 
     a{
-      @include paddingbox(180px, 38px, 10px, 0, 0, 38px);
+      @include paddingbox(180px, 38px, 10px, 0, 0, 8px);
 
       display:block;
      }
@@ -137,7 +137,7 @@
     width:312px;
 
     a{
-      @include paddingbox(312px, 38px, 10px, 0, 0, 38px);
+      @include paddingbox(312px, 38px, 10px, 0, 0, 8px);
 
       display:block;
      }
