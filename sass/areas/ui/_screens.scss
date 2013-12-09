@@ -97,6 +97,25 @@
       }
     }
 
+    div#uploadProgress {
+      @include paddingbox(314px, 40px, 0, 0, 0, 0);
+      @include border-radius(4px);
+
+      display:none;
+      float: left;
+      border: solid 1px $white;
+      margin-bottom: $def_margin_unit * 2;
+      overflow: hidden;
+
+      div.bar {
+        height: 100%;
+        width: 30%;
+        background-color: #19d167;
+        background-image: url(../img/loaders/bar.png);
+        background-repeat: repeat-x;
+      }
+    }
+
   }
 
   /////
