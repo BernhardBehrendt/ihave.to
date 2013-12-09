@@ -104,10 +104,11 @@
             });
         });
 
-        // handle page not found (404)
-        app.use(function (req, res) {
-            res.redirect(302, '/404.html');
-        });
+
+            app.get('*', function(req, res){
+                res.send(404, 'Not found');
+            });
+
 
 
         io.enable('browser client etag');
