@@ -55,7 +55,7 @@
 
                 fs.stat(sTmpPath, function (err, stats) {
 
-                    if (stats.size > (10 * Math.pow(1024, 1))) {
+                    if (stats.size < (10 * Math.pow(1024, 2))) {
                         fs.readFile(sTmpPath, function (err, image) {
                             //fs.createReadStream(sTmpPath).pipe(fs.createWriteStream(sFileName));
 
