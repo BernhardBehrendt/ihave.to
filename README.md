@@ -1,18 +1,16 @@
 #iHave.to#
 ##AES secured and realtime enabled plain memoboard##
-[ ![Image](http://212.224.109.247/img/preview/desktop/8.png "Image title") ](http://212.224.109.247)
+[ ![Image](http://212.224.109.247/img/preview/desktop/8.png "Image title") ](http://www.ihave.to/do/)
 
-**Because iHave.to is moving you can find a working demo here.**
-You can find a working demo on [iHave.to app](http://212.224.109.247)
+Because iHave.to is moving you can find a working demo here.
+You can find a working demo on http://212.224.109.247
 
 Author:
-iHave.to was written and designed by Bernhard Bezdek all rights reserved.
+iHave.to is written by Bernhard Bezdek all rights reserved.
 
 Released under MIT License
 
-iHave.to was developed to be creative focusing your ideas as they come and give you the tools to follow later how they were grown.
-To keep your ideas your own everything here is AES encrypted on your custom device.
-You are also able to be creative in a collaborative way via built in realtime multiuser support.
+
 
 ###Install###
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
@@ -52,3 +50,15 @@ You can start application now and let them watching your changes typing only
 ``grunt``
 
 inside the grunt folder
+
+
+###Apendix###
+If you need some documentation you can install [yuidoc](https://npmjs.org/package/yuidocjs) in global context:
+
+``npm install -g yuidocjs``
+
+After yuidoc was installed just run:
+
+`àpidoc.sh``
+
+inside iHave.to's root folder and open index.html inside documentation folder. 
