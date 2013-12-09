@@ -31,7 +31,7 @@ After previous step was successful you can run iHave.to on serveral ways from te
 
 
 ###Standalone###
-``node app.js``- Thats it you can open iHave.to in browser at ``http://localhost:3000``
+``node app.js``- Thats it. You now can open iHave.to in browser at ``http://localhost:3000``
 
 **You can change the port in ``server/settings/config.js``.
 
@@ -41,7 +41,9 @@ If you want to run iHave.to as a daemon I recommend [pm2](https://npmjs.org/pack
 
 With following command inside server folder you can start the application:
 
-``pm2 start app.js -i max``
+``pm2 start app.js -i max``- Thats it. You now can open iHave.to in browser at ``http://localhost:3000``
+
+**You can change the port in ``server/settings/config.js``.
  
 ###Developer##
 If you want to change things or want to create new features a grunt task is shipped with this project.
@@ -54,9 +56,11 @@ Enter grunt folder from termina and install grunt and dependencies:
 
 You can start application now and let them watching your changes typing only
 
-``grunt``
+``grunt`` inside the grunt folder.
 
-inside the grunt folder
+You now can open iHave.to in browser at ``http://localhost:3000``
+
+**You can change the port in ``server/settings/config.js``.
 
 
 ###Apendix###
