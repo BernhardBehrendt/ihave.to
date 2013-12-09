@@ -75,7 +75,7 @@ var LANGUAGE = {
         GOOD: "gut",
         STRONG: "sicher",
         NOGO: "verboten",
-        ENTER_YOUR_NAME: "Gebe für die Timeline deine Namen ein. (Mit ESC/ENTER kannst du diesen Schritt überspringen)",
+        ENTER_YOUR_NAME: "Gebe für die Timeline deinen Namen ein. (Mit ESC/ENTER kannst du diesen Schritt überspringen)",
         REALLY_DELETE_THE_SELECTED_SCREENS: "Sollen die gewählten Boards wirklich gelöscht werden?",
         CONFIRM_DELETE_POST: "Soll dieses Memo wirklich gelöscht werden? (Du kannst es in deiner Timeline immer wieder finden)",
         OK: "Ok",
@@ -986,6 +986,14 @@ var Screens;
                         ID: "dropImage",
                         CLASS: "dropzone",
                         CONTENT: "DROP_IMAGEFILE_HERE".translate()
+                    },
+                    DIV: {
+                        ID: "uploadProgress",
+                        CONTENT: {
+                            DIV: {
+                                CLASSES: "bar"
+                            }
+                        }
                     },
                     LINK: [ {
                         ID: "create-screen",
@@ -13463,25 +13471,32 @@ var showMessage;
             } else showMessage("CANT_STORE_EMPTY_POST", "error"), $(this).removeClass("active");
         }
     }).on(CONF.EVENTS.CLICK, "#new_screen", function() {
-        var a, b;
+        var a;
         $(this).hasClass("active") ? (CONF.DOM.UIWINDOW.children(".cmd").prepend(new Template(new Screens().newScreen()).toHtml()), 
         $("#dropImage").dropzone({
             url: "/upload-wp",
             paramName: "file",
-            maxFilesize: 10,
-            maxFiles: 10,
-            accept: function(c, d) {
-                -1 === CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(c.name.substring(c.name.length - 4, c.name.length)) ? (showMessage("FILETYPE_NOT_ALLOWED", "error"), 
-                $("div.dz-preview").remove()) : (a = $("#create-screen, #abort-create-screen"), 
-                b = $("#screen-bg-url").val().trim().split("/").pop(), b.length > 0 && $.post("/unlink-wp", {
-                    image: b
-                }), showMessage("UPLOADING_FILE"), d(), $("div.dz-preview").remove(), a.fadeOut(250));
+            maxFilesize: 60,
+            maxFiles: 1,
+            accept: function(b, c) {
+                -1 === CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(b.name.substring(b.name.length - 4, b.name.length)) ? showMessage("FILETYPE_NOT_ALLOWED", "error") : (a = $("#screen-bg-url").val().trim().split("/").pop(), 
+                a.length > 0 && $.post("/unlink-wp", {
+                    image: a
+                }), showMessage("UPLOADING_FILE"), c(), $("#create-screen, #abort-create-screen").fadeOut(250));
             },
-            success: function(b, c) {
-                showMessage("UPLOADING_FINISH"), $("#screen-bg-url").val(c), a.fadeIn(250);
+            uploadprogress: function(a, b) {
+                var c = $("#uploadProgress");
+                c.hasClass("active") || c.addClass("active"), c.children("div.bar").css("width", b + "%"), 
+                b >= 100 && (c.removeClass("active"), c.children("div.bar").removeAttr("style"));
+            },
+            complete: function(a) {
+                this.removeFile(a);
+            },
+            success: function(a, b) {
+                showMessage("UPLOADING_FINISH"), $("#screen-bg-url").val(b), $("#create-screen, #abort-create-screen").fadeIn(250);
             },
             error: function() {
-                showMessage("UPLOADING_ERROR"), a.fadeIn(250);
+                showMessage("UPLOADING_ERROR"), $("#create-screen, #abort-create-screen").fadeIn(250);
             }
         })) : $("#new_screen-ui").fadeOut(CONF.PROPS.INT.MASTERCLOCK / 4, function() {
             $(this).remove();

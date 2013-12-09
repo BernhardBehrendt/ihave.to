@@ -36,13 +36,35 @@
     }
   }
 
+  div#uploadProgress {
+    @include paddingbox(614px, 40px, 0, 0, 0, 0);
+    @include border-radius(10px);
+    @include transition-property("opacity");
+    @include transition-duration("0.25s");
+
+    display:none;
+    float: left;
+    border: solid 1px $white;
+    margin-bottom: $def_margin_unit * 2;
+    overflow: hidden;
+
+    div.bar {
+      height: 100%;
+      width: 30%;
+      background-image: url(../img/loaders/bar.png);
+      background-repeat: repeat-x;
+    }
+  }
+
+  div#uploadProgress.active{
+    display: block;
+  }
+
   form#dropImage.dz-drag-hover {
     background-color: $white_25;
     color: #000;
   }
 
-  @include iPodSafariPortrait() {
-  }
   @include iPodWebappPortrait() {
     @include paddingbox(316px, 360px, $def_margin_unit / 2, 0, $def_margin_unit / 2, 0);
 

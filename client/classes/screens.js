@@ -192,6 +192,14 @@ var Screens;
                         CONTENT: "DROP_IMAGEFILE_HERE".translate()
 
                     },
+                    DIV: {
+                        ID: "uploadProgress",
+                        CONTENT: {
+                            DIV: {
+                                CLASSES: "bar"
+                            }
+                        }
+                    },
                     LINK: [
                         {
                             ID: 'create-screen',

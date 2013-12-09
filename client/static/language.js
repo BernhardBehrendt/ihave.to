@@ -23,7 +23,7 @@ var LANGUAGE = {
         NOGO: 'verboten',
 
         // ALERTS AND PROMPTS
-        ENTER_YOUR_NAME: 'Gebe für die Timeline deine Namen ein. (Mit ESC/ENTER kannst du diesen Schritt überspringen)',
+        ENTER_YOUR_NAME: 'Gebe für die Timeline deinen Namen ein. (Mit ESC/ENTER kannst du diesen Schritt überspringen)',
         REALLY_DELETE_THE_SELECTED_SCREENS: 'Sollen die gewählten Boards wirklich gelöscht werden?',
         CONFIRM_DELETE_POST: 'Soll dieses Memo wirklich gelöscht werden? (Du kannst es in deiner Timeline immer wieder finden)',
         OK: 'Ok',

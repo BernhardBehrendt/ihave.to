@@ -4,6 +4,7 @@
 /*global Board*/
 /*global Screens*/
 /*global Apprise*/
+/*global isMobile*/
 /*global Settings*/
 /*global Template*/
 /*global PostWindow*/
@@ -281,7 +282,6 @@
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Create new screen
         .on(CONF.EVENTS.CLICK, '#new_screen', function () {
-            var oScreenButtons;
             var sCurrentBgVal;
 
             if ($(this).hasClass('active')) {
@@ -291,19 +291,16 @@
                 $("#dropImage").dropzone({
                     url: "/upload-wp",
                     paramName: "file", // The name that will be used to transfer the file
-                    maxFilesize: 10, // MB,
-                    maxFiles: 10,
+                    maxFilesize: 60, // MB,
+                    maxFiles: 1,
                     accept: function (file, done) {
 
                         if (CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(file.name.substring(file.name.length - 4, file.name.length)) === -1) {
 
                             showMessage('FILETYPE_NOT_ALLOWED', 'error');
 
-                            $('div.dz-preview').remove();
                         }
                         else {
-
-                            oScreenButtons = $('#create-screen, #abort-create-screen');
                             sCurrentBgVal = $('#screen-bg-url').val().trim().split('/').pop();
 
                             if (sCurrentBgVal.length > 0) {
@@ -313,20 +310,37 @@
                             showMessage('UPLOADING_FILE');
                             done();
 
-                            $('div.dz-preview').remove();
-
-                            oScreenButtons.fadeOut(250);
+                            $('#create-screen, #abort-create-screen').fadeOut(250);
                         }
+                    },
+                    uploadprogress: function (file, uploaded) {
+                        var oUploadProgress = $('#uploadProgress');
+
+                        if (!oUploadProgress.hasClass('active')) {
+                            oUploadProgress.addClass('active');
+                        }
+
+                        oUploadProgress.children('div.bar').css('width', uploaded + '%');
+
+                        if (uploaded >= 100) {
+                            oUploadProgress.removeClass('active');
+                            oUploadProgress.children('div.bar').removeAttr('style');
+                        }
+
+
+                    },
+                    complete: function (file) {
+                        this.removeFile(file);
                     },
                     success: function (response, data) {
                         showMessage('UPLOADING_FINISH');
 
                         $('#screen-bg-url').val(data);
-                        oScreenButtons.fadeIn(250);
+                        $('#create-screen, #abort-create-screen').fadeIn(250);
                     },
-                    error: function (error) {
+                    error: function () {
                         showMessage('UPLOADING_ERROR');
-                        oScreenButtons.fadeIn(250);
+                        $('#create-screen, #abort-create-screen').fadeIn(250);
                     }});
 
 

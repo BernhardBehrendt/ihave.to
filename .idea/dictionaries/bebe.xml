@@ -1,8 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="bebe">
     <words>
+      <w>dropzone</w>
+      <w>filesize</w>
       <w>fromtime</w>
       <w>strore</w>
+      <w>uploadprogress</w>
     </words>
   </dictionary>
 </component>
