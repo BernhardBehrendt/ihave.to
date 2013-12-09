@@ -37,7 +37,7 @@ You can change the port in ``server/settings/config.js``.
 
 
 ###Daemon##
-If you want to run iHave.to as a daemon I recommend using [pm2](https://npmjs.org/package/pm2 "Modern CLI process manager for Node apps with a builtin load-balancer")
+If you want to run iHave.to as a daemon I recommend using [pm2](https://npmjs.org/package/pm2 "Modern CLI process manager for Node apps with a builtin load-balancer").
 
 With following command inside server folder you can start the application:
 
