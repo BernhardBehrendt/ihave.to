@@ -1,67 +1,54 @@
+#iHave.to#
+##AES secured and realtime enabled plain memoboard##
+[ ![Image](http://212.224.109.247/img/preview/desktop/8.png "Image title") ](http://212.224.109.247)
 
-iHave.to is a memoboard with realtime support and client side AES en/decryption running on node.js.
-================================================================================================
-[ ![Image](http://cdn.alternativeto.net/s/baa06179-4709-e211-a334-0025902c7e73_6_full.png "Image title") ](http://www.ihave.to/do/)
-
-You can find a working demo on http://www.ihave.to/
+**Because iHave.to is moving you can find a working demo here.**
+You can find a working demo on [iHave.to app](http://212.224.109.247)
 
 Author:
-iHave.to is written by Bernhard Bezdek all rights reserved.
+iHave.to was written and designed by Bernhard Bezdek all rights reserved.
 
 Released under MIT License
 
+iHave.to was developed to be creative focusing your ideas as they come and give you the tools to follow later how they were grown.
+To keep your ideas your own everything here is AES encrypted on your custom device.
+You are also able to be creative in a collaborative way via built in realtime multiuser support.
+
+###Install###
+iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
 
 
+To resolve all dependencies open iHave.to's server folder in a terminal and type following command:
 
-Startup:
+``npm install -l``
 
-
-To run the application a node runtime is required (http://nodejs.org/)
-
-Create the folder boards (if not exists) on same level as server and public folder
-Ensure that hte boards folder has write permissions for nodejs running user.
-
-Now there are two ways possible to run the application:
-
-1) Run the app as standalone
+After previous step was successful you can run iHave.to on serveral ways from terminal (**stay in server folder**):
 
 
+###Standalone###
+``node app.js``- Thats it you can open iHave.to in browser at ``http://localhost:3000``
 
-    - Enter server folder
-    - type in your terminal node server-standalone.js
-
-    - Finish (access the app via http://localhost:3000)
-
-2) Run the app in your nginx via proxy pass
-
-    - Create an nginx server block like this one
-
-	server {
-     listen 80;
-     server_name mydomain.com www.mydomain.com default_server;
-     access_log /var/log/nginx/mydomain.com.log;
+**You can change the port in ``server/settings/config.js``.
 
 
+###Daemon##
+If you want to run iHave.to as a daemon I recommend [pm2](https://npmjs.org/package/pm2 "Modern CLI process manager for Node apps with a builtin load-balancer")
 
-     location / {
-        root /path/to/public/folder/;
-        error_page    404 = index.html;
-     }
+With following command inside server folder you can start the application:
 
-     location ~* \.(jpg|jpeg|gif|css|png|js|ico|html|woff|svg|ttf)$ {
-       root /path/to/public/folder/;
-       access_log off;
-      # expires max;
-     }
+``pm2 start app.js -i max``
+ 
+###Developer##
+If you want to change things or want to create new features a grunt task is shipped with this project.
 
-     location /socket.io/ {
-            proxy_pass http://127.0.0.1:3000;
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-     }
+Enter grunt folder from termina and install grunt and dependencies:
 
+``npm install grunt``
 
-     Then start the server.proxy_pass.js script inside the server folder by type in teminal
-     node server.proxy_pass.js
+``npm install -l``
 
+You can start application now and let them watching your changes typing only
 
+``grunt``
+
+inside the grunt folder
