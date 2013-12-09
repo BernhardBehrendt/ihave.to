@@ -1,16 +1,22 @@
 #iHave.to#
-##AES secured and realtime enabled plain memoboard##
-[ ![Image](http://212.224.109.247/img/preview/desktop/8.png "Image title") ](http://www.ihave.to/do/)
+##AES secured and real time enabled plain memoboard##
+[ ![Image](http://212.224.109.247/img/preview/desktop/8.png "Image title") ](http://212.224.109.247)
 
 Because iHave.to is moving you can find a working demo here.
-You can find a working demo on http://212.224.109.247
+You can find a working demo [here](http://212.224.109.247)
 
 Author:
-iHave.to is written by Bernhard Bezdek all rights reserved.
+iHave.to is written and designed by Bernhard Bezdek all rights reserved.
 
 Released under MIT License
 
 
+iHave.to was developed to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown.
+To keep your ideas your own everything is AES encrypted on your custom device.
+You are also able to be creative in a collaborative way via realtime multiuser support.
+Your data is strongly protected on your device until any authenticated endpoint.
+
+**And YES, you can customize your memo board with custom wallpapers ;-)**.
 
 ###Install###
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
@@ -61,4 +67,4 @@ After yuidoc was installed just run:
 
 `àpidoc.sh``
 
-inside iHave.to's root folder and open index.html inside documentation folder. 
+Inside iHave.to's root folder and open index.html inside documentation folder.
