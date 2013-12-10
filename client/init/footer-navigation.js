@@ -50,6 +50,16 @@
         CONF.DOM.CMD_INFO.empty();
     });
 
+    // The new Post edit navigation
+    CONF.DOM.CMD.bind('setTimelineNav', function () {
+        var oMenu = new Menu();
+
+        $(this).html(new Template(oMenu.getMenuCmds(oMenu.getTimelineMenu())).toHtml());
+
+
+        CONF.DOM.CMD_INFO.empty();
+    });
+
     // the screen navigation
     CONF.DOM.CMD.bind('setScreenNav', function () {
         var oMenu = new Menu();

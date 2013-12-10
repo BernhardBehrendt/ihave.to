@@ -8,6 +8,7 @@
 /*global Settings*/
 /*global Template*/
 /*global PostWindow*/
+/*global Timeline*/
 /*global showMessage*/
 /*global Dropzone*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,6 +104,32 @@
                 var oTextarea = CONF.DOM.UIWINDOW.find('textarea');
                 oTextarea.val(oTextarea.val().toString().br2nl());
                 oTextarea.focus();
+            }
+        })
+
+        .on(CONF.EVENTS.CLICK, '#timeline', function () {
+            var sActiveScreen;
+            var oTimeline;
+
+            if ($(this).hasClass('active')) {
+                sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
+                CONF.DOM.UIWINDOW.trigger('showUi');
+                CONF.DOM.CMD.trigger('setTimelineNav');
+
+
+                oTimeline = new Timeline(CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS);
+                oTimeline.getTimespan().getTimelineModel();
+
+                // CONF.DOM.UIWINDOW.children('.cmd').html();
+
+                CONF.DOM.UIWINDOW.children('.cmd').css({
+                        margin: 0,
+                        padding: 0,
+                        width: 100 + '%',
+                        minHeight: 100 + '%',
+                        maxWidth: 'none'
+                    }
+                );
             }
         })
 
@@ -240,7 +267,7 @@
                                 BY: CONF.PROPS.INT.WHO,
                                 TGT: iTimestamp,
                                 ACN: "content",
-                                TO: oTextarea.val().escapeHtml().urlToLink().   nl2br()
+                                TO: oTextarea.val().escapeHtml().urlToLink().nl2br()
                             },
                             {
                                 BY: CONF.PROPS.INT.WHO,
@@ -455,4 +482,5 @@
                 });
             }
         });
-})();
+})
+    ();

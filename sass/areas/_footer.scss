@@ -81,7 +81,7 @@
         }
 
         #timeline{
-          @include sprite-bg('timer-default', $x1Icons, $x2Icons);
+          @include sprite-bg('clock-default', $x1Icons, $x2Icons);
           &:hover{@extend #timeline.active;}
         }
 
@@ -177,7 +177,7 @@
         #chrono.active{@include sprite-bg('order-hover', $x1Icons, $x2Icons);}
         #screen.active{@include sprite-bg('computer-hover', $x1Icons, $x2Icons);}
         #settings.active{@include sprite-bg('configuration-hover', $x1Icons, $x2Icons);}
-        #timeline.active{@include sprite-bg('timer-hover', $x1Icons, $x2Icons);}
+        #timeline.active{@include sprite-bg('clock-hover', $x1Icons, $x2Icons);}
 
         // Login
         #home.active{@include sprite-bg('home-hover', $x1Icons, $x2Icons);}

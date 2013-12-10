@@ -85,7 +85,7 @@ var Menu;
      */
     Menu.prototype.getPrivateMain = function (sActiveOne) {
         var i;
-        var aMenuCmds = ['new_post', 'screen', 'chrono', 'settings'];
+        var aMenuCmds = ['new_post', 'screen', 'timeline', 'chrono', 'settings'];
         var aCmds = [];
 
         if (sActiveOne === undefined) {
@@ -105,6 +105,36 @@ var Menu;
             };
         }
 
+        return aCmds;
+    };
+
+    /**
+     * The main menue for timeline
+     * @method getTimelineMenu
+     * @param {String} sActiveOne the Actice menu item
+     * @return {Array} The commands for menubar
+     */
+    Menu.prototype.getTimelineMenu = function (sActiveOne) {
+        var i;
+        var aMenuCmds = ['back'];
+        var aCmds = [];
+
+        if (sActiveOne === undefined) {
+            sActiveOne = '';
+        }
+
+        for (i = 0; i < aMenuCmds.length; i += 1) {
+            aCmds[i] = {
+                CONTENT: {
+                    LINK: {
+                        URL: '#',
+                        ID: aMenuCmds[i],
+                        CLASSES: ((aMenuCmds[i] === sActiveOne) ? 'active' : '')
+                    }
+                },
+                AFTER: ' '
+            };
+        }
         return aCmds;
     };
 

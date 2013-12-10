@@ -16,6 +16,8 @@
     // Hide the main ui interface
     CONF.DOM.UIWINDOW.bind('hideUi', function () {
         CONF.DOM.UIWINDOW.children('.cmd').empty();
+        CONF.DOM.UIWINDOW.children('.cmd').removeAttr('style');
+
         $(this).removeClass('opened').addClass('closed');
     });
 

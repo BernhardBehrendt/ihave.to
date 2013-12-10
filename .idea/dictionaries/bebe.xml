@@ -5,6 +5,8 @@
       <w>filesize</w>
       <w>fromtime</w>
       <w>strore</w>
+      <w>timeline</w>
+      <w>timespan</w>
       <w>uploadprogress</w>
     </words>
   </dictionary>
