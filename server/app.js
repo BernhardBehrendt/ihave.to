@@ -96,6 +96,9 @@
             });
         });
 
+        ap.get('/do', function(req, res){
+            res.redirect('/');
+        });
 
         app.get('*', function (req, res) {
             res.send(404, 'Not found');
