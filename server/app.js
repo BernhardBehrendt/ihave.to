@@ -56,7 +56,7 @@
                     if (stats.size <= (SETTINGS.MAX_UPLOAD_SIZE * Math.pow(1024, 2))) {
                         // If image is an jpeg image
                         if (['image/jpg', 'image/jpeg'].indexOf(req.files.file.headers['content-type']) !== -1) {
-                            gm(sTargetFile).autoOrient()
+                            gm(sTmpPath).autoOrient()
                                 .write(sTargetFile, function (err) {
                                     res.send('upload/' + sTargetFile.split('/').pop());
                                 });
