@@ -88,7 +88,7 @@
      * @return boolean is / is not an image url
      */
     String.prototype.isImageURL = function () {
-        var mRegex = /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:jpg|jpeg|gif|png|JPG|JPEG))(?:\?([^#]*))?(?:#(.*))?/;
+        var mRegex = /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG))(?:\?([^#]*))?(?:#(.*))?/;
 
         return mRegex.test(this.toString());
     };

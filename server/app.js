@@ -10,6 +10,7 @@
     var Store = require('socket.io-clusterhub');
     var cluster = require('cluster');
     var numCPUs = require('os').cpus().length;
+    var gm = require('gm');
     var SETTINGS = require(__dirname + '/settings/config');
 
     if (!fs.existsSync(SETTINGS.ROOT + '../boards/')) {
@@ -47,34 +48,28 @@
         app.use(express.static(SETTINGS.ROOT + '../public/'));
 
         app.post('/upload-wp', function (req, res) {
-
-
             if (['image/png', 'image/jpg', 'image/jpeg', 'image/gif'].indexOf(req.files.file.headers['content-type']) !== -1) {
                 var sTmpPath = req.files.file.path;
                 var sTargetFile = __dirname + '/../public/upload/' + sTmpPath.split('/').pop();
 
                 fs.stat(sTmpPath, function (err, stats) {
-
-                    if (stats.size <= (6 * Math.pow(1024, 2))) {
-                        fs.readFile(sTmpPath, function (err, image) {
-                            //fs.createReadStream(sTmpPath).pipe(fs.createWriteStream(sFileName));
-
-                            if (err === null) {
-
-                                // Fix image rotation and save to target
-
-                                fs.writeFile(sTargetFile, image, function (err) {
-                                    if (err === null) {
-                                        res.send('upload/' + sTargetFile.split('/').pop());
-                                    } else {
-                                        res.send('FILE_WRITE_ERROR');
-                                    }
+                    if (stats.size <= (SETTINGS.MAX_UPLOAD_SIZE * Math.pow(1024, 2))) {
+                        // If image is an jpeg image
+                        if (['image/jpg', 'image/jpeg'].indexOf(req.files.file.headers['content-type']) !== -1) {
+                            gm(sTargetFile).autoOrient()
+                                .write(sTargetFile, function (err) {
+                                    res.send('upload/' + sTargetFile.split('/').pop());
                                 });
-                            } else {
-                                res.send('FILE_READ_ERROR');
-                            }
-
-                        });
+                        } else {
+                            fs.createReadStream(sTmpPath).pipe(fs.createWriteStream(sTargetFile));
+                            fs.exists(sTargetFile, function (exists) {
+                                if (exists) {
+                                    res.send('upload/' + sTargetFile.split('/').pop());
+                                } else {
+                                    res.send('FILE_WRITE_ERROR');
+                                }
+                            });
+                        }
                     } else {
                         res.send('FILE_TO_LARGE');
                     }
@@ -88,9 +83,7 @@
 
         app.post('/unlink-wp', function (req, res) {
             var sRemoveFile = req.body.image.split('/').pop();
-
             fs.exists(__dirname + '/../public/upload/' + sRemoveFile, function (exists) {
-
                 if (exists) {
                     fs.unlink(__dirname + '/../public/upload/' + sRemoveFile, function (err) {
                         if (err) {
@@ -98,17 +91,15 @@
                         }
                     });
                 }
-
                 res.send('done');
 
             });
         });
 
 
-            app.get('*', function(req, res){
-                res.send(404, 'Not found');
-            });
-
+        app.get('*', function (req, res) {
+            res.send(404, 'Not found');
+        });
 
 
         io.enable('browser client etag');
@@ -127,9 +118,6 @@
                 // Handle conection lost delete board object
                 socket.on('disconnect', function () {
                     oBoard.goodBye();
-
-                    // Seems to be wrong but necessary to cleanup memory or done by garbage collection???
-                    //delete oBoard;
                 });
             });
         });
