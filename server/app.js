@@ -48,7 +48,7 @@
         app.use(express.static(SETTINGS.ROOT + '../public/'));
 
         app.post('/upload-wp', function (req, res) {
-            if (['image/png', 'image/jpg', 'image/jpeg', 'image/gif'].indexOf(req.files.file.headers['content-type']) !== -1) {
+            if (['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/svg+xml'].indexOf(req.files.file.headers['content-type']) !== -1) {
                 var sTmpPath = req.files.file.path;
                 var sTargetFile = __dirname + '/../public/upload/' + sTmpPath.split('/').pop();
 

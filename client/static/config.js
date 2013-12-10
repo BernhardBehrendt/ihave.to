@@ -60,7 +60,7 @@ var CONF;
             },
             ARRAY: {
                 COLORS: ['blue', 'turkis', 'green', 'yellow', 'orange', 'red', 'pink', 'grey', 'white'],
-                ALLOWED_FILES: ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.gif', '.GIF']
+                ALLOWED_FILES: ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.gif', '.GIF', '.svg', '.SVG']
             },
             OBJECT: {
                 STORAGE: null
