@@ -321,7 +321,6 @@
                     maxFilesize: 6, // MB,
                     maxFiles: 1,
                     accept: function (file, done) {
-
                         if (CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(file.name.substring(file.name.length - 4, file.name.length)) === -1) {
 
                             showMessage('FILETYPE_NOT_ALLOWED', 'error');
