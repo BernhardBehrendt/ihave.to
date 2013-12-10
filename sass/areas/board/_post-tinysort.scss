@@ -156,8 +156,9 @@
   cursor: pointer;
 
   .content {
-    @include user-select(none);
-
+    p {
+      @include user-select(none);
+    }
     overflow-y: auto;
   }
 }

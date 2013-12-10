@@ -131,12 +131,12 @@
       }
 
       a.imageLink {
-        display:inline;
-        border:none;
-        background:none;
+        display: inline;
+        border: none;
+        background: none;
 
-        img{
-          width:100%;
+        img {
+          width: 100%;
         }
 
       }
@@ -144,7 +144,6 @@
   }
 
   h3 {
-
     color: #000;
     font-weight: bold;
     margin-bottom: $def_margin_unit / 4;
@@ -156,7 +155,9 @@
   cursor: pointer;
 
   .content {
-    @include user-select(none);
+    p {
+      @include user-select(none);
+    }
 
     overflow-y: auto;
   }
