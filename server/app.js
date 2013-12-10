@@ -96,7 +96,7 @@
             });
         });
 
-        ap.get('/do', function(req, res){
+        app.get('/do', function(req, res){
             res.redirect('/');
         });
 
