@@ -138,7 +138,7 @@
                             oPost.remove();
                             Apprise('close');
                         }, // Callback function
-                        className: null, // Custom class name(s)
+                        className: 'red', // Custom class name(s)
                         id: 'confirm', // Element ID
                         text: 'OK'.translate() // Button text
                     },
@@ -146,6 +146,7 @@
                         action: function () {
                             Apprise('close');
                         },
+                        className: 'blue',
                         id: 'abort', // Element ID
                         text: 'ABORT'.translate() // Button text
                     }

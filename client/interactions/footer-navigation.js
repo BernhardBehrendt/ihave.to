@@ -461,7 +461,7 @@
 
                                 Apprise('close');
                             }, // Callback function
-                            className: null, // Custom class name(s)
+                            className: 'red', // Custom class name(s)
                             id: 'confirm', // Element ID
                             text: 'OK'.translate() // Button text
                         },
@@ -473,6 +473,7 @@
                                 Apprise('close');
                             },
                             id: 'abort', // Element ID
+                            className: 'blue',
                             text: 'ABORT'.translate() // Button text
                         }
                     },

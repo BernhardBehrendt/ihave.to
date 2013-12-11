@@ -611,7 +611,7 @@ var Connection;
 
                             Apprise('close');
                         },
-                        className: null,
+                        className: 'blue',
                         id: 'confirm',
                         text: 'OK'.translate()
                     }
