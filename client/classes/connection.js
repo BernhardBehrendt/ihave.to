@@ -5,6 +5,7 @@
 /*global Apprise*/
 /*global CryptoJS*/
 /*global Template*/
+/*global Screens*/
 /*global showMessage*/
 var Connection;
 (function () {
@@ -200,9 +201,9 @@ var Connection;
 
                         CONF.DOM.BOARD.trigger('uiBoard');
                     }
-                } else {
-                    showMessage('RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN');
                 }
+
+                self.updateCurrentView();
             }
 
             // Detect if a user was added
@@ -212,6 +213,56 @@ var Connection;
                 showMessage(sUserName + ' ' + 'WAS_ADDED_TO_BOARD'.translate());
             }
         });
+    };
+
+    /**
+     * The handler for serveral view updates
+     * @method updateCurrentView
+     */
+    Connection.prototype.updateCurrentView = function () {
+
+        if (CONF.DOM.UIWINDOW.children('.cmd').children('.screen').length > 0) {
+            this.updateScreenOverview();
+        }
+    };
+
+    /**
+     * Update the ScreenOverview and create an updated expected Screenoverview
+     * @method updateScreenOverview
+     */
+    Connection.prototype.updateScreenOverview = function () {
+
+        var i;
+        var aScreens = [];
+        var oCurrentScreenItem;
+        var oTrashVButton = $('#trash_empty.active, #trash_full');
+
+
+        if (oTrashVButton.length === 1) {
+            $.each(CONF.DOM.UIWINDOW.children('.cmd').children('.screen.do'), function () {
+                aScreens.push($(this).attr('id'));
+            });
+
+            oTrashVButton.prev().remove();
+            oTrashVButton.removeAttr('id').attr('id', 'trash_empty').removeClass('active');
+
+        }
+
+        CONF.DOM.UIWINDOW.children('.cmd').children('.screen').remove();
+
+        CONF.DOM.UIWINDOW.children('.cmd').append(new Template(new Screens().getOverview()).toHtml());
+
+        if (aScreens.length > 0) {
+            $('#trash_empty').trigger(CONF.EVENTS.CLICK);
+
+            for (i = 0; i < aScreens.length; i += 1) {
+                oCurrentScreenItem = $('#' + aScreens[i]);
+
+                if (oCurrentScreenItem.length === 1) {
+                    oCurrentScreenItem.trigger(CONF.EVENTS.CLICK);
+                }
+            }
+        }
     };
 
     /**
