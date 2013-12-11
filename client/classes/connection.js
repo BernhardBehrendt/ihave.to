@@ -201,8 +201,6 @@ var Connection;
 
                         CONF.DOM.BOARD.trigger('uiBoard');
                     }
-                } else {
-                    showMessage('RECEIVED_CHANGES_WICH_DONT_AFFECT_CURRENT_SCREEN');
                 }
 
                 self.updateCurrentView();
@@ -238,8 +236,6 @@ var Connection;
         var aScreens = [];
         var oCurrentScreenItem;
         var oTrashVButton = $('#trash_empty.active, #trash_full');
-
-        showMessage('CHANGE_ON_WORKSPACES');
 
 
         if (oTrashVButton.length === 1) {
