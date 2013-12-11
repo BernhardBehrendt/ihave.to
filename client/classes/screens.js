@@ -136,7 +136,7 @@ var Screens;
                         IMG: {
                             SRC: 'img/textures/onboard.png',
                             CLASSES: 'screen-icon',
-                            STYLE: 'background-image:url(' + oScreen.META.BG + ');'
+                            STYLE: 'background-image:url(' + oScreen.META.BG.replace(/(.[A-Za-z]*)$/, '.thumb$1').replace('thumb.svg',  'svg') + ');'
                         },
                         H: {
                             NO: 4,

@@ -58,13 +58,21 @@
                         if (['image/jpg', 'image/jpeg'].indexOf(req.files.file.headers['content-type']) !== -1) {
                             gm(sTmpPath).autoOrient()
                                 .write(sTargetFile, function (err) {
-                                    res.send('upload/' + sTargetFile.split('/').pop());
+                                    gm(sTargetFile).thumb(64, 64, sTargetFile.replace(/(.[A-Za-z]*)$/, '.thumb$1'), 50, function (err) {
+                                        res.send('upload/' + sTargetFile.split('/').pop());
+                                    });
                                 });
                         } else {
                             fs.createReadStream(sTmpPath).pipe(fs.createWriteStream(sTargetFile));
                             fs.exists(sTargetFile, function (exists) {
                                 if (exists) {
-                                    res.send('upload/' + sTargetFile.split('/').pop());
+                                    if ('image/svg+xml' !== req.files.file.headers['content-type']) {
+                                        gm(sTargetFile).thumb(64, 64, sTargetFile.replace(/(.[A-Za-z]*)$/, '.thumb$1'), 50, function (err) {
+                                            res.send('upload/' + sTargetFile.split('/').pop());
+                                        });
+                                    } else {
+                                        res.send('upload/' + sTargetFile.split('/').pop());
+                                    }
                                 } else {
                                     res.send('FILE_WRITE_ERROR');
                                 }
@@ -73,7 +81,6 @@
                     } else {
                         res.send('FILE_TO_LARGE');
                     }
-
                 });
             } else {
                 res.send('UPLOAD_ERROR');
@@ -90,13 +97,21 @@
                             console.log(err);
                         }
                     });
+
+                    if (sRemoveFile.indexOf('.svg') === -1) {
+                        fs.unlink(__dirname + '/../public/upload/' + sRemoveFile.replace(/(.[A-Za-z]*)$/, '.thumb$1'), function (err) {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
                 }
                 res.send('done');
 
             });
         });
 
-        app.get('/do', function(req, res){
+        app.get('/do', function (req, res) {
             res.redirect('/');
         });
 

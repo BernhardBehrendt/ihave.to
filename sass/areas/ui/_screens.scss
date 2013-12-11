@@ -182,42 +182,22 @@
 
   @include iPodWebappPortrait {
     @include paddingbox(308px, 64px);
-
-    img {
-      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
-    }
   }
 
   @include iPodSafariPortrait {
     @include paddingbox(308px, 64px);
-
-    img {
-      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
-    }
   }
 
   @include iPodSafariLandscapeFullscrren {
     @include paddingbox(223px, 64px);
-
-    img {
-      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
-    }
   }
 
   @include iPodWebappLandscape {
     @include paddingbox(231px, 64px);
-
-    img {
-      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
-    }
   }
 
   @include iPodSafariLandscape {
     @include paddingbox(223px, 64px);
-
-    img {
-      background-image: url(../img/touchicons/apple-touch-icon-114x114-precomposed.png) !important
-    }
   }
 
   img {

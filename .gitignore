@@ -6,5 +6,6 @@ boards
 .git
 ./documentation
 LAYOUT
-./.idea
+.idea
 ./.sass-cache
+.nodemonignore
