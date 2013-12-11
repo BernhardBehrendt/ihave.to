@@ -1,4 +1,3 @@
-/*global $*/
 /*global _*/
 /*global CONF*/
 var Screens;

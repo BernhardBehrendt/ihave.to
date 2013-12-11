@@ -329,7 +329,8 @@ var Connection;
                         }
                     }
 
-                    showMessage(sUser + ' ' + sChange.translate(), 'warning');
+                    // Tells who did what but i think it not nice
+                    //showMessage(sUser + ' ' + sChange.translate(), 'warning');
                 }
             }
         } else {
