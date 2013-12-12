@@ -4,7 +4,9 @@
 iHave.to was created to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown.
 To keep your ideas your own everything is AES encrypted on your custom device.
 You are also able to be creative in a collaborative way via realtime multiuser support.
-Your data is strongly protected on your device until any authenticated endpoint.
+Your written data is strongly protected using AES on your device until any authenticated endpoint.
+If you're using iHave.to in a collaborative way only the encryptet data difference is broadcasted to any user who's actually
+on the memo board.
 
 **And YES, you can customize your memo board with custom wallpapers ;-)**.
 
@@ -25,7 +27,7 @@ Released under MIT License
 
 ###Dependencies###
 For creating thumbs [graphicsmagick](http://www.graphicsmagick.org/) and [imagemagick](http://www.imagemagick.org/script/index.php)
-is required on system running ihave.to/do
+is required on system running iHave.to/do
 
 In Debain/Ubuntu you can install imagemagick and graphicsmagick via ``apt``
 ```
