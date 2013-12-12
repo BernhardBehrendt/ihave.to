@@ -1,5 +1,12 @@
-#iHave.to#
+#iHave.to/do#
 ##AES secured and real time enabled plain memoboard##
+
+iHave.to was developed to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown.
+To keep your ideas your own everything is AES encrypted on your custom device.
+You are also able to be creative in a collaborative way via realtime multiuser support.
+Your data is strongly protected on your device until any authenticated endpoint.
+
+**And YES, you can customize your memo board with custom wallpapers ;-)**.
 
 [ ![Image](http://www.ihave.to/img/preview/desktop/8.png "iHave.to memoboard view") ](http://www.ihave.to/)
 
@@ -12,17 +19,9 @@
 You can find a working demo [here](http://www.ihave.to).
 
 Author:
-iHave.to is written and designed by Bernhard Bezdek all rights reserved.
+iHave.to/do is written and designed by Bernhard Bezdek all rights reserved.
 
 Released under MIT License
-
-
-iHave.to was developed to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown.
-To keep your ideas your own everything is AES encrypted on your custom device.
-You are also able to be creative in a collaborative way via realtime multiuser support.
-Your data is strongly protected on your device until any authenticated endpoint.
-
-**And YES, you can customize your memo board with custom wallpapers ;-)**.
 
 ###Dependencies###
 For creating thumbs [graphicsmagick](http://www.graphicsmagick.org/) and [imagemagick](http://www.imagemagick.org/script/index.php)
