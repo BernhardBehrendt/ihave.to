@@ -1,11 +1,11 @@
 #iHave.to#
 ##AES secured and real time enabled plain memoboard##
-[ ![Image](http://5.45.102.42/img/preview/desktop/8.png "iHave.to memoboard view") ](http://5.45.102.42/)
-[ ![Image](http://5.45.102.42/img/preview/desktop/7.png "iHave.to edit view") ](http://5.45.102.42/)
-[ ![Image](http://5.45.102.42/img/preview/desktop/6.png "iHave.to workspaces view") ](http://5.45.102.42/)
-[ ![Image](http://5.45.102.42/img/preview/mobile/mobile.png "iHave.to on a mobile device") ](http://5.45.102.42/)
+[ ![Image](http://www.ihave.to/img/preview/desktop/8.png "iHave.to memoboard view") ](http://www.ihave.to/)
+[ ![Image](http://www.ihave.to/img/preview/desktop/7.png "iHave.to edit view") ](http://www.ihave.to/)
+[ ![Image](http://www.ihave.to/img/preview/desktop/6.png "iHave.to workspaces view") ](http://www.ihave.to/)
+[ ![Image](http://www.ihave.to/img/preview/mobile/mobile.png "iHave.to on a mobile device") ](http://www.ihave.to/)
 
-You can find a working demo [here](http://5.45.102.42).
+You can find a working demo [here](http://www.ihave.to).
 
 Author:
 iHave.to is written and designed by Bernhard Bezdek all rights reserved.
