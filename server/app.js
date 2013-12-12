@@ -44,6 +44,9 @@
         io.configure(function () {
             io.set('store', new Store());
         });
+
+        gm.quality(SETTINGS.GM_QUALITY);
+
         app.use(express.bodyParser());
         app.use(express.static(SETTINGS.ROOT + '../public/'));
 
