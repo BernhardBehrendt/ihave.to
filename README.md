@@ -2,9 +2,8 @@
 ##AES secured and real time enabled plain memoboard##
 
 iHave.to was created to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown.
-To keep your ideas your own everything is AES encrypted on your custom device.
-You are also able to be creative in a collaborative way via realtime multiuser support.
-Your written data is strongly protected using AES on your device until any authenticated endpoint.
+It's also possible to be creative in a collaborative way via realtime multiuser support.
+Your memo data is strongly protected using AES on your device until any authenticated endpoint.
 If you're using iHave.to in a collaborative way only the encryptet data difference is broadcasted to any user who's actually
 on the memo board.
 
