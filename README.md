@@ -61,7 +61,7 @@ You can change the port in ``server/settings/config.js``.
 ###Developer##
 If you want to change things or want to create new features a grunt task is shipped with this project.
 
-Enter grunt folder from termina and install grunt and dependencies:
+Enter grunt folder from terminal and install grunt and dependencies:
 
 ``npm install grunt``
 
