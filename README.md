@@ -24,19 +24,26 @@ Your data is strongly protected on your device until any authenticated endpoint.
 
 **And YES, you can customize your memo board with custom wallpapers ;-)**.
 
-###Install###
+###Dependencies###
+For creating thumbs [graphicsmagick](http://www.graphicsmagick.org/) and [imagemagick](http://www.imagemagick.org/script/index.php)
+is required on system running ihave.to/do
+
+In Debain/Ubuntu you can install imagemagick and graphicsmagick via ``apt``
+```
+sudo apt-get install graphicsmagick imagemagick
+```
+
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
 
-
-To resolve all dependencies open iHave.to's server folder in a terminal and type following command:
-
+###Install###
+To resolve all direct dependencies open projects server folder in a terminal and type following command:
 ``npm install -l``
 
-After previous step was successful you can run iHave.to on serveral ways from terminal (**stay in server folder**):
+After previous step was successful you can run iHave.to on several ways from terminal (**stay in server folder**):
 
 
 ###Standalone###
-``node app.js``- Thats it. You now can open iHave.to in browser at ``http://localhost:3000``
+``node app.js``- That's it. You now can open iHave.to in browser at ``http://localhost:3000``
 
 You can change the port in ``server/settings/config.js``.
 
