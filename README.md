@@ -25,7 +25,7 @@ iHave.to/do is written and designed by Bernhard Bezdek all rights reserved.
 Released under MIT License
 
 ###Dependencies###
-For creating thumbs [graphicsmagick](http://www.graphicsmagick.org/) and [imagemagick](http://www.imagemagick.org/script/index.php)
+For creating thumbs and fix image rotations [graphicsmagick](http://www.graphicsmagick.org/) and [imagemagick](http://www.imagemagick.org/script/index.php)
 is required on system running iHave.to/do
 
 In Debain/Ubuntu you can install imagemagick and graphicsmagick via ``apt``
