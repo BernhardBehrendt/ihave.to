@@ -36,7 +36,7 @@ sudo apt-get install graphicsmagick imagemagick
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
 
 ###Install###
-To resolve all direct dependencies open projects server folder in a terminal and type following command:
+To resolve all direct dependencies open projects server folder in a terminal and type:
 ``npm install -l``
 
 After previous step was successful you can run iHave.to on several ways from terminal (**stay in server folder**):
@@ -66,7 +66,7 @@ Enter grunt folder from termina and install grunt and dependencies:
 
 ``npm install -l``
 
-You can start application now and let them watching your changes typing following command inside the grunt folder:
+You can start application now and let them watching your changes typing inside grunt folder:
 
 ``grunt``
 
