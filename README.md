@@ -37,6 +37,7 @@ iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [n
 
 ###Install###
 To resolve all direct dependencies open projects server folder in a terminal and type:
+
 ``npm install -l``
 
 After previous step was successful you can run iHave.to on several ways from terminal (**stay in server folder**):
