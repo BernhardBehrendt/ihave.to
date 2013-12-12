@@ -33,6 +33,7 @@ var CONF;
                 DRAGGING: false
             },
             INT: {
+                MAX_UPLOAD:14,
                 CMD_INFO_MIN_WIDTH: 300,
                 DEF_MARGIN_UNIT: 16,
                 FAST: 125,

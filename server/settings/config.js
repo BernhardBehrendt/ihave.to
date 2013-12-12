@@ -8,7 +8,7 @@ var CONF = null;
     CONF = {
         PORT: 3000,
         ROOT: __dirname + '/../',
-        MAX_UPLOAD_SIZE: 6,
+        MAX_UPLOAD_SIZE: 16,
         GM_QUALITY: 95
     };
 })();

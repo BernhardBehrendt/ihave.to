@@ -318,7 +318,7 @@
                 $("#dropImage").dropzone({
                     url: "/upload-wp",
                     paramName: "file", // The name that will be used to transfer the file
-                    maxFilesize: 6, // MB,
+                    maxFilesize: CONF.PROPS.NUMBER.MAX_UPLOAD, // MB,
                     maxFiles: 1,
                     accept: function (file, done) {
                         if (CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(file.name.substring(file.name.length - 4, file.name.length)) === -1) {
