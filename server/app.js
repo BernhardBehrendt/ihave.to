@@ -58,7 +58,7 @@
                     if (stats.size <= (SETTINGS.MAX_UPLOAD_SIZE * Math.pow(1024, 2))) {
                         // If image is an jpeg image
                         if (['image/jpg', 'image/jpeg'].indexOf(req.files.file.headers['content-type']) !== -1) {
-                            gm(sTmpPath)..quality(SETTINGS.GM_QUALITY).autoOrient()
+                            gm(sTmpPath).quality(SETTINGS.GM_QUALITY).autoOrient()
                                 .write(sTargetFile, function (err) {
                                     gm(sTargetFile).thumb(64, 64, sTargetFile.replace(/(.[A-Za-z]*)$/, '.thumb$1'), SETTINGS.GM_QUALITY, function (err) {
                                         res.send('upload/' + sTargetFile.split('/').pop());
