@@ -8,19 +8,7 @@
     "use strict";
     $(document).ready(function () {
         CONF.DOM.UIWINDOW.trigger('showUi');
-        CONF.DOM.UIWINDOW.children('.cmd').html(new Template({
-            LINK: {
-                URL: 'https://github.com/BernhardBezdek/ihave.to',
-                TARGET: '_blank',
-                CONTENT: {
-                    IMG: {
-                        SRC: 'https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png',
-                        ALT: 'Fork me on GitHub',
-                        STYLE: 'position: absolute; top: 0; right: 0; border: 0;'
-                    }
-                }
-            }
-        }).toHtml() + new Template(new Login()).toHtml());
+        CONF.DOM.UIWINDOW.children('.cmd').html(new Template(new Login()).toHtml());
 
         var aBoards;
         var sLastBoard = '';

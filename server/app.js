@@ -11,6 +11,7 @@
     var cluster = require('cluster');
     var numCPUs = require('os').cpus().length;
     var gm = require('gm');
+    var path = require('path');
     var SETTINGS = require(__dirname + '/settings/config');
 
     if (!fs.existsSync(SETTINGS.ROOT + '../boards/')) {
@@ -113,8 +114,18 @@
             });
         });
 
+        app.get('/', function (req, res) {
+            fs.exists(path.resolve(__dirname + '/../public/index.html'), function (exists) {
+                if (exists) {
+                    res.sendfile(path.resolve(__dirname + '/../public/index.html'));
+                } else {
+                    res.redirect('/do');
+                }
+            });
+        });
+
         app.get('/do', function (req, res) {
-            res.redirect('/');
+            res.sendfile(path.resolve(__dirname + '/../public/do.html'));
         });
 
         app.get('*', function (req, res) {
