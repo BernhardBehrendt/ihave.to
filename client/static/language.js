@@ -85,7 +85,7 @@ var LANGUAGE = {
 
         ENCRYPT_SELECTED_SCREEN: 'Das Board wird entschlüsselt.',
         POST_WITH_COLOR_BLUE: 'Blau bedeutet:',
-        POST_WITH_COLOR_TURKIS: 'Türkise bedeutet:',
+        POST_WITH_COLOR_TURKIS: 'Türkis bedeutet:',
         POST_WITH_COLOR_GREEN: 'Grün bedeutet:',
         POST_WITH_COLOR_YELLOW: 'Gelb bedeutet:',
         POST_WITH_COLOR_ORANGE: 'Orange bedeutet:',
