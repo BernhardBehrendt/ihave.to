@@ -45,7 +45,7 @@
     // Create the frontend salt
     // Note to never loose this key because it's for setup the requestet boardname
     if (!fs.existsSync(CONFIG.ROOT + '../public/js/salt.js')) {
-        fs.writeFileSync(CONFIG.ROOT + '../public/js/salt.js', 'CONF.PROPS.STRING.SALT = "' + crypto.randomBytes(2048).toString('base64') + '"');
+        fs.writeFileSync(CONFIG.ROOT + '../public/js/salt.js', 'CONF.PROPS.STRING.SALT = "' + crypto.randomBytes(2048).toString('base64') + '";');
         console.log('A CLIENT SALT WAS CREATED AT "public/js/salt.js". Make sure to never loose this file');
     }
 
