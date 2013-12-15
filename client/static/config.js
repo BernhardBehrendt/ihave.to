@@ -55,8 +55,8 @@ var CONF;
                 UD: 'undefined',
                 OBJ: 'object',
                 NUM: 'number',
-                SALT: '/pC|-}t@Go<gV-8Cs9]S-62lxfIfkp$XsjYqMR%5}7w(,jjoSCe1Z!.~;o?ZH%o;',
-                SCREEN_DEFAULT_BG: 'http://5.45.102.42/img/wallpaper-default.jpg',
+                SALT: null,
+                SCREEN_DEFAULT_BG: 'http://ihave.to/img/wallpaper-default.jpg',
                 BLOCKRESIZE: 'input[type="text"]:focus, textarea'
             },
             ARRAY: {
