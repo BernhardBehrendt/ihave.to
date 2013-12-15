@@ -195,6 +195,22 @@ var Board = null;
             } else {
                 // Start running board in regulary mode
                 self.setVerifier();
+
+                self.setAccessData();
+            }
+        });
+    };
+
+    /**
+     * Set the last access date on a boards folder
+     * @method setAccessData
+     */
+    Board.prototype.setAccessData = function () {
+        var iAccessTime = Math.round(new Date().getTime() / 1000);
+
+        this.fs.utimes(this.sBoardFolder, iAccessTime, iAccessTime, function (error) {
+            if (error) {
+                console.log(error);
             }
         });
     };
