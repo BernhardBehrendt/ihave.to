@@ -1,282 +1,289 @@
-#login-window{
+@import "compass/utilities/general/clearfix";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
+//
+@import "../../mixins/paddingbox";
+@import "../../mixins/devices";
+@import "../../mixins/user-select";
+@import "../../declarations/dimensions";
+@import "../../declarations/colors";
+@import "../../declarations/fonts";
+
+#login-window {
   @include paddingbox(434px, 368px, 10px, 10px, 10px, 10px);
   @include rgba-background(rgba(255, 255, 255, 0.1));
   @include border-radius(4px);
 
-  @include desktopClient{
+  @include desktopClient {
     @include box-shadow(0px 0px 2px #777);
-    margin-top:$def_margin_unit;
+    margin-top: $def_margin_unit;
 
   }
 
-  @include iPodWebappPortrait{
-   @include paddingbox(316px, 404px, 10px, 10px, 10px, 10px);
+  @include iPodWebappPortrait {
+    @include paddingbox(316px, 404px, 10px, 10px, 10px, 10px);
   }
 
-  @include iPodSafariPortrait{
-   @include paddingbox(316px, 362px, 10px, 10px, 10px, 10px);
+  @include iPodSafariPortrait {
+    @include paddingbox(316px, 362px, 10px, 10px, 10px, 10px);
   }
 
-  @include iPodSafariLandscapeFullscrren{
-   @include paddingbox(476px, 368px, 10px, 10px, 10px, 10px);
+  @include iPodSafariLandscapeFullscrren {
+    @include paddingbox(476px, 368px, 10px, 10px, 10px, 10px);
   }
 
-  @include iPodWebappLandscape{
-   @include paddingbox(476px, 368px, 10px, 10px, 10px, 10px);
+  @include iPodWebappLandscape {
+    @include paddingbox(476px, 368px, 10px, 10px, 10px, 10px);
   }
 
-  @include iPodSafariLandscape{
-   @include paddingbox(476px, 368px, 10px, 10px, 10px, 10px);
+  @include iPodSafariLandscape {
+    @include paddingbox(476px, 368px, 10px, 10px, 10px, 10px);
   }
 
-
-  #login-content{
+  #login-content {
     @include clearfix;
     @include paddingbox(414px, 348px, 20px, 20px, 8px, 20px);
     @include box-shadow(#000 0px 0px 4px);
     @include rgba-background(rgba(255, 255, 255, 0.19));
 
-    @include iPodWebappPortrait{
-     @include paddingbox(296px, 384px, 20px, 20px, 8px, 20px);
+    @include iPodWebappPortrait {
+      @include paddingbox(296px, 384px, 20px, 20px, 8px, 20px);
     }
 
-    @include iPodSafariPortrait{
-     @include paddingbox(296px, 342px, 20px, 20px, 8px, 20px);
+    @include iPodSafariPortrait {
+      @include paddingbox(296px, 342px, 20px, 20px, 8px, 20px);
     }
 
-    @include iPodSafariLandscapeFullscrren{
-     @include paddingbox(456px, 348px, 30px, 20px, 8px, 20px);
+    @include iPodSafariLandscapeFullscrren {
+      @include paddingbox(456px, 348px, 30px, 20px, 8px, 20px);
     }
 
-    @include iPodWebappLandscape{
-     @include paddingbox(456px, 348px, 10px, 20px, 8px, 20px);
+    @include iPodWebappLandscape {
+      @include paddingbox(456px, 348px, 10px, 20px, 8px, 20px);
     }
 
-    @include iPodSafariLandscape{
-     @include paddingbox(456px, 348px, 10px, 20px, 8px, 20px);
+    @include iPodSafariLandscape {
+      @include paddingbox(456px, 348px, 10px, 20px, 8px, 20px);
     }
 
-    h1{
-      float:left;
-      color:$white;
+    h1 {
+      float: left;
+      color: $white;
       font-size: $large;
-      margin-bottom:$def_margin_unit / 2;
-      width:100%
+      margin-bottom: $def_margin_unit / 2;
+      width: 100%
     }
 
-    p{
-      float:left;
-      color:$white;
-      font-size:$small;
-      font-family:$font-light;
-      letter-spacing:0.02em;
-      line-height:16px;
-      margin-bottom:$def_margin_unit;
-      width:100%;
+    p {
+      float: left;
+      color: $white;
+      font-size: $small;
+      font-family: $font-light;
+      letter-spacing: 0.02em;
+      line-height: 16px;
+      margin-bottom: $def_margin_unit;
+      width: 100%;
     }
 
-    div#login-form{
+    div#login-form {
 
-      input{
+      input {
         @include paddingbox(374px, 30px, 0, 0, 0, $def_margin_unit / 4);
 
-        @include iPodWebappPortrait{
-         @include paddingbox(254px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodWebappPortrait {
+          @include paddingbox(254px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        @include iPodSafariPortrait{
-         @include paddingbox(254px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodSafariPortrait {
+          @include paddingbox(254px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        @include iPodSafariLandscapeFullscrren{
-         @include paddingbox(414px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodSafariLandscapeFullscrren {
+          @include paddingbox(414px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        @include iPodWebappLandscape{
-        @include paddingbox(414px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodWebappLandscape {
+          @include paddingbox(414px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        @include iPodSafariLandscape{
-         @include paddingbox(414px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodSafariLandscape {
+          @include paddingbox(414px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        float:left;
-        margin-bottom:$def_margin_unit;
-        font-size:$small;
+        float: left;
+        margin-bottom: $def_margin_unit;
+        font-size: $small;
       }
 
-
-
-      input[type="password"]{
+      input[type="password"] {
         @include paddingbox(314px, 30px, 0, 0, 0, $def_margin_unit / 4);
         @include border-radius(4px 0 0 4px);
 
-        border-right:none;
+        border-right: none;
 
-        @include iPodWebappPortrait{
-         @include paddingbox(196px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodWebappPortrait {
+          @include paddingbox(196px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        @include iPodSafariPortrait{
-         @include paddingbox(196px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodSafariPortrait {
+          @include paddingbox(196px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        @include iPodSafariLandscapeFullscrren{
-         @include paddingbox(356px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodSafariLandscapeFullscrren {
+          @include paddingbox(356px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        @include iPodWebappLandscape{
-        @include paddingbox(356px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodWebappLandscape {
+          @include paddingbox(356px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
 
-        @include iPodSafariLandscape{
-         @include paddingbox(356px, 30px, 0, 0, 0, $def_margin_unit / 4);
+        @include iPodSafariLandscape {
+          @include paddingbox(356px, 30px, 0, 0, 0, $def_margin_unit / 4);
         }
       }
 
       /*  RESULT STYLE  */
-      span.testresult{
+      span.testresult {
         @include border-radius(0 4px 4px 0);
-        border:solid 1px $white;
-        border-left:none;
+        border: solid 1px $white;
+        border-left: none;
 
-        float:right;
-        width:58px;
-        height:30px;
+        float: right;
+        width: 58px;
+        height: 30px;
       }
-      span.testresult span{
+      span.testresult span {
         @include text-shadow(#fff 0px 0px 2px);
-        display:block;
-        height:21px;
-        width:100%;
-        padding-top:9px;
-        text-align:center;
-        color:$black;
-        font-size:$xsmall;
+        display: block;
+        height: 21px;
+        width: 100%;
+        padding-top: 9px;
+        text-align: center;
+        color: $black;
+        font-size: $xsmall;
       }
 
-
-      span.shortPass{
+      span.shortPass {
         @include rgba-background($red);
       }
 
-      span.badPass{
+      span.badPass {
         @include rgba-background($red);
       }
 
-      span.goodPass{
+      span.goodPass {
         @include rgba-background($yellow);
       }
 
-      span.strongPass{
+      span.strongPass {
         @include rgba-background($green);
 
       }
     }
 
-    ul{
-      margin-top:4px;
-      float:left;
-      li{
-        width:374px;
+    ul {
+      margin-top: 4px;
+      float: left;
+      li {
+        width: 374px;
 
-        @include iPodWebappPortrait{
-         width:256px;
+        @include iPodWebappPortrait {
+          width: 256px;
         }
 
-        @include iPodSafariPortrait{
-         width:256px;
+        @include iPodSafariPortrait {
+          width: 256px;
         }
 
-        @include iPodSafariLandscapeFullscrren{
-         width:416px;
+        @include iPodSafariLandscapeFullscrren {
+          width: 416px;
         }
 
-        @include iPodWebappLandscape{
-        width:416px;
+        @include iPodWebappLandscape {
+          width: 416px;
         }
 
-        @include iPodSafariLandscape{
-         width:416px;
+        @include iPodSafariLandscape {
+          width: 416px;
         }
 
-        a{
-          width:330px;
+        a {
+          width: 330px;
 
-
-          @include iPodWebappPortrait{
-           width:212px;
-           font-size:$xsmall;
-           margin-top:6px;
+          @include iPodWebappPortrait {
+            width: 212px;
+            font-size: $xsmall;
+            margin-top: 6px;
           }
 
-          @include iPodSafariPortrait{
-           width:212px;
-           font-size:$xsmall;
-           margin-top:6px;
+          @include iPodSafariPortrait {
+            width: 212px;
+            font-size: $xsmall;
+            margin-top: 6px;
           }
 
-          @include iPodSafariLandscapeFullscrren{
-           width:372px;
-           font-size:$normal;
-           margin-top:0px;
+          @include iPodSafariLandscapeFullscrren {
+            width: 372px;
+            font-size: $normal;
+            margin-top: 0px;
           }
 
-          @include iPodWebappLandscape{
-            width:372px;
-            font-size:$normal;
-            margin-top:0px;
+          @include iPodWebappLandscape {
+            width: 372px;
+            font-size: $normal;
+            margin-top: 0px;
           }
 
-          @include iPodSafariLandscape{
-           width:372px;
-           font-size:$normal;
-           margin-top:0px;
+          @include iPodSafariLandscape {
+            width: 372px;
+            font-size: $normal;
+            margin-top: 0px;
           }
         }
       }
     }
 
-    span{
-      float:left;
-      color:$white;
-      font-family:$font-light;
-      font-size:$normal;
+    span {
+      float: left;
+      color: $white;
+      font-family: $font-light;
+      font-size: $normal;
 
-      strong{
-        color:$red;
-        font-family:$font-bold;
+      strong {
+        color: $red;
+        font-family: $font-bold;
         font-size: $normal;
       }
     }
 
-    #login-loader{
-      display:block;
-      margin:0 auto;
-      margin-top:170px;
+    #login-loader {
+      display: block;
+      margin: 0 auto;
+      margin-top: 170px;
 
-      @include desktopClient{
-        margin-top:140px;
+      @include desktopClient {
+        margin-top: 140px;
       }
 
-      @include iPodSafariLandscapeFullscrren{
-        margin-top:80px;
+      @include iPodSafariLandscapeFullscrren {
+        margin-top: 80px;
       }
 
-      @include iPodWebappLandscape{
-        margin-top:80px;
+      @include iPodWebappLandscape {
+        margin-top: 80px;
       }
 
-      @include iPodSafariLandscape{
-        margin-top:80px;
+      @include iPodSafariLandscape {
+        margin-top: 80px;
       }
     }
 
-    #login-message{
-      margin-top:$def_margin_unit / 4;
-      color:$white;
-      font-size:$xxsmall;
-      text-align:center;
+    #login-message {
+      margin-top: $def_margin_unit / 4;
+      color: $white;
+      font-size: $xxsmall;
+      text-align: center;
     }
   }
 }

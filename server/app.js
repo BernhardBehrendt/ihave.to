@@ -2,13 +2,15 @@
 /*global console*/
 /*global __dirname*/
 /*global oBoard*/
+/*global CONFIG*/
+/*global global*/
+
 (function () {
     "use strict";
 
     // Set configuration globally
     global.CONFIG = require(__dirname + '/settings/config');
 
-    var i;
     var app;
     var oGarbageCollector;
 

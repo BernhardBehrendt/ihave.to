@@ -23,7 +23,7 @@ var LANGUAGE = {
         NOGO: 'verboten',
 
         // ALERTS AND PROMPTS
-        ENTER_YOUR_NAME: 'Gebe für die Timeline deinen Namen ein wenn du das Memoboard collaborativ einsetzen möchtest.<b/>(Mit ESC oder RETURN kannst du diesen Schritt überspringen)',
+        ENTER_YOUR_NAME: 'Gebe für die Timeline deinen Namen ein wenn du das Memoboard collaborativ einsetzen möchtest.<br/>(Mit ESC oder RETURN kannst du diesen Schritt überspringen)',
         REALLY_DELETE_THE_SELECTED_SCREENS: 'Sollen die gewählten Arbeitsflächen wirklich gelöscht werden?',
         CONFIRM_DELETE_POST: 'Soll dieses Memo wirklich gelöscht werden?<br/>Aus der Timeline kannst du diesen wiederherstellen',
         OK: 'Ok',

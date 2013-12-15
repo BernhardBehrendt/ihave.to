@@ -5,16 +5,13 @@
 (function () {
     "use strict";
 
-    if (typeof String === 'undefined') {
-        /**
-         * @module Extends
-         * @submodule Datatype
-         * @class String
-         * @constructor
-         * @type {Object}
-         */
-        String = {};
-    }
+    /**
+     * @module Extends
+     * @submodule Datatype
+     * @class String
+     * @constructor
+     * @type {Object}
+     */
 
     /**
      * Lightweight templating for client side html rendering

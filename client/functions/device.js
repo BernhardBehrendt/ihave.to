@@ -1,5 +1,6 @@
 /*global $*/
 /*global CONF*/
+/*global window*/
 var isMobile;
 (function () {
     "use strict";
@@ -22,7 +23,7 @@ var isMobile;
         var mobile = ['iphone', 'ipad', 'android', 'blackberry', 'nokia', 'opera mini', 'windows mobile'];
 
         for (i = 0; i < mobile.length; i += 1) {
-            if (mobile[i] !== not && navigator.userAgent.toLowerCase().indexOf(mobile[i]) > 0) {
+            if (mobile[i] !== not && window.navigator.userAgent.toLowerCase().indexOf(mobile[i]) > 0) {
                 return true;
             }
         }

@@ -1,229 +1,307 @@
-  footer{
+@import "compass/utilities/general/clearfix";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+//
+@import "../declarations/dimensions";
+@import "../declarations/sprite-maps";
+@import "../declarations/fonts";
+@import "../declarations/colors";
+@import "../mixins/paddingbox";
+@import "../mixins/sprite-background";
+
+
+footer {
   @include rgba-background($footer-background);
   @include clearfix;
 
-  position:fixed;
-  bottom:0px;
-  left:0px;
-  z-index:4;
-  width:100%;
-  height:$footer-height;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 4;
+  width: 100%;
+  height: $footer-height;
 
-  nav{
+  nav {
     @include paddingbox(100%, 100%, 0, 1%, 0, 1%);
-    float:left;
-    max-width:$nav-max-width;
+    float: left;
+    max-width: $nav-max-width;
     ul {
       @include clearfix;
 
-      width:100%;
-      height:100%;
+      width: 100%;
+      height: 100%;
 
       text-align: justify;
 
-      li{
+      li {
 
-        width:auto;
-        height:auto;
-        margin-top:11px;
-        display:inline-block;
-        position:relative;
+        width: auto;
+        height: auto;
+        margin-top: 11px;
+        display: inline-block;
+        position: relative;
 
-        a{
+        a {
           @include paddingbox(32px, 32px);
 
-          display:block;
+          display: block;
         }
 
-        span.counter{
+        span.counter {
           @include border-radius(8px);
 
-          width:16px;
-          height:14px;
-          padding-top:2px;
-          position:absolute;
-          left:2px;
-          top:4px;
-          display:block;
-          background-color:#cb3232;
-          color:$white;
-          font-size:$xxsmall;
-          text-align:center;
+          width: 16px;
+          height: 14px;
+          padding-top: 2px;
+          position: absolute;
+          left: 2px;
+          top: 4px;
+          display: block;
+          background-color: #cb3232;
+          color: $white;
+          font-size: $xxsmall;
+          text-align: center;
         }
-
 
         // Main navigation
-        #new_post{
+        #new_post {
           @include sprite-bg('add-default', $x1Icons, $x2Icons);
-          &:hover{@extend #new_post.active;}
+          &:hover {
+            @extend #new_post.active;
+          }
         }
 
-        #new_screen{
+        #new_screen {
           @include sprite-bg('add-default', $x1Icons, $x2Icons);
-          &:hover{@extend #new_screen.active;}
+          &:hover {
+            @extend #new_screen.active;
+          }
         }
 
-
-        #chrono{
+        #chrono {
           @include sprite-bg('order-default', $x1Icons, $x2Icons);
-          &:hover{@extend #chrono.active;}
+          &:hover {
+            @extend #chrono.active;
+          }
         }
 
-        #screen{
+        #screen {
           @include sprite-bg('computer-default', $x1Icons, $x2Icons);
-          &:hover{@extend #screen.active;}
+          &:hover {
+            @extend #screen.active;
+          }
         }
 
-
-        #settings{
+        #settings {
           @include sprite-bg('configuration-default', $x1Icons, $x2Icons);
-          &:hover{@extend #settings.active;}
+          &:hover {
+            @extend #settings.active;
+          }
         }
 
-        #timeline{
+        #timeline {
           @include sprite-bg('clock-default', $x1Icons, $x2Icons);
-          &:hover{@extend #timeline.active;}
+          &:hover {
+            @extend #timeline.active;
+          }
         }
 
-
-
-
         // Post navigation
-        #home{
+        #home {
           @include sprite-bg('home-default', $x1Icons, $x2Icons);
-          &:hover{@extend #home.active;}
+          &:hover {
+            @extend #home.active;
+          }
         }
 
-         #login{
+        #login {
           @include sprite-bg('unlocked-default', $x1Icons, $x2Icons);
-          &:hover{@extend #login.active;}
+          &:hover {
+            @extend #login.active;
+          }
         }
 
-         #help{
+        #help {
           @include sprite-bg('help-default', $x1Icons, $x2Icons);
-          &:hover{@extend #help.active;}
+          &:hover {
+            @extend #help.active;
+          }
         }
 
-        #system{
+        #system {
           @include sprite-bg('info-default', $x1Icons, $x2Icons);
-          &:hover{@extend #system.active;}
+          &:hover {
+            @extend #system.active;
+          }
         }
 
         // Post navigation
-        #store_post{
+        #store_post {
           @include sprite-bg('tick-default', $x1Icons, $x2Icons);
-          &:hover{@extend #store_post.active;}
+          &:hover {
+            @extend #store_post.active;
+          }
         }
 
         // Post edit Navigation
-        #edit{
+        #edit {
           @include sprite-bg('pen-default', $x1Icons, $x2Icons);
-          &:hover{@extend #edit.active;}
+          &:hover {
+            @extend #edit.active;
+          }
         }
 
-        #delete{
+        #delete {
           @include sprite-bg('bin-full-default', $x1Icons, $x2Icons);
-          &:hover{@extend #delete.active;}
+          &:hover {
+            @extend #delete.active;
+          }
         }
-
 
         // Screen navigation
-        #new_screen{
+        #new_screen {
           @include sprite-bg('add-default', $x1Icons, $x2Icons);
-          &:hover{@extend #new_screen.active;}
+          &:hover {
+            @extend #new_screen.active;
+          }
         }
 
-
-
-        #trash_empty{
+        #trash_empty {
           @include sprite-bg('bin-empty-default', $x1Icons, $x2Icons);
-          &:hover{@extend #trash_empty.active;}
+          &:hover {
+            @extend #trash_empty.active;
+          }
         }
 
-        #trash_full{
+        #trash_full {
           @include sprite-bg('bin-full-default', $x1Icons, $x2Icons);
-          &:hover{@extend #trash_full.active;}
+          &:hover {
+            @extend #trash_full.active;
+          }
         }
-
-
 
         // Settings navigation
-        #tags{
+        #tags {
           @include sprite-bg('tag-default', $x1Icons, $x2Icons);
-          &:hover{@extend #tags.active;}
+          &:hover {
+            @extend #tags.active;
+          }
         }
 
-        #rescue{
+        #rescue {
           @include sprite-bg('help-default', $x1Icons, $x2Icons);
-          &:hover{@extend #rescue.active;}
+          &:hover {
+            @extend #rescue.active;
+          }
         }
 
         // Second level all
-         #back{
+        #back {
           @include sprite-bg('left-default', $x1Icons, $x2Icons);
-          &:hover{@extend #back.active;}
+          &:hover {
+            @extend #back.active;
+          }
         }
 
-        #cancel{
+        #cancel {
           @include sprite-bg('error-default', $x1Icons, $x2Icons);
-          &:hover{@extend #cancel.active;}
+          &:hover {
+            @extend #cancel.active;
+          }
         }
-
-
-
 
         // Main navigation activestate
-        #new_post.active{@include sprite-bg('add-hover', $x1Icons, $x2Icons);}
-        #chrono.active{@include sprite-bg('order-hover', $x1Icons, $x2Icons);}
-        #screen.active{@include sprite-bg('computer-hover', $x1Icons, $x2Icons);}
-        #settings.active{@include sprite-bg('configuration-hover', $x1Icons, $x2Icons);}
-        #timeline.active{@include sprite-bg('clock-hover', $x1Icons, $x2Icons);}
+        #new_post.active {
+          @include sprite-bg('add-hover', $x1Icons, $x2Icons);
+        }
+        #chrono.active {
+          @include sprite-bg('order-hover', $x1Icons, $x2Icons);
+        }
+        #screen.active {
+          @include sprite-bg('computer-hover', $x1Icons, $x2Icons);
+        }
+        #settings.active {
+          @include sprite-bg('configuration-hover', $x1Icons, $x2Icons);
+        }
+        #timeline.active {
+          @include sprite-bg('clock-hover', $x1Icons, $x2Icons);
+        }
 
         // Login
-        #home.active{@include sprite-bg('home-hover', $x1Icons, $x2Icons);}
-        #login.active{@include sprite-bg('unlocked-hover', $x1Icons, $x2Icons);}
-        #help.active{@include sprite-bg('help-hover', $x1Icons, $x2Icons);}
-        #system.active{@include sprite-bg('info-hover', $x1Icons, $x2Icons);}
+        #home.active {
+          @include sprite-bg('home-hover', $x1Icons, $x2Icons);
+        }
+        #login.active {
+          @include sprite-bg('unlocked-hover', $x1Icons, $x2Icons);
+        }
+        #help.active {
+          @include sprite-bg('help-hover', $x1Icons, $x2Icons);
+        }
+        #system.active {
+          @include sprite-bg('info-hover', $x1Icons, $x2Icons);
+        }
         // Posts navigation active state
-        #store_post.active{@include sprite-bg('tick-hover', $x1Icons, $x2Icons);}
+        #store_post.active {
+          @include sprite-bg('tick-hover', $x1Icons, $x2Icons);
+        }
 
         // Posts edit navigation active state
-        #edit.active{@include sprite-bg('pen-hover', $x1Icons, $x2Icons);}
-        #delete.active{@include sprite-bg('bin-full-hover', $x1Icons, $x2Icons);}
+        #edit.active {
+          @include sprite-bg('pen-hover', $x1Icons, $x2Icons);
+        }
+        #delete.active {
+          @include sprite-bg('bin-full-hover', $x1Icons, $x2Icons);
+        }
 
         // Screens navigation activestate
-        #new_screen.active{@include sprite-bg('add-hover', $x1Icons, $x2Icons);}
-        #trash_empty.active{@include sprite-bg('bin-empty-hover', $x1Icons, $x2Icons);}
-        #trash_full.active{@include sprite-bg('bin-full-hover', $x1Icons, $x2Icons);}
+        #new_screen.active {
+          @include sprite-bg('add-hover', $x1Icons, $x2Icons);
+        }
+        #trash_empty.active {
+          @include sprite-bg('bin-empty-hover', $x1Icons, $x2Icons);
+        }
+        #trash_full.active {
+          @include sprite-bg('bin-full-hover', $x1Icons, $x2Icons);
+        }
 
-         // Settings navigation activestate
-        #tags.active{@include sprite-bg('tag-hover', $x1Icons, $x2Icons);}
-        #rescue.active{@include sprite-bg('help-hover', $x1Icons, $x2Icons);}
+        // Settings navigation activestate
+        #tags.active {
+          @include sprite-bg('tag-hover', $x1Icons, $x2Icons);
+        }
+        #rescue.active {
+          @include sprite-bg('help-hover', $x1Icons, $x2Icons);
+        }
 
         // 2nd level all
-        #back.active{@include sprite-bg('left-hover', $x1Icons, $x2Icons);}
-        #cancel.active{@include sprite-bg('error-hover', $x1Icons, $x2Icons);}
+        #back.active {
+          @include sprite-bg('left-hover', $x1Icons, $x2Icons);
+        }
+        #cancel.active {
+          @include sprite-bg('error-hover', $x1Icons, $x2Icons);
+        }
 
-
-        #edit.hidden, #delete.hidden, #new_post.hidden, #trash.hidden, #chrono.hidden, #screen.hidden, #settings.hidden, #timeline.hidden,#home.hidden, #login.hidden, #help.hidden, #system.hidden, #store_post.hidden, #new_screen.hidden, #trash_empty.hidden, #trash_full.hidden, #tag.hidden, #rescue.hidden, #back.hidden, #cancel.hidden{
-          display:none;
+        #edit.hidden, #delete.hidden, #new_post.hidden, #trash.hidden, #chrono.hidden, #screen.hidden, #settings.hidden, #timeline.hidden, #home.hidden, #login.hidden, #help.hidden, #system.hidden, #store_post.hidden, #new_screen.hidden, #trash_empty.hidden, #trash_full.hidden, #tag.hidden, #rescue.hidden, #back.hidden, #cancel.hidden {
+          display: none;
         }
       }
-      li.fixline { padding-left: 100%; }
+      li.fixline {
+        padding-left: 100%;
+      }
     }
   }
-  section#cmdinfo{
+  section#cmdinfo {
     @include paddingbox(auto, $footer-height, $def_margin_unit / 2, 0, 0, 0);
 
-    float:right;
-    display:none;
-    line-height:22px;
+    float: right;
+    display: none;
+    line-height: 22px;
 
-    font-family:$font-light;
-    color:$white;
-    letter-spacing:0.02em;
+    font-family: $font-light;
+    color: $white;
+    letter-spacing: 0.02em;
   }
 }
-footer.shadow{
+
+footer.shadow {
   @include box-shadow($ui-shadow);
 }

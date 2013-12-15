@@ -1,10 +1,21 @@
-.post {
-  //@include x1x2(0 0, '../img/backgrounds/1x/paper.png', '../img/backgrounds/2x/paper.png');
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transition";
+//
+@import "../../declarations/dimensions";
+@import "../../declarations/colors";
+@import "../../declarations/fonts";
+@import "../../mixins/paddingbox";
+@import "../../mixins/devices";
+@import "../../mixins/user-select";
 
+
+.post {
   @include paddingbox(196px, 196px);
   @include border-radius(4px);
   @include box-shadow(1px 1px 2px #333);
-  @import "areas/board/postfunctions";
+
+  @import "postfunctions";
 
   transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
@@ -138,7 +149,6 @@
         img {
           width: 100%;
         }
-
       }
     }
   }

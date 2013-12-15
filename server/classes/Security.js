@@ -1,6 +1,7 @@
 /*global module*/
 /*global require*/
 /*global __dirname*/
+/*global CONFIG*/
 var Security = null;
 (function () {
     "use strict";
@@ -73,5 +74,6 @@ var Security = null;
     };
 })
     ();
+
 module.exports = Security;
 

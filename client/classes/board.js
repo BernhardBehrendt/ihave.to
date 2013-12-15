@@ -19,15 +19,7 @@ var Board;
         this._oScreen = oScreen;
         this._setDeleted = {};
         this._oScreenPost = {};
-        //this.iFromTime = false;
     };
-
-    /**
-     * The timestamp from where rendering sould begin
-     * @property iFromTime
-     * @type {Boolean}
-     */
-    Board.prototype.iFromTime = false;
 
     /**
      * The instance of the screen to render
@@ -81,9 +73,6 @@ var Board;
         var iTimestamp;
         var oScreenPosts;
         var aPosts = [];
-
-        // Detect if an initial time was set before
-        //this.iFromTime = (Object.keys(this._oScreen.SCREEN.POSTS)[0]);
 
         // Start screen posts preprocess
         if (this._oScreen.SCREEN.POSTS !== undefined) {

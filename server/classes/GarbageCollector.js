@@ -1,30 +1,51 @@
+/*global CONFIG*/
+/*global console*/
 var GarbageCollector = null;
 (function () {
+    "use strict";
+
+    /**
+     * GarbageCollector class which work cronjob like
+     * and ensure that images and board filew which are outdated are deleted
+     *
+     * @author Bernhard Bezdek
+     * @module Server
+     * @submodule Classes
+     * @class GarbageCollector
+     * @contructor
+     */
     GarbageCollector = function () {
         this.fs = require('fs');
-        this.cp = require('child_process')
+        this.cp = require('child_process');
     };
 
+    /**
+     * Initialize observing of relevant folders (Upload Folder and board Folder) and check folders in defined times
+     * @method observe
+     */
     GarbageCollector.prototype.observe = function () {
         var self = this;
 
         setInterval(function () {
-            console.log('Remove outdated files');
-
             self.observeBoards();
             self.observeUploads();
 
-            console.log('Finished clean process');
+            console.log('Observer finished @ ' + new Date());
 
-        }, 10000);
+        }, CONFIG.RUN_CLEANUP);
 
         this.observeBoards();
         this.observeUploads();
+
+        console.log('Observer started @ ' + new Date());
     };
 
+    /**
+     * Observe the boards folder for outdated boards
+     * @method observeBoards
+     */
     GarbageCollector.prototype.observeBoards = function () {
         var i;
-        var iAgeInDays;
         var self = this;
         var sBoardDir = CONFIG.ROOT + '../boards/';
         var sCurrentRef;
@@ -43,9 +64,12 @@ var GarbageCollector = null;
         });
     };
 
+    /**
+     * Observe the Upload folder for outdated files
+     * @method observeUplods
+     */
     GarbageCollector.prototype.observeUploads = function () {
         var i;
-        var iAgeInDays;
         var self = this;
         var sUploadDir = CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/';
         var sCurrentRef;
@@ -64,12 +88,19 @@ var GarbageCollector = null;
         });
     };
 
+    /**
+     * Fetch stats of given resource and handle decision to remove that folder
+     * @method checkStats
+     * @param {String} sReference Path to reference
+     */
     GarbageCollector.prototype.checkStats = function (sReference) {
+        var iAgeInDays;
         var self = this;
-        var iDay = 86400000;
+        var iDay = 86400000;    // Milliseconds on a day
 
         this.fs.stat(sReference, function (error, stats) {
             if (!error) {
+
                 iAgeInDays = (new Date().getTime() - new Date(stats.atime).getTime()) / iDay;
 
                 if (iAgeInDays >= CONFIG.MAX_DAYS_UNUSED) {
@@ -83,6 +114,11 @@ var GarbageCollector = null;
         });
     };
 
+    /**
+     * Remove a file from disk
+     * @method removeFile
+     * @param {String} sFile The path to file to remove
+     */
     GarbageCollector.prototype.removeFile = function (sFile) {
         this.fs.unlink(sFile, function (err) {
             if (err) {
@@ -91,6 +127,11 @@ var GarbageCollector = null;
         });
     };
 
+    /**
+     * Remove a file from disk
+     * @method removeFolder
+     * @param {String} sFolder The path to folder to remove
+     */
     GarbageCollector.prototype.removeFolder = function (sFolder) {
         this.cp.exec('rm -rf ' + sFolder, function (error) {
             if (error) {

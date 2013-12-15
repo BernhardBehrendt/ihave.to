@@ -93,6 +93,7 @@ var Template;
         if (!this.getTpls()) {
             // A (hopefully) complete HTML Reference
             // But extends are posible of cours via extend method
+
             this.setTpls({
                 ABBR: "{BEFORE}<abbr accesskey=\"{ACCESSKEY}\" hidden=\"{HIDDEN}\" itemtype=\"{ITEMTYPE}\" class=\"{CLASS}\" id=\"{ID}\" lang=\"{LANG}\" contenteditable=\"{CONTENTEDITABLE}\" inert=\"{INERT}\" spellcheck=\"{SPELLCHECK}\" contextmenu=\"{CONTEXTMENU}\" itemid=\"{ITEMID}\" style=\"{STYLE}\" dir=\"{DIR}\" itemprop=\"{ITEMPROP}\" tabindex=\"{TABINDEX}\" draggable=\"{DRAGGABLE}\" itemref=\"{ITEMREF}\" title=\"{TITLE}\" dropzone=\"{DROPZONE}\" itemscope=\"{ITEMSCOPE}\" translate=\"{TRANSLATE}\" >{INSERT}</abbr>{AFTER}",
                 ADDRESS: "{BEFORE}<address accesskey=\"{ACCESSKEY}\" hidden=\"{HIDDEN}\" itemtype=\"{ITEMTYPE}\" class=\"{CLASS}\" id=\"{ID}\" lang=\"{LANG}\" contenteditable=\"{CONTENTEDITABLE}\" inert=\"{INERT}\" spellcheck=\"{SPELLCHECK}\" contextmenu=\"{CONTEXTMENU}\" itemid=\"{ITEMID}\" style=\"{STYLE}\" dir=\"{DIR}\" itemprop=\"{ITEMPROP}\" tabindex=\"{TABINDEX}\" draggable=\"{DRAGGABLE}\" itemref=\"{ITEMREF}\" title=\"{TITLE}\" dropzone=\"{DROPZONE}\" itemscope=\"{ITEMSCOPE}\" translate=\"{TRANSLATE}\" >{INSERT}</address>{AFTER}",
@@ -225,7 +226,7 @@ var Template;
             SPAN: '<span id="{ID}" class="{CLASSES}">{CONTENT}</span>',
             P: '<p class="{CLASSES}">{CONTENT}</p>',
             STRONG: '<strong class="{CLASSES}">{CONTENT}</strong>',
-          //  TEXTAREA: '<textarea id="{ID}" class="{CLASSES}">{CONTENT}</textarea>',
+            //  TEXTAREA: '<textarea id="{ID}" class="{CLASSES}">{CONTENT}</textarea>',
 
             UL: '<ul id="{ID}" class="{CLASSES}">{CONTENT}</ul>',
             LI: '{BEFORE}<li id="{ID}" class="{CLASSES}">{CONTENT}</li>{AFTER}',

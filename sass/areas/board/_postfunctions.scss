@@ -1,115 +1,125 @@
-#post-functions{
+@import "compass/utilities/general/clearfix";
+@import "compass/css3/box-shadow";
+@import "compass/css3/border-radius";
+@import "compass/css3/transform";
+//
+@import "../../declarations/sprite-maps";
+@import "../../mixins/devices";
+@import "../../mixins/sprite-background";
+
+#post-functions {
   @include clearfix;
   @include box-shadow(0px 0px 2px #333);
   @include border-radius(4px);
 
-  position:absolute;
+  position: absolute;
 
-  @include desktopClient{
-    width:92%;
-    height:32px;
-    top:10px;
-    left:8px;
+  @include desktopClient {
+    width: 92%;
+    height: 32px;
+    top: 10px;
+    left: 8px;
   }
 
-  @include iPodWebappPortrait{
-    width:92%;
-    height:32px;
-    top:10px;
-    left:8px;
+  @include iPodWebappPortrait {
+    width: 92%;
+    height: 32px;
+    top: 10px;
+    left: 8px;
   }
 
-  @include iPodSafariPortrait{
-    width:92%;
-    height:32px;
-    top:10px;
-    left:8px;
+  @include iPodSafariPortrait {
+    width: 92%;
+    height: 32px;
+    top: 10px;
+    left: 8px;
   }
 
-  @include iPodSafariLandscapeFullscrren{
-    width:92%;
-    height:32px;
-    top:10px;
-    left:8px;
+  @include iPodSafariLandscapeFullscrren {
+    width: 92%;
+    height: 32px;
+    top: 10px;
+    left: 8px;
   }
 
-  @include iPodWebappLandscape{
-    width:92%;
-    height:32px;
-    top:10px;
-    left:8px;
+  @include iPodWebappLandscape {
+    width: 92%;
+    height: 32px;
+    top: 10px;
+    left: 8px;
   }
 
-  @include iPodSafariLandscape{
-    width:92%;
-    height:32px;
-    top:10px;
-    left:8px;
+  @include iPodSafariLandscape {
+    width: 92%;
+    height: 32px;
+    top: 10px;
+    left: 8px;
   }
 
-  a.post-function{
-    float:left;
+  a.post-function {
+    float: left;
 
-    @include desktopClient{
-      margin-left:9px;
+    @include desktopClient {
+      margin-left: 9px;
     }
 
-    @include iPodWebappPortrait{
-       transform:scale(0.5);
+    @include iPodWebappPortrait {
+      // transform:scale(0.5);
+      @include transform(0.5);
     }
 
-    @include iPodSafariPortrait{
-      transform:scale(0.5);
+    @include iPodSafariPortrait {
+      @include transform(0.5);
     }
 
-    @include iPodSafariLandscapeFullscrren{
-      transform:scale(0.5);
+    @include iPodSafariLandscapeFullscrren {
+      @include transform(0.5);
     }
 
-    @include iPodWebappLandscape{
-      transform:scale(0.5);
+    @include iPodWebappLandscape {
+      @include transform(0.5);
     }
 
-    @include iPodSafariLandscape{
-      transform:scale(0.5);
+    @include iPodSafariLandscape {
+      @include transform(0.5);
     }
 
   }
 
-  a#edit{
+  a#edit {
     @include sprite-bg('pen-default', $x1Icons, $x2Icons);
 
-    margin-left:50px;
+    margin-left: 50px;
 
-    &:hover{
+    &:hover {
       @include sprite-bg('pen-hover', $x1Icons, $x2Icons);
     }
   }
 
-  a#move{
+  a#move {
     @include sprite-bg('move-default', $x1Icons, $x2Icons);
 
-    display:none;
+    display: none;
 
-    &:hover{
+    &:hover {
       @include sprite-bg('move-hover', $x1Icons, $x2Icons);
     }
   }
 
-  a#callendar{
+  a#callendar {
     @include sprite-bg('calendar-default', $x1Icons, $x2Icons);
 
-    display:none;
+    display: none;
 
-    &:hover{
+    &:hover {
       @include sprite-bg('calendar-hover', $x1Icons, $x2Icons);
     }
   }
 
-  a#delete{
+  a#delete {
     @include sprite-bg('bin-full-default', $x1Icons, $x2Icons);
 
-    &:hover{
+    &:hover {
       @include sprite-bg('bin-full-hover', $x1Icons, $x2Icons);
     }
   }

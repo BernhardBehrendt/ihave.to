@@ -1,3 +1,7 @@
+@import "compass/utilities/general/clearfix";
+//
+@import "../mixins/user-select";
+
 section#board{
   @include user-select(none);
   position:fixed;

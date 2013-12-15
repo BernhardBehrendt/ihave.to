@@ -18,7 +18,7 @@ var Screens;
      * Counts the visibe posts inside a screen which aren't deleted or moved
      * @method getStats
      * @param {Object} oScreen
-     * @return {Number} The number of visible posts on given screen
+     * @return {Object} The number of visible posts and posts color steepening on given screen
      */
     Screens.prototype.getStats = function (oScreen) {
         var id;

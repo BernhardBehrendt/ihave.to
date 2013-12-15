@@ -275,7 +275,6 @@ var Connection;
         var i;
         var sUser;
         var oTarget;
-        var sChange;
         var sRMClasses;
         var bUpdated = false;
 
@@ -284,7 +283,6 @@ var Connection;
             if (oItem.TGT !== undefined) {
 
                 oTarget = $('#' + oItem.TGT);
-                sChange = '';
 
                 // If Target exists
                 if (oTarget.length === 1) {
@@ -298,13 +296,11 @@ var Connection;
                             left: oItem.TO[0] + '%',
                             top: oItem.TO[1] + '%'
                         }, 750);
-                        sChange = 'POSTS_POSITION';
                     }
 
                     // Update the Content
                     if (oItem.ACN === 'content') {
                         $(oTarget).find('.content').children('p').html(oItem.TO);
-                        sChange = 'POSTS_CONTENT';
                     }
 
                     // Handle Post deletion (if an update comes after the postit willl be recreated)
@@ -312,7 +308,6 @@ var Connection;
                         $(oTarget).fadeOut(250, function () {
                             $(this).remove();
                         });
-                        sChange = 'DELETED_POST';
                     }
 
                     if (oItem.ACN === 'color') {
@@ -320,7 +315,6 @@ var Connection;
                         // Remove class to change to from string
                         sRMClasses = sRMClasses.replace(oItem.TO, '');
                         $(oTarget).removeClass(sRMClasses).addClass(oItem.TO);
-                        sChange = 'POSTS_COLOR';
                     }
 
                     for (sUser in CONF.BOARD.USERS) {

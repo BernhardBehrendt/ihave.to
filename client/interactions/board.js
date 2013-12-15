@@ -20,12 +20,9 @@
         $('#post-functions').remove();
         $(this).parent('.post').addClass('focused');
     })
-        .on(CONF.EVENTS.CLICK, '.screen', function (event) {
-
+        .on(CONF.EVENTS.CLICK, '.screen', function () {
             $('#post-functions').remove();
             $(this).find('div.post.focused').removeClass('focused');
-
-
         })
 
         .on(CONF.EVENTS.CLICK, '.post > .content > p > a', function (event) {
@@ -34,7 +31,12 @@
             if (!isMobile()) {
                 window.open($(this).attr('href'));
             } else {
-                if (window.navigator.standalone !== undefined && window.navigator.standalone === true) {
+
+                if (window.navigator.standalone === undefined) {
+                    window.navigator.standalone = false;
+                }
+
+                if (window.navigator.standalone === true) {
                     showMessage('IOS_ERROR_OPENWINDOW');
                 }
                 else {

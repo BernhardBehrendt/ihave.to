@@ -14,7 +14,8 @@ var CONFIG = null;
         MAX_DAYS_UNUSED: 60,
         THUMB_HGT: 64,
         THUMB_WID: 64,
-        IMG_ROOT: 'upload'
+        IMG_ROOT: 'upload',
+        RUN_CLEANUP: 10000
     };
 })();
 
