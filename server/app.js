@@ -19,6 +19,7 @@
     var http = require('http');
     var mime = require('mime');
     var path = require('path');
+    var crypto = require('crypto');
     var express = require('express');
     var socketio = require('socket.io');
 
@@ -39,6 +40,13 @@
 
     if (!fs.existsSync(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT)) {
         fs.mkdirSync(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT);
+    }
+
+    // Create the frontend salt
+    // Note to never loose this key because it's for setup the requestet boardname
+    if (!fs.existsSync(CONFIG.ROOT + '../public/js/salt.js')) {
+        fs.writeFileSync(CONFIG.ROOT + '../public/js/salt.js', 'CONF.PROPS.STRING.SALT = "' + crypto.randomBytes(2048).toString('base64') + '"');
+        console.log('A CLIENT SALT WAS CREATED AT "public/js/salt.js". Make sure to never loose this file');
     }
 
     // Express settings

@@ -102,7 +102,6 @@ module.exports = function (grunt) {
                     '../public/js/client.js': [
                         '../client/static/language.js',
                         '../client/static/config.js',
-                        '../client/static/salt.js',
                         '../client/static/templates.js',
 
                         '../client/classes/extends/string.js',

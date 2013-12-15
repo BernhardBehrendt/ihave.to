@@ -15,7 +15,7 @@ var Security = null;
      */
     Security = function () {
         if (!this.fs.existsSync(CONFIG.ROOT + 'settings/salt')) {
-            this.fs.writeFileSync(CONFIG.ROOT + 'settings/salt', this.oCrypto.randomBytes(64).toString('base64'));
+            this.fs.writeFileSync(CONFIG.ROOT + 'settings/salt', this.oCrypto.randomBytes(2048).toString('base64'));
         }
 
         this._salt = this.fs.readFileSync(CONFIG.ROOT + 'settings/salt', 'UTF-8');

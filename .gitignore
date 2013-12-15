@@ -9,3 +9,4 @@ LAYOUT
 .idea/
 ./.sass-cache
 .nodemonignore
+public/js/salt.js
