@@ -13,6 +13,11 @@ var Security = null;
      * @constructor
      */
     Security = function () {
+        if (!this.fs.existsSync(CONFIG.ROOT + 'settings/salt')) {
+            this.fs.writeFileSync(CONFIG.ROOT + 'settings/salt', this.oCrypto.randomBytes(64).toString('base64'));
+        }
+
+        this._salt = this.fs.readFileSync(CONFIG.ROOT + 'settings/salt', 'UTF-8');
     };
 
     /**
@@ -42,7 +47,7 @@ var Security = null;
      * @type {String}
      * @private
      */
-    Security.prototype._salt = ":F1E-C!^QK`c9nI:wRq r*d/v3gs&I.&BlLGC=KOyRV7>5o  G~;0|2~3R`*dQ{Y')";
+    Security.prototype._salt = null;
 
     /**
      * Create the verifier by given basestring
@@ -52,8 +57,7 @@ var Security = null;
      */
     Security.prototype.createVerifier = function (sBase) {
         var sBaseRev = new this.oString(sBase).reverse();
-        var sBaseTime = new this.oString(new Date().getTime().toString()).reverse();
-        var sPreHash = this._salt + sBaseRev + sBaseTime;
+        var sPreHash = this._salt + sBaseRev;
 
         return this.oCrypto.createHash('sha512').update(sPreHash).digest('hex');
     };
@@ -67,6 +71,7 @@ var Security = null;
     Security.prototype.getVerifier = function (sVerifierFile) {
         return this.fs.readFileSync(sVerifierFile, 'UTF-8');
     };
-})();
+})
+    ();
 module.exports = Security;
 
