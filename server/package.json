@@ -9,6 +9,7 @@
         "express": "*",
         "socket.io": "*",
         "socket.io-clusterhub": "*",
-        "gm":"*"
+        "gm":"*",
+        "mime":"*"
     }
 }
