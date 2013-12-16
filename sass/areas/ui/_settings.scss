@@ -14,18 +14,18 @@
 
   h2 {
     margin-bottom: $def_margin_unit / 2;
-    color: $white;
+    color: $whiteFull;
   }
 
   h4 {
     margin-bottom: $def_margin_unit / 2;
-    color: $white;
+    color: $whiteFull;
     font-size: $small;
   }
 
   .settings-desc, .messaging-desc {
     margin-bottom: $def_margin_unit;
-    color: $white;
+    color: $whiteFull;
     font-family: $font-light;
     font-size: $small;
   }
@@ -119,7 +119,7 @@
         @include paddingbox(110px, 26px, 0, 0, 0, 0);
         display: block;
         margin-top: $def_margin_unit / 4;
-        color: $white;
+        color: $whiteFull;
         font-family: $font-light;
         font-size: $small;
         letter-spacing: 0.06em;
@@ -130,7 +130,7 @@
         @include paddingbox(110px, 18px, 0, 0, 0, $def_margin_unit / 4);
         display: block;
         font-size: $small;
-        color: $white;
+        color: $whiteFull;
         border-color: #555;
       }
     }

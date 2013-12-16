@@ -46,7 +46,7 @@
   li.button.ok{
     //@include x1x2(($def_margin_unit / 4) 3px, '../img/icons/1x/tick-default.png', '../img/icons/2x/tick-default.png');
 
-    background-color:$green;
+    background-color:#F4AC00;
 
     &:hover{
      // @include x1x2(($def_margin_unit / 4) 3px, '../img/icons/1x/tick-hover.png', '../img/icons/2x/tick-hover.png');

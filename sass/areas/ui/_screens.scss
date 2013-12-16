@@ -39,9 +39,9 @@
     float: left;
     font-size: $large;
     margin-bottom: $def_margin_unit * 2;
-    border: solid 1px $white;
+    border: solid 1px $whiteFull;
     text-align: center;
-    color: $white;
+    color: $whiteFull;
 
     div.dz-preview {
       display: none !important;
@@ -54,7 +54,7 @@
 
     display:none;
     float: left;
-    border: solid 1px $white;
+    border: solid 1px $whiteFull;
     margin-bottom: $def_margin_unit * 2;
     overflow: hidden;
 
@@ -102,7 +102,7 @@
       margin-bottom: $def_margin_unit * 2;
       border: solid 1px $white;
       text-align: center;
-      color: $white;
+      color: $whiteFull;
 
       div.dz-preview {
         display: none !important;
@@ -316,7 +316,7 @@
   @include rgba-background($red_50);
   opacity: 0.5;
   span, h4 {
-    color: $white;
+    color: $whiteFull;
   }
 }
 
