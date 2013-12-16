@@ -12,8 +12,8 @@ var CONFIG = null;
         GM_QUALITY: 95,
         ALLOWED_UPLOAD_FILES: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
         MAX_DAYS_UNUSED: 60,
-        THUMB_HGT: 64,
-        THUMB_WID: 64,
+        THUMB_HGT: 128,
+        THUMB_WID: 128,
         IMG_ROOT: 'upload',
         RUN_CLEANUP: 10000
     };
