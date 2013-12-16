@@ -161,6 +161,30 @@
         .on('dblclick', '.post', function (event) {
             event.preventDefault();
             event.stopPropagation();
+
+            var oPost;
+
+            if (!isMobile()) {
+                oPost = $(this).closest('.post');
+            } else {
+
+                CONF.DOM.CMD.trigger('setMainNav');
+                CONF.DOM.BOARD.trigger('normalBoard');
+
+                oPost = $('#board').find('div.post.focused');
+                oPost.removeClass('mobile');
+                oPost.removeClass('focused');
+            }
+            $('#new_post').trigger(CONF.EVENTS.CLICK, {
+                origin: oPost
+            });
+
+            // Add hidden class and remove on change
+            //$('#store_post').addClass('hidden');
+            CONF.DOM.CMD.find('#store_post').addClass('hidden');
+
+
+
         })
         // Create a new post at dblclicked position
         .on('dblclick', '.posts', function (event) {
