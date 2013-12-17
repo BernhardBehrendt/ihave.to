@@ -129,7 +129,9 @@ var ImageUpload = null;
             if (!error) {
                 self.sendResponse(CONFIG.IMG_ROOT + '/' + sTarget.split('/').pop(), 200);
             } else {
-                self.sendResponse('500 INTERNAL SERVER ERROR', 500);
+                console.log(error);
+                console.log('Cant create Thumbnail. Maybe imagemagick or graphicsmagick missing');
+                self.sendResponse('503 Service Unavailable', 503);
             }
         });
     };
@@ -148,7 +150,9 @@ var ImageUpload = null;
                 if (!error) {
                     self.createThumb(sFileTarget, sFileTarget.replace(/(.[A-Za-z]*)$/, '.thumb$1'));
                 } else {
-                    self.sendResponse('500 INTERNAL SERVER ERROR', 500);
+                    console.log(error);
+                    console.log('Cant create Thumbnail. Maybe imagemagick or graphicsmagick missing');
+                    self.sendResponse('503 Service Unavailable', 503);
                 }
             });
     };

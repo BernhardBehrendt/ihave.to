@@ -25,6 +25,7 @@ iHave.to/do is written and designed by Bernhard Bezdek all rights reserved.
 Released under MIT License
 
 ###Dependencies###
+####graphicsmagick/imagemagick####
 For creating thumbs and fix image rotations [graphicsmagick](http://www.graphicsmagick.org/) and [imagemagick](http://www.imagemagick.org/script/index.php)
 is required on system running iHave.to/do
 
@@ -33,6 +34,12 @@ In Debain/Ubuntu you can install imagemagick and graphicsmagick via ``apt``
 sudo apt-get install graphicsmagick imagemagick
 ```
 
+On OS X you can install via brew or macports
+
+On Windows you need visit the websites of imagemagick and graphicsmagick and install the windows version of that libraries.
+
+
+####Node.js####
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
 
 ###Install via NPM###
