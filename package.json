@@ -7,13 +7,7 @@
         "email": "bernhard.bezdek@googlemail.com"
     },
     "license": "MIT",
-
-    "contributors": [
-        {
-            "name": "Bernhard Bezdek",
-            "email": "bernhard.bezdek@googlemail.com"
-        }
-    ],
+    "preferGlobal": "true",
     "dependencies": {
         "express": "*",
         "gm": "*",
