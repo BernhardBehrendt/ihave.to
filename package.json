@@ -7,7 +7,6 @@
         "email": "bernhard.bezdek@googlemail.com"
     },
     "license": "MIT",
-    "preferGlobal": "true",
     "dependencies": {
         "express": "*",
         "gm": "*",
