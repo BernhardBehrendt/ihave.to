@@ -43,8 +43,6 @@ On Windows you need visit the websites of imagemagick and graphicsmagick and ins
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
 
 ###Install via NPM###
-Create an empty folder go inside and enter:
-
 ``npm install ihave.to -g``
 
 You now can start application by type in your terminal:
