@@ -35,23 +35,21 @@ sudo apt-get install graphicsmagick imagemagick
 
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
 
-###Install###
-There are two different ways to install ihave.to on your own server
-####GIT CLONE####
-To resolve all direct dependencies open projects server folder in a terminal and type:
-
-``npm install -l``
-
-After previous step was successful you can run iHave.to on several ways from terminal (**stay in server folder**):
-
-
-####NPM####
+###Install via NPM###
 Create an empty folder go inside and enter:
 
-``npm install ihave.to``
+``npm install ihave.to -g``
 
-Now navigate via terminal to ./node_modules/ihave.to and follow the next step
+You now can start application by type in your terminal:
 
+``ihaveto`` (Yes without the dot)
+
+
+###Install via cloned github Repository###
+After you have cloned this repository resolve the dependencies by type in your terminal from projects root folder (where package.js is located):
+``npm install -l``
+
+After this step is done, you can runstandalone/deamonize/grunt this project:
 
 
 ###Standalone###
@@ -60,16 +58,16 @@ Now navigate via terminal to ./node_modules/ihave.to and follow the next step
 You can change the port in ``server/settings/config.js``.
 
 
-###Daemon##
+###Daemon###
 If you want to run iHave.to as a daemon I recommend using [pm2](https://npmjs.org/package/pm2 "Modern CLI process manager for Node apps with a builtin load-balancer").
 
 With following command inside server folder you can start the application:
 
-``pm2 start app.js -i max``- Thats it. You now can open iHave.to in browser at ``http://localhost:3000``
+``pm2 start app.js -i max`` - Thats it. You now can open iHave.to in browser at ``http://localhost:3000``
 
 You can change the port in ``server/settings/config.js``.
  
-###Developer##
+###Grunt (for developers)###
 If you want to change things or want to create new features a grunt task is shipped with this project.
 
 Enter grunt folder from terminal and install grunt and dependencies:
