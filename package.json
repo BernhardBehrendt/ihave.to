@@ -1,13 +1,47 @@
-{"name": "ihave.to", "version": "0.9.8", "private": false, "scripts": {
-    "start": "node app.js"
-}, "dependencies": {
-    "express": "*",
-    "socket.io": "*",
-    "gm": "*",
-    "mime": "*"
-}, "description": "iHave.to was created to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown. It's also possible to be creative in a collaborative way via realtime multiuser support. Your memo data is strongly protected using AES on your device until any authenticated endpoint. If you're using iHave.to in a collaborative way only the encryptet data difference is broadcasted to any user who's actually on the memo board.", "main": "app.js", "devDependencies": {}, "repository": {
-    "type": "git",
-    "url": "https://github.com/BernhardBezdek/ihave.to"
-}, "keywords": ["catch", "ideas", "aes", "client", "side", "encryption", "memo", "real", "time", "collaborate", "customize"], "author": "Bernhard Bezdek", "license": "MIT", "bugs": {
-    "url": "https://github.com/BernhardBezdek/ihave.to/issues"
-}, "homepage": "http://ihave.to"}
+{
+    "name": "ihave.to",
+    "description": "Catch ideas. As they come and let them grow with your team in real time",
+    "version": "0.9.6",
+    "author": {
+        "name": "Bernhard Bezdek",
+        "email": "bernhard.bezdek@googlemail.com"
+    },
+    "license": "MIT",
+
+    "contributors": [
+        {
+            "name": "Bernhard Bezdek",
+            "email": "bernhard.bezdek@googlemail.com"
+        }
+    ],
+    "dependencies": {
+        "express": "*",
+        "gm": "*",
+        "mime": "*",
+        "socket.io": "*"
+    },
+
+    "keywords": [
+        "memo",
+        "board",
+        "real time",
+        "collaborate",
+        "aes",
+        "clientside encryption"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/BernhardBezdek/ihave.to"
+    },
+    "bin": {
+        "ihaveto": "./bin/ihaveto"
+    },
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "readmeFilename": "README.md",
+    "bugs": {
+        "url": "https://github.com/BernhardBezdek/ihave.to/issues"
+    },
+    "homepage": "http://www.ihave.to"
+}
