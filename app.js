@@ -9,7 +9,7 @@
     "use strict";
 
     // Set configuration globally
-    global.CONFIG = require(__dirname + '/settings/config');
+    global.CONFIG = require(__dirname + '/server/settings/config');
 
     var app;
     var oGarbageCollector;
@@ -31,7 +31,6 @@
 
     var server = http.createServer(app);
     var io = socketio.listen(server);
-
 
     // Setup required folder if not exit
     if (!fs.existsSync(CONFIG.ROOT + '../boards/')) {
@@ -70,65 +69,97 @@
         });
     });
 
-
     // Give access to uploaded images and update the modification date to determine if the image can be deleted if it's
     // older than CONFIG.MAX_DAYS_UNUSED
-    app.get('/upload/*', function (req, res) {
+    app.get('/upload/*', function (req, res, next) {
+        var iRefPos;
         var oMediaStream;
-        var sFileTarget = __dirname + '/../' + req.url;
+        var sFileTarget = __dirname + '/' + req.url;
+
         var iAccessTime = Math.round(new Date().getTime() / 1000);
 
-        fs.exists(sFileTarget, function (exists) {
-            if (exists) {
-                fs.utimes(sFileTarget, iAccessTime, iAccessTime, function (error) {
-                    if (!error) {
-                        oMediaStream = fs.createReadStream(sFileTarget);
-                        res.type(mime.lookup(sFileTarget));
-                        oMediaStream.pipe(res);
-                    } else {
-                        res.send(500, '500 INTERNAL SERVER ERROR');
-                    }
-                });
-            } else {
-                res.send(404, '404 NOT FOUND');
-            }
-        });
+        // Check if referer domain is enabled to access ressources
+        if (req.headers.referer !== undefined && CONFIG.PASS_REFERER !== '*') {
+            iRefPos = req.headers.referer.indexOf(CONFIG.PASS_REFERER);
+        }
+
+        // Check the referer domain
+        if ((iRefPos <= 11 && iRefPos > -1) || CONFIG.PASS_REFERER === '*') {
+            fs.exists(sFileTarget, function (exists) {
+                if (exists) {
+                    fs.utimes(sFileTarget, iAccessTime, iAccessTime, function (error) {
+                        if (!error) {
+                            oMediaStream = fs.createReadStream(sFileTarget);
+                            res.type(mime.lookup(sFileTarget));
+                            oMediaStream.pipe(res);
+                        } else {
+                            res.send(500, '500 INTERNAL SERVER ERROR');
+                        }
+                    });
+                } else {
+                    next();
+                }
+            });
+        } else {
+            next();
+        }
     });
 
     // Upload Wallpaper images
-    app.post('/upload-wp', function (req, res) {
+    app.post('/upload-wp', function (req, res, next) {
+        var iRefPos;
         var oImageUpload;
-        if (req.files !== undefined && req.files.file instanceof Object) {
-            oImageUpload = new ImageUpload(req.files.file, res);
 
-            oImageUpload.process();
+        // Check if referer domain is enabled to access ressources
+        if (req.headers.referer !== undefined && CONFIG.PASS_REFERER !== '*') {
+            iRefPos = req.headers.referer.indexOf(CONFIG.PASS_REFERER);
+        }
+
+        // Check the referer domain
+        if ((iRefPos <= 11 && iRefPos > -1) || CONFIG.PASS_REFERER === '*') {
+            if (req.files !== undefined && req.files.file instanceof Object) {
+                oImageUpload = new ImageUpload(req.files.file, res);
+
+                oImageUpload.process();
+            } else {
+                res.send(200, 'OK');
+            }
         } else {
-            res.send(200, 'OK');
+            next();
         }
     });
 
     // Remove an uploaded image and it's related thumbs
-    app.post('/unlink-wp', function (req, res) {
+    app.post('/unlink-wp', function (req, res, next) {
+        var iRefPos;
         var sRemoveFile = req.body.image.split('/').pop();
+        if (req.headers.referer !== undefined && CONFIG.PASS_REFERER !== '*') {
+            iRefPos = req.headers.referer.indexOf(CONFIG.PASS_REFERER);
+        }
 
-        fs.exists(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + sRemoveFile, function (exists) {
-            if (exists) {
-                fs.unlink(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + sRemoveFile, function (err) {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
+        // Check the referer domain
+        if ((iRefPos <= 11 && iRefPos > -1) || CONFIG.PASS_REFERER === '*') {
+            fs.exists(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + sRemoveFile, function (exists) {
+                if (exists) {
+                    fs.unlink(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + sRemoveFile, function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
 
-                fs.unlink(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + sRemoveFile.replace(/(.[A-Za-z]*)$/, '.thumb$1'), function (err) {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
-            }
+                    fs.unlink(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + sRemoveFile.replace(/(.[A-Za-z]*)$/, '.thumb$1'), function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                }
 
-            // Placed here for faster response
-            res.send('done');
-        });
+                // Placed here for faster response
+                res.send('done');
+            });
+        } else {
+            next();
+        }
     });
 
     // If you need a custom index page you can place one into public directory
@@ -144,7 +175,7 @@
 
     // The dafault path for the memeo board
     app.get('/do', function (req, res) {
-        res.sendfile(path.resolve(__dirname + '/../public/do.html'));
+        res.sendfile(path.resolve(__dirname + '/public/do.html'));
     });
 
     // Handle 404 Errors
