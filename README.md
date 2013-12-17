@@ -36,11 +36,22 @@ sudo apt-get install graphicsmagick imagemagick
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
 
 ###Install###
+There are two different ways to install ihave.to on your own server
+####GIT CLONE####
 To resolve all direct dependencies open projects server folder in a terminal and type:
 
 ``npm install -l``
 
 After previous step was successful you can run iHave.to on several ways from terminal (**stay in server folder**):
+
+
+####NPM####
+Create an empty folder go inside and enter:
+
+``npm install ihave.to``
+
+Now navigate via terminal to ./node_modules/ihave.to and follow the next step
+
 
 
 ###Standalone###
