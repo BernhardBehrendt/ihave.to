@@ -1,14 +1,40 @@
 {
-    "name": "ihave.to",
-    "version": "0.9.5",
-    "private": false,
-    "scripts": {
-        "start": "node app.js"
-    },
-    "dependencies": {
-        "express": "*",
-        "socket.io": "*",
-        "gm":"*",
-        "mime":"*"
-    }
+  "name": "ihave.to",
+  "version": "0.9.5",
+  "private": false,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "socket.io": "*",
+    "gm": "*",
+    "mime": "*"
+  },
+  "description": "iHave.to was created to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown. It's also possible to be creative in a collaborative way via realtime multiuser support. Your memo data is strongly protected using AES on your device until any authenticated endpoint. If you're using iHave.to in a collaborative way only the encryptet data difference is broadcasted to any user who's actually on the memo board.",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BernhardBezdek/ihave.to"
+  },
+  "keywords": [
+    "catch",
+    "ideas",
+    "aes",
+    "client",
+    "side",
+    "encryption",
+    "memo",
+    "real",
+    "time",
+    "collaborate",
+    "customize"
+  ],
+  "author": "Bernhard Bezdek",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/BernhardBezdek/ihave.to/issues"
+  },
+  "homepage": "http://ihave.to"
 }

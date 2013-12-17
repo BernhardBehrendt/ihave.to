@@ -5,8 +5,6 @@ var Settings;
 
     /**
      * Settings frontend will be generated
-     * @TODO Storing values is exiting on wrong place but will be stored here in future
-     *
      * @module Client
      * @submodule Classes
      * @class Settings

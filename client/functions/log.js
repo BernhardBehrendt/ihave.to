@@ -14,7 +14,6 @@ var log;
      * @class log
      * @constructor
      * @param {String} logdata
-     * @TODO Use basic APP.LOGGER for better loggng capabilities
      */
     log = function (logdata) {
         if (console !== undefined && CONF.PROPS.BOOLEAN.LOG === true) {
