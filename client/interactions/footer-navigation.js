@@ -347,11 +347,11 @@
                             $('#dropImage').hide();
                         }
 
-                        oUploadProgress.children('div.bar').css('width', uploaded + '%');
+                        oUploadProgress.children('div.bar').css('width', uploaded + '%').text((Math.round(uploaded * 100) / 100));
 
                         if (uploaded >= 100) {
                             oUploadProgress.removeClass('active');
-                            oUploadProgress.children('div.bar').removeAttr('style'.text((Math.round(uploaded * 100) / 100)));
+                            oUploadProgress.children('div.bar').removeAttr('style');
                             $('#dropImage').show();
                         }
 
