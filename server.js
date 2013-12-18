@@ -129,6 +129,29 @@
         }
     });
 
+    // Upload memo images images
+    app.post('/upload-postimage', function (req, res, next) {
+        var iRefPos;
+        var oImageUpload;
+
+        // Check if referer domain is enabled to access ressources
+        if (req.headers.referer !== undefined && CONFIG.PASS_REFERER !== '*') {
+            iRefPos = req.headers.referer.indexOf(CONFIG.PASS_REFERER);
+        }
+
+        // Check the referer domain
+        if ((iRefPos <= 11 && iRefPos > -1) || CONFIG.PASS_REFERER === '*') {
+            if (req.files !== undefined && req.files.file instanceof Object) {
+                oImageUpload = new ImageUpload(req.files.file, res);
+                oImageUpload.createPostImage();
+            } else {
+                res.send(200, 'OK');
+            }
+        } else {
+            next();
+        }
+    });
+
     // Remove an uploaded image and it's related thumbs
     app.post('/unlink-wp', function (req, res, next) {
         var iRefPos;

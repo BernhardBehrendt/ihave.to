@@ -297,6 +297,8 @@
                     CONF.DOM.BOARDSCREENS.html(new Template(oBoard.getTemplate()).toHtml());
                     CONF.DOM.BOARD.trigger('uiBoard');
 
+                    oBoard.enableDroppable($('.post'));
+
                 } else {
                     showMessage('CANT_STORE_EMPTY_POST', 'error');
                     $(this).removeClass('active');

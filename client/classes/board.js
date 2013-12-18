@@ -1,5 +1,6 @@
 /*global $*/
 /*global CONF*/
+/*global showMessage*/
 var Board;
 (function () {
     "use strict";
@@ -215,5 +216,62 @@ var Board;
      */
     Board.prototype.setBackground = function () {
         $('body').css('background-image', 'url(' + this._oScreen.SCREEN.META.BG + ')');
+    };
+
+    /**
+     * @method enableDroppable
+     * @param {Object} oItems Hte items to make droppable
+     *
+     */
+    Board.prototype.enableDroppable = function (oItems) {
+        oItems.dropzone({
+            url: "/upload-postimage",
+            paramName: "file", // The name that will be used to transfer the file
+            maxFilesize: CONF.PROPS.INT.MAX_UPLOAD, // MB,
+            maxFiles: 1,
+            clickable: false,
+            accept: function (file, done) {
+                if (CONF.PROPS.ARRAY.ALLOWED_FILES.indexOf(file.name.substring(file.name.length - 4, file.name.length)) === -1) {
+                    showMessage('FILETYPE_NOT_ALLOWED', 'error');
+
+                }
+                else {
+                    showMessage('UPLOADING_FILE');
+                    done();
+                }
+            },
+            uploadprogress: function (file, uploaded) {
+
+
+            },
+            complete: function (file) {
+                this.removeFile(file);
+            },
+            success: function (response, data) {
+                showMessage('UPLOADING_FINISH');
+
+                if (data.indexOf('upload/') === 0) {
+
+                    var oPost = $(this.element);
+
+
+                    CONF.DOM.CMD.trigger('setMainNav');
+                    CONF.DOM.BOARD.trigger('normalBoard');
+
+                    //oPost = $('#board').find('div.post.focused');
+                    oPost.removeClass('mobile');
+                    oPost.removeClass('focused');
+
+                    $('#new_post').trigger(CONF.EVENTS.CLICK, {
+                        origin: oPost
+                    });
+
+                    $('textarea').val($('textarea').val() + " \n\n" + window.location.toString().replace('/do', '/') + data);
+                    $('#store_post').trigger('click');
+                }
+            },
+            error: function () {
+                showMessage('UPLOADING_ERROR');
+            }});
     };
 })();

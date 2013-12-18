@@ -2,45 +2,53 @@
 //
 @import "../mixins/user-select";
 
-section#board{
+section#board {
   @include user-select(none);
-  position:fixed;
-  top:0px;
-  left:0px;
-  z-index:3;
-  width:100%;
-  height:100%;
-  display:none;
-  overflow:hidden;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: none;
+  overflow: hidden;
 
-  .posts{
+  .posts {
     @include clearfix;
     @include user-select(none);
 
-    width:100%;
-    height:100%;
-    cursor:pointer;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 
-    .screen.normal{
+    .screen {
+      .post {
+        .dz-preview {
+          display: none;
+        }
+      }
+    }
+
+    .screen.normal {
       @include clearfix;
       @include user-select(none);
 
-      float:left;
-      width:100%;
-      height:100%;
-      overflow:hidden;
+      float: left;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
 
       @import "board/post-normal";
     }
 
-    .screen.tinysort{
+    .screen.tinysort {
       @include clearfix;
       @include user-select(none);
 
-      float:left;
-      width:100%;
-      height:100%;
-      overflow:auto;
+      float: left;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
 
       @import "board/post-tinysort";
     }

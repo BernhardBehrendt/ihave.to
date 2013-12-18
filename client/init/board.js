@@ -53,6 +53,8 @@
 
                 CONF.DOM.BOARDSCREENS.html(new Template(oCurrentScreen).toHtml());
                 CONF.DOM.BOARD.trigger('uiBoard');
+
+                oBoard.enableDroppable($('.post'));
             }
         }
     });

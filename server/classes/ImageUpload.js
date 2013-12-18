@@ -67,6 +67,22 @@ var ImageUpload = null;
     };
 
     /**
+     * Initiate the whole image process which is required for successfully storing of the image
+     * @method process
+     */
+    ImageUpload.prototype.createPostImage = function () {
+        var sFileTarget;
+
+        if (this.checkFileType()) {
+            sFileTarget = (CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + this.file.path.split('/').pop());
+
+            this.resize(this.file.path, sFileTarget, 800, 600);
+        } else {
+            this.sendResponse('UNKNOWN_FILE_TYPE');
+        }
+    };
+
+    /**
      * Check the uploads filesize limit which was set in CONFIG.MAX_UPLOAD_SIZE
      * @method checkSizeLimits
      */
@@ -121,16 +137,57 @@ var ImageUpload = null;
      * @method createThumb
      * @param {String} sTarget The origin size image path
      * @param {String} sDestination location where image should be stored
+     * @param {Number} width of the heigth of thumbnail
+     * @param {Number} height of the heigth of thumbnail
      */
-    ImageUpload.prototype.createThumb = function (sTarget, sDestination) {
+    ImageUpload.prototype.createThumb = function (sTarget, sDestination, width, height) {
         var self = this;
 
-        this.gm(sTarget).thumb(CONFIG.THUMB_WID, CONFIG.THUMB_HGT, sDestination, CONFIG.GM_QUALITY, function (error) {
+        if (width === undefined) {
+            width = CONFIG.THUMB_WID;
+        }
+
+        if (height === undefined) {
+            height = CONFIG.THUMB_HGT;
+        }
+
+        this.gm(sTarget).thumb(width, height, sDestination, CONFIG.GM_QUALITY, function (error) {
             if (!error) {
                 self.sendResponse(CONFIG.IMG_ROOT + '/' + sTarget.split('/').pop(), 200);
             } else {
                 console.log(error);
                 console.log('Cant create Thumbnail. Maybe imagemagick or graphicsmagick missing');
+                self.sendResponse('503 Service Unavailable', 503);
+            }
+        });
+    };
+
+    /**
+     * Creates the thumb of a given image and store it in given destination
+     *
+     * @method createThumb
+     * @param {String} sTarget The origin size image path
+     * @param {String} sDestination location where image should be stored
+     * @param {Number} width of the heigth of thumbnail
+     * @param {Number} height of the heigth of thumbnail
+     */
+    ImageUpload.prototype.resize = function (sTarget, sDestination, width, height) {
+        var self = this;
+
+        if (width === undefined) {
+            width = CONFIG.THUMB_WID;
+        }
+
+        if (height === undefined) {
+            height = CONFIG.THUMB_HGT;
+        }
+
+        this.gm(sTarget).resize(width, height).noProfile().write(sDestination, function (error) {
+            if (!error) {
+                self.sendResponse(CONFIG.IMG_ROOT + '/' + sTarget.split('/').pop(), 200);
+            } else {
+                console.log(error);
+                console.log('Image resize failed');
                 self.sendResponse('503 Service Unavailable', 503);
             }
         });
