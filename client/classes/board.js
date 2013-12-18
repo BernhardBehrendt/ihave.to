@@ -246,6 +246,7 @@ var Board;
             },
             complete: function (file) {
                 this.removeFile(file);
+                $('#store_post').trigger('click');
             },
             success: function (response, data) {
                 showMessage('UPLOADING_FINISH');
@@ -267,7 +268,7 @@ var Board;
                     });
 
                     $('textarea').val($('textarea').val() + " \n\n" + window.location.toString().replace('/do/', '/').replace('/do', '/') + data);
-                    $('#store_post').trigger('click');
+
                 }
             },
             error: function () {
