@@ -266,7 +266,7 @@ var Board;
                         origin: oPost
                     });
 
-                    $('textarea').val($('textarea').val() + " \n\n" + window.location.toString().replace('/do', '/') + data);
+                    $('textarea').val($('textarea').val() + " \n\n" + window.location.toString().replace('/do/', '/').replace('/do', '/') + data);
                     $('#store_post').trigger('click');
                 }
             },
