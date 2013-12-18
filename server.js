@@ -97,7 +97,7 @@
                         }
                     });
                 } else {
-                    next();
+                    res.send(401, 'You can access images only via memo board (not directly by URL)');
                 }
             });
         } else {
