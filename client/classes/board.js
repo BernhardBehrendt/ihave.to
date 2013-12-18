@@ -246,7 +246,10 @@ var Board;
             },
             complete: function (file) {
                 this.removeFile(file);
-                $('#store_post').trigger('click');
+
+                setTimeout(function () {
+                    $('#store_post').trigger('click');
+                }, 200);
             },
             success: function (response, data) {
                 showMessage('UPLOADING_FINISH');
