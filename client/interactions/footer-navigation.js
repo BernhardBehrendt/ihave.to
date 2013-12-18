@@ -355,6 +355,8 @@
                             $('#dropImage').show();
                         }
 
+                        showMessage('UPLOADING_FILE'.translate() + ' | ' + uploaded + '%');
+
 
                     },
                     complete: function (file) {
