@@ -249,7 +249,7 @@ var Board;
 
                 setTimeout(function () {
                     $('#store_post').trigger('click');
-                }, 200);
+                }, 1000);
             },
             success: function (response, data) {
                 showMessage('UPLOADING_FINISH');
