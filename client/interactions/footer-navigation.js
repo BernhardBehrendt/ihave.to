@@ -355,7 +355,7 @@
                             $('#dropImage').show();
                         }
 
-                        showMessage('UPLOADING_FILE'.translate() + ' | ' + uploaded + '%');
+                        showMessage('UPLOADING_FILE'.translate() + ' | ' + (Math.round(uploaded*100)/100) + '%');
 
 
                     },
