@@ -12,7 +12,7 @@ var GarbageCollector = null;
      * @module Server
      * @submodule Classes
      * @class GarbageCollector
-     * @contructor
+     * @constructor
      */
     GarbageCollector = function () {
         this.fs = require('fs');

@@ -128,7 +128,7 @@
      * Converts an string into a clickable link
      * NOTCE (youtube Links are converted into an embed video) iframe
      * @method urlToLink
-     * @returns {String} The HTML representation containing links and iframes
+     * @return {String} The HTML representation containing links and iframes
      */
     String.prototype.urlToLink = function urlToLink() {
 

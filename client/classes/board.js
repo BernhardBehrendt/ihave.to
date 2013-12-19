@@ -6,7 +6,7 @@ var Board;
     "use strict";
 
     /**
-     * Board converts a screentimline into a valid screen view
+     * Board converts a screentimline into a valid screen viewh
      *
      *
      * @author Bernhard Bezdek <bernahrd.bezdek@googlemail.com>
@@ -113,7 +113,7 @@ var Board;
      * Creates the Templates required post structure for later working/merging
      * into an existing representation on screen object
      *
-     * @method_createPost
+     * @method _createPost
      * @param {Object} oPost the timeline entry to get parsed
      * @return {Object} The template engines representation to create HTML from it
      * @private
@@ -237,6 +237,8 @@ var Board;
                 }
                 else {
                     showMessage('UPLOADING_FILE');
+                    $('footer').addClass('disabled');
+
                     done();
                 }
             },
@@ -246,31 +248,36 @@ var Board;
             },
             complete: function (file) {
                 this.removeFile(file);
-
-                setTimeout(function () {
-                    $('#store_post').trigger('click');
-                }, 1000);
+                $('footer').removeClass('disabled');
             },
             success: function (response, data) {
                 showMessage('UPLOADING_FINISH');
 
+
                 if (data.indexOf('upload/') === 0) {
-
                     var oPost = $(this.element);
+                    var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
+                    var oDiff = JSON.parse('{"PRIVATE":{"SCREENS":{"' + sActiveScreen + '":{"POSTS":{"' + iTimestamp + '":{}}}}}}');
+                    var iTimestamp = new Date().getTime();
+                    var sNewContent;
+                    var oChange;
+                    var sAddImage;
 
+                    sAddImage = (window.location.toString().replace('/do/', '/').replace('/do', '/') + data).urlToLink();
+                    sNewContent = oPost.find('p').html() + '<br/><br/>' + sAddImage;
+                    oChange = {
+                        ACN: 'content',
+                        BY: CONF.PROPS.INT.WHO,
+                        TGT: oPost.attr('id'),
+                        TO: sNewContent
+                    };
 
-                    CONF.DOM.CMD.trigger('setMainNav');
-                    CONF.DOM.BOARD.trigger('normalBoard');
+                    CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS[iTimestamp] = oChange;
+                    oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTimestamp] = oChange;
 
-                    //oPost = $('#board').find('div.post.focused');
-                    oPost.removeClass('mobile');
-                    oPost.removeClass('focused');
+                    oPost.find('p').html(sNewContent);
 
-                    $('#new_post').trigger(CONF.EVENTS.CLICK, {
-                        origin: oPost
-                    });
-
-                    $('textarea').val($('textarea').val() + " \n\n" + window.location.toString().replace('/do/', '/').replace('/do', '/') + data);
+                    CONF.COM.SOCKET.saveChanges(oDiff);
 
                 }
             },

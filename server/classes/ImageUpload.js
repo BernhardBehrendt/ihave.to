@@ -14,6 +14,8 @@ var ImageUpload = null;
      * @submodule Classes
      * @class ImageUpload
      * @constructor
+     * @param {Object} oRessourceFile The uploaded file in temp folder
+     * @param {Object} response The express js response object
      */
     ImageUpload = function (oRessourceFile, response) {
         this.gm = require('gm');
@@ -24,7 +26,7 @@ var ImageUpload = null;
 
     /**
      * The instance of gm (GraphicsMagic)
-     * @param gm
+     * @property gm
      * @type {Function}
      * @see http://aheckmann.github.io/gm/
      */
@@ -32,7 +34,7 @@ var ImageUpload = null;
 
     /**
      * The instance of node file system api
-     * @param fs
+     * @property fs
      * @type {Function}
      * @see http://nodejs.org/api/fs.html
      */
@@ -40,7 +42,7 @@ var ImageUpload = null;
 
     /**
      * The reference to a unprocessed file
-     * @param file
+     * @property file
      * @type {String}
      */
     ImageUpload.prototype.file = null;
@@ -48,7 +50,7 @@ var ImageUpload = null;
 
     /**
      * The reference to express response object
-     * @param response
+     * @property response
      * @type {Function}
      * @see http://expressjs.com/api.html#res.send
      */
@@ -216,6 +218,7 @@ var ImageUpload = null;
 
     /**
      * Send a response to client after action was done or if an error occured
+     * @method sendResponse
      * @param {String} message The message to tell client
      * @param {Number} code The HTTP-Status code (default 200)
      */

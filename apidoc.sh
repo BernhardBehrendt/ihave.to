@@ -1,1 +1,1 @@
-yuidoc  ./client ./server -x ./server/node_modules -o ./documentation/
+yuidoc  ./client/classes ./client/functions ./client/interactions ./client/static ./server/   -o ./documentation/

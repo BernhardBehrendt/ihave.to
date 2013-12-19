@@ -16,33 +16,35 @@ var Post;
     Post = function (oPost) {
 
         this.oPost = ( oPost !== undefined) ? oPost : false;
-
-        if (this.oPost) {
-            /**
-             * the Post id (proxy)
-             */
-            /**
-             * Get the color of an selected post
-             */
-            this.getColor = function () {
-                var i;
-                var sMatchedColor = false;
-
-                for (i = 0; i < CONF.PROPS.ARRAY.COLORS.length; i += 1) {
-                    if (this.oPost.hasClass(CONF.PROPS.ARRAY.COLORS[i])) {
-                        sMatchedColor = CONF.PROPS.ARRAY.COLORS[i];
-                    }
-                }
-
-                return sMatchedColor;
-            };
-
-
-            this.getId = function () {
-                return this.oPost.attr('id');
-            };
-        }
     };
+
+    /**
+     * Get the selected post color
+     * @method getColor
+     * @return {String} The detected color
+     */
+    Post.prototype.getColor = function () {
+        var i;
+        var sMatchedColor = false;
+
+        for (i = 0; i < CONF.PROPS.ARRAY.COLORS.length; i += 1) {
+            if (this.oPost.hasClass(CONF.PROPS.ARRAY.COLORS[i])) {
+                sMatchedColor = CONF.PROPS.ARRAY.COLORS[i];
+            }
+        }
+
+        return sMatchedColor;
+    };
+
+    /**
+     * Get the selected posts ID
+     * @method getId
+     * @return {String|null}
+     */
+    Post.prototype.getId = function () {
+        return this.oPost.attr('id') || null;
+    };
+
 
     /**
      * Get the ASCII Text content from a postit

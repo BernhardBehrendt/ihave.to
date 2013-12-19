@@ -13,7 +13,7 @@ var Board = null;
      * @module Server
      * @submodule Classes
      * @class Board
-     * @contructor
+     * @constructor
      * @param {String} sBoard The computet name of the requested board
      * @param {Object} oSocket The created socket connection
      */

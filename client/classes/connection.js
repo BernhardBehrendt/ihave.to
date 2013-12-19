@@ -43,8 +43,8 @@ var Connection;
 
     /**
      * Here the encryption phrase is stored
-     * @param _encryption
-     * @type {null}
+     * @property _encryption
+     * @type {null|String}
      * @private
      */
     Connection.prototype._encryption = null;
@@ -52,7 +52,7 @@ var Connection;
     /**
      * The whole board as AES encrypted string
      * AES encryption is enabled after first initialisation of a board
-     * @param _data
+     * @property _data
      * @type {String}
      * @private
      */
@@ -61,6 +61,7 @@ var Connection;
     /**
      * The verifier which is required for write permissins after handshake
      * and need to be decrypted out of the requested boardfile
+     * @property _verifier
      * @type {String}
      * @private
      */
@@ -69,7 +70,7 @@ var Connection;
     /**
      * The SHA-3 hashed name of the board
      *
-     * @param _board
+     * @property _board
      * @type {String}
      * @private
      */
@@ -269,7 +270,7 @@ var Connection;
      * Update the curretn screen if theres an incoming change
      * @method updateScreen
      * @param {Object} oItem
-     * @returns {Boolean}
+     * @return {Boolean}
      */
     Connection.prototype.updateScreen = function updateScreen(oItem) {
         var i;

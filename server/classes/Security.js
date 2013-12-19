@@ -45,6 +45,7 @@ var Security = null;
 
     /**
      * The salst for creating the verifier
+     * @property _salt
      * @type {String}
      * @private
      */

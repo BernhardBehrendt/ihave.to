@@ -1,6 +1,7 @@
 @import "compass/utilities/general/clearfix";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
+@import "compass/css3/transition";
 //
 @import "../declarations/dimensions";
 @import "../declarations/sprite-maps";
@@ -9,10 +10,11 @@
 @import "../mixins/paddingbox";
 @import "../mixins/sprite-background";
 
-
 footer {
   @include rgba-background($footer-background);
   @include clearfix;
+  @include transition-property("bottom");
+  @include transition-duration("0.2s");
 
   position: fixed;
   bottom: 0px;
@@ -304,4 +306,8 @@ footer {
 
 footer.shadow {
   @include box-shadow($ui-shadow);
+}
+
+footer.disabled {
+  bottom: $footer-height * -1;
 }
