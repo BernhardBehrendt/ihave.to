@@ -299,6 +299,25 @@ footer {
     color: $white;
     letter-spacing: 0.02em;
   }
+
+  div#memoUploadProgress {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    div.bar {
+      height: 98.2%;
+      width: 2%;
+      padding-left: 0.8%;
+      padding-top: 0.8%;
+      background-image: url(../img/loaders/bar.png);
+      background-repeat: repeat-x;
+      margin-top: 7px;
+    }
+  }
 }
 
 footer.shadow {
@@ -308,5 +327,9 @@ footer.shadow {
 footer.disabled {
   ul {
     display: none;
+  }
+
+  div#memoUploadProgress {
+    display: block;
   }
 }

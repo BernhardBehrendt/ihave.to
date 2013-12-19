@@ -243,7 +243,20 @@ var Board;
                 }
             },
             uploadprogress: function (file, uploaded) {
+                var oUploadProgress = $('#memoUploadProgress');
 
+                if (!oUploadProgress.hasClass('active')) {
+                    oUploadProgress.addClass('active');
+                    $('#dropImage').hide();
+                }
+
+                oUploadProgress.children('div.bar').css('width', uploaded + '%').text((Math.round(uploaded) + '%'));
+
+                if (uploaded >= 100) {
+                    oUploadProgress.removeClass('active');
+                    oUploadProgress.children('div.bar').removeAttr('style');
+                    $('#dropImage').show();
+                }
 
             },
             complete: function (file) {

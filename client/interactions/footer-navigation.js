@@ -369,8 +369,6 @@
                             oUploadProgress.children('div.bar').removeAttr('style');
                             $('#dropImage').show();
                         }
-
-
                     },
                     complete: function (file) {
                         this.removeFile(file);
