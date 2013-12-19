@@ -279,13 +279,13 @@ var Board;
 
 
                 if (data.indexOf('upload/') === 0) {
-                    var oPost = $(this.element);
-                    var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
-                    var oDiff = JSON.parse('{"PRIVATE":{"SCREENS":{"' + sActiveScreen + '":{"POSTS":{"' + iTimestamp + '":{}}}}}}');
-                    var iTimestamp = new Date().getTime();
                     var sNewContent;
                     var oChange;
                     var sAddImage;
+                    var oPost = $(this.element);
+                    var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
+                    var iTimestamp = new Date().getTime();
+                    var oDiff = JSON.parse('{"PRIVATE":{"SCREENS":{"' + sActiveScreen + '":{"POSTS":{"' + iTimestamp + '":{}}}}}}');
 
                     sAddImage = (window.location.toString().replace('/do/', '/').replace('/do', '/') + data).urlToLink();
                     sNewContent = oPost.find('p').html() + '<br/><br/>' + sAddImage;
