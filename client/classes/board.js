@@ -240,6 +240,12 @@ var Board;
                     $('footer').addClass('disabled');
 
                     done();
+
+                    if (window.uploadProgresses === undefined) {
+                        window.uploadProgresses = 0;
+                    }
+
+                    window.uploadProgresses += 1;
                 }
             },
             uploadprogress: function (file, uploaded) {
@@ -261,7 +267,12 @@ var Board;
             },
             complete: function (file) {
                 this.removeFile(file);
-                $('footer').removeClass('disabled');
+
+                window.uploadProgresses -= 1;
+
+                if (window.uploadProgresses === 0) {
+                    $('footer').removeClass('disabled');
+                }
             },
             success: function (response, data) {
                 showMessage('UPLOADING_FINISH');
