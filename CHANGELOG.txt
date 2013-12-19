@@ -1,0 +1,4 @@
+0.9.6 | Made ihave.to to an open source project
+0.9.7 | Added suport for drag and drop for image upload on memos
+        Improvements in workspace area to raise consistency after an upload process
+

@@ -50,6 +50,16 @@
         })
         // Leave subnavigation level
         .on(CONF.EVENTS.CLICK, '#back', function () {
+
+            //
+            if ($('#screen-bg-url').length === 1) {
+                var sUploadedBgVal = $('#screen-bg-url').val().trim().split('/').pop();
+
+                if (sUploadedBgVal.length > 0) {
+                    $.post('/unlink-wp', {image: sUploadedBgVal});
+                }
+            }
+
             CONF.DOM.CMD.trigger('setMainNav');
 
             CONF.DOM.CMD.find('.active').trigger(CONF.EVENTS.CLICK);
@@ -337,6 +347,8 @@
                             }
 
                             showMessage('UPLOADING_FILE');
+                            $('footer').addClass('disabled');
+
                             done();
 
                             $('#create-screen, #abort-create-screen').fadeOut(250);
@@ -362,6 +374,7 @@
                     },
                     complete: function (file) {
                         this.removeFile(file);
+                        $('footer').removeClass('disabled');
                     },
                     success: function (response, data) {
                         showMessage('UPLOADING_FINISH');
@@ -384,6 +397,15 @@
 
         // Switch in delete screen mode
         .on(CONF.EVENTS.CLICK, '#trash_empty', function () {
+
+            if ($('#screen-bg-url').length === 1) {
+                var sUploadedBgVal = $('#screen-bg-url').val().trim().split('/').pop();
+
+                if (sUploadedBgVal.length > 0) {
+                    $.post('/unlink-wp', {image: sUploadedBgVal});
+                }
+            }
+
             if ($(this).hasClass('active')) {
                 if (CONF.DOM.UIWINDOW.children('.cmd').find('.screen').length > 1) {
                     showMessage('SELECT_SCREENS_TO_DELETE');

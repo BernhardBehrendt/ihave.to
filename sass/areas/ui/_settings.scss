@@ -118,7 +118,7 @@
       span {
         @include paddingbox(110px, 26px, 0, 0, 0, 0);
         display: block;
-        margin-top: $def_margin_unit / 4;
+        margin-top: $def_margin_unit / 2;
         color: $whiteFull;
         font-family: $font-light;
         font-size: $small;

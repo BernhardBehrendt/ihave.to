@@ -57,7 +57,6 @@
             if (oScreenName.val() !== 'NEW_SCREEN_NAME'.translate() && oScreenName.val().trim().length > 0) {
                 if (CONF.BOARD.PRIVATE.SCREENS[oScreenName.val().trim()] !== undefined) {
                     showMessage(oScreenName.val().trim() + ' ' + 'SCREEN_ALREADY_EXISTS'.translate(), 'error');
-                    $('#abort-create-screen').trigger('click');
                 } else {
                     if (CONF.BOARD.PRIVATE.SCREENS[oScreenName.val()] === undefined) {
                         var sScreenBgUrl = $('#screen-bg-url').val();
@@ -74,6 +73,8 @@
                         CONF.BOARD.PRIVATE.SCREENS[oScreenName.val()] = oChange;
                     }
 
+                    // Need to remvove. Otherwise triggered cancel action will remove the image
+                    $('input#screen-bg-url').remove();
                     $('#abort-create-screen').trigger('click');
 
                     CONF.DOM.UIWINDOW.children('.cmd').html(new Template(new Screens().getOverview()).toHtml());
@@ -86,6 +87,13 @@
             }
         }).on('click', '#abort-create-screen', function () {
 
+            if ($('input#screen-bg-url').length === 1) {
+                var sUploadedBgVal = $('#screen-bg-url').val().trim().split('/').pop();
+
+                if (sUploadedBgVal.length > 0) {
+                    $.post('/unlink-wp', {image: sUploadedBgVal});
+                }
+            }
             $('#new_screen-ui').fadeOut(CONF.PROPS.INT.MASTERCLOCK / 4, function () {
                 $(this).remove();
                 $('#new_screen').removeClass('active');

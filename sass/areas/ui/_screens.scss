@@ -25,12 +25,13 @@
     float: left;
     font-size: $large;
     margin-bottom: $def_margin_unit;
+    border-color: #555;
 
   }
 
   form#dropImage {
 
-    @include paddingbox(614px, 120px, 46px, 0, 0, $def_margin_unit / 4);
+    @include paddingbox(614px, 74px, 23px, 0, 0, $def_margin_unit / 4);
     @include border-radius(4px);
     @include transition-property("background-color");
     @include transition-property("color");

@@ -108,7 +108,7 @@ var LANGUAGE = {
         IS_MARKED_AS: 'bedeutet',
 
         // DEFAULT VALUES
-        NEW_SCREEN_NAME: 'Name des neuen Memoboard',
+        NEW_SCREEN_NAME: 'Name der neuen Arbeitsfläche',
         NEW_BG_URL: 'URL zu deinem Hintergrundbild',
         DROP_IMAGEFILE_HERE: 'Ziehe das Hintergrundbild auf diese Fläche',
         FILETYPE_NOT_ALLOWED: 'Dieser Datentyp ist nicht erlaubt (Ausschließlich: JPG, PNG, GIF, SVG)',
