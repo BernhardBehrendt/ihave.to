@@ -6,6 +6,7 @@
 /*global Apprise*/
 /*global window*/
 /*global showMessage*/
+/*global Template*/
 (function () {
     "use strict";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +21,10 @@
         $('#post-functions').remove();
         $(this).parent('.post').addClass('focused');
     })
+        .on(CONF.EVENTS.CLICK, '#fullsize', function () {
+            $(this).removeClass('active');
+        })
+
         .on(CONF.EVENTS.CLICK, '.screen', function () {
             $('#post-functions').remove();
             $(this).find('div.post.focused').removeClass('focused');
@@ -28,19 +33,30 @@
         .on(CONF.EVENTS.CLICK, '.post > .content > p > a', function (event) {
             event.preventDefault();
             event.stopPropagation();
-            if (!isMobile()) {
-                window.open($(this).attr('href'));
+            var oImage;
+
+            if ($(this).children('img').length === 1) {
+                $('#fullsize').addClass('active').html(new Template({IMG: {SRC: $(this).attr('href')}}).toHtml());
+
+                oImage = $('#fullsize').children('img');
+                oImage.css('marginTop', (($(window).height() - oImage.outerHeight()) / 2) + 'px');
+
             } else {
 
-                if (window.navigator.standalone === undefined) {
-                    window.navigator.standalone = false;
-                }
-
-                if (window.navigator.standalone === true) {
-                    showMessage('IOS_ERROR_OPENWINDOW');
-                }
-                else {
+                if (!isMobile()) {
                     window.open($(this).attr('href'));
+                } else {
+
+                    if (window.navigator.standalone === undefined) {
+                        window.navigator.standalone = false;
+                    }
+
+                    if (window.navigator.standalone === true) {
+                        showMessage('IOS_ERROR_OPENWINDOW');
+                    }
+                    else {
+                        window.open($(this).attr('href'));
+                    }
                 }
             }
         })
@@ -182,7 +198,6 @@
             // Add hidden class and remove on change
             //$('#store_post').addClass('hidden');
             CONF.DOM.CMD.find('#store_post').addClass('hidden');
-
 
 
         })

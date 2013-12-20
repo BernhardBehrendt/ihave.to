@@ -4,7 +4,7 @@
     "use strict";
 
     // Fix for preventing overflow scrolling of the body
-    $(document).on('touchmove', 'body',function (e) {
+    $(document).on('touchmove', 'body', function (e) {
         if (!$('.tinysort').has($(e.target)).length && !$('#ui').has($(e.target)).length && !$('.focused').has($(e.target)).length) {
             e.preventDefault();
         }
@@ -18,6 +18,7 @@
                     CONF.DOM.UIWINDOW.trigger('hideUi');
                     CONF.DOM.CMD.find('.active').trigger(CONF.EVENTS.CLICK);
                     CONF.DOM.CMD.trigger('setMainNav');
+                    $('#fullsize').removeClass('active').empty();
                 }
             }
         })
