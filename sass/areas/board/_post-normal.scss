@@ -147,7 +147,10 @@
         background: none;
 
         img {
+          @include border-radius(4px);
+
           width: 100%;
+
         }
       }
     }
