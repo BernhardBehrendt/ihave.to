@@ -1,5 +1,7 @@
 /*global CONFIG*/
 /*global console*/
+/*global require*/
+/*global module*/
 var GarbageCollector = null;
 (function () {
     "use strict";

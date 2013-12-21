@@ -20,6 +20,7 @@
  */
 @import "compass/css3/background-size";
 @import "compass/utilities/sprites/";
+
 @mixin sprite-bg($name, $normal, $retina, $padtop: 0px, $center: null, $padleft: 0px) {
   background-image: sprite-url($normal);
   background-position: sprite-position($normal, $name);

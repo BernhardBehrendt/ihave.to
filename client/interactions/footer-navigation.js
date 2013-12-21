@@ -256,7 +256,6 @@
                                 // Add changes to board
                                 oDiff.PRIVATE.SCREENS[sActiveScreen].POSTS[iTimestamp] = oChange;
                                 CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS[iTimestamp] = oChange;
-                                console.log(oChange);
                             }
 
                         }

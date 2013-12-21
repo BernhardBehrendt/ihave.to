@@ -1,6 +1,7 @@
 /*global CONFIG*/
-/*global require*/
+/*global console*/
 /*global module*/
+/*global require*/
 
 var ImageUpload = null;
 
