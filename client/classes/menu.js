@@ -1,4 +1,3 @@
-/*global CONF*/
 var Menu;
 (function () {
     "use strict";

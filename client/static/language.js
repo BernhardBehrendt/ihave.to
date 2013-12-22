@@ -1,4 +1,5 @@
-var LANGUAGE = {
+/*global window*/
+window.LANGUAGE = {
     DE: {
         // BASICS
         MOBILE_TITLE: 'iHave.to',

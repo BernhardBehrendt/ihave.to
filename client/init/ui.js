@@ -1,6 +1,5 @@
 /*global $*/
 /*global CONF*/
-/*global Template*/
 /*global isMobile*/
 
 (function () {

@@ -1,3 +1,5 @@
+@import "compass/utilities/sprites";
+
 @mixin x1x2($position, $x1, $x2){
   // TODO REPLACE $x2 for real retina integration
   // ACTUALLY EVERYWHERE THE HIGHRES IMAGE IST LOADED WITH NON RETINA DIMENSIONS

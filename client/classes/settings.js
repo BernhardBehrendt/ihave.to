@@ -1,4 +1,3 @@
-/*global CONF*/
 var Settings;
 (function () {
     "use strict";

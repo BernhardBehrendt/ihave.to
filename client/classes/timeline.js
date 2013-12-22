@@ -1,4 +1,5 @@
 /*global _*/
+/*global console*/
 var Timeline;
 (function () {
     "use strict";

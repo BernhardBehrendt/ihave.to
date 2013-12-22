@@ -1,14 +1,13 @@
-    /*global module*/
+/*global module*/
 /*global __dirname*/
 var CONFIG = null;
 
 (function () {
     "use strict";
-
     CONFIG = {
         PORT: 3000,
-        PASS_REFERER:'localhost',           // Determine which calls are passed to uploaded data
-                                    // (* means everything and domain without http://www. (e.g. mydomain.com))
+        PASS_REFERER: 'localhost',           // Determine which calls are passed to uploaded data
+        // (* means everything and domain without http://www. (e.g. mydomain.com))
 
         ROOT: __dirname + '/../',   // The servers root folder
         MAX_UPLOAD_SIZE: 16,        // Determine the max upload file size in MB

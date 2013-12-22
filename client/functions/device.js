@@ -1,5 +1,3 @@
-/*global $*/
-/*global CONF*/
 /*global window*/
 var isMobile;
 (function () {

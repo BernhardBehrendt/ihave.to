@@ -130,6 +130,7 @@ var Connection;
             var sScreenName;
             var sFirstScreen;
             var sActiveScreen;
+            var oBoard;
             var oDiff = JSON.parse(CONF.COM.SOCKET.decrypt(data));
 
             // Patch the local board representation
@@ -192,7 +193,7 @@ var Connection;
                         }
 
 
-                        var oBoard = new Board({
+                        oBoard = new Board({
                             NAME: sFirstScreen,
                             SCREEN: oScreen,
                             FROMTIME: false

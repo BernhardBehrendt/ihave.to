@@ -5,7 +5,6 @@
 /*global Template*/
 /*global Connection*/
 /*global showMessage*/
-var Post;
 (function () {
     "use strict";
 

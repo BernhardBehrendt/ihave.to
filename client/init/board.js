@@ -3,7 +3,6 @@
 /*global CONF*/
 /*global Board*/
 /*global Template*/
-/*global setTimeout*/
 /*global isMobile*/
 /*global parseInt*/
 (function () {

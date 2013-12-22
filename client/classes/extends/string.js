@@ -177,7 +177,7 @@
     function parseUri(str) {
         var o = parseUri.options, m = o.parser[o.strictMode ? "strict" : "loose"].exec(str.toString()), uri = {}, i = 14;
 
-        while (i--) {
+        while (i -= 1) {
             uri[o.key[i]] = m[i] || "";
         }
         uri[o.q.name] = {};

@@ -1,4 +1,3 @@
-/*global $*/
 /*global CONF*/
 /*global Template*/
 var PostWindow;

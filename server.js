@@ -1,7 +1,6 @@
 /*global require*/
 /*global console*/
 /*global __dirname*/
-/*global oBoard*/
 /*global CONFIG*/
 /*global global*/
 
@@ -15,7 +14,6 @@
     var oGarbageCollector;
 
     var fs = require('fs');
-    var gm = require('gm');
     var http = require('http');
     var mime = require('mime');
     var path = require('path');
@@ -50,7 +48,7 @@
 
     // Express settings
     app.use(express.bodyParser());
-    app.use(express.static(CONFIG.ROOT + '../public/'));
+    app.use(express[''](CONFIG.ROOT + '../public/'));
 
     // Socket io settings
     io.enable('browser client etag');

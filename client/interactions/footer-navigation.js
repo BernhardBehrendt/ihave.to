@@ -4,13 +4,11 @@
 /*global Board*/
 /*global Screens*/
 /*global Apprise*/
-/*global isMobile*/
 /*global Settings*/
 /*global Template*/
 /*global PostWindow*/
 /*global Timeline*/
 /*global showMessage*/
-/*global Dropzone*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // General Navigation Handling
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,10 +48,10 @@
         })
         // Leave subnavigation level
         .on(CONF.EVENTS.CLICK, '#back', function () {
-
+            var oBgUrl = $('#screen-bg-url');
             //
-            if ($('#screen-bg-url').length === 1) {
-                var sUploadedBgVal = $('#screen-bg-url').val().trim().split('/').pop();
+            if (oBgUrl.length === 1) {
+                var sUploadedBgVal = oBgUrl.val().trim().split('/').pop();
 
                 if (sUploadedBgVal.length > 0) {
                     $.post('/unlink-wp', {image: sUploadedBgVal});
@@ -394,9 +392,9 @@
 
         // Switch in delete screen mode
         .on(CONF.EVENTS.CLICK, '#trash_empty', function () {
-
-            if ($('#screen-bg-url').length === 1) {
-                var sUploadedBgVal = $('#screen-bg-url').val().trim().split('/').pop();
+            var oBgUrl = $('#screen-bg-url');
+            if (oBgUrl.length === 1) {
+                var sUploadedBgVal = oBgUrl.val().trim().split('/').pop();
 
                 if (sUploadedBgVal.length > 0) {
                     $.post('/unlink-wp', {image: sUploadedBgVal});

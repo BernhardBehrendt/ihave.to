@@ -34,11 +34,12 @@
             event.preventDefault();
             event.stopPropagation();
             var oImage;
+            var oFullSize = $('#fullsize');
 
             if ($(this).children('img').length === 1) {
-                $('#fullsize').addClass('active').html(new Template({IMG: {SRC: $(this).attr('href')}}).toHtml());
+                oFullSize.addClass('active').html(new Template({IMG: {SRC: $(this).attr('href')}}).toHtml());
 
-                oImage = $('#fullsize').children('img');
+                oImage = oFullSize.children('img');
                 oImage.css('marginTop', (($(window).height() - oImage.outerHeight()) / 2) + 'px');
 
             } else {
