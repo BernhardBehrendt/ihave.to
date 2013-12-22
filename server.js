@@ -48,7 +48,7 @@
 
     // Express settings
     app.use(express.bodyParser());
-    app.use(express[''](CONFIG.ROOT + '../public/'));
+    app.use(express.static(CONFIG.ROOT + '../public/'));
 
     // Socket io settings
     io.enable('browser client etag');
