@@ -6,8 +6,9 @@ var CONFIG = null;
     "use strict";
     CONFIG = {
         PORT: 3000,
-        PASS_REFERER: 'localhost',           // Determine which calls are passed to uploaded data
-        // (* means everything and domain without http://www. (e.g. mydomain.com))
+        PASS_REFERER: '*',           // Determine which calls are passed to uploaded data
+                                     // (* means everything and domain without "http://www." (e.g. mydomain.com)
+                                     // means only calls from given domain which is recommended)
 
         ROOT: __dirname + '/../',   // The servers root folder
         MAX_UPLOAD_SIZE: 16,        // Determine the max upload file size in MB

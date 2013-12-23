@@ -213,7 +213,7 @@ window.LANGUAGE = {
 
         ENCRYPT_SELECTED_SCREEN: 'Memo board was decrypted',
         POST_WITH_COLOR_BLUE: 'Blue means:',
-        POST_WITH_COLOR_TURKIS: 'Turkis mens:',
+        POST_WITH_COLOR_TURKIS: 'Turkis means:',
         POST_WITH_COLOR_GREEN: 'Green means:',
         POST_WITH_COLOR_YELLOW: 'Yellow means:',
         POST_WITH_COLOR_ORANGE: 'Orange means:',
