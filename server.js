@@ -47,7 +47,7 @@
     }
 
     // Express settings
-    app.use(express.bodyParser());
+    app.use(express.json());
     app.use(express.static(CONFIG.ROOT + '../public/'));
 
     // Socket io settings
