@@ -11,7 +11,16 @@
     global.CONFIG = require(__dirname + '/server/settings/config');
 
     var app;
+    var https;
+    var server;
+    var oHttpServer;
+    var oHttpRouting;
+    var sCurrentHost;
+    var sTargetHost;
+    var oSslConfig;
     var oGarbageCollector;
+
+    var bSslEnabled = (CONFIG.SSL_CERT !== null && CONFIG.SSL_KEY !== null);
 
     var fs = require('fs');
     var http = require('http');
@@ -21,13 +30,42 @@
     var express = require('express');
     var socketio = require('socket.io');
 
-    app = express();
+    if (bSslEnabled && fs.existsSync(CONFIG.SSL_CERT) && fs.existsSync(CONFIG.SSL_KEY)) {
+
+        https = require('https');
+
+        oSslConfig = {
+            key: fs.readFileSync(CONFIG.SSL_KEY),
+            cert: fs.readFileSync(CONFIG.SSL_CERT)
+        };
+    }
 
     var Board = require(CONFIG.ROOT + 'classes/Board');
     var ImageUpload = require(CONFIG.ROOT + 'classes/ImageUpload');
     var GarbageCollector = require(CONFIG.ROOT + 'classes/GarbageCollector');
 
-    var server = http.createServer(app);
+    app = express();
+
+    if (https === undefined) {
+        server = http.createServer(app);
+    } else {
+        server = https.createServer(oSslConfig, app);
+        oHttpRouting = express();
+
+        //Switch protocols
+        oHttpRouting.all('*', function (req, res) {
+            sCurrentHost = req.headers.host.toString().replace(':' + CONFIG.PORT, '');
+            sTargetHost = 'https://' + sCurrentHost + ':' + CONFIG.SSL_PORT + req.url;
+
+            res.redirect(sTargetHost);
+        });
+
+        oHttpServer = http.createServer(oHttpRouting);
+        oHttpServer.listen(CONFIG.PORT);
+
+        // Create redirection here for non ssl calls
+        console.log('created ssl server');
+    }
     var io = socketio.listen(server);
 
     // Setup required folder if not exit
@@ -205,11 +243,17 @@
     });
 
     // Set listening port
-    server.listen(CONFIG.PORT);
+    if (https === undefined) {
+        server.listen(CONFIG.PORT);
+        console.log('iHave.to was started on port ' + CONFIG.PORT);
+    } else {
+        server.listen(CONFIG.SSL_PORT);
+        console.log('iHave.to was started on port ' + CONFIG.SSL_PORT);
+    }
 
     //Start the garbageCollector for static files
     oGarbageCollector = new GarbageCollector();
     oGarbageCollector.observe();
 
-    console.log('iHave.to was started on port ' + CONFIG.PORT);
+
 })();
