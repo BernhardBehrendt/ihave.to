@@ -260,7 +260,8 @@ var Board;
 
                 if (uploaded >= 100) {
                     oUploadProgress.removeClass('active');
-                    oUploadProgress.children('div.bar').removeAttr('style');
+                    oUploadProgress.children('div.bar').removeAttr('style').text('');
+
                     $('#dropImage').show();
                 }
 

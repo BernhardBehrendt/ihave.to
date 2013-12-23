@@ -85,7 +85,7 @@
     }
 
     // Express settings
-    app.use(express.json());
+    app.use(express.multipart());
     app.use(express.static(CONFIG.ROOT + '../public/'));
 
     // Socket io settings
