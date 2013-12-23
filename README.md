@@ -9,15 +9,15 @@ on the memo board.
 
 **And YES, you can customize your memo board with custom wallpapers ;-)**.
 
-[ ![Image](http://www.ihave.to/img/preview/desktop/8.png "iHave.to memoboard view") ](http://www.ihave.to/)
+[ ![Image](https://www.ihave.to/img/preview/desktop/8.png "iHave.to memoboard view") ](https://www.ihave.to/)
 
-[ ![Image](http://www.ihave.to/img/preview/desktop/7.png "iHave.to edit view") ](http://www.ihave.to/)
+[ ![Image](https://www.ihave.to/img/preview/desktop/7.png "iHave.to edit view") ](https://www.ihave.to/)
 
-[ ![Image](http://www.ihave.to/img/preview/desktop/6.png "iHave.to workspaces view") ](http://www.ihave.to/)
+[ ![Image](https://www.ihave.to/img/preview/desktop/6.png "iHave.to workspaces view") ](https://www.ihave.to/)
 
-[ ![Image](http://www.ihave.to/img/preview/mobile/mobile.png "iHave.to on a mobile device") ](http://www.ihave.to/)
+[ ![Image](https://www.ihave.to/img/preview/mobile/mobile.png "iHave.to on a mobile device") ](https://www.ihave.to/)
 
-You can find a working demo [here](http://www.ihave.to).
+You can find a working demo [here](https://www.ihave.to).
 
 Author:
 iHave.to/do is written and designed by Bernhard Bezdek all rights reserved.
@@ -40,7 +40,7 @@ On Windows you need visit the websites of imagemagick and graphicsmagick and ins
 
 
 ####Node.js####
-iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](https://npmjs.org/ "Node Packaged Modules").
+iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](http://npmjs.org/ "Node Packaged Modules").
 
 ###Install via NPM###
 ``npm install ihave.to -g``
@@ -91,7 +91,7 @@ You can change the port in ``server/settings/config.js``.
 
 
 ###Apendix###
-If you need some documentation you can install [yuidoc](https://npmjs.org/package/yuidocjs) in global context:
+If you need some documentation you can install [yuidoc](http://npmjs.org/package/yuidocjs) in global context:
 
 ``npm install -g yuidocjs``
 
