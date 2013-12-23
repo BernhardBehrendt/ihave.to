@@ -136,7 +136,7 @@
 
         text = text.replace(/Www/g, 'www').replace(/WWw/g, 'www').replace(/WWW/, 'www');
         if (text.match(/https:\/\//) !== null || text.match(/http:\/\//) !== null || text.match(/www\./) !== null) {
-            text = text.replace(/https:\/\//g, 'http://');
+            //text = text.replace(/https:\/\//g, 'http://');
             if (text.match(/www\./) !== null) {
                 text = text.replace(/www./g, 'http://www.');
             }

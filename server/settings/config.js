@@ -18,9 +18,9 @@ var CONFIG = null;
         THUMB_WID: 128,             // The Thumb width (double size fox retina displays)
         GM_QUALITY: 95,             // Set the quality level for image optimisations
         RUN_CLEANUP: 21600000,      // Means 4 times a day
+        SSL_KEY: null,              // The absolute path to a ssl key file
+        SSL_CERT: null,             // The absolute path to a ssl certificates
         SSL_PORT: 4433,             // The port which provides SSL
-        SSL_KEY: '/Users/bernhardbezdek/Desktop/ssl/key.pem',   // The absolute path to a ssl key file
-        SSL_CERT: '/Users/bernhardbezdek/Desktop/ssl/cert.pem',             // The absolute path to a ssl certificates
         ALLOWED_UPLOAD_FILES: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] // The allowed image upload formats
     };
 })();

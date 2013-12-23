@@ -289,6 +289,7 @@ var Board;
                     var oDiff = JSON.parse('{"PRIVATE":{"SCREENS":{"' + sActiveScreen + '":{"POSTS":{"' + iTimestamp + '":{}}}}}}');
 
                     sAddImage = (window.location.toString().replace('/do/', '/').replace('/do', '/') + data).urlToLink();
+                    alert(sAddImage);
                     sNewContent = oPost.find('p').html() + '<br/><br/>' + sAddImage;
                     oChange = {
                         ACN: 'content',
