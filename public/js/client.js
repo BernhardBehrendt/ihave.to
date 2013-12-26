@@ -1326,10 +1326,10 @@ var Timeline;
             DIV: []
         };
         for (console.log(this.memoIdList), a = 0; a < this.memoIdList.length; a += 1) c.DIV.push(this.getLifecycle(this.memoIdList[a]));
-        return b = {
+        return c.DIV.reverse(), b = {
             CONTENT: c,
             CLASSES: "lifecycles"
-        }, console.log(b), b;
+        };
     }, Timeline.prototype.getLifecycle = function(a) {
         var b, c = {
             ID: "change_on_" + a,

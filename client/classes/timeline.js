@@ -132,13 +132,12 @@ var Timeline;
             oLifeCycles.DIV.push(this.getLifecycle(this.memoIdList[i]));
         }
 
+        oLifeCycles.DIV.reverse();
+
         oLifecycles = {
             CONTENT: oLifeCycles,
             CLASSES: 'lifecycles'
         };
-
-        console.log(oLifecycles);
-
         return oLifecycles;
     };
 
