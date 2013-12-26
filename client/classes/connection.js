@@ -402,7 +402,7 @@ var Connection;
 
             // Here the initial settings could be made
             sInitScreenName = 'WORKSPACE'.translate();
-            iTargetId = new Date().getTime();
+            iTargetId = parseInt(new Date().getTime(), 10);
 
             // Setup the First Workspace with a First postit on it
             oInitialBoard.PRIVATE.SCREENS[sInitScreenName] = {

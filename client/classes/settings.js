@@ -56,8 +56,8 @@ var Settings;
                             'CLASSES': 'legend_icon ' + sColor.toLowerCase()
                         },
                         SPAN: {
-                            CLASSES: 'legend-desc',
-                            CONTENT: ('POST_WITH_COLOR_' + sColor).translate()
+                            CLASS: 'legend-desc',
+                            INSERT: ('POST_WITH_COLOR_' + sColor).translate()
                         },
 
                         INPUT: {

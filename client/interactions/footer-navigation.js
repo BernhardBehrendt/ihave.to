@@ -125,10 +125,7 @@
                 CONF.DOM.CMD.trigger('setTimelineNav');
 
 
-                oTimeline = new Timeline(CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS);
-                oTimeline.getTimespan().getTimelineModel();
-
-                // CONF.DOM.UIWINDOW.children('.cmd').html();
+                oTimeline = new Timeline(CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS, CONF.BOARD.SETTINGS.COLORS);
 
                 CONF.DOM.UIWINDOW.children('.cmd').css({
                         margin: 0,
@@ -137,7 +134,7 @@
                         minHeight: 100 + '%',
                         maxWidth: 'none'
                     }
-                );
+                ).html(oTimeline.render());
             }
         })
 
@@ -192,7 +189,7 @@
         .on(CONF.EVENTS.CLICK, '#store_post', function () {
 
             if ($(this).hasClass('active')) {
-                var iTimestamp = new Date().getTime();
+                var iTimestamp = parseInt(new Date().getTime());
                 var oPostWindow = $('#post-window');
                 var oTextarea = oPostWindow.children('textarea');
                 var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');

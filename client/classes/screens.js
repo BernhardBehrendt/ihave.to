@@ -143,8 +143,8 @@ var Screens;
                             CONTENT: sScreenName
                         },
                         SPAN: {
-                            CLASSES: 'screen-posts',
-                            CONTENT: oScreenStats.items + "&nbsp;" + ((oScreenStats.items === 0 || oScreenStats.items > 1) ? "POSTS".translate() : "POST".translate())
+                            CLASS: 'screen-posts',
+                            INSERT: oScreenStats.items + "&nbsp;" + ((oScreenStats.items === 0 || oScreenStats.items > 1) ? "POSTS".translate() : "POST".translate())
                         },
                         DIV: {
                             CLASSES: "screenStats",

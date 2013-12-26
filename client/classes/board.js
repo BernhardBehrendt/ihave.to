@@ -293,7 +293,7 @@ var Board;
                     oChange = {
                         ACN: 'content',
                         BY: CONF.PROPS.INT.WHO,
-                        TGT: oPost.attr('id'),
+                        TGT: parseInt(oPost.attr('id'), 10),
                         TO: sNewContent
                     };
 

@@ -95,7 +95,7 @@
                     // Create an object for the change
                     var oChange = {
                         BY: CONF.PROPS.INT.WHO,
-                        TGT: $(this).attr('id'),
+                        TGT: parseInt($(this).attr('id'), 10),
                         ACN: 'position',
                         TO: [iLeftValue, iTopValue]
                     };

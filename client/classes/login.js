@@ -53,8 +53,8 @@ var Login;
                                         ], 'xwide')
                                     },
                                     SPAN: {
-                                        CLASSES: 'notice',
-                                        CONTENT: {
+                                        CLASS: 'notice',
+                                        INSERT: {
                                             STRONG: {
                                                 CONTENT: 'NOTICE'.translate()
                                             },

@@ -223,7 +223,6 @@ var Template;
 
             IMG: '<img id="{ID}" class="{CLASSES}" alt="{ALT}" src="{SRC}" style="{STYLE}"/>',
             DIV: '<div id="{ID}" class="{CLASSES}" style="{STYLE}">{CONTENT}</div>',
-            SPAN: '<span id="{ID}" class="{CLASSES}">{CONTENT}</span>',
             P: '<p class="{CLASSES}">{CONTENT}</p>',
             STRONG: '<strong class="{CLASSES}">{CONTENT}</strong>',
             //  TEXTAREA: '<textarea id="{ID}" class="{CLASSES}">{CONTENT}</textarea>',
