@@ -75,6 +75,7 @@ div.lifecycles {
   width: 100%;
   height: auto;
   overflow: auto;
+  padding-bottom:60px;
 
   div.memo {
     @include clearfix;
