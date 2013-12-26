@@ -95,6 +95,31 @@ div.lifecycles {
       margin-top: 2px;
       color: $white;
       text-align: center;
+
+      background-size:100%;
+      background-color: $white;
+    }
+
+    div.change.deleted{
+      cursor:pointer;
+      background-image:url(../img/actions/deleted.png);
+    }
+
+    div.change.position{
+      background-image:url(../img/actions/move.png);
+      display:none;
+    }
+
+    div.change.color.content{
+      background-image:url(../img/actions/edit.png);
+    }
+
+    div.change.color{
+      background-image:url(../img/actions/color.png);
+    }
+
+    div.change.content{
+      background-image:url(../img/actions/edit.png);
     }
 
     div.change.blue {

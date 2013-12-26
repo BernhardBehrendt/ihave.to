@@ -127,7 +127,6 @@ var Timeline;
         var oLifeCycles = {DIV: []};
         var oLifecycles;
 
-        console.log(this.memoIdList);
         for (i = 0; i < this.memoIdList.length; i += 1) {
             oLifeCycles.DIV.push(this.getLifecycle(this.memoIdList[i]));
         }
@@ -199,7 +198,6 @@ var Timeline;
         }
 
         return {
-            CONTENT: 'X',
             CLASSES: sChanges
         }
     };

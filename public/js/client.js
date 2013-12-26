@@ -1325,7 +1325,7 @@ var Timeline;
         var a, b, c = {
             DIV: []
         };
-        for (console.log(this.memoIdList), a = 0; a < this.memoIdList.length; a += 1) c.DIV.push(this.getLifecycle(this.memoIdList[a]));
+        for (a = 0; a < this.memoIdList.length; a += 1) c.DIV.push(this.getLifecycle(this.memoIdList[a]));
         return c.DIV.reverse(), b = {
             CONTENT: c,
             CLASSES: "lifecycles"
@@ -1345,7 +1345,6 @@ var Timeline;
         if (a instanceof Array) for (b = 0; b < a.length; b += 1) c += a[b].ACN + " ", "color" === a[b].ACN && (c += a[b].TO + " "); else c += a.ACN + " ", 
         "color" === a.ACN && (c += a.TO + " ");
         return {
-            CONTENT: "X",
             CLASSES: c
         };
     }, Timeline.prototype.getTimespan = function() {
