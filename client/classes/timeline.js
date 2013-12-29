@@ -156,6 +156,7 @@ var Timeline;
      */
     Timeline.prototype.getLifecycle = function (sMemoId) {
         var iTimeStamp;
+        var oChangeOml;
         var oLifeCycle = {
             ID: 'change_on_' + sMemoId,
             CLASSES: 'memo',
@@ -168,15 +169,21 @@ var Timeline;
 
         for (iTimeStamp in this.screen) {
             if (this.screen.hasOwnProperty(iTimeStamp)) {
+
                 if (this.screen[iTimeStamp] instanceof Array && this.screen[iTimeStamp][0].TGT === sMemoId) {
-                    oLifeCycle.CONTENT.DIV.push(this.getChange(this.screen[iTimeStamp], iTimeStamp));
+                    oChangeOml = this.getChange(this.screen[iTimeStamp], iTimeStamp)
                 } else if (this.screen[iTimeStamp].TGT === sMemoId) {
-                    oLifeCycle.CONTENT.DIV.push(this.getChange(this.screen[iTimeStamp], iTimeStamp));
+                    oChangeOml = this.getChange(this.screen[iTimeStamp], iTimeStamp);
+                }
+
+
+                if (oChangeOml !== false) {
+                    oLifeCycle.CONTENT.DIV.push(oChangeOml);
                 }
             }
         }
 
-        oLifeCycle.STYLE = 'width:' + (oLifeCycle.CONTENT.DIV.length * 34) + 'px';
+        oLifeCycle.STYLE = 'width:' + 'auto' + 'px';
 
         return oLifeCycle;
     };
@@ -215,7 +222,8 @@ var Timeline;
     Timeline.prototype.getChange = function (oMemo, iChangeTime) {
         var i;
         var sChanges = 'change ';
-
+        var aNonTimelineChanges = ['position'];
+        var oChange;
         if (oMemo instanceof Array) {
             for (i = 0; i < oMemo.length; i += 1) {
                 sChanges += oMemo[i].ACN + ' ';
@@ -224,19 +232,26 @@ var Timeline;
                     sChanges += oMemo[i].TO + ' ';
                 }
             }
-        } else {
+        } else if (aNonTimelineChanges.indexOf(oMemo.ACN) === -1) {
             sChanges += oMemo.ACN + ' ';
 
             if (oMemo.ACN === 'color') {
                 sChanges += oMemo.TO + ' ';
             }
+        } else {
+            oChange = false;
         }
 
-        return {
-            STYLE: "margin-left:" + (this.handleDeltaTime(iChangeTime) / 1000) + "px",
-            ID: iChangeTime,
-            CLASSES: sChanges
+        if (oChange === undefined) {
+            // Outer div with a calculated width with line background
+            oChange = {
+                STYLE: "margin-left:" + (this.handleDeltaTime(iChangeTime) / 10000) + "px",
+                ID: iChangeTime,
+                CLASSES: sChanges
+            }
         }
+
+        return oChange;
     };
 
     /**

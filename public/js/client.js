@@ -1334,7 +1334,7 @@ var Timeline;
             CLASSES: "lifecycles"
         };
     }, Timeline.prototype.getLifecycle = function(a) {
-        var b, c = {
+        var b, c, d = {
             ID: "change_on_" + a,
             CLASSES: "memo",
             CONTENT: {
@@ -1342,21 +1342,22 @@ var Timeline;
             }
         };
         this.handleDeltaTime(0);
-        for (b in this.screen) this.screen.hasOwnProperty(b) && (this.screen[b] instanceof Array && this.screen[b][0].TGT === a ? c.CONTENT.DIV.push(this.getChange(this.screen[b], b)) : this.screen[b].TGT === a && c.CONTENT.DIV.push(this.getChange(this.screen[b], b)));
-        return c.STYLE = "width:" + 34 * c.CONTENT.DIV.length + "px", c;
+        for (b in this.screen) this.screen.hasOwnProperty(b) && (this.screen[b] instanceof Array && this.screen[b][0].TGT === a ? c = this.getChange(this.screen[b], b) : this.screen[b].TGT === a && (c = this.getChange(this.screen[b], b)), 
+        c !== !1 && d.CONTENT.DIV.push(c));
+        return d.STYLE = "width:autopx", d;
     }, Timeline.prototype.handleDeltaTime = function(a) {
         var b;
         return b = 0 === this.lastMarker ? 0 : a - this.lastMarker, this.lastMarker = a, 
         console.log(b), b;
     }, Timeline.prototype.getChange = function(a, b) {
-        var c, d = "change ";
-        if (a instanceof Array) for (c = 0; c < a.length; c += 1) d += a[c].ACN + " ", "color" === a[c].ACN && (d += a[c].TO + " "); else d += a.ACN + " ", 
-        "color" === a.ACN && (d += a.TO + " ");
-        return {
-            STYLE: "margin-left:" + this.handleDeltaTime(b) / 1e3 + "px",
+        var c, d, e = "change ", f = [ "position" ];
+        if (a instanceof Array) for (c = 0; c < a.length; c += 1) e += a[c].ACN + " ", "color" === a[c].ACN && (e += a[c].TO + " "); else -1 === f.indexOf(a.ACN) ? (e += a.ACN + " ", 
+        "color" === a.ACN && (e += a.TO + " ")) : d = !1;
+        return void 0 === d && (d = {
+            STYLE: "margin-left:" + this.handleDeltaTime(b) / 1e4 + "px",
             ID: b,
-            CLASSES: d
-        };
+            CLASSES: e
+        }), d;
     }, Timeline.prototype.getTimespan = function() {
         var a;
         for (a in this.screen) this.screen.hasOwnProperty(a) && this.timeStamps.push(parseInt(a, 10));
