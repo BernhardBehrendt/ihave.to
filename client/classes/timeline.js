@@ -32,6 +32,14 @@ var Timeline;
     Timeline.prototype.legend = null;
 
     /**
+     * The marker for timeline delta times
+     *
+     * @property lastMarker
+     * @type {Number}
+     */
+    Timeline.prototype.lastMarker = 0;
+
+    /**
      * The legend which explain about the timeline color meanings
      *
      * @property legend
@@ -156,12 +164,14 @@ var Timeline;
             }
         };
 
+        this.handleDeltaTime(0);
+
         for (iTimeStamp in this.screen) {
             if (this.screen.hasOwnProperty(iTimeStamp)) {
                 if (this.screen[iTimeStamp] instanceof Array && this.screen[iTimeStamp][0].TGT === sMemoId) {
-                    oLifeCycle.CONTENT.DIV.push(this.getChange(this.screen[iTimeStamp]));
+                    oLifeCycle.CONTENT.DIV.push(this.getChange(this.screen[iTimeStamp], iTimeStamp));
                 } else if (this.screen[iTimeStamp].TGT === sMemoId) {
-                    oLifeCycle.CONTENT.DIV.push(this.getChange(this.screen[iTimeStamp]));
+                    oLifeCycle.CONTENT.DIV.push(this.getChange(this.screen[iTimeStamp], iTimeStamp));
                 }
             }
         }
@@ -171,13 +181,38 @@ var Timeline;
         return oLifeCycle;
     };
 
+
+    /**
+     * Determine the delta between a previous stored and a given one
+     * Set the given one to delta for later comparsion
+     *
+     * @method handleDeltaTime
+     * @param {Number} iDeltaTime The time to compare with last value
+     * @return {Number} The delta between last value and given value
+     */
+    Timeline.prototype.handleDeltaTime = function (iDeltaTime) {
+        var iDelta;
+
+        if (this.lastMarker === 0) {
+            iDelta = 0;
+        } else {
+            iDelta = iDeltaTime - this.lastMarker;
+        }
+
+        this.lastMarker = iDeltaTime;
+        console.log(iDelta);
+        return iDelta;
+    };
+
     /**
      * Create a lifecycle entry
      *
      * @method getChange
+     * @param {Object} The memo change object
+     * @param {Number} The memo hange time
      * @return {Object} The changes OMM
      */
-    Timeline.prototype.getChange = function (oMemo) {
+    Timeline.prototype.getChange = function (oMemo, iChangeTime) {
         var i;
         var sChanges = 'change ';
 
@@ -198,6 +233,8 @@ var Timeline;
         }
 
         return {
+            STYLE: "margin-left:" + (this.handleDeltaTime(iChangeTime) / 1000) + "px",
+            ID: iChangeTime,
             CLASSES: sChanges
         }
     };

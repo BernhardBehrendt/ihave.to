@@ -124,6 +124,8 @@ window.LANGUAGE = {
         NEW_POST: 'Neues Memo anlegen',
         EDIT_POST: 'Memo bearbeiten',
 
+        REALLY_RESTORE_MEMO: 'Soll das Memo wiederhergestellt werden?',
+
         EXAMPLE_TEXT: 'Das ist das erste Memo auf deinem Board.<br>Lege deine Notizen, Links  <a style="background-image:url(http://www.iHave.to/favicon.ico)" title="http://www.iHave.to" target="_blank" href="http://www.iHave.to"></a> oder Foto oder Youtube Video URL\'s hier ab.<br><br>Viel Spass mit iHave.to/do'
     },
     EN: {
@@ -249,6 +251,9 @@ window.LANGUAGE = {
         DESCRIPTION_PRIORITIES_SETTINGS: 'This will give you a better overview what a memo means only by color.',
         NEW_POST: 'Create a new memo',
         EDIT_POST: 'Modify an existing memo',
+
+        REALLY_RESTORE_MEMO: 'Restore this memo?',
+
         EXAMPLE_TEXT: 'This is the first Memo on your board.<br>Place your notices, links  <a style="background-image:url(http://www.iHave.to/favicon.ico)" title="http://www.iHave.to" target="_blank" href="http://www.iHave.to"></a>, photo or youtube URL\'s here<br><br>Have fun using ihave.to/do'
     }
 };

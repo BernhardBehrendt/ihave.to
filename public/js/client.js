@@ -161,6 +161,7 @@ window.LANGUAGE = {
         DESCRIPTION_PRIORITIES_SETTINGS: "Dann ist es einfacher, zu erkennen worum es auf einem Memo in etwa geht und um deine Notizen sind besser strukturiert.",
         NEW_POST: "Neues Memo anlegen",
         EDIT_POST: "Memo bearbeiten",
+        REALLY_RESTORE_MEMO: "Soll das Memo wiederhergestellt werden?",
         EXAMPLE_TEXT: 'Das ist das erste Memo auf deinem Board.<br>Lege deine Notizen, Links  <a style="background-image:url(http://www.iHave.to/favicon.ico)" title="http://www.iHave.to" target="_blank" href="http://www.iHave.to"></a> oder Foto oder Youtube Video URL\'s hier ab.<br><br>Viel Spass mit iHave.to/do'
     },
     EN: {
@@ -266,6 +267,7 @@ window.LANGUAGE = {
         DESCRIPTION_PRIORITIES_SETTINGS: "This will give you a better overview what a memo means only by color.",
         NEW_POST: "Create a new memo",
         EDIT_POST: "Modify an existing memo",
+        REALLY_RESTORE_MEMO: "Restore this memo?",
         EXAMPLE_TEXT: 'This is the first Memo on your board.<br>Place your notices, links  <a style="background-image:url(http://www.iHave.to/favicon.ico)" title="http://www.iHave.to" target="_blank" href="http://www.iHave.to"></a>, photo or youtube URL\'s here<br><br>Have fun using ihave.to/do'
     }
 };
@@ -1304,8 +1306,9 @@ var Timeline;
     "use strict";
     Timeline = function(a, b) {
         this.screen = a, this.legend = b, this.getTimespan(), this.getMemoIdList();
-    }, Timeline.prototype.legend = null, Timeline.prototype.memoIdList = [], Timeline.prototype.screen = null, 
-    Timeline.prototype.timeStamps = [], Timeline.prototype.timelineView = null, Timeline.prototype.getMemoIdList = function() {
+    }, Timeline.prototype.legend = null, Timeline.prototype.lastMarker = 0, Timeline.prototype.memoIdList = [], 
+    Timeline.prototype.screen = null, Timeline.prototype.timeStamps = [], Timeline.prototype.timelineView = null, 
+    Timeline.prototype.getMemoIdList = function() {
         var a;
         for (a in this.screen) this.screen.hasOwnProperty(a) && (this.screen[a] instanceof Array ? void 0 !== this.screen[a][0].TGT && -1 === this.memoIdList.indexOf(this.screen[a][0].TGT) && this.memoIdList.push(this.screen[a][0].TGT) : void 0 !== this.screen[a].TGT && -1 === this.memoIdList.indexOf(this.screen[a].TGT) && this.memoIdList.push(this.screen[a].TGT));
     }, Timeline.prototype.getLegend = function() {
@@ -1338,14 +1341,21 @@ var Timeline;
                 DIV: []
             }
         };
-        for (b in this.screen) this.screen.hasOwnProperty(b) && (this.screen[b] instanceof Array && this.screen[b][0].TGT === a ? c.CONTENT.DIV.push(this.getChange(this.screen[b])) : this.screen[b].TGT === a && c.CONTENT.DIV.push(this.getChange(this.screen[b])));
+        this.handleDeltaTime(0);
+        for (b in this.screen) this.screen.hasOwnProperty(b) && (this.screen[b] instanceof Array && this.screen[b][0].TGT === a ? c.CONTENT.DIV.push(this.getChange(this.screen[b], b)) : this.screen[b].TGT === a && c.CONTENT.DIV.push(this.getChange(this.screen[b], b)));
         return c.STYLE = "width:" + 34 * c.CONTENT.DIV.length + "px", c;
-    }, Timeline.prototype.getChange = function(a) {
-        var b, c = "change ";
-        if (a instanceof Array) for (b = 0; b < a.length; b += 1) c += a[b].ACN + " ", "color" === a[b].ACN && (c += a[b].TO + " "); else c += a.ACN + " ", 
-        "color" === a.ACN && (c += a.TO + " ");
+    }, Timeline.prototype.handleDeltaTime = function(a) {
+        var b;
+        return b = 0 === this.lastMarker ? 0 : a - this.lastMarker, this.lastMarker = a, 
+        console.log(b), b;
+    }, Timeline.prototype.getChange = function(a, b) {
+        var c, d = "change ";
+        if (a instanceof Array) for (c = 0; c < a.length; c += 1) d += a[c].ACN + " ", "color" === a[c].ACN && (d += a[c].TO + " "); else d += a.ACN + " ", 
+        "color" === a.ACN && (d += a.TO + " ");
         return {
-            CLASSES: c
+            STYLE: "margin-left:" + this.handleDeltaTime(b) / 1e3 + "px",
+            ID: b,
+            CLASSES: d
         };
     }, Timeline.prototype.getTimespan = function() {
         var a;
@@ -13749,7 +13759,9 @@ var showMessage;
             $(this).remove(), $("#new_screen").removeClass("active");
         });
     });
-}(), function() {
+}(), $(document).on(CONF.EVENTS.CLICK, "div.change.deleted", function() {
+    Apprise("REALLY_RESTORE_MEMO".translate());
+}), function() {
     "use strict";
     $(document).on("focusin", "input", function() {
         $(this).data("val", $(this).val()), $(this).val("");
