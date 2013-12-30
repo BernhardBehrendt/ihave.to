@@ -1347,7 +1347,7 @@ var Timeline;
         this.handleDeltaTime(0), this.boxWidth = 0;
         for (b in this.screen) this.screen.hasOwnProperty(b) && (this.screen[b] instanceof Array && this.screen[b][0].TGT === a ? c = this.getChange(this.screen[b], b) : this.screen[b].TGT === a && (c = this.getChange(this.screen[b], b)), 
         c !== !1 && (d.CONTENT.DIV.push(c), c = !1));
-        return d.STYLE = "width:" + this.boxWidth + "px;margin-left:" + Math.round((this.iLast - parseInt(a, 10)) / this.scaleFactor) + "px;", 
+        return d.STYLE = "width:" + this.boxWidth + "px;margin-left:" + Math.round((this.iLast - parseInt(a, 10)) / this.scaleFactor * 2) + "px;", 
         0 === d.CONTENT.DIV.length && (d = !1), d;
     }, Timeline.prototype.handleDeltaTime = function(a) {
         var b;
