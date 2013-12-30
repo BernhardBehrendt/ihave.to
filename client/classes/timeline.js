@@ -19,6 +19,7 @@ var Timeline;
         this.legend = legend;
 
         this.getTimespan();
+
         this.getMemoIdList();
     };
 
@@ -56,6 +57,14 @@ var Timeline;
      * @type {String}
      */
     Timeline.prototype.sLastColor = '';
+
+    /**
+     * Determines the scale factor for timeline
+     *
+     * @property scaleFactor
+     * @type {String}
+     */
+    Timeline.prototype.scaleFactor = 100000;
 
     /**
      * The marker for timeline delta times
@@ -196,9 +205,12 @@ var Timeline;
             }
         };
 
+        if (this.referenceStartTime === undefined) {
+            this.referenceStartTime = parseInt(sMemoId, 10);
+        }
+
         this.handleDeltaTime(0);
         this.boxWidth = 0;
-
         for (iTimeStamp in this.screen) {
             if (this.screen.hasOwnProperty(iTimeStamp)) {
 
@@ -216,7 +228,7 @@ var Timeline;
             }
         }
 
-        oLifeCycle.STYLE = 'width:' + this.boxWidth + 'px';
+        oLifeCycle.STYLE = 'width:' + this.boxWidth + 'px;margin-left:' + Math.round((this.iLast - parseInt(sMemoId, 10)) / this.scaleFactor) + 'px;';
 
         if (oLifeCycle.CONTENT.DIV.length === 0) {
             oLifeCycle = false;
@@ -244,7 +256,6 @@ var Timeline;
         }
 
         this.lastMarker = iDeltaTime;
-        console.log(iDelta);
         return iDelta;
     };
 
@@ -283,7 +294,7 @@ var Timeline;
 
         if (oChange === undefined) {
 
-            this.lineWidth = Math.round((this.handleDeltaTime(iChangeTime) / 1000000));
+            this.lineWidth = Math.round((this.handleDeltaTime(iChangeTime) / this.scaleFactor));
 
             if (this.lineWidth < 20) {
                 this.boxWidth += 20;
@@ -325,6 +336,9 @@ var Timeline;
             }
         }
 
+        this.iFirst = _.first(this.timeStamps);
+        this.iLast = _.last(this.timeStamps);
+
         return this;
     };
 
@@ -335,12 +349,6 @@ var Timeline;
      * @return {Object} The timeline OMM
      */
     Timeline.prototype.getTimestream = function () {
-
-
-        var iFirst = _.first(this.timeStamps);
-        var iLast = _.last(this.timeStamps);
-
-        console.log((((iLast - iFirst) / 1000) / 60 / 60 / 24) + 'Tage zeitspanne');
         return this.timelineView;
     };
 

@@ -1307,9 +1307,9 @@ var Timeline;
     Timeline = function(a, b) {
         this.screen = a, this.legend = b, this.getTimespan(), this.getMemoIdList();
     }, Timeline.prototype.legend = null, Timeline.prototype.boxWidth = 0, Timeline.prototype.lineWidth = 0, 
-    Timeline.prototype.sLastColor = "", Timeline.prototype.lastMarker = 0, Timeline.prototype.memoIdList = [], 
-    Timeline.prototype.screen = null, Timeline.prototype.timeStamps = [], Timeline.prototype.timelineView = null, 
-    Timeline.prototype.getMemoIdList = function() {
+    Timeline.prototype.sLastColor = "", Timeline.prototype.scaleFactor = 1e5, Timeline.prototype.lastMarker = 0, 
+    Timeline.prototype.memoIdList = [], Timeline.prototype.screen = null, Timeline.prototype.timeStamps = [], 
+    Timeline.prototype.timelineView = null, Timeline.prototype.getMemoIdList = function() {
         var a;
         for (a in this.screen) this.screen.hasOwnProperty(a) && (this.screen[a] instanceof Array ? void 0 !== this.screen[a][0].TGT && -1 === this.memoIdList.indexOf(this.screen[a][0].TGT) && this.memoIdList.push(this.screen[a][0].TGT) : void 0 !== this.screen[a].TGT && -1 === this.memoIdList.indexOf(this.screen[a].TGT) && this.memoIdList.push(this.screen[a].TGT));
     }, Timeline.prototype.getLegend = function() {
@@ -1343,20 +1343,21 @@ var Timeline;
                 DIV: []
             }
         };
+        void 0 === this.referenceStartTime && (this.referenceStartTime = parseInt(a, 10)), 
         this.handleDeltaTime(0), this.boxWidth = 0;
         for (b in this.screen) this.screen.hasOwnProperty(b) && (this.screen[b] instanceof Array && this.screen[b][0].TGT === a ? c = this.getChange(this.screen[b], b) : this.screen[b].TGT === a && (c = this.getChange(this.screen[b], b)), 
         c !== !1 && (d.CONTENT.DIV.push(c), c = !1));
-        return d.STYLE = "width:" + this.boxWidth + "px", 0 === d.CONTENT.DIV.length && (d = !1), 
-        d;
+        return d.STYLE = "width:" + this.boxWidth + "px;margin-left:" + Math.round((this.iLast - parseInt(a, 10)) / this.scaleFactor) + "px;", 
+        0 === d.CONTENT.DIV.length && (d = !1), d;
     }, Timeline.prototype.handleDeltaTime = function(a) {
         var b;
         return b = 0 === this.lastMarker ? 0 : a - this.lastMarker, this.lastMarker = a, 
-        console.log(b), b;
+        b;
     }, Timeline.prototype.getChange = function(a, b) {
         var c, d, e = "", f = [ "position" ];
         if (a instanceof Array) for (c = 0; c < a.length; c += 1) e += a[c].ACN + " ", "color" === a[c].ACN && (this.sLastColor = a[c].TO); else -1 === f.indexOf(a.ACN) ? (e += a.ACN + " ", 
         "color" === a.ACN && (this.sLastColor = a.TO)) : d = !1;
-        return void 0 === d && (this.lineWidth = Math.round(this.handleDeltaTime(b) / 1e6), 
+        return void 0 === d && (this.lineWidth = Math.round(this.handleDeltaTime(b) / this.scaleFactor), 
         this.boxWidth += this.lineWidth < 20 ? 20 : this.lineWidth, d = {
             ID: b,
             CLASSES: "change " + this.sLastColor,
@@ -1370,10 +1371,10 @@ var Timeline;
     }, Timeline.prototype.getTimespan = function() {
         var a;
         for (a in this.screen) this.screen.hasOwnProperty(a) && this.timeStamps.push(parseInt(a, 10));
-        return this;
+        return this.iFirst = _.first(this.timeStamps), this.iLast = _.last(this.timeStamps), 
+        this;
     }, Timeline.prototype.getTimestream = function() {
-        var a = _.first(this.timeStamps), b = _.last(this.timeStamps);
-        return console.log((b - a) / 1e3 / 60 / 60 / 24 + "Tage zeitspanne"), this.timelineView;
+        return this.timelineView;
     }, Timeline.prototype.render = function() {
         var a = {
             DIV: []
