@@ -64,7 +64,7 @@ var Timeline;
      * @property scaleFactor
      * @type {String}
      */
-    Timeline.prototype.scaleFactor = 100000;
+    Timeline.prototype.scaleFactor = 1000000;
 
     /**
      * The marker for timeline delta times
@@ -228,7 +228,7 @@ var Timeline;
             }
         }
 
-        oLifeCycle.STYLE = 'width:' + this.boxWidth + 'px;margin-left:' + Math.round((this.iLast - parseInt(sMemoId, 10)) / (this.scaleFactor * 10)) + 'px;';
+        oLifeCycle.STYLE = 'width:' + this.boxWidth + 'px;margin-left:' + Math.round((this.iLast - parseInt(sMemoId, 10)) / (this.scaleFactor)) + 'px;';
 
         if (oLifeCycle.CONTENT.DIV.length === 0) {
             oLifeCycle = false;
