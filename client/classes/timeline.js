@@ -64,7 +64,7 @@ var Timeline;
      * @property scaleFactor
      * @type {String}
      */
-    Timeline.prototype.scaleFactor = 1000000;
+    Timeline.prototype.scaleFactor = 10000000;
 
     /**
      * The marker for timeline delta times
