@@ -32,6 +32,22 @@ var Timeline;
     Timeline.prototype.legend = null;
 
     /**
+     * The width for the current box
+     *
+     * @property boxWidth
+     * @type {Number}
+     */
+    Timeline.prototype.boxWidth = 0;
+
+    /**
+     * The time width for the current line
+     *
+     * @property lineWidth
+     * @type {Number}
+     */
+    Timeline.prototype.lineWidth = 0;
+
+    /**
      * The last detected line color
      *
      *
@@ -176,6 +192,7 @@ var Timeline;
         };
 
         this.handleDeltaTime(0);
+        this.boxWidth = 0;
 
         for (iTimeStamp in this.screen) {
             if (this.screen.hasOwnProperty(iTimeStamp)) {
@@ -194,7 +211,7 @@ var Timeline;
             }
         }
 
-        oLifeCycle.STYLE = 'width:auto';
+        oLifeCycle.STYLE = 'width:' + this.boxWidth + 'px';
 
         return oLifeCycle;
     };
@@ -256,11 +273,21 @@ var Timeline;
         }
 
         if (oChange === undefined) {
+
+            this.lineWidth = Math.round((this.handleDeltaTime(iChangeTime) / 100000));
+
+            if (this.lineWidth < 20) {
+                this.boxWidth += 20;
+            } else {
+                this.boxWidth += this.lineWidth;
+            }
+
+
             // Outer div with a calculated width with line background
             oChange = {
                 ID: iChangeTime,
                 CLASSES: 'change ' + this.sLastColor,
-                STYLE: "width:" + (this.handleDeltaTime(iChangeTime) / 100000) + "px",
+                STYLE: "width:" + this.lineWidth + "px",
                 CONTENT: {
                     DIV: {
                         CLASSES: 'icon ' + sChanges
