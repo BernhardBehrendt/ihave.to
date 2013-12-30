@@ -228,7 +228,7 @@ var Timeline;
             }
         }
 
-        oLifeCycle.STYLE = 'width:' + this.boxWidth + 'px;margin-left:' + Math.round((this.iLast - parseInt(sMemoId, 10)) / this.scaleFactor * 2) + 'px;';
+        oLifeCycle.STYLE = 'width:' + this.boxWidth + 'px;margin-left:' + Math.round((this.iLast - parseInt(sMemoId, 10)) / (this.scaleFactor * 2)) + 'px;';
 
         if (oLifeCycle.CONTENT.DIV.length === 0) {
             oLifeCycle = false;
