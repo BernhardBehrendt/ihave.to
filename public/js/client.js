@@ -1354,7 +1354,7 @@ var Timeline;
         var c, d, e = "", f = [ "position" ];
         if (a instanceof Array) for (c = 0; c < a.length; c += 1) e += a[c].ACN + " ", "color" === a[c].ACN && (this.sLastColor = a[c].TO); else -1 === f.indexOf(a.ACN) ? (e += a.ACN + " ", 
         "color" === a.ACN && (this.sLastColor = a.TO)) : d = !1;
-        return void 0 === d && (this.lineWidth = Math.round(this.handleDeltaTime(b) / 1e5), 
+        return void 0 === d && (this.lineWidth = Math.round(this.handleDeltaTime(b) / 1e6), 
         this.boxWidth += this.lineWidth < 20 ? 20 : this.lineWidth, d = {
             ID: b,
             CLASSES: "change " + this.sLastColor,

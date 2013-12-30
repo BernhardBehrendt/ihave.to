@@ -274,7 +274,7 @@ var Timeline;
 
         if (oChange === undefined) {
 
-            this.lineWidth = Math.round((this.handleDeltaTime(iChangeTime) / 100000));
+            this.lineWidth = Math.round((this.handleDeltaTime(iChangeTime) / 1000000));
 
             if (this.lineWidth < 20) {
                 this.boxWidth += 20;
