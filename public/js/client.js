@@ -1328,8 +1328,9 @@ var Timeline;
     }, Timeline.prototype.getLifecycles = function() {
         var a, b, c = {
             DIV: []
-        };
-        for (a = 0; a < this.memoIdList.length; a += 1) c.DIV.push(this.getLifecycle(this.memoIdList[a]));
+        }, d = !1;
+        for (a = 0; a < this.memoIdList.length; a += 1) d = this.getLifecycle(this.memoIdList[a]), 
+        d !== !1 && c.DIV.push(d);
         return c.DIV.reverse(), b = {
             CONTENT: c,
             CLASSES: "lifecycles"
@@ -1345,7 +1346,8 @@ var Timeline;
         this.handleDeltaTime(0), this.boxWidth = 0;
         for (b in this.screen) this.screen.hasOwnProperty(b) && (this.screen[b] instanceof Array && this.screen[b][0].TGT === a ? c = this.getChange(this.screen[b], b) : this.screen[b].TGT === a && (c = this.getChange(this.screen[b], b)), 
         c !== !1 && (d.CONTENT.DIV.push(c), c = !1));
-        return d.STYLE = "width:" + this.boxWidth + "px", d;
+        return d.STYLE = "width:" + this.boxWidth + "px", 0 === d.CONTENT.DIV.length && (d = !1), 
+        d;
     }, Timeline.prototype.handleDeltaTime = function(a) {
         var b;
         return b = 0 === this.lastMarker ? 0 : a - this.lastMarker, this.lastMarker = a, 

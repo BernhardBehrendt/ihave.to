@@ -160,9 +160,14 @@ var Timeline;
         var i;
         var oLifeCycles = {DIV: []};
         var oLifecycles;
+        var oLifecycle = false;
 
         for (i = 0; i < this.memoIdList.length; i += 1) {
-            oLifeCycles.DIV.push(this.getLifecycle(this.memoIdList[i]));
+            oLifecycle = this.getLifecycle(this.memoIdList[i]);
+
+            if (oLifecycle !== false) {
+                oLifeCycles.DIV.push(oLifecycle);
+            }
         }
 
         oLifeCycles.DIV.reverse();
@@ -212,6 +217,10 @@ var Timeline;
         }
 
         oLifeCycle.STYLE = 'width:' + this.boxWidth + 'px';
+
+        if (oLifeCycle.CONTENT.DIV.length === 0) {
+            oLifeCycle = false;
+        }
 
         return oLifeCycle;
     };
