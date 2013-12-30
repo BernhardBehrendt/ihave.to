@@ -1307,7 +1307,7 @@ var Timeline;
     Timeline = function(a, b) {
         this.screen = a, this.legend = b, this.getTimespan(), this.getMemoIdList();
     }, Timeline.prototype.legend = null, Timeline.prototype.boxWidth = 0, Timeline.prototype.lineWidth = 0, 
-    Timeline.prototype.sLastColor = "", Timeline.prototype.scaleFactor = 4e6, Timeline.prototype.lastMarker = 0, 
+    Timeline.prototype.sLastColor = "", Timeline.prototype.scaleFactor = 2e6, Timeline.prototype.lastMarker = 0, 
     Timeline.prototype.memoIdList = [], Timeline.prototype.screen = null, Timeline.prototype.timeStamps = [], 
     Timeline.prototype.timelineView = null, Timeline.prototype.getMemoIdList = function() {
         var a;
