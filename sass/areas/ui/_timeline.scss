@@ -87,6 +87,7 @@ div.lifecycles {
 
     div.change {
       //@include border-radius(12px);
+      @include clearfix;
 
       float: left;
       min-width: 20px;
@@ -94,10 +95,12 @@ div.lifecycles {
       border-top: solid 2px #fff;
       color: $white;
       text-align: center;
+      overflow: visible;
 
       div.icon {
         @include border-radius(10px);
 
+        float:right;
         background-size: 100%;
         background-color: $white_75;
         width: 20px;

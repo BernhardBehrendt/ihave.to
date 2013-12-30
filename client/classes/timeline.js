@@ -260,7 +260,7 @@ var Timeline;
             oChange = {
                 ID: iChangeTime,
                 CLASSES: 'change ' + this.sLastColor,
-                STYLE: "width:" + (this.handleDeltaTime(iChangeTime) / 10000) + "px",
+                STYLE: "width:" + (this.handleDeltaTime(iChangeTime) / 100000) + "px",
                 CONTENT: {
                     DIV: {
                         CLASSES: 'icon ' + sChanges

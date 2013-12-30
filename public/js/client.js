@@ -1356,7 +1356,7 @@ var Timeline;
         return void 0 === d && (d = {
             ID: b,
             CLASSES: "change " + this.sLastColor,
-            STYLE: "width:" + this.handleDeltaTime(b) / 1e4 + "px",
+            STYLE: "width:" + this.handleDeltaTime(b) / 1e5 + "px",
             CONTENT: {
                 DIV: {
                     CLASSES: "icon " + e
