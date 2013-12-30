@@ -100,7 +100,7 @@ div.lifecycles {
       div.icon {
         @include border-radius(10px);
 
-        float:right;
+        float: right;
         background-size: 100%;
         background-color: $white_75;
         width: 20px;
@@ -124,7 +124,7 @@ div.lifecycles {
       }
 
       div.icon.color {
-        background-image: url(../img/actions/color.png);
+        //background-image: url(../img/actions/color.png);
       }
 
       div.icon.content {
@@ -135,30 +135,58 @@ div.lifecycles {
 
     div.change.blue {
       border-color: $blue_75;
+
+      div.icon {
+        background-color: $blue;
+      }
     }
     div.change.turkis {
       border-color: $turkis_75;
+      div.icon {
+        background-color: $turkis;
+      }
     }
     div.change.green {
       border-color: $green_75;
+      div.icon {
+        background-color: $green;
+      }
     }
     div.change.yellow {
       border-color: $yellow_75;
+      div.icon {
+        background-color: $yellow;
+      }
     }
     div.change.orange {
       border-color: $orange_75;
+      div.icon {
+        background-color: $orange;
+      }
     }
     div.change.red {
       border-color: $red_75;
+      div.icon {
+        background-color: $red;
+      }
     }
     div.change.pink {
       border-color: $pink_75;
+      div.icon {
+        background-color: $pink;
+      }
     }
     div.change.grey {
       border-color: $grey_75;
+      div.icon {
+        background-color: $grey;
+      }
     }
     div.change.white {
       border-color: $white_75;
+      div.icon {
+        background-color: $white;
+      }
     }
   }
 }
