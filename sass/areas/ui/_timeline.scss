@@ -75,81 +75,87 @@ div.lifecycles {
   width: 100%;
   height: auto;
   overflow: auto;
-  padding-bottom:60px;
+  padding-bottom: 60px;
 
   div.memo {
     @include clearfix;
 
     width: 100%;
     height: 26px;
-    margin-bottom: 8px;
+    margin-top: 11px;
+    overflow: visible;
 
     div.change {
-      @include border-radius(12px);
+      //@include border-radius(12px);
 
       float: left;
-      width: 20px;
-      height: 20px;
-      border: solid 2px #fff;
-      margin-right: 10px;
-      margin-top: 2px;
+      min-width: 20px;
+      height: 5px;
+      border-top: solid 2px #fff;
       color: $white;
       text-align: center;
 
-      background-size:100%;
-      background-color: $white;
-    }
+      div.icon {
+        @include border-radius(10px);
 
-    div.change.deleted{
-      cursor:pointer;
-      background-image:url(../img/actions/deleted.png);
-    }
+        background-size: 100%;
+        background-color: $white_75;
+        width: 20px;
+        height: 20px;
+        margin-top: -11px;
+      }
 
-    div.change.position{
-      background-image:url(../img/actions/move.png);
-      //display:none;
-    }
+      div.icon.deleted {
+        cursor: pointer;
+        background-image: url(../img/actions/deleted.png);
+      }
 
-    div.change.color.content.position{
-      background-image:url(../img/actions/add.png);
-      display:block;
-    }
+      div.icon.position {
+        background-image: url(../img/actions/move.png);
+        //display:none;
+      }
 
-    div.change.color{
-      background-image:url(../img/actions/color.png);
-    }
+      div.icon.color.content.position {
+        background-image: url(../img/actions/add.png);
+        display: block;
+      }
 
-    div.change.content{
-      background-image:url(../img/actions/edit.png);
+      div.icon.color {
+        background-image: url(../img/actions/color.png);
+      }
+
+      div.icon.content {
+        background-image: url(../img/actions/edit.png);
+      }
+
     }
 
     div.change.blue {
-      border-color: $blue;
+      border-color: $blue_75;
     }
     div.change.turkis {
-      border-color: $turkis;
+      border-color: $turkis_75;
     }
     div.change.green {
-      border-color: $green;
+      border-color: $green_75;
     }
     div.change.yellow {
-      border-color: $yellow;
+      border-color: $yellow_75;
     }
     div.change.orange {
-      border-color: $orange;
+      border-color: $orange_75;
     }
     div.change.red {
-      border-color: $red;
+      border-color: $red_75;
     }
     div.change.pink {
-      border-color: $pink;
+      border-color: $pink_75;
     }
     div.change.grey {
-      border-color: $grey;
+      border-color: $grey_75;
     }
     div.change.white {
-      border-color: $white;
+      border-color: $white_75;
     }
-
   }
 }

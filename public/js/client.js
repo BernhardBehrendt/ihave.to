@@ -1306,9 +1306,9 @@ var Timeline;
     "use strict";
     Timeline = function(a, b) {
         this.screen = a, this.legend = b, this.getTimespan(), this.getMemoIdList();
-    }, Timeline.prototype.legend = null, Timeline.prototype.lastMarker = 0, Timeline.prototype.memoIdList = [], 
-    Timeline.prototype.screen = null, Timeline.prototype.timeStamps = [], Timeline.prototype.timelineView = null, 
-    Timeline.prototype.getMemoIdList = function() {
+    }, Timeline.prototype.legend = null, Timeline.prototype.sLastColor = "", Timeline.prototype.lastMarker = 0, 
+    Timeline.prototype.memoIdList = [], Timeline.prototype.screen = null, Timeline.prototype.timeStamps = [], 
+    Timeline.prototype.timelineView = null, Timeline.prototype.getMemoIdList = function() {
         var a;
         for (a in this.screen) this.screen.hasOwnProperty(a) && (this.screen[a] instanceof Array ? void 0 !== this.screen[a][0].TGT && -1 === this.memoIdList.indexOf(this.screen[a][0].TGT) && this.memoIdList.push(this.screen[a][0].TGT) : void 0 !== this.screen[a].TGT && -1 === this.memoIdList.indexOf(this.screen[a].TGT) && this.memoIdList.push(this.screen[a].TGT));
     }, Timeline.prototype.getLegend = function() {
@@ -1334,7 +1334,7 @@ var Timeline;
             CLASSES: "lifecycles"
         };
     }, Timeline.prototype.getLifecycle = function(a) {
-        var b, c, d = {
+        var b, c = !1, d = {
             ID: "change_on_" + a,
             CLASSES: "memo",
             CONTENT: {
@@ -1343,20 +1343,25 @@ var Timeline;
         };
         this.handleDeltaTime(0);
         for (b in this.screen) this.screen.hasOwnProperty(b) && (this.screen[b] instanceof Array && this.screen[b][0].TGT === a ? c = this.getChange(this.screen[b], b) : this.screen[b].TGT === a && (c = this.getChange(this.screen[b], b)), 
-        c !== !1 && d.CONTENT.DIV.push(c));
-        return d.STYLE = "width:autopx", d;
+        c !== !1 && (d.CONTENT.DIV.push(c), c = !1));
+        return d.STYLE = "width:auto", d;
     }, Timeline.prototype.handleDeltaTime = function(a) {
         var b;
         return b = 0 === this.lastMarker ? 0 : a - this.lastMarker, this.lastMarker = a, 
         console.log(b), b;
     }, Timeline.prototype.getChange = function(a, b) {
-        var c, d, e = "change ", f = [ "position" ];
-        if (a instanceof Array) for (c = 0; c < a.length; c += 1) e += a[c].ACN + " ", "color" === a[c].ACN && (e += a[c].TO + " "); else -1 === f.indexOf(a.ACN) ? (e += a.ACN + " ", 
-        "color" === a.ACN && (e += a.TO + " ")) : d = !1;
+        var c, d, e = "", f = [ "position" ];
+        if (a instanceof Array) for (c = 0; c < a.length; c += 1) e += a[c].ACN + " ", "color" === a[c].ACN && (this.sLastColor = a[c].TO); else -1 === f.indexOf(a.ACN) ? (e += a.ACN + " ", 
+        "color" === a.ACN && (this.sLastColor = a.TO)) : d = !1;
         return void 0 === d && (d = {
-            STYLE: "margin-left:" + this.handleDeltaTime(b) / 1e4 + "px",
             ID: b,
-            CLASSES: e
+            CLASSES: "change " + this.sLastColor,
+            STYLE: "width:" + this.handleDeltaTime(b) / 1e4 + "px",
+            CONTENT: {
+                DIV: {
+                    CLASSES: "icon " + e
+                }
+            }
         }), d;
     }, Timeline.prototype.getTimespan = function() {
         var a;

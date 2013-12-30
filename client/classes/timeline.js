@@ -32,6 +32,16 @@ var Timeline;
     Timeline.prototype.legend = null;
 
     /**
+     * The last detected line color
+     *
+     *
+     *
+     * @property sLastColor
+     * @type {String}
+     */
+    Timeline.prototype.sLastColor = '';
+
+    /**
      * The marker for timeline delta times
      *
      * @property lastMarker
@@ -156,7 +166,7 @@ var Timeline;
      */
     Timeline.prototype.getLifecycle = function (sMemoId) {
         var iTimeStamp;
-        var oChangeOml;
+        var oChangeOml = false;
         var oLifeCycle = {
             ID: 'change_on_' + sMemoId,
             CLASSES: 'memo',
@@ -179,11 +189,12 @@ var Timeline;
 
                 if (oChangeOml !== false) {
                     oLifeCycle.CONTENT.DIV.push(oChangeOml);
+                    oChangeOml = false;
                 }
             }
         }
 
-        oLifeCycle.STYLE = 'width:' + 'auto' + 'px';
+        oLifeCycle.STYLE = 'width:auto';
 
         return oLifeCycle;
     };
@@ -215,13 +226,13 @@ var Timeline;
      * Create a lifecycle entry
      *
      * @method getChange
-     * @param {Object} The memo change object
-     * @param {Number} The memo hange time
+     * @param {Object} oMemo The memo change object
+     * @param {Number} iChangeTime The memo hange time
      * @return {Object} The changes OMM
      */
     Timeline.prototype.getChange = function (oMemo, iChangeTime) {
         var i;
-        var sChanges = 'change ';
+        var sChanges = '';
         var aNonTimelineChanges = ['position'];
         var oChange;
         if (oMemo instanceof Array) {
@@ -229,14 +240,16 @@ var Timeline;
                 sChanges += oMemo[i].ACN + ' ';
 
                 if (oMemo[i].ACN === 'color') {
-                    sChanges += oMemo[i].TO + ' ';
+                    // sChanges += oMemo[i].TO + ' ';
+                    this.sLastColor = oMemo[i].TO;
                 }
             }
         } else if (aNonTimelineChanges.indexOf(oMemo.ACN) === -1) {
             sChanges += oMemo.ACN + ' ';
 
             if (oMemo.ACN === 'color') {
-                sChanges += oMemo.TO + ' ';
+                //sChanges += oMemo.TO + ' ';
+                this.sLastColor = oMemo.TO;
             }
         } else {
             oChange = false;
@@ -245,10 +258,15 @@ var Timeline;
         if (oChange === undefined) {
             // Outer div with a calculated width with line background
             oChange = {
-                STYLE: "margin-left:" + (this.handleDeltaTime(iChangeTime) / 10000) + "px",
                 ID: iChangeTime,
-                CLASSES: sChanges
-            }
+                CLASSES: 'change ' + this.sLastColor,
+                STYLE: "width:" + (this.handleDeltaTime(iChangeTime) / 10000) + "px",
+                CONTENT: {
+                    DIV: {
+                        CLASSES: 'icon ' + sChanges
+                    }
+                }
+            };
         }
 
         return oChange;
@@ -308,5 +326,4 @@ var Timeline;
 
         return oTpl.toHtml();
     };
-})
-    ();
+})();
