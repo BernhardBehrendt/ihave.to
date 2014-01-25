@@ -9,15 +9,10 @@ on the memo board.
 
 **And YES, you can customize your memo board with custom wallpapers ;-)**.
 
-[ ![Image](https://www.ihave.to/img/preview/desktop/8.png "iHave.to memoboard view") ](https://www.ihave.to/)
+[ ![Image](http://www.ihave.to/img/preview/desktop/8.png "iHave.to memoboard view") ](http://www.ihave.to/)
+[ ![Image](www.ihave.to/img/media/architecture_simple.jpg "How it works") ](http://www.ihave.to/)
 
-[ ![Image](https://www.ihave.to/img/preview/desktop/7.png "iHave.to edit view") ](https://www.ihave.to/)
-
-[ ![Image](https://www.ihave.to/img/preview/desktop/6.png "iHave.to workspaces view") ](https://www.ihave.to/)
-
-[ ![Image](https://www.ihave.to/img/preview/mobile/mobile.png "iHave.to on a mobile device") ](https://www.ihave.to/)
-
-You can find a working demo [here](https://www.ihave.to).
+You can find a working demo [here](http://www.ihave.to).
 
 Author:
 iHave.to/do is written and designed by Bernhard Bezdek all rights reserved.
