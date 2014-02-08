@@ -114,6 +114,11 @@ div.lifecycles {
         background-image: url(../img/actions/deleted.png);
       }
 
+      div.icon.restored {
+        cursor: pointer;
+        background-image: url(../img/actions/restored.png);
+      }
+
       div.icon.position {
         background-image: url(../img/actions/move.png);
         //display:none;

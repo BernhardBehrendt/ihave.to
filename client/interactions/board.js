@@ -22,7 +22,13 @@
         $(this).parent('.post').addClass('focused');
     })
         .on(CONF.EVENTS.CLICK, '#fullsize', function () {
-            $(this).removeClass('active');
+            var self = $(this);
+
+            self.removeClass('active');
+
+            setTimeout(function () {
+                self.remove();
+            }, 2000);
         })
 
         .on(CONF.EVENTS.CLICK, '.screen', function () {
@@ -33,16 +39,38 @@
         .on(CONF.EVENTS.CLICK, '.post > .content > p > a', function (event) {
             event.preventDefault();
             event.stopPropagation();
-            var oImage;
-            var oFullSize = $('#fullsize');
+
+            $('<div id="#fullsize" class="active">').appendTo('body');
 
             if ($(this).children('img').length === 1) {
-                oFullSize.addClass('active').html(new Template({IMG: {SRC: $(this).attr('href')}}).toHtml());
+                var oEnlargedImage;
+                var iTopPosition;
+                var self = $(this);
+                var oImage = new Image();
+                oImage.onload = function () {
 
-                oImage = oFullSize.children('img');
-                oImage.css('marginTop', (($(window).height() - oImage.outerHeight()) / 2) + 'px');
+                    $('body').prepend(new Template({
+                        DIV: {
+                            ID: 'fullsize',
+                            CONTENT: {
+                                IMG: {
+                                    SRC: self.attr('href')
+                                }
+                            }
+                        }
+                    }).toHtml());
 
-            } else {
+                    oEnlargedImage = $('#fullsize').children('img');
+                    iTopPosition = (($(window).height() - oImage.height) / 2);
+                    oEnlargedImage.css('marginTop', iTopPosition + 'px');
+                    oEnlargedImage.parent().addClass('active');
+                };
+
+                oImage.src = $(this).attr('href');
+
+
+            }
+            else {
 
                 if (!isMobile()) {
                     window.open($(this).attr('href'));
@@ -236,4 +264,5 @@
                 });
             }
         });
-})();
+})
+    ();

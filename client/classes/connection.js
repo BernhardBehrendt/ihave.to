@@ -6,6 +6,7 @@
 /*global CryptoJS*/
 /*global Template*/
 /*global Screens*/
+/*global Timeline*/
 /*global showMessage*/
 var Connection;
 (function () {
@@ -226,6 +227,10 @@ var Connection;
         if (CONF.DOM.UIWINDOW.children('.cmd').children('.screen').length > 0) {
             this.updateScreenOverview();
         }
+
+        if (CONF.DOM.UIWINDOW.children('.cmd').children('.lifecycles').length > 0) {
+            this.updateLifecycleOverview();
+        }
     };
 
     /**
@@ -268,6 +273,21 @@ var Connection;
     };
 
     /**
+     * Update the ScreenOverview and create an updated expected Screenoverview
+     * @method updateScreenOverview
+     */
+    Connection.prototype.updateLifecycleOverview = function () {
+        var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
+        CONF.DOM.UIWINDOW.trigger('showUi');
+        CONF.DOM.CMD.trigger('setTimelineNav');
+
+
+        var oTimeline = new Timeline(CONF.BOARD.PRIVATE.SCREENS[sActiveScreen].POSTS, CONF.BOARD.SETTINGS.COLORS);
+
+        CONF.DOM.UIWINDOW.children('.cmd').html(oTimeline.render());
+    };
+
+    /**
      * Update the curretn screen if theres an incoming change
      * @method updateScreen
      * @param {Object} oItem
@@ -283,12 +303,9 @@ var Connection;
         // Array means new Post (content and color)
         if (!( oItem instanceof Array)) {
             if (oItem.TGT !== undefined) {
-
-                oTarget = $('#' + oItem.TGT);
-
+                oTarget = $('div.screen').find('#' + oItem.TGT);
                 // If Target exists
                 if (oTarget.length === 1) {
-
                     // Tell further process no further consistency operations are required
                     bUpdated = true;
 
@@ -340,7 +357,6 @@ var Connection;
 
             }
         }
-
         return bUpdated;
     };
 

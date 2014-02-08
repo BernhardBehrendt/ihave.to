@@ -1,5 +1,4 @@
 /*global _*/
-/*global console*/
 /*global Template*/
 var Timeline;
 (function () {
@@ -233,7 +232,6 @@ var Timeline;
         if (oLifeCycle.CONTENT.DIV.length === 0) {
             oLifeCycle = false;
         }
-
         return oLifeCycle;
     };
 
@@ -336,7 +334,6 @@ var Timeline;
             }
         }
 
-        this.iFirst = _.first(this.timeStamps);
         this.iLast = _.last(this.timeStamps);
 
         return this;

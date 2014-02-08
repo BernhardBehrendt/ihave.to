@@ -84,7 +84,7 @@ var Menu;
      */
     Menu.prototype.getPrivateMain = function (sActiveOne) {
         var i;
-        var aMenuCmds = ['new_post', 'screen', 'timeline', 'chrono', 'settings'];
+        var aMenuCmds = ['new_post', 'screen', 'timeline', 'settings'];
         var aCmds = [];
 
         if (sActiveOne === undefined) {

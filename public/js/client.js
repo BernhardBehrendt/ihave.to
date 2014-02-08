@@ -328,7 +328,7 @@ var CONF;
                 OBJ: "object",
                 NUM: "number",
                 SALT: null,
-                SCREEN_DEFAULT_BG: "https://ihave.to/img/wallpaper-default.jpg",
+                SCREEN_DEFAULT_BG: "http://ihave.to/img/wallpaper-default.jpg",
                 BLOCKRESIZE: 'input[type="text"]:focus, textarea'
             },
             ARRAY: {
@@ -574,7 +574,8 @@ var Connection;
             }
         });
     }, Connection.prototype.updateCurrentView = function() {
-        CONF.DOM.UIWINDOW.children(".cmd").children(".screen").length > 0 && this.updateScreenOverview();
+        CONF.DOM.UIWINDOW.children(".cmd").children(".screen").length > 0 && this.updateScreenOverview(), 
+        CONF.DOM.UIWINDOW.children(".cmd").children(".lifecycles").length > 0 && this.updateLifecycleOverview();
     }, Connection.prototype.updateScreenOverview = function() {
         var a, b, c = [], d = $("#trash_empty.active, #trash_full");
         if (1 === d.length && ($.each(CONF.DOM.UIWINDOW.children(".cmd").children(".screen.do"), function() {
@@ -583,9 +584,14 @@ var Connection;
         CONF.DOM.UIWINDOW.children(".cmd").children(".screen").remove(), CONF.DOM.UIWINDOW.children(".cmd").append(new Template(new Screens().getOverview()).toHtml()), 
         c.length > 0) for ($("#trash_empty").trigger(CONF.EVENTS.CLICK), a = 0; a < c.length; a += 1) b = $("#" + c[a]), 
         1 === b.length && b.trigger(CONF.EVENTS.CLICK);
+    }, Connection.prototype.updateLifecycleOverview = function() {
+        var a = CONF.DOM.BOARDPOSTS.data("activescreen");
+        CONF.DOM.UIWINDOW.trigger("showUi"), CONF.DOM.CMD.trigger("setTimelineNav");
+        var b = new Timeline(CONF.BOARD.PRIVATE.SCREENS[a].POSTS, CONF.BOARD.SETTINGS.COLORS);
+        CONF.DOM.UIWINDOW.children(".cmd").html(b.render());
     }, Connection.prototype.updateScreen = function(a) {
         var b, c, d, e, f = !1;
-        if (a instanceof Array) for (b = 0; b < a.length; b += 1) f ? this.updateScreen(a[b]) : f = this.updateScreen(a[b]); else if (void 0 !== a.TGT && (d = $("#" + a.TGT), 
+        if (a instanceof Array) for (b = 0; b < a.length; b += 1) f ? this.updateScreen(a[b]) : f = this.updateScreen(a[b]); else if (void 0 !== a.TGT && (d = $("div.screen").find("#" + a.TGT), 
         1 === d.length)) {
             f = !0, "position" === a.ACN && $(d).animate({
                 left: a.TO[0] + "%",
@@ -778,7 +784,7 @@ var Menu;
         };
         return d;
     }, Menu.prototype.getPrivateMain = function(a) {
-        var b, c = [ "new_post", "screen", "timeline", "chrono", "settings" ], d = [];
+        var b, c = [ "new_post", "screen", "timeline", "settings" ], d = [];
         for (void 0 === a && (a = ""), b = 0; b < c.length; b += 1) d[b] = {
             CONTENT: {
                 LINK: {
@@ -1371,8 +1377,7 @@ var Timeline;
     }, Timeline.prototype.getTimespan = function() {
         var a;
         for (a in this.screen) this.screen.hasOwnProperty(a) && this.timeStamps.push(parseInt(a, 10));
-        return this.iFirst = _.first(this.timeStamps), this.iLast = _.last(this.timeStamps), 
-        this;
+        return this.iLast = _.last(this.timeStamps), this;
     }, Timeline.prototype.getTimestream = function() {
         return this.timelineView;
     }, Timeline.prototype.render = function() {
@@ -13282,8 +13287,9 @@ var log;
 }(), function() {
     "use strict";
     CONF.DOM.BOARD = $("#board"), CONF.DOM.BOARD.bind("setupBoard", function(a, b) {
+        var c = $(window);
         CONF.DOM.BOARDPOSTS = $(this).children(".posts"), CONF.DOM.BOARDSCREENS = CONF.DOM.BOARDPOSTS.children(".screen"), 
-        CONF.DOM.BOARD.height($(document).height() - CONF.DOM.CMD.height()), CONF.DOM.BOARD.width($(document).width()), 
+        CONF.DOM.BOARD.height(c.height() - CONF.DOM.CMD.height()), CONF.DOM.BOARD.width(c.width()), 
         void 0 !== b && CONF.DOM.BOARD.trigger("loadPosts", b), $(this).fadeIn(CONF.PROPS.INT.MASTERCLOCK), 
         log("Boards height was set to " + CONF.DOM.BOARD.height()), log("Boards width was set to " + CONF.DOM.BOARD.width() * CONF.DOM.BOARDSCREENS.length);
     }), CONF.DOM.BOARD.bind("loadPosts", function(a, b) {
@@ -13438,17 +13444,30 @@ var showMessage;
         a.stopPropagation(), a.preventDefault(), $(this).closest(".screen").find(".focused").removeClass("focused"), 
         $("#post-functions").remove(), $(this).parent(".post").addClass("focused");
     }).on(CONF.EVENTS.CLICK, "#fullsize", function() {
-        $(this).removeClass("active");
+        var a = $(this);
+        a.removeClass("active"), setTimeout(function() {
+            a.remove();
+        }, 2e3);
     }).on(CONF.EVENTS.CLICK, ".screen", function() {
         $("#post-functions").remove(), $(this).find("div.post.focused").removeClass("focused");
     }).on(CONF.EVENTS.CLICK, ".post > .content > p > a", function(a) {
-        a.preventDefault(), a.stopPropagation();
-        var b, c = $("#fullsize");
-        1 === $(this).children("img").length ? (c.addClass("active").html(new Template({
-            IMG: {
-                SRC: $(this).attr("href")
-            }
-        }).toHtml()), b = c.children("img"), b.css("marginTop", ($(window).height() - b.outerHeight()) / 2 + "px")) : isMobile() ? (void 0 === window.navigator.standalone && (window.navigator.standalone = !1), 
+        if (a.preventDefault(), a.stopPropagation(), $('<div id="#fullsize" class="active">').appendTo("body"), 
+        1 === $(this).children("img").length) {
+            var b, c, d = $(this), e = new Image();
+            e.onload = function() {
+                $("body").prepend(new Template({
+                    DIV: {
+                        ID: "fullsize",
+                        CONTENT: {
+                            IMG: {
+                                SRC: d.attr("href")
+                            }
+                        }
+                    }
+                }).toHtml()), b = $("#fullsize").children("img"), c = ($(window).height() - e.height) / 2, 
+                b.css("marginTop", c + "px"), b.parent().addClass("active");
+            }, e.src = $(this).attr("href");
+        } else isMobile() ? (void 0 === window.navigator.standalone && (window.navigator.standalone = !1), 
         window.navigator.standalone === !0 ? showMessage("IOS_ERROR_OPENWINDOW") : window.open($(this).attr("href"))) : window.open($(this).attr("href"));
     }).on(CONF.EVENTS.CLICK, ".focused > .content", function(a) {
         a.preventDefault(), a.stopPropagation();
@@ -13591,7 +13610,7 @@ var showMessage;
         CONF.DOM.UIWINDOW.children(".cmd").html(new Template(new Settings(CONF.BOARD.SETTINGS).getTemplate()).toHtml()));
     }).on(CONF.EVENTS.CLICK, "#store_post", function() {
         if ($(this).hasClass("active")) {
-            var a, b, c, d = parseInt(new Date().getTime()), e = $("#post-window"), f = e.children("textarea"), g = CONF.DOM.BOARDPOSTS.data("activescreen"), h = JSON.parse('{"PRIVATE":{"SCREENS":{"' + g + '":{"POSTS":{"' + d + '":{}}}}}}'), i = $("#back");
+            var a, b, c, d = parseInt(new Date().getTime(), 10), e = $("#post-window"), f = e.children("textarea"), g = CONF.DOM.BOARDPOSTS.data("activescreen"), h = JSON.parse('{"PRIVATE":{"SCREENS":{"' + g + '":{"POSTS":{"' + d + '":{}}}}}}'), i = $("#back");
             if (f.val().trim().length > 0) {
                 if (void 0 !== f.attr("id") && 0 === f.attr("id").indexOf("origin")) {
                     var j = parseInt(f.attr("id").replace("origin-", ""), 10), k = $(".color_select").data("beforechange"), l = e.find("a.selected").parent().attr("class");
@@ -13770,9 +13789,45 @@ var showMessage;
             $(this).remove(), $("#new_screen").removeClass("active");
         });
     });
-}(), $(document).on(CONF.EVENTS.CLICK, "div.change.deleted", function() {
-    Apprise("REALLY_RESTORE_MEMO".translate());
-}), function() {
+}(), function() {
+    "use strict";
+    $(document).on(CONF.EVENTS.CLICK, "div.change > .deleted", function() {
+        var a = $(this);
+        Apprise("CONFIRM_RESTORE_POST".translate(), {
+            animation: 250,
+            buttons: {
+                confirm: {
+                    action: function() {
+                        var b = parseInt(a.parent().attr("id"), 10), c = CONF.DOM.BOARDPOSTS.data("activescreen"), d = parseInt(a.closest("div.memo").attr("id").replace("change_on_", ""), 10), e = JSON.parse('{"PRIVATE":{"SCREENS":{"' + c + '":{"POSTS":{"' + b + '":{}}}}}}'), f = {
+                            ACN: "restored",
+                            BY: CONF.BOARD.PRIVATE.SCREENS[c].POSTS[b].BY + "->" + CONF.PROPS.INT.WHO,
+                            TGT: d
+                        };
+                        e.PRIVATE.SCREENS[c].POSTS[b] = f, CONF.BOARD.PRIVATE.SCREENS[c].POSTS[b] = f, CONF.COM.SOCKET.saveChanges(e), 
+                        a.addClass("restored").removeClass("deleted"), CONF.DOM.BOARD.trigger("loadPosts", {
+                            NAME: c,
+                            SCREEN: CONF.BOARD.PRIVATE.SCREENS[c],
+                            FROMTIME: !1
+                        }), $("#back").trigger("click"), Apprise("close");
+                    },
+                    className: "red",
+                    id: "confirm",
+                    text: "OK".translate()
+                },
+                abort: {
+                    action: function() {
+                        Apprise("close");
+                    },
+                    className: "blue",
+                    id: "abort",
+                    text: "ABORT".translate()
+                }
+            },
+            input: !1,
+            override: !0
+        });
+    });
+}(), function() {
     "use strict";
     $(document).on("focusin", "input", function() {
         $(this).data("val", $(this).val()), $(this).val("");

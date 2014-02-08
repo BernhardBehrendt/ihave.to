@@ -15,12 +15,13 @@
      *
      */
     CONF.DOM.BOARD.bind('setupBoard', function (event, oActiveScreen) {
+        var oWindow = $(window);
 
         CONF.DOM.BOARDPOSTS = $(this).children('.posts');
         CONF.DOM.BOARDSCREENS = CONF.DOM.BOARDPOSTS.children('.screen');
 
-        CONF.DOM.BOARD.height($(document).height() - CONF.DOM.CMD.height());
-        CONF.DOM.BOARD.width($(document).width());
+        CONF.DOM.BOARD.height(oWindow.height() - CONF.DOM.CMD.height());
+        CONF.DOM.BOARD.width(oWindow.width());
 
         if (oActiveScreen !== undefined) {
             CONF.DOM.BOARD.trigger('loadPosts', oActiveScreen);

@@ -189,7 +189,7 @@
         .on(CONF.EVENTS.CLICK, '#store_post', function () {
 
             if ($(this).hasClass('active')) {
-                var iTimestamp = parseInt(new Date().getTime());
+                var iTimestamp = parseInt(new Date().getTime(), 10);
                 var oPostWindow = $('#post-window');
                 var oTextarea = oPostWindow.children('textarea');
                 var sActiveScreen = CONF.DOM.BOARDPOSTS.data('activescreen');
