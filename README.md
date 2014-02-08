@@ -9,8 +9,8 @@ on the memo board.
 
 **And YES, you can customize your memo board with custom wallpapers ;-)**.
 
+[ ![Image](http://www.ihave.to/img/media/architecture_simple.jpg "How it works") ](http://www.ihave.to/)
 [ ![Image](http://www.ihave.to/img/preview/desktop/8.png "iHave.to memoboard view") ](http://www.ihave.to/)
-[ ![Image](www.ihave.to/img/media/architecture_simple.jpg "How it works") ](http://www.ihave.to/)
 
 You can find a working demo [here](http://www.ihave.to).
 
