@@ -24,6 +24,7 @@ window.LANGUAGE = {
         NOGO: 'verboten',
 
         // ALERTS AND PROMPTS
+        CONFIRM_RESTORE_POST:"Soll das ausgewählte Memo wiederhergestellt werden?",
         ENTER_YOUR_NAME: 'Gebe für die Timeline deinen Namen ein wenn du das Memoboard collaborativ einsetzen möchtest.<br/>(Mit ESC oder RETURN kannst du diesen Schritt überspringen)',
         REALLY_DELETE_THE_SELECTED_SCREENS: 'Sollen die gewählten Arbeitsflächen wirklich gelöscht werden?',
         CONFIRM_DELETE_POST: 'Soll dieses Memo wirklich gelöscht werden?<br/>Aus der Timeline kannst du diesen wiederherstellen',
@@ -62,7 +63,7 @@ window.LANGUAGE = {
         SCREEN_ALREADY_EXISTS: 'existiert bereits',
         IOS_ERROR_OPENWINDOW: 'In der Webbapp kannst du keine neuen Tabs öffnen',
         CHANGED_PRIO_NAME: 'Farbbedeeutung wurde geändert',
-        WAS_ADDED_TO_BOARD: 'wurde zum Board hinzugefügt',
+        WAS_ADDED_TO_BOARD: 'ist dem Board beigetreten',
         PLEASE_ENTER_VALID_PASSWORD: 'Dein Passwort ist zu kurz',
         PLEASE_ENTER_A_VALID_BOARDNAME: 'Es wurde kein Name für das Memoboard gewählt',
 
@@ -152,7 +153,7 @@ window.LANGUAGE = {
         NOGO: 'forbidden',
 
         // ALERTS AND PROMPTS
-
+        CONFIRM_RESTORE_POST:"Restore selected memo?",
         ENTER_YOUR_NAME: 'Enter your name if you plan to use this memo board in a collaborative way (Press ESC or RETURN to skip this step)',
         REALLY_DELETE_THE_SELECTED_SCREENS: 'Really delete selected workspaces?',
         CONFIRM_DELETE_POST: 'Really delete this memo? (you have also access after deletion via timeline)',
@@ -191,7 +192,7 @@ window.LANGUAGE = {
         SCREEN_ALREADY_EXISTS: 'already exists',
         IOS_ERROR_OPENWINDOW: 'In web app you can\'t open links in new window',
         CHANGED_PRIO_NAME: 'Color meaning was changed',
-        WAS_ADDED_TO_BOARD: 'was added to board',
+        WAS_ADDED_TO_BOARD: 'entered the board',
         PLEASE_ENTER_VALID_PASSWORD: 'Password to short',
         PLEASE_ENTER_A_VALID_BOARDNAME: 'Missing memoboard name',
 

@@ -92,6 +92,6 @@ If you need some documentation you can install [yuidoc](http://npmjs.org/package
 
 After yuidoc was installed just run following command inside the apps root folder:
 
-`àpidoc.sh``
+``apidoc.sh``
 
 Now open index.html file inside documentation folder in your browser.
