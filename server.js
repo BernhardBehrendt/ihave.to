@@ -55,7 +55,7 @@
         //Switch protocols
         oHttpRouting.all('*', function (req, res) {
             sCurrentHost = req.headers.host.toString().replace(':' + CONFIG.PORT, '');
-            sTargetHost = 'https://' + sCurrentHost + ':' + CONFIG.SSL_PORT + req.url;
+            sTargetHost = 'https://' + sCurrentHost + req.url;
 
             res.redirect(sTargetHost);
         });
