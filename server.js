@@ -36,7 +36,8 @@
 
         oSslConfig = {
             key: fs.readFileSync(CONFIG.SSL_KEY),
-            cert: fs.readFileSync(CONFIG.SSL_CERT)
+            cert: fs.readFileSync(CONFIG.SSL_CERT),
+            ca: fs.readFileSync(CONFIG.SSL_CA)
         };
     }
 

@@ -20,6 +20,7 @@ var CONFIG = null;
         RUN_CLEANUP: 21600000,      // Means 4 times a day
         SSL_KEY: null,              // The absolute path to a ssl key file
         SSL_CERT: null,             // The absolute path to a ssl certificates
+        SSL_CA: null,               // The intermediate CA certificate
         SSL_PORT: 4433,             // The port which provides SSL
         ALLOWED_UPLOAD_FILES: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] // The allowed image upload formats
     };
