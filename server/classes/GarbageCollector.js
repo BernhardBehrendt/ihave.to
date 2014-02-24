@@ -98,12 +98,12 @@ var GarbageCollector = null;
     GarbageCollector.prototype.checkStats = function (sReference) {
         var iAgeInDays;
         var self = this;
-        var iDay = 86400000;    // Milliseconds on a day
+        var iDay = 86400000;    // Milliseconds in a day
 
         this.fs.stat(sReference, function (error, stats) {
             if (!error) {
 
-                iAgeInDays = (new Date().getTime() - new Date(stats.atime).getTime()) / iDay;
+                iAgeInDays = Math.floor((new Date().getTime() - new Date(stats.mtime).getTime()) / iDay);
 
                 if (iAgeInDays >= CONFIG.MAX_DAYS_UNUSED) {
                     if (stats.isDirectory()) {
