@@ -1,6 +1,7 @@
 #iHave.to/do#
 ##AES secured and real time enabled plain memoboard##
 
+[![Build Status](https://travis-ci.org/BernhardBezdek/ihave.to.svg?branch=master)](https://travis-ci.org/BernhardBezdek/ihave.to)
 [![Dependency Status](https://gemnasium.com/BernhardBezdek/ihave.to.svg)](https://gemnasium.com/BernhardBezdek/ihave.to)
 
 
