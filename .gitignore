@@ -1,11 +1,7 @@
 node_modules/
 boards
 .DS_Store
-.project
-.git
 ./documentation
-LAYOUT
 .idea/
 ./.sass-cache
-.nodemonignore
 public/js/salt.js
