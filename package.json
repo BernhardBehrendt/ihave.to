@@ -1,7 +1,7 @@
 {
     "name": "ihave.to",
     "description": "Catch ideas. As they come and let them grow with your team in real time",
-    "version": "0.9.41",
+    "version": "0.9.42",
     "author": {
         "name": "Bernhard Bezdek",
         "email": "bernhard.bezdek@googlemail.com"
@@ -12,7 +12,6 @@
         "formidable": "*",
         "express": "*",
         "body-parser": "*",
-        "formidable:": "*",
         "gm": "*",
         "mime": "*",
         "socket.io": "*"
