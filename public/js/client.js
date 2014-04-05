@@ -534,7 +534,7 @@ var Connection;
     Connection.prototype._data = null, Connection.prototype._verifier = null, Connection.prototype._board = null, 
     Connection.prototype.connect = function(a) {
         var b = this;
-        null === this._board && void 0 !== a && (this._board = a), void 0 !== this._board ? (this.socket.emit("init", this._board.substring(1, 30)), 
+        null === this._board && void 0 !== a && (this._board = a), void 0 !== this._board && null !== this._board ? (this.socket.emit("init", this._board), 
         this.socket.on("connected", function(a) {
             $("#cmd").removeAttr("style"), b.setData(a), b.handleData();
         })) : window.location.reload();
