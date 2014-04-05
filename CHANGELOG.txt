@@ -43,3 +43,5 @@ CHANGELOG:
 
 0.9.44 | Restored key security back to full length
 
+0.9.45 | New client build
+
