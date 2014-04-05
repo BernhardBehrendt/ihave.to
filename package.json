@@ -16,7 +16,6 @@
         "mime": "*",
         "socket.io": "*"
     },
-
     "keywords": [
         "memo",
         "board",
