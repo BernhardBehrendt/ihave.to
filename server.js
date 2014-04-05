@@ -95,7 +95,7 @@
 
     // Socket io settings
     //io.enable('browser client gzip');
-    //  io.set('log level', 3);
+    io.set('log level', 1);
     io.sockets.on('connection', function (socket) {
 
         // The initial connector for the board api

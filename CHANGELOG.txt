@@ -36,3 +36,8 @@ CHANGELOG:
 0.9.40 | Migration to express 4 and socket.io 1.0
 
 0.9.41 | Fixed issue #1
+
+0.9.42 | Dependency issue
+
+0.9.43 | Logging issue in production context removed
+
