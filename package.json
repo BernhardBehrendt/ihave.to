@@ -1,7 +1,7 @@
 {
     "name": "ihave.to",
     "description": "Catch ideas. As they come and let them grow with your team in real time",
-    "version": "0.9.21",
+    "version": "0.9.41",
     "author": {
         "name": "Bernhard Bezdek",
         "email": "bernhard.bezdek@googlemail.com"
@@ -9,10 +9,11 @@
     "license": "MIT",
     "preferGlobal": "true",
     "dependencies": {
-        "formidable":"*",
+        "formidable": "*",
         "express": "*",
         "body-parser": "*",
-	    "gm": "*",
+        "formidable:": "*",
+        "gm": "*",
         "mime": "*",
         "socket.io": "*"
     },
@@ -36,7 +37,7 @@
         "ihaveto": "./bin/ihaveto"
     },
     "engines": {
-        "node": ">= 0.10.0"
+        "node": ">= 0.8.0"
     },
     "readmeFilename": "https://github.com/BernhardBezdek/ihave.to/blob/master/README.md",
     "bugs": {

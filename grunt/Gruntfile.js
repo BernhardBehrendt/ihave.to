@@ -16,11 +16,11 @@ module.exports = function (grunt) {
                 }
             }
         },
-        macreload: {
-            firefox: {
-                browser: 'firefox'
-            }
-        },
+//        macreload: {
+//            firefox: {
+//                browser: 'firefox'
+//            }
+//        },
         compass: {
             dist: {
                 options: {
@@ -50,15 +50,15 @@ module.exports = function (grunt) {
         watch: {
             styles: {
                 files: '../sass/**/*.scss',
-                tasks: ['compass', 'notify:styles', 'macreload']
+                tasks: ['compass', 'notify:styles']//, 'macreload']
             },
             nodemonrestart: {
                 files: '../nodemonrestart.tmp',
-                tasks: ['notify:nodemon', 'macreload']
+                tasks: ['notify:nodemon']//, 'macreload']
             },
             client: {
                 files: '../client/**/*.js',
-                tasks: ['uglify', 'macreload']
+                tasks: ['uglify']//, 'macreload']
             }
         },
         jshint: {
@@ -126,7 +126,7 @@ module.exports = function (grunt) {
                         '../client/vendor/crypto/rollups/aes.js',
                         '../client/vendor/crypto/rollups/sha3.js',
 
-                        '../client/vendor/socket.io/socket.io.js',
+                    //    '../client/vendor/socket.io/socket.io.js',
 
                         '../client/vendor/dropzone/dropzone.js',
 
@@ -142,7 +142,7 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-notify');
-    grunt.loadNpmTasks('grunt-macreload');
+    //grunt.loadNpmTasks('grunt-macreload');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-shell-spawn');

@@ -8,6 +8,7 @@
 /*global Screens*/
 /*global Timeline*/
 /*global showMessage*/
+/*global alert*/
 var Connection;
 (function () {
     "use strict";
@@ -30,6 +31,7 @@ var Connection;
 
             showMessage('RECONNECTING'.translate(), 'error');
             $('.screen, #cmd').empty();
+
             CONF.COM.SOCKET.connect();
         });
 
@@ -85,10 +87,15 @@ var Connection;
      */
     Connection.prototype.connect = function (board) {
         var self = this;
-        this._board = board;
-        if (this._board !== undefined) {
-            // console.log('connect now');
-            this.socket.emit('connect', this._board);
+
+        if (this._board === null && board !== undefined) {
+            this._board = board;
+        }
+
+
+        if (this._board !== undefined && this._board !== null) {
+
+            this.socket.emit('init', this._board.substring(1, 30));
 
             this.socket.on('connected', function (data) {
                 $('#cmd').removeAttr('style');

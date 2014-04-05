@@ -89,7 +89,7 @@
                     }
                 }).toHtml());
 
-                CONF.COM.SOCKET = new Connection('/');
+                CONF.COM.SOCKET = new Connection();
                 CONF.COM.SOCKET.setEncryptionPhrase(sPassword);
                 CONF.COM.SOCKET.connect(sHash.toString());
 

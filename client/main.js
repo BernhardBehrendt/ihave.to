@@ -32,6 +32,7 @@
             var oLoginWindow = $('#login-window');
 
             aBoards = CONF.PROPS.OBJECT.STORAGE.getItem("boards").split('-').filter(String);
+
             if (sLastBoard.length > 0) {
 
                 oBoardName.val(sLastBoard);

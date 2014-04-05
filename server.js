@@ -10,6 +10,7 @@
     // Set configuration globally
     global.CONFIG = require(__dirname + '/server/settings/config');
 
+    var io;
     var app;
     var https;
     var server;
@@ -30,7 +31,7 @@
     //@TODO https://github.com/felixge/node-formidable integration for uploads
     var formidable = require('formidable');
     var express = require('express');
-    var bodyParser  = require('body-parser');
+    var bodyParser = require('body-parser');
     var socketio = require('socket.io');
 
     if (bSslEnabled && fs.existsSync(CONFIG.SSL_CERT) && fs.existsSync(CONFIG.SSL_KEY)) {
@@ -72,9 +73,8 @@
         console.log('created ssl server');
     }
 
-    var io = socketio.listen(server);
+    io = socketio.listen(server);
 
-    console.log(io);
 
     // Setup required folder if not exit
     if (!fs.existsSync(CONFIG.ROOT + '../boards/')) {
@@ -92,16 +92,14 @@
         console.log('A CLIENT SALT WAS CREATED AT "public/js/salt.js". Make sure to never loose this file');
     }
 
-    // Express settings
-    app.use(bodyParser());
-    app.use(express.static(CONFIG.ROOT + '../public/'));
 
     // Socket io settings
-    io.enable('browser client gzip');
-    io.set('log level', 1);
+    //io.enable('browser client gzip');
+    //  io.set('log level', 3);
     io.sockets.on('connection', function (socket) {
+
         // The initial connector for the board api
-        socket.on('connect', function (sBoardName) {
+        socket.on('init', function (sBoardName) {
             // Initialize Board (and create if not exist)
             var oBoard = new Board(sBoardName, socket);
 
@@ -111,6 +109,9 @@
             });
         });
     });
+// Express settings
+    app.use(bodyParser());
+    app.use(express.static(CONFIG.ROOT + '../public/'));
 
     // Give access to uploaded images and update the modification date to determine if the image can be deleted if it's
     // older than CONFIG.MAX_DAYS_UNUSED
@@ -160,13 +161,18 @@
 
         // Check the referer domain
         if ((iRefPos <= 11 && iRefPos > -1) || CONFIG.PASS_REFERER === '*') {
-            if (req.files !== undefined && req.files.file instanceof Object) {
-                oImageUpload = new ImageUpload(req.files.file, res);
 
-                oImageUpload.process();
-            } else {
-                res.send(200, 'OK');
-            }
+            var form = new formidable.IncomingForm();
+
+            form.parse(req, function (err, fields, files) {
+                if (err === null && files.file !== undefined) {
+                    oImageUpload = new ImageUpload(files.file, res);
+                    oImageUpload.process();
+                } else {
+                    res.send(200, 'NOT_ALLOWED');
+                }
+            });
+
         } else {
             next();
         }
@@ -184,12 +190,18 @@
 
         // Check the referer domain
         if ((iRefPos <= 11 && iRefPos > -1) || CONFIG.PASS_REFERER === '*') {
-            if (req.files !== undefined && req.files.file instanceof Object) {
-                oImageUpload = new ImageUpload(req.files.file, res);
-                oImageUpload.createPostImage();
-            } else {
-                res.send(200, 'OK');
-            }
+
+            var form = new formidable.IncomingForm();
+
+            form.parse(req, function (err, fields, files) {
+                if (err === null && files.file !== undefined) {
+                    oImageUpload = new ImageUpload(files.file, res);
+                    oImageUpload.createPostImage();
+                } else {
+                    res.send(200, 'NOT_ALLOWED');
+                }
+            });
+
         } else {
             next();
         }

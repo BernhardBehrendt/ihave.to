@@ -77,8 +77,8 @@ var ImageUpload = null;
         var sFileTarget;
 
         if (this.checkFileType()) {
-            sFileTarget = (CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + this.file.path.split('/').pop());
-            this.resize(this.file.path, sFileTarget, 800, 600);
+            sFileTarget = (CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + this.file.path.split('/').pop() + '.' + this.file.type.replace('image/', ''));
+            this.resize(sFileTarget, 800, 600);
         } else {
             this.sendResponse('UNKNOWN_FILE_TYPE');
         }
@@ -130,7 +130,7 @@ var ImageUpload = null;
             }
         }
 
-        return (aLokForFileType.indexOf(this.file.headers['content-type']) !== -1);
+        return (aLokForFileType.indexOf(this.file.type) !== -1);
     };
 
     /**
@@ -168,12 +168,11 @@ var ImageUpload = null;
      * Creates the thumb of a given image and store it in given destination
      *
      * @method createThumb
-     * @param {String} sTarget The origin size image path
      * @param {String} sDestination location where image should be stored
      * @param {Number} width of the heigth of thumbnail
      * @param {Number} height of the heigth of thumbnail
      */
-    ImageUpload.prototype.resize = function (sTarget, sDestination, width, height) {
+    ImageUpload.prototype.resize = function (sDestination, width, height) {
         var self = this;
 
         if (width === undefined) {
@@ -184,9 +183,9 @@ var ImageUpload = null;
             height = CONFIG.THUMB_HGT;
         }
 
-        this.gm(sTarget).resize(width, height).noProfile().write(sDestination, function (error) {
+        this.gm(this.file.path).resize(width, height).noProfile().write(sDestination, function (error) {
             if (!error) {
-                self.sendResponse(CONFIG.IMG_ROOT + '/' + sTarget.split('/').pop(), 200);
+                self.sendResponse(CONFIG.IMG_ROOT + '/' + self.file.path.split('/').pop() + '.' + self.file.type.replace('image/', ''), 200);
             } else {
                 console.log(error);
                 console.log('Image resize failed');
@@ -201,7 +200,7 @@ var ImageUpload = null;
      */
     ImageUpload.prototype.optimizeAndSave = function () {
         var self = this;
-        var sFileTarget = CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + this.file.path.split('/').pop();
+        var sFileTarget = CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + this.file.path.split('/').pop() + '.' + this.file.type.replace('image/', '');
 
         this.gm(this.file.path).quality(CONFIG.GM_QUALITY)
             .autoOrient()
