@@ -1,6 +1,9 @@
 #iHave.to/do#
 ##AES secured and real time enabled plain memoboard##
 
+[![Dependency Status](https://gemnasium.com/BernhardBezdek/ihave.to.svg)](https://gemnasium.com/BernhardBezdek/ihave.to)
+
+
 iHave.to was created to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown.
 It's also possible to be creative in a collaborative way via realtime multiuser support.
 Your memo data is strongly protected using AES on your device until any authenticated endpoint.
