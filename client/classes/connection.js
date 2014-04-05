@@ -95,7 +95,7 @@ var Connection;
 
         if (this._board !== undefined && this._board !== null) {
 
-            this.socket.emit('init', this._board.substring(1, 30));
+            this.socket.emit('init', this._board);
 
             this.socket.on('connected', function (data) {
                 $('#cmd').removeAttr('style');

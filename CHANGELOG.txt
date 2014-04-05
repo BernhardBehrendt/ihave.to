@@ -41,3 +41,5 @@ CHANGELOG:
 
 0.9.43 | Logging issue in production context removed
 
+0.9.44 | Restored key security back to full length
+
