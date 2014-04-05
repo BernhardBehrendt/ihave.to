@@ -84,13 +84,14 @@ module.exports = function (grunt) {
             target: {
                 tasks: ['nodemon', 'watch', 'jshint'],
                 options: {
-                    logConcurrentOutput: true
+                    logConcurrentOutput: true,
+                    limit: 3
                 }
             }
         },
         uglify: {
             options: {
-                beautify:true
+                beautify: true
 //                compress: {
 //                    global_defs: {
 //                        "DEBUG": true

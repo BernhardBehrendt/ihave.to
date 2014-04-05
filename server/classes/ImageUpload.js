@@ -78,7 +78,6 @@ var ImageUpload = null;
 
         if (this.checkFileType()) {
             sFileTarget = (CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + this.file.path.split('/').pop());
-
             this.resize(this.file.path, sFileTarget, 800, 600);
         } else {
             this.sendResponse('UNKNOWN_FILE_TYPE');

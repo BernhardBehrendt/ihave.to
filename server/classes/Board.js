@@ -145,10 +145,11 @@ var Board = null;
     Board.prototype.initialize = function (verifier) {
         // Create a temporary copy of that class
         var self = this;
-
+        console.log('HIER');
         // Check if the requested boardfile already exists
         this.fs.exists(this.sBoardFolder, function (exists) {
             // Exists not so we create a new one
+            console.log('DA');
             if (!exists) {
                 // Create boardfolder
                 self.fs.mkdir(self.sBoardFolder, '0777', function () {

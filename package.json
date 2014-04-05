@@ -9,8 +9,10 @@
     "license": "MIT",
     "preferGlobal": "true",
     "dependencies": {
+        "formidable":"*",
         "express": "*",
-        "gm": "*",
+        "body-parser": "*",
+	    "gm": "*",
         "mime": "*",
         "socket.io": "*"
     },

@@ -15,10 +15,10 @@ function Apprise(a, b) {
         input: !1,
         override: !0
     };
-    return $.extend(g, b), "close" == a ? ($cA.dissapear(), void 0) : $Apprise.is(":visible") ? (AppriseQueue.push({
+    return $.extend(g, b), "close" == a ? void $cA.dissapear() : $Apprise.is(":visible") ? void AppriseQueue.push({
         text: a,
         options: g
-    }), void 0) : (this.adjustWidth = function() {
+    }) : (this.adjustWidth = function() {
         var a = $window.width(), b = "20%", c = "40%";
         800 >= a ? (b = "90%", c = "5%") : 1400 >= a && a > 800 ? (b = "70%", c = "15%") : 1800 >= a && a > 1400 ? (b = "50%", 
         c = "25%") : 2200 >= a && a > 1800 && (b = "30%", c = "35%"), $Apprise.css("width", b).css("left", c);
@@ -54,7 +54,7 @@ function Apprise(a, b) {
         top: "20%"
     }, g.animation, function() {
         c.keyPress();
-    }), g.input && f.focus(), void 0);
+    }), void (g.input && f.focus()));
 }
 
 window.LANGUAGE = {
@@ -2809,9 +2809,9 @@ var Timeline;
         },
         toggleClass: function(a, b) {
             var c = typeof a;
-            return "boolean" == typeof b && "string" === c ? b ? this.addClass(a) : this.removeClass(a) : fb.isFunction(a) ? this.each(function(c) {
+            return "boolean" == typeof b && "string" === c ? b ? this.addClass(a) : this.removeClass(a) : this.each(fb.isFunction(a) ? function(c) {
                 fb(this).toggleClass(a.call(this, c, this.className, b), b);
-            }) : this.each(function() {
+            } : function() {
                 if ("string" === c) for (var b, d = 0, e = fb(this), f = a.match(hb) || []; b = f[d++]; ) e.hasClass(b) ? e.removeClass(b) : e.addClass(b); else (c === R || "boolean" === c) && (this.className && qb.set(this, "__className__", this.className), 
                 this.className = this.className || a === !1 ? "" : qb.get(this, "__className__") || "");
             });
@@ -2862,7 +2862,7 @@ var Timeline;
             if (a && 3 !== g && 8 !== g && 2 !== g) return typeof a.getAttribute === R ? fb.prop(a, c, d) : (1 === g && fb.isXMLDoc(a) || (c = c.toLowerCase(), 
             e = fb.attrHooks[c] || (fb.expr.match.bool.test(c) ? ub : tb)), d === b ? e && "get" in e && null !== (f = e.get(a, c)) ? f : (f = fb.find.attr(a, c), 
             null == f ? b : f) : null !== d ? e && "set" in e && (f = e.set(a, d, c)) !== b ? f : (a.setAttribute(c, d + ""), 
-            d) : (fb.removeAttr(a, c), void 0));
+            d) : void fb.removeAttr(a, c));
         },
         removeAttr: function(a, b) {
             var c, d, e = 0, f = b && b.match(hb);
@@ -3080,8 +3080,7 @@ var Timeline;
     }, fb.Event = function(a, b) {
         return this instanceof fb.Event ? (a && a.type ? (this.originalEvent = a, this.type = a.type, 
         this.isDefaultPrevented = a.defaultPrevented || a.getPreventDefault && a.getPreventDefault() ? g : h) : this.type = a, 
-        b && fb.extend(this, b), this.timeStamp = a && a.timeStamp || fb.now(), this[fb.expando] = !0, 
-        void 0) : new fb.Event(a, b);
+        b && fb.extend(this, b), this.timeStamp = a && a.timeStamp || fb.now(), void (this[fb.expando] = !0)) : new fb.Event(a, b);
     }, fb.Event.prototype = {
         isDefaultPrevented: h,
         isPropagationStopped: h,
@@ -3440,9 +3439,9 @@ var Timeline;
             }).append(this)), this);
         },
         wrapInner: function(a) {
-            return fb.isFunction(a) ? this.each(function(b) {
+            return this.each(fb.isFunction(a) ? function(b) {
                 fb(this).wrapInner(a.call(this, b));
-            }) : this.each(function() {
+            } : function() {
                 var b = fb(this), c = b.contents();
                 c.length ? c.wrapAll(a) : b.append(a);
             });
@@ -4076,8 +4075,7 @@ var Timeline;
         fb.fn[c] = function(f) {
             return fb.access(this, function(c, f, g) {
                 var h = O(c);
-                return g === b ? h ? h[d] : c[f] : (h ? h.scrollTo(e ? a.pageXOffset : g, e ? g : a.pageYOffset) : c[f] = g, 
-                void 0);
+                return g === b ? h ? h[d] : c[f] : void (h ? h.scrollTo(e ? a.pageXOffset : g, e ? g : a.pageYOffset) : c[f] = g);
             }, c, f, arguments.length, null);
         };
     }), fb.each({
@@ -4261,13 +4259,13 @@ var Timeline;
         b = b.split(".")[1], e = j + "-" + b, d || (d = c, c = a.Widget), a.expr[":"][e.toLowerCase()] = function(b) {
             return !!a.data(b, e);
         }, a[j] = a[j] || {}, f = a[j][b], g = a[j][b] = function(a, b) {
-            return this._createWidget ? (arguments.length && this._createWidget(a, b), void 0) : new g(a, b);
+            return this._createWidget ? void (arguments.length && this._createWidget(a, b)) : new g(a, b);
         }, a.extend(g, f, {
             version: d.version,
             _proto: a.extend({}, d),
             _childConstructors: []
         }), h = new c(), h.options = a.widget.extend({}, h.options), a.each(d, function(b, d) {
-            return a.isFunction(d) ? (i[b] = function() {
+            return a.isFunction(d) ? void (i[b] = function() {
                 var a = function() {
                     return c.prototype[b].apply(this, arguments);
                 }, e = function(a) {
@@ -4278,7 +4276,7 @@ var Timeline;
                     return this._super = a, this._superApply = e, b = d.apply(this, arguments), this._super = c, 
                     this._superApply = f, b;
                 };
-            }(), void 0) : (i[b] = d, void 0);
+            }()) : void (i[b] = d);
         }), g.prototype = a.widget.extend(h, {
             widgetEventPrefix: f ? h.widgetEventPrefix : b
         }, i, {
@@ -4298,11 +4296,11 @@ var Timeline;
         var f = e.prototype.widgetFullName || c;
         a.fn[c] = function(g) {
             var h = "string" == typeof g, i = d.call(arguments, 1), j = this;
-            return g = !h && i.length ? a.widget.extend.apply(null, [ g ].concat(i)) : g, h ? this.each(function() {
+            return g = !h && i.length ? a.widget.extend.apply(null, [ g ].concat(i)) : g, this.each(h ? function() {
                 var d, e = a.data(this, f);
                 return e ? a.isFunction(e[g]) && "_" !== g.charAt(0) ? (d = e[g].apply(e, i), d !== e && d !== b ? (j = d && d.jquery ? j.pushStack(d.get()) : d, 
                 !1) : void 0) : a.error("no such method '" + g + "' for " + c + " widget instance") : a.error("cannot call methods on " + c + " prior to initialization; attempted to call method '" + g + "'");
-            }) : this.each(function() {
+            } : function() {
                 var b = a.data(this, f);
                 b ? b.option(g || {})._init() : a.data(this, f, new e(g, this));
             }), j;
@@ -4659,12 +4657,10 @@ var Timeline;
         },
         _setContainment: function() {
             var b, c, d, e = this.options;
-            return e.containment ? "window" === e.containment ? (this.containment = [ a(window).scrollLeft() - this.offset.relative.left - this.offset.parent.left, a(window).scrollTop() - this.offset.relative.top - this.offset.parent.top, a(window).scrollLeft() + a(window).width() - this.helperProportions.width - this.margins.left, a(window).scrollTop() + (a(window).height() || document.body.parentNode.scrollHeight) - this.helperProportions.height - this.margins.top ], 
-            void 0) : "document" === e.containment ? (this.containment = [ 0, 0, a(document).width() - this.helperProportions.width - this.margins.left, (a(document).height() || document.body.parentNode.scrollHeight) - this.helperProportions.height - this.margins.top ], 
-            void 0) : e.containment.constructor === Array ? (this.containment = e.containment, 
-            void 0) : ("parent" === e.containment && (e.containment = this.helper[0].parentNode), 
-            c = a(e.containment), d = c[0], d && (b = "hidden" !== c.css("overflow"), this.containment = [ (parseInt(c.css("borderLeftWidth"), 10) || 0) + (parseInt(c.css("paddingLeft"), 10) || 0), (parseInt(c.css("borderTopWidth"), 10) || 0) + (parseInt(c.css("paddingTop"), 10) || 0), (b ? Math.max(d.scrollWidth, d.offsetWidth) : d.offsetWidth) - (parseInt(c.css("borderRightWidth"), 10) || 0) - (parseInt(c.css("paddingRight"), 10) || 0) - this.helperProportions.width - this.margins.left - this.margins.right, (b ? Math.max(d.scrollHeight, d.offsetHeight) : d.offsetHeight) - (parseInt(c.css("borderBottomWidth"), 10) || 0) - (parseInt(c.css("paddingBottom"), 10) || 0) - this.helperProportions.height - this.margins.top - this.margins.bottom ], 
-            this.relative_container = c), void 0) : (this.containment = null, void 0);
+            return e.containment ? "window" === e.containment ? void (this.containment = [ a(window).scrollLeft() - this.offset.relative.left - this.offset.parent.left, a(window).scrollTop() - this.offset.relative.top - this.offset.parent.top, a(window).scrollLeft() + a(window).width() - this.helperProportions.width - this.margins.left, a(window).scrollTop() + (a(window).height() || document.body.parentNode.scrollHeight) - this.helperProportions.height - this.margins.top ]) : "document" === e.containment ? void (this.containment = [ 0, 0, a(document).width() - this.helperProportions.width - this.margins.left, (a(document).height() || document.body.parentNode.scrollHeight) - this.helperProportions.height - this.margins.top ]) : e.containment.constructor === Array ? void (this.containment = e.containment) : ("parent" === e.containment && (e.containment = this.helper[0].parentNode), 
+            c = a(e.containment), d = c[0], void (d && (b = "hidden" !== c.css("overflow"), 
+            this.containment = [ (parseInt(c.css("borderLeftWidth"), 10) || 0) + (parseInt(c.css("paddingLeft"), 10) || 0), (parseInt(c.css("borderTopWidth"), 10) || 0) + (parseInt(c.css("paddingTop"), 10) || 0), (b ? Math.max(d.scrollWidth, d.offsetWidth) : d.offsetWidth) - (parseInt(c.css("borderRightWidth"), 10) || 0) - (parseInt(c.css("paddingRight"), 10) || 0) - this.helperProportions.width - this.margins.left - this.margins.right, (b ? Math.max(d.scrollHeight, d.offsetHeight) : d.offsetHeight) - (parseInt(c.css("borderBottomWidth"), 10) || 0) - (parseInt(c.css("paddingBottom"), 10) || 0) - this.helperProportions.height - this.margins.top - this.margins.bottom ], 
+            this.relative_container = c))) : void (this.containment = null);
         },
         _convertPositionTo: function(b, c) {
             c || (c = this.position);
@@ -5637,9 +5633,9 @@ var Timeline;
             return this.reverting ? !1 : this.options.disabled || "static" === this.options.type ? !1 : (this._refreshItems(b), 
             a(b.target).parents().each(function() {
                 return a.data(this, f.widgetName + "-item") === f ? (d = a(this), !1) : void 0;
-            }), a.data(b.target, f.widgetName + "-item") === f && (d = a(b.target)), d ? !this.options.handle || c || (a(this.options.handle, d).find("*").addBack().each(function() {
+            }), a.data(b.target, f.widgetName + "-item") === f && (d = a(b.target)), d && (!this.options.handle || c || (a(this.options.handle, d).find("*").addBack().each(function() {
                 this === b.target && (e = !0);
-            }), e) ? (this.currentItem = d, this._removeCurrentsFromItems(), !0) : !1 : !1);
+            }), e)) ? (this.currentItem = d, this._removeCurrentsFromItems(), !0) : !1);
         },
         _mouseStart: function(b, c, d) {
             var e, f, g = this.options;
@@ -6598,10 +6594,9 @@ var Timeline;
             }), "content" !== this.options.heightStyle && a.css("height", "");
         },
         _setOption: function(a, b) {
-            return "active" === a ? (this._activate(b), void 0) : ("event" === a && (this.options.event && this._off(this.headers, this.options.event), 
+            return "active" === a ? void this._activate(b) : ("event" === a && (this.options.event && this._off(this.headers, this.options.event), 
             this._setupEvents(b)), this._super(a, b), "collapsible" !== a || b || this.options.active !== !1 || this._activate(0), 
-            "icons" === a && (this._destroyIcons(), b && this._createIcons()), "disabled" === a && this.headers.add(this.headers.next()).toggleClass("ui-state-disabled", !!b), 
-            void 0);
+            "icons" === a && (this._destroyIcons(), b && this._createIcons()), void ("disabled" === a && this.headers.add(this.headers.next()).toggleClass("ui-state-disabled", !!b)));
         },
         _keydown: function(b) {
             if (!b.altKey && !b.ctrlKey) {
@@ -6742,7 +6737,7 @@ var Timeline;
                 step: function(a, b) {
                     b.now = Math.round(a);
                 }
-            }), a.hide().animate(d, {
+            }), void a.hide().animate(d, {
                 duration: h,
                 easing: g,
                 complete: n,
@@ -6750,7 +6745,7 @@ var Timeline;
                     c.now = Math.round(a), "height" !== c.prop ? j += c.now : "content" !== i.options.heightStyle && (c.now = Math.round(f - b.outerHeight() - j), 
                     j = 0);
                 }
-            }), void 0) : b.animate(c, h, g, n) : a.animate(d, h, g, n);
+            })) : b.animate(c, h, g, n) : a.animate(d, h, g, n);
         },
         _toggleComplete: function(a) {
             var b = a.oldPanel;
@@ -6789,7 +6784,7 @@ var Timeline;
             this.isNewMenu = !0, this.element.addClass("ui-autocomplete-input").attr("autocomplete", "off"), 
             this._on(this.element, {
                 keydown: function(e) {
-                    if (this.element.prop("readOnly")) return b = !0, d = !0, c = !0, void 0;
+                    if (this.element.prop("readOnly")) return b = !0, d = !0, void (c = !0);
                     b = !1, d = !1, c = !1;
                     var f = a.ui.keyCode;
                     switch (e.keyCode) {
@@ -6827,8 +6822,7 @@ var Timeline;
                     }
                 },
                 keypress: function(d) {
-                    if (b) return b = !1, (!this.isMultiLine || this.menu.element.is(":visible")) && d.preventDefault(), 
-                    void 0;
+                    if (b) return b = !1, void ((!this.isMultiLine || this.menu.element.is(":visible")) && d.preventDefault());
                     if (!c) {
                         var e = a.ui.keyCode;
                         switch (d.keyCode) {
@@ -6850,14 +6844,14 @@ var Timeline;
                     }
                 },
                 input: function(a) {
-                    return d ? (d = !1, a.preventDefault(), void 0) : (this._searchTimeout(a), void 0);
+                    return d ? (d = !1, void a.preventDefault()) : void this._searchTimeout(a);
                 },
                 focus: function() {
                     this.selectedItem = null, this.previous = this._value();
                 },
                 blur: function(a) {
-                    return this.cancelBlur ? (delete this.cancelBlur, void 0) : (clearTimeout(this.searching), 
-                    this.close(a), this._change(a), void 0);
+                    return this.cancelBlur ? void delete this.cancelBlur : (clearTimeout(this.searching), 
+                    this.close(a), void this._change(a));
                 }
             }), this._initSource(), this.menu = a("<ul>").addClass("ui-autocomplete ui-front").appendTo(this._appendTo()).menu({
                 role: null
@@ -6876,9 +6870,9 @@ var Timeline;
                 },
                 menufocus: function(b, c) {
                     if (this.isNewMenu && (this.isNewMenu = !1, b.originalEvent && /^mouse/.test(b.originalEvent.type))) return this.menu.blur(), 
-                    this.document.one("mousemove", function() {
+                    void this.document.one("mousemove", function() {
                         a(b.target).trigger(b.originalEvent);
-                    }), void 0;
+                    });
                     var d = c.item.data("ui-autocomplete-item");
                     !1 !== this._trigger("focus", b, {
                         item: d
@@ -7007,7 +7001,7 @@ var Timeline;
         },
         _move: function(a, b) {
             return this.menu.element.is(":visible") ? this.menu.isFirstItem() && /^previous/.test(a) || this.menu.isLastItem() && /^next/.test(a) ? (this._value(this.term), 
-            this.menu.blur(), void 0) : (this.menu[a](b), void 0) : (this.search(null, b), void 0);
+            void this.menu.blur()) : void this.menu[a](b) : void this.search(null, b);
         },
         widget: function() {
             return this.menu.element;
@@ -7099,14 +7093,13 @@ var Timeline;
                     return a(this).button("widget")[0];
                 }).removeClass("ui-state-active").attr("aria-pressed", "false");
             }) : (this.buttonElement.bind("mousedown" + this.eventNamespace, function() {
-                return h.disabled ? !1 : (a(this).addClass("ui-state-active"), b = this, g.document.one("mouseup", function() {
+                return h.disabled ? !1 : (a(this).addClass("ui-state-active"), b = this, void g.document.one("mouseup", function() {
                     b = null;
-                }), void 0);
+                }));
             }).bind("mouseup" + this.eventNamespace, function() {
-                return h.disabled ? !1 : (a(this).removeClass("ui-state-active"), void 0);
+                return h.disabled ? !1 : void a(this).removeClass("ui-state-active");
             }).bind("keydown" + this.eventNamespace, function(b) {
-                return h.disabled ? !1 : ((b.keyCode === a.ui.keyCode.SPACE || b.keyCode === a.ui.keyCode.ENTER) && a(this).addClass("ui-state-active"), 
-                void 0);
+                return h.disabled ? !1 : void ((b.keyCode === a.ui.keyCode.SPACE || b.keyCode === a.ui.keyCode.ENTER) && a(this).addClass("ui-state-active"));
             }).bind("keyup" + this.eventNamespace + " blur" + this.eventNamespace, function() {
                 a(this).removeClass("ui-state-active");
             }), this.buttonElement.is("a") && this.buttonElement.keyup(function(b) {
@@ -7131,8 +7124,7 @@ var Timeline;
             this.hasTitle || this.buttonElement.removeAttr("title");
         },
         _setOption: function(a, b) {
-            return this._super(a, b), "disabled" === a ? (b ? this.element.prop("disabled", !0) : this.element.prop("disabled", !1), 
-            void 0) : (this._resetButton(), void 0);
+            return this._super(a, b), "disabled" === a ? void (b ? this.element.prop("disabled", !0) : this.element.prop("disabled", !1)) : void this._resetButton();
         },
         refresh: function() {
             var b = this.element.is("input, button") ? this.element.is(":disabled") : this.element.hasClass("ui-button-disabled");
@@ -7141,8 +7133,7 @@ var Timeline;
             }) : "checkbox" === this.type && (this.element.is(":checked") ? this.buttonElement.addClass("ui-state-active").attr("aria-pressed", "true") : this.buttonElement.removeClass("ui-state-active").attr("aria-pressed", "false"));
         },
         _resetButton: function() {
-            if ("input" === this.type) return this.options.label && this.element.val(this.options.label), 
-            void 0;
+            if ("input" === this.type) return void (this.options.label && this.element.val(this.options.label));
             var b = this.buttonElement.removeClass(h), c = a("<span></span>", this.document[0]).addClass("ui-button-text").html(this.options.label).appendTo(b.empty()).text(), d = this.options.icons, e = d.primary && d.secondary, f = [];
             d.primary || d.secondary ? (this.options.text && f.push("ui-button-text-icon" + (e ? "s" : d.primary ? "-primary" : "-secondary")), 
             d.primary && b.prepend("<span class='ui-button-icon-primary ui-icon " + d.primary + "'></span>"), 
@@ -7395,13 +7386,13 @@ var Timeline;
         _optionDatepicker: function(c, d, f) {
             var g, h, i, j, k = this._getInst(c);
             return 2 === arguments.length && "string" == typeof d ? "defaults" === d ? a.extend({}, a.datepicker._defaults) : k ? "all" === d ? a.extend({}, k.settings) : this._get(k, d) : null : (g = d || {}, 
-            "string" == typeof d && (g = {}, g[d] = f), k && (this._curInst === k && this._hideDatepicker(), 
+            "string" == typeof d && (g = {}, g[d] = f), void (k && (this._curInst === k && this._hideDatepicker(), 
             h = this._getDateDatepicker(c, !0), i = this._getMinMaxDate(k, "min"), j = this._getMinMaxDate(k, "max"), 
             e(k.settings, g), null !== i && g.dateFormat !== b && g.minDate === b && (k.settings.minDate = this._formatDate(k, i)), 
             null !== j && g.dateFormat !== b && g.maxDate === b && (k.settings.maxDate = this._formatDate(k, j)), 
             "disabled" in g && (g.disabled ? this._disableDatepicker(c) : this._enableDatepicker(c)), 
             this._attachments(a(c), k), this._autoSize(k), this._setDate(k, h), this._updateAlternate(k), 
-            this._updateDatepicker(k)), void 0);
+            this._updateDatepicker(k))));
         },
         _changeDatepicker: function(a, b, c) {
             this._optionDatepicker(a, b, c);
@@ -7919,7 +7910,7 @@ var Timeline;
                     C = l ? "<th class='ui-datepicker-week-col'>" + this._get(a, "weekHeader") + "</th>" : "", 
                     v = 0; 7 > v; v++) D = (v + k) % 7, C += "<th" + ((v + k + 6) % 7 >= 5 ? " class='ui-datepicker-week-end'" : "") + "><span title='" + m[D] + "'>" + n[D] + "</span></th>";
                     for (B += C + "</tr></thead><tbody>", E = this._getDaysInMonth(ab, _), ab === a.selectedYear && _ === a.selectedMonth && (a.selectedDay = Math.min(a.selectedDay, E)), 
-                    F = (this._getFirstDayOfMonth(ab, _) - k + 7) % 7, G = Math.ceil((F + E) / 7), H = X ? this.maxRows > G ? this.maxRows : G : G, 
+                    F = (this._getFirstDayOfMonth(ab, _) - k + 7) % 7, G = Math.ceil((F + E) / 7), H = X && this.maxRows > G ? this.maxRows : G, 
                     this.maxRows = H, I = this._daylightSavingAdjust(new Date(ab, _, 1 - F)), J = 0; H > J; J++) {
                         for (B += "<tr>", K = l ? "<td class='ui-datepicker-week-col'>" + this._get(a, "calculateWeek")(I) + "</td>" : "", 
                         v = 0; 7 > v; v++) L = q ? q.apply(a.input ? a.input[0] : null, [ I ]) : [ !0, "" ], 
@@ -8126,11 +8117,11 @@ var Timeline;
         },
         open: function() {
             var b = this;
-            return this._isOpen ? (this._moveToTop() && this._focusTabbable(), void 0) : (this._isOpen = !0, 
+            return this._isOpen ? void (this._moveToTop() && this._focusTabbable()) : (this._isOpen = !0, 
             this.opener = a(this.document[0].activeElement), this._size(), this._position(), 
             this._createOverlay(), this._moveToTop(null, !0), this._show(this.uiDialog, this.options.show, function() {
                 b._focusTabbable(), b._trigger("focus");
-            }), this._trigger("open"), void 0);
+            }), void this._trigger("open"));
         },
         _focusTabbable: function() {
             var a = this.element.find("[autofocus]");
@@ -8152,7 +8143,7 @@ var Timeline;
             }).appendTo(this._appendTo()), this._on(this.uiDialog, {
                 keydown: function(b) {
                     if (this.options.closeOnEscape && !b.isDefaultPrevented() && b.keyCode && b.keyCode === a.ui.keyCode.ESCAPE) return b.preventDefault(), 
-                    this.close(b), void 0;
+                    void this.close(b);
                     if (b.keyCode === a.ui.keyCode.TAB) {
                         var c = this.uiDialog.find(":tabbable"), d = c.filter(":first"), e = c.filter(":last");
                         b.target !== e[0] && b.target !== this.uiDialog[0] || b.shiftKey ? b.target !== d[0] && b.target !== this.uiDialog[0] || !b.shiftKey || (e.focus(1), 
@@ -8198,8 +8189,7 @@ var Timeline;
         },
         _createButtons: function() {
             var b = this, c = this.options.buttons;
-            return this.uiDialogButtonPane.remove(), this.uiButtonSet.empty(), a.isEmptyObject(c) || a.isArray(c) && !c.length ? (this.uiDialog.removeClass("ui-dialog-buttons"), 
-            void 0) : (a.each(c, function(c, d) {
+            return this.uiDialogButtonPane.remove(), this.uiButtonSet.empty(), a.isEmptyObject(c) || a.isArray(c) && !c.length ? void this.uiDialog.removeClass("ui-dialog-buttons") : (a.each(c, function(c, d) {
                 var e, f;
                 d = a.isFunction(d) ? {
                     click: d,
@@ -8212,8 +8202,7 @@ var Timeline;
                     icons: d.icons,
                     text: d.showText
                 }, delete d.icons, delete d.showText, a("<button></button>", d).button(f).appendTo(b.uiButtonSet);
-            }), this.uiDialog.addClass("ui-dialog-buttons"), this.uiDialogButtonPane.appendTo(this.uiDialog), 
-            void 0);
+            }), this.uiDialog.addClass("ui-dialog-buttons"), void this.uiDialogButtonPane.appendTo(this.uiDialog));
         },
         _makeDraggable: function() {
             function b(a) {
@@ -8906,19 +8895,17 @@ var Timeline;
         },
         nextPage: function(b) {
             var c, d, e;
-            return this.active ? (this.isLastItem() || (this._hasScroll() ? (d = this.active.offset().top, 
+            return this.active ? void (this.isLastItem() || (this._hasScroll() ? (d = this.active.offset().top, 
             e = this.element.height(), this.active.nextAll(".ui-menu-item").each(function() {
                 return c = a(this), c.offset().top - d - e < 0;
-            }), this.focus(b, c)) : this.focus(b, this.activeMenu.children(".ui-menu-item")[this.active ? "last" : "first"]())), 
-            void 0) : (this.next(b), void 0);
+            }), this.focus(b, c)) : this.focus(b, this.activeMenu.children(".ui-menu-item")[this.active ? "last" : "first"]()))) : void this.next(b);
         },
         previousPage: function(b) {
             var c, d, e;
-            return this.active ? (this.isFirstItem() || (this._hasScroll() ? (d = this.active.offset().top, 
+            return this.active ? void (this.isFirstItem() || (this._hasScroll() ? (d = this.active.offset().top, 
             e = this.element.height(), this.active.prevAll(".ui-menu-item").each(function() {
                 return c = a(this), c.offset().top - d + e > 0;
-            }), this.focus(b, c)) : this.focus(b, this.activeMenu.children(".ui-menu-item").first())), 
-            void 0) : (this.next(b), void 0);
+            }), this.focus(b, c)) : this.focus(b, this.activeMenu.children(".ui-menu-item").first()))) : void this.next(b);
         },
         _hasScroll: function() {
             return this.element.outerHeight() < this.element.prop("scrollHeight");
@@ -9132,7 +9119,7 @@ var Timeline;
         },
         value: function(a) {
             return a === b ? this.options.value : (this.options.value = this._constrainedValue(a), 
-            this._refreshValue(), void 0);
+            void this._refreshValue());
         },
         _constrainedValue: function(a) {
             return a === b && (a = this.options.value), this.indeterminate = a === !1, "number" != typeof a && (a = 0), 
@@ -9304,12 +9291,12 @@ var Timeline;
         },
         value: function(a) {
             return arguments.length ? (this.options.value = this._trimAlignValue(a), this._refreshValue(), 
-            this._change(null, 0), void 0) : this._value();
+            void this._change(null, 0)) : this._value();
         },
         values: function(b, c) {
             var d, e, f;
             if (arguments.length > 1) return this.options.values[b] = this._trimAlignValue(c), 
-            this._refreshValue(), this._change(null, b), void 0;
+            this._refreshValue(), void this._change(null, b);
             if (!arguments.length) return this._values();
             if (!a.isArray(arguments[0])) return this.options.values && this.options.values.length ? this._values(b) : this.value();
             for (d = this.options.values, e = arguments[0], f = 0; f < d.length; f += 1) d[f] = this._trimAlignValue(e[f]), 
@@ -9516,8 +9503,8 @@ var Timeline;
                 this.previous = this.element.val();
             },
             blur: function(a) {
-                return this.cancelBlur ? (delete this.cancelBlur, void 0) : (this._stop(), this._refresh(), 
-                this.previous !== this.element.val() && this._trigger("change", a), void 0);
+                return this.cancelBlur ? void delete this.cancelBlur : (this._stop(), this._refresh(), 
+                void (this.previous !== this.element.val() && this._trigger("change", a)));
             },
             mousewheel: function(a, b) {
                 if (b) {
@@ -9543,8 +9530,7 @@ var Timeline;
             },
             "mouseup .ui-spinner-button": "_stop",
             "mouseenter .ui-spinner-button": function(b) {
-                return a(b.currentTarget).hasClass("ui-state-active") ? this._start(b) === !1 ? !1 : (this._repeat(null, a(b.currentTarget).hasClass("ui-spinner-up") ? 1 : -1, b), 
-                void 0) : void 0;
+                return a(b.currentTarget).hasClass("ui-state-active") ? this._start(b) === !1 ? !1 : void this._repeat(null, a(b.currentTarget).hasClass("ui-spinner-up") ? 1 : -1, b) : void 0;
             },
             "mouseleave .ui-spinner-button": "_stop"
         },
@@ -9618,7 +9604,7 @@ var Timeline;
         _setOption: function(a, b) {
             if ("culture" === a || "numberFormat" === a) {
                 var c = this._parse(this.element.val());
-                return this.options[a] = b, this.element.val(this._format(c)), void 0;
+                return this.options[a] = b, void this.element.val(this._format(c));
             }
             ("max" === a || "min" === a || "step" === a) && "string" == typeof b && (b = this._parse(b)), 
             "icons" === a && (this.buttons.first().find(".ui-icon").removeClass(this.options.icons.up).addClass(b.up), 
@@ -9671,7 +9657,7 @@ var Timeline;
             this._stepDown((a || 1) * this.options.page);
         }),
         value: function(a) {
-            return arguments.length ? (b(this._value).call(this, a), void 0) : this._parse(this.element.val());
+            return arguments.length ? void b(this._value).call(this, a) : this._parse(this.element.val());
         },
         widget: function() {
             return this.uiSpinner;
@@ -9748,11 +9734,10 @@ var Timeline;
                     break;
 
                   case a.ui.keyCode.SPACE:
-                    return b.preventDefault(), clearTimeout(this.activating), this._activate(d), void 0;
+                    return b.preventDefault(), clearTimeout(this.activating), void this._activate(d);
 
                   case a.ui.keyCode.ENTER:
-                    return b.preventDefault(), clearTimeout(this.activating), this._activate(d === this.options.active ? !1 : d), 
-                    void 0;
+                    return b.preventDefault(), clearTimeout(this.activating), void this._activate(d === this.options.active ? !1 : d);
 
                   default:
                     return;
@@ -9784,10 +9769,9 @@ var Timeline;
             return a = this._findNextTab(a, b), this.tabs.eq(a).focus(), a;
         },
         _setOption: function(a, b) {
-            return "active" === a ? (this._activate(b), void 0) : "disabled" === a ? (this._setupDisabled(b), 
-            void 0) : (this._super(a, b), "collapsible" === a && (this.element.toggleClass("ui-tabs-collapsible", b), 
-            b || this.options.active !== !1 || this._activate(0)), "event" === a && this._setupEvents(b), 
-            "heightStyle" === a && this._setupHeightStyle(b), void 0);
+            return "active" === a ? void this._activate(b) : "disabled" === a ? void this._setupDisabled(b) : (this._super(a, b), 
+            "collapsible" === a && (this.element.toggleClass("ui-tabs-collapsible", b), b || this.options.active !== !1 || this._activate(0)), 
+            "event" === a && this._setupEvents(b), void ("heightStyle" === a && this._setupHeightStyle(b)));
         },
         _tabId: function(a) {
             return a.attr("aria-controls") || "ui-tabs-" + c();
@@ -10036,10 +10020,10 @@ var Timeline;
         },
         _setOption: function(b, c) {
             var d = this;
-            return "disabled" === b ? (this[c ? "_disable" : "_enable"](), this.options[b] = c, 
-            void 0) : (this._super(b, c), "content" === b && a.each(this.tooltips, function(a, b) {
+            return "disabled" === b ? (this[c ? "_disable" : "_enable"](), void (this.options[b] = c)) : (this._super(b, c), 
+            void ("content" === b && a.each(this.tooltips, function(a, b) {
                 d._updateContent(b);
-            }), void 0);
+            })));
         },
         _disable: function() {
             var b = this;
@@ -10075,7 +10059,7 @@ var Timeline;
                 a.data("ui-tooltip-open") && e._delay(function() {
                     b && (b.type = f), this._open(b, a, c);
                 });
-            }), c && this._open(b, a, c), void 0);
+            }), void (c && this._open(b, a, c)));
         },
         _open: function(c, d, e) {
             function f(a) {
@@ -10083,7 +10067,7 @@ var Timeline;
             }
             var g, h, i, j = a.extend({}, this.options.position);
             if (e) {
-                if (g = this._find(d), g.length) return g.find(".ui-tooltip-content").html(e), void 0;
+                if (g = this._find(d), g.length) return void g.find(".ui-tooltip-content").html(e);
                 d.is("[title]") && (c && "mouseover" === c.type ? d.attr("title", "") : d.removeAttr("title")), 
                 g = this._tooltip(d), b(d, g.attr("id")), g.find(".ui-tooltip-content").html(e), 
                 this.options.track && c && /^mouse/.test(c.type) ? (this._on(this.document, {
@@ -10571,7 +10555,7 @@ var Timeline;
     return -1;
 }), function() {
     var a = this, b = a._, c = {}, d = Array.prototype, e = Object.prototype, f = Function.prototype, g = d.push, h = d.slice, i = d.concat, j = e.toString, k = e.hasOwnProperty, l = d.forEach, m = d.map, n = d.reduce, o = d.reduceRight, p = d.filter, q = d.every, r = d.some, s = d.indexOf, t = d.lastIndexOf, u = Array.isArray, v = Object.keys, w = f.bind, x = function(a) {
-        return a instanceof x ? a : this instanceof x ? (this._wrapped = a, void 0) : new x(a);
+        return a instanceof x ? a : this instanceof x ? void (this._wrapped = a) : new x(a);
     };
     "undefined" != typeof exports ? ("undefined" != typeof module && module.exports && (exports = module.exports = x), 
     exports._ = x) : a._ = x, x.VERSION = "1.5.2";
@@ -11806,8 +11790,7 @@ var io = "undefined" == typeof module ? {} : module.exports;
         };
         var f = !1;
         c.load = function(a) {
-            return "document" in b && "complete" === document.readyState || f ? a() : (c.on(b, "load", a, !1), 
-            void 0);
+            return "document" in b && "complete" === document.readyState || f ? a() : void c.on(b, "load", a, !1);
         }, c.on = function(a, b, c, d) {
             a.attachEvent ? a.attachEvent("on" + b, c) : a.addEventListener && a.addEventListener(b, c, d);
         }, c.request = function(a) {
@@ -11820,9 +11803,9 @@ var io = "undefined" == typeof module ? {} : module.exports;
         }, "undefined" != typeof window && c.load(function() {
             f = !0;
         }), c.defer = function(a) {
-            return c.ua.webkit && "undefined" == typeof importScripts ? (c.load(function() {
+            return c.ua.webkit && "undefined" == typeof importScripts ? void c.load(function() {
                 setTimeout(a, 100);
-            }), void 0) : a();
+            }) : a();
         }, c.merge = function(a, b, d, e) {
             var f, g = e || [], h = "undefined" == typeof d ? 2 : d;
             for (f in b) b.hasOwnProperty(f) && c.indexOf(g, f) < 0 && ("object" == typeof a[f] && h ? c.merge(a[f], b[f], h - 1, g) : (a[f] = b[f], 
@@ -12188,7 +12171,7 @@ var io = "undefined" == typeof module ? {} : module.exports;
             return c.connecting = !0, this.handshake(function(d, e, f, g) {
                 function h(a) {
                     return c.transport && c.transport.clearTimeouts(), c.transport = c.getTransport(a), 
-                    c.transport ? (c.transport.ready(c, function() {
+                    c.transport ? void c.transport.ready(c, function() {
                         c.connecting = !0, c.publish("connecting", c.transport.name), c.transport.open(), 
                         c.options["connect timeout"] && (c.connectTimeoutTimer = setTimeout(function() {
                             if (!c.connected && (c.connecting = !1, c.options["try multiple transports"])) {
@@ -12196,7 +12179,7 @@ var io = "undefined" == typeof module ? {} : module.exports;
                                 a.length ? h(a) : c.publish("connect_failed");
                             }
                         }, c.options["connect timeout"]));
-                    }), void 0) : c.publish("connect_failed");
+                    }) : c.publish("connect_failed");
                 }
                 c.sessionid = d, c.closeTimeout = 1e3 * f, c.heartbeatTimeout = 1e3 * e, c.transports || (c.transports = c.origTransports = g ? b.util.intersect(g.split(","), c.options.transports) : c.options.transports), 
                 c.setHeartbeatTimeout(), h(c.transports), c.once("connect", function() {
@@ -12256,11 +12239,11 @@ var io = "undefined" == typeof module ? {} : module.exports;
                 delete c.reconnectionTimer, delete c.redoTransports, c.options["try multiple transports"] = e;
             }
             function b() {
-                return c.reconnecting ? c.connected ? a() : c.connecting && c.reconnecting ? c.reconnectionTimer = setTimeout(b, 1e3) : (c.reconnectionAttempts++ >= d ? c.redoTransports ? (c.publish("reconnect_failed"), 
+                return c.reconnecting ? c.connected ? a() : c.connecting && c.reconnecting ? c.reconnectionTimer = setTimeout(b, 1e3) : void (c.reconnectionAttempts++ >= d ? c.redoTransports ? (c.publish("reconnect_failed"), 
                 a()) : (c.on("connect_failed", b), c.options["try multiple transports"] = !0, c.transports = c.origTransports, 
                 c.transport = c.getTransport(), c.redoTransports = !0, c.connect()) : (c.reconnectionDelay < f && (c.reconnectionDelay *= 2), 
                 c.connect(), c.publish("reconnecting", c.reconnectionDelay, c.reconnectionAttempts), 
-                c.reconnectionTimer = setTimeout(b, c.reconnectionDelay)), void 0) : void 0;
+                c.reconnectionTimer = setTimeout(b, c.reconnectionDelay))) : void 0;
             }
             this.reconnecting = !0, this.reconnectionAttempts = 0, this.reconnectionDelay = this.options["reconnection delay"];
             var c = this, d = this.options["max reconnection attempts"], e = this.options["try multiple transports"], f = this.options["reconnection limit"];
@@ -12562,9 +12545,9 @@ var io = "undefined" == typeof module ? {} : module.exports;
             return this.onData(a), this.isOpen && this.get(), this;
         }, d.prototype.ready = function(a, c) {
             var d = this;
-            return e ? (b.util.load(function() {
+            return e ? void b.util.load(function() {
                 c.call(d);
-            }), void 0) : c.call(this);
+            }) : c.call(this);
         }, d.check = function() {
             return "document" in c;
         }, d.xdomainCheck = function() {
@@ -12885,7 +12868,7 @@ var io = "undefined" == typeof module ? {} : module.exports;
                             return a = i.hiddenFileInput.files, a.length && (i.emit("selectedfiles", a), i.handleFiles(a)), 
                             d();
                         });
-                    }, d()), this.URL = null != (g = window.URL) ? g : window.webkitURL, h = this.events, 
+                    })(), this.URL = null != (g = window.URL) ? g : window.webkitURL, h = this.events, 
                     e = 0, f = h.length; f > e; e++) a = h[e], this.on(a, this.options[a]);
                     return this.on("uploadprogress", function() {
                         return i.updateTotalUploadProgress();
@@ -13036,7 +13019,7 @@ var io = "undefined" == typeof module ? {} : module.exports;
                             e.addFile(a));
                         }) : a.isDirectory && e.addDirectory(a, "" + b + "/" + a.name);
                     }, c.readEntries(d, function(a) {
-                        return "undefined" != typeof console && null !== console ? "function" == typeof console.log ? console.log(a) : void 0 : void 0;
+                        return "undefined" != typeof console && null !== console && "function" == typeof console.log ? console.log(a) : void 0;
                     });
                 }, b.prototype.removeFile = function(a) {
                     return a.status === b.UPLOADING && this.cancelUpload(a), this.files = h(this.files, a), 
@@ -13169,10 +13152,10 @@ var io = "undefined" == typeof module ? {} : module.exports;
                 for (document.querySelectorAll ? d = document.querySelectorAll(".dropzone") : (d = [], 
                 b = function(a) {
                     var b, c, e, f;
-                    for (f = [], c = 0, e = a.length; e > c; c++) b = a[c], /(^| )dropzone($| )/.test(b.className) ? f.push(d.push(b)) : f.push(void 0);
+                    for (f = [], c = 0, e = a.length; e > c; c++) b = a[c], f.push(/(^| )dropzone($| )/.test(b.className) ? d.push(b) : void 0);
                     return f;
                 }, b(document.getElementsByTagName("div")), b(document.getElementsByTagName("form"))), 
-                g = [], e = 0, f = d.length; f > e; e++) c = d[e], a.optionsForElement(c) !== !1 ? g.push(new a(c)) : g.push(void 0);
+                g = [], e = 0, f = d.length; f > e; e++) c = d[e], g.push(a.optionsForElement(c) !== !1 ? new a(c) : void 0);
                 return g;
             }, a.blacklistedBrowsers = [ /opera.*Macintosh.*version\/12/i ], a.isBrowserSupported = function() {
                 var b, c, d, e, f;
@@ -13243,7 +13226,7 @@ var io = "undefined" == typeof module ? {} : module.exports;
                     try {
                         j.doScroll("left");
                     } catch (b) {
-                        return a = b, setTimeout(g, 50), void 0;
+                        return a = b, void setTimeout(g, 50);
                     }
                     return f("poll");
                 }, "complete" !== d.readyState) {

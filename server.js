@@ -27,7 +27,10 @@
     var mime = require('mime');
     var path = require('path');
     var crypto = require('crypto');
+    //@TODO https://github.com/felixge/node-formidable integration for uploads
+    var formidable = require('formidable');
     var express = require('express');
+    var bodyParser  = require('body-parser');
     var socketio = require('socket.io');
 
     if (bSslEnabled && fs.existsSync(CONFIG.SSL_CERT) && fs.existsSync(CONFIG.SSL_KEY)) {
@@ -49,6 +52,7 @@
 
     if (https === undefined) {
         server = http.createServer(app);
+        // Test
     } else {
         server = https.createServer(oSslConfig, app);
         oHttpRouting = express();
@@ -67,7 +71,10 @@
         // Create redirection here for non ssl calls
         console.log('created ssl server');
     }
+
     var io = socketio.listen(server);
+
+    console.log(io);
 
     // Setup required folder if not exit
     if (!fs.existsSync(CONFIG.ROOT + '../boards/')) {
@@ -86,11 +93,10 @@
     }
 
     // Express settings
-    app.use(express.bodyParser());
+    app.use(bodyParser());
     app.use(express.static(CONFIG.ROOT + '../public/'));
 
     // Socket io settings
-    io.enable('browser client etag');
     io.enable('browser client gzip');
     io.set('log level', 1);
     io.sockets.on('connection', function (socket) {
