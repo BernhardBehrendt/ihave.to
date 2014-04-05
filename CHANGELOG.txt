@@ -33,3 +33,6 @@ CHANGELOG:
 
 0.9.21 | Support for outdating boards (60 Day unused ressources gets deleted [Boards & Images])
 
+0.9.40 | Migration to express 4 and socket.io 1.0
+
+0.9.41 | Fixed issue #1
