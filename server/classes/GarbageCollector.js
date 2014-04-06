@@ -57,7 +57,7 @@ var GarbageCollector = null;
 
                         sCurrentRef = sBoardDir + folders[i];
 
-                        self.checkStats(sCurrentRef);
+                        self.checkStats(sCurrentRef, 0);
                     }
                 }
             }
@@ -81,7 +81,7 @@ var GarbageCollector = null;
 
                         sCurrentRef = sUploadDir + files[i];
 
-                        self.checkStats(sCurrentRef);
+                        self.checkStats(sCurrentRef, 10);
                     }
                 }
             }
@@ -92,18 +92,24 @@ var GarbageCollector = null;
      * Fetch stats of given resource and handle decision to remove that folder
      * @method checkStats
      * @param {String} sReference Path to reference
+     * @param {Number} iDaysOffset Offset for deletion (CONFIG.MAX_DAYS_UNUSED+iDaysOffset)
      */
-    GarbageCollector.prototype.checkStats = function (sReference) {
+    GarbageCollector.prototype.checkStats = function (sReference, iDaysOffset) {
+
         var iAgeInDays;
         var self = this;
         var iDay = 86400000;    // Milliseconds in a day
+
+        if (iDaysOffset === undefined || isNaN(iDaysOffset)) {
+            iDaysOffset = 0;
+        }
 
         this.fs.stat(sReference, function (error, stats) {
             if (!error) {
 
                 iAgeInDays = Math.floor((new Date().getTime() - new Date(stats.mtime).getTime()) / iDay);
 
-                if (iAgeInDays >= CONFIG.MAX_DAYS_UNUSED) {
+                if (iAgeInDays >= CONFIG.MAX_DAYS_UNUSED + iDaysOffset) {
                     if (stats.isDirectory()) {
                         self.removeFolder(sReference);
                     } else if (stats.isFile()) {
@@ -128,7 +134,7 @@ var GarbageCollector = null;
     };
 
     /**
-     * Remove a file from disk
+     * Remove a folder from disk
      * @method removeFolder
      * @param {String} sFolder The path to folder to remove
      */

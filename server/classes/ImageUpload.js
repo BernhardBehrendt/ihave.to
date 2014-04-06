@@ -78,7 +78,7 @@ var ImageUpload = null;
             sFileTarget = (CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + this.file.path.split('/').pop() + '.' + this.file.type.replace('image/', ''));
             this.resize(sFileTarget, 800, 600);
         } else {
-            this.sendResponse('UNKNOWN_FILE_TYPE');
+            this.sendResponse('UNKNOWN_FILE_TYPE', 200);
         }
     };
 
@@ -93,7 +93,7 @@ var ImageUpload = null;
             if (stats.size <= (CONFIG.MAX_UPLOAD_SIZE * Math.pow(1024, 2))) {
                 self.optimizeAndSave();
             } else {
-                self.sendResponse('FILE_TO_LARGE');
+                self.sendResponse('FILE_TO_LARGE', 200);
             }
         });
 
@@ -143,11 +143,11 @@ var ImageUpload = null;
     ImageUpload.prototype.createThumb = function (sTarget, sDestination, width, height) {
         var self = this;
 
-        if (width === undefined) {
+        if (width === undefined || !width) {
             width = CONFIG.THUMB_WID;
         }
 
-        if (height === undefined) {
+        if (height === undefined || !height) {
             height = CONFIG.THUMB_HGT;
         }
 
@@ -204,7 +204,7 @@ var ImageUpload = null;
             .autoOrient()
             .write(sFileTarget, function (error) {
                 if (!error) {
-                    self.createThumb(sFileTarget, sFileTarget.replace(/(.[A-Za-z]*)$/, '.thumb$1'));
+                    self.createThumb(sFileTarget, sFileTarget.replace(/(.[A-Za-z]*)$/, '.thumb$1'), false, false);
                 } else {
                     logging.error(error);
                     logging.error('Cant create Thumbnail. Maybe imagemagick or graphicsmagick missing');

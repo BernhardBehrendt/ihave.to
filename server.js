@@ -31,7 +31,8 @@
     var express = require('express');
     var bodyParser = require('body-parser');
     var socketio = require('socket.io');
-    var logging = new require('clrlog')('Initialized logging', 'success', 'main.log');
+    var Clrlog = require('clrlog');
+    var logging = new Clrlog('Initialized logging', 'success', 'main.log');
 
     global.logging = logging;
 

@@ -8,7 +8,6 @@
 /*global Screens*/
 /*global Timeline*/
 /*global showMessage*/
-/*global alert*/
 var Connection;
 (function () {
     "use strict";
