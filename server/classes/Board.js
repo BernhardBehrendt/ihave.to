@@ -1,10 +1,11 @@
 /*global module*/
-/*global console*/
 /*global require*/
 /*global __dirname*/
+/*global logging*/
 var Board = null;
 (function () {
     "use strict";
+
 
     /**
      * The iHave.to
@@ -21,7 +22,6 @@ var Board = null;
         //this._verifier = false;
 
         this.oSocket = oSocket;
-
         this.sBoardFolder = __dirname + '/../../boards/' + sBoard + '/';
         this.sVerifierFile = this.sBoardFolder + 'VERIFIER';
         this.sBoardFile = this.sBoardFolder + 'BOARD';
@@ -184,7 +184,7 @@ var Board = null;
                                 }
                             }
                         }), 'UTF-8', function () {
-                            console.log('New Board created');
+                            logging.success('New Board created');
 
                             // Start running board in regulary mode
                             self.setVerifier();
@@ -209,7 +209,7 @@ var Board = null;
 
         this.fs.utimes(this.sBoardFolder, iAccessTime, iAccessTime, function (error) {
             if (error) {
-                console.log(error);
+                logging.error(error);
             }
         });
     };

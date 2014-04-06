@@ -1,5 +1,4 @@
 /*global require*/
-/*global console*/
 /*global __dirname*/
 /*global CONFIG*/
 /*global global*/
@@ -28,11 +27,13 @@
     var mime = require('mime');
     var path = require('path');
     var crypto = require('crypto');
-    //@TODO https://github.com/felixge/node-formidable integration for uploads
     var formidable = require('formidable');
     var express = require('express');
     var bodyParser = require('body-parser');
     var socketio = require('socket.io');
+    var logging = new require('clrlog')('Initialized logging', 'success', 'main.log');
+
+    global.logging = logging;
 
     if (bSslEnabled && fs.existsSync(CONFIG.SSL_CERT) && fs.existsSync(CONFIG.SSL_KEY)) {
 
@@ -50,6 +51,8 @@
     var GarbageCollector = require(CONFIG.ROOT + 'classes/GarbageCollector');
 
     app = express();
+
+    logging.logLevel = 'warning,error';
 
     if (https === undefined) {
         server = http.createServer(app);
@@ -70,7 +73,7 @@
         oHttpServer.listen(CONFIG.PORT);
 
         // Create redirection here for non ssl calls
-        console.log('created ssl server');
+        logging.success('created ssl server');
     }
 
     io = socketio.listen(server);
@@ -89,7 +92,7 @@
     // Note to never loose this key because it's for setup the requestet boardname
     if (!fs.existsSync(CONFIG.ROOT + '../public/js/salt.js')) {
         fs.writeFileSync(CONFIG.ROOT + '../public/js/salt.js', 'CONF.PROPS.STRING.SALT = "' + crypto.randomBytes(2048).toString('base64') + '";');
-        console.log('A CLIENT SALT WAS CREATED AT "public/js/salt.js". Make sure to never loose this file');
+        logging.warning('A CLIENT SALT WAS CREATED AT "public/js/salt.js". Make sure to never loose this file');
     }
 
 
@@ -148,6 +151,7 @@
             next();
         }
     });
+
 
     // Upload Wallpaper images
     app.post('/upload-wp', function (req, res, next) {
@@ -221,13 +225,13 @@
                 if (exists) {
                     fs.unlink(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + sRemoveFile, function (err) {
                         if (err) {
-                            console.log(err);
+                            logging.error(err);
                         }
                     });
 
                     fs.unlink(CONFIG.ROOT + '../' + CONFIG.IMG_ROOT + '/' + sRemoveFile.replace(/(.[A-Za-z]*)$/, '.thumb$1'), function (err) {
                         if (err) {
-                            console.log(err);
+                            logging.error(err);
                         }
                     });
                 }
@@ -256,6 +260,7 @@
         res.sendfile(path.resolve(__dirname + '/public/do.html'));
     });
 
+
     // Handle 404 Errors
     app.get('*', function (req, res) {
         res.send(404, '400 NOT FOUND');
@@ -264,10 +269,10 @@
     // Set listening port
     if (https === undefined) {
         server.listen(CONFIG.PORT);
-        console.log('iHave.to was started on port ' + CONFIG.PORT);
+        logging.success('iHave.to was started on port ' + CONFIG.PORT);
     } else {
         server.listen(CONFIG.SSL_PORT);
-        console.log('iHave.to was started on port ' + CONFIG.SSL_PORT);
+        logging.success('iHave.to was started on port ' + CONFIG.SSL_PORT);
     }
 
     //Start the garbageCollector for static files

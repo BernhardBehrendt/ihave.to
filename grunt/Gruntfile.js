@@ -30,12 +30,14 @@ module.exports = function (grunt) {
         },
         nodemon: {
             dev: {
+                script: 'server.js',
                 options: {
-                    file: 'server.js',
+                    //file: 'server.js',
                     nodeArgs: [],
-                    ignoredFiles: ['grunt/**', 'public/**', 'server/node_modules/**'],
-                    watchedExtensions: ['js', 'json'],
-                    cwd: '../'
+                    ignore: ['grunt/**', 'public/**', 'server/node_modules/**', 'client/**'],
+                    ext: 'js,json',
+                    cwd: __dirname + '/../',
+                    delay: 1
                 }
             }
         },
@@ -52,10 +54,10 @@ module.exports = function (grunt) {
                 files: '../sass/**/*.scss',
                 tasks: ['compass', 'notify:styles']//, 'macreload']
             },
-            nodemonrestart: {
-                files: '../nodemonrestart.tmp',
-                tasks: ['notify:nodemon']//, 'macreload']
-            },
+//            nodemonrestart: {
+//                files: ['../server.js', '../server/classes/*', '../server/config/*'],
+//                tasks: ['notify:nodemon']//, 'macreload']
+//            },
             client: {
                 files: '../client/**/*.js',
                 tasks: ['uglify']//, 'macreload']
@@ -126,7 +128,7 @@ module.exports = function (grunt) {
                         '../client/vendor/crypto/rollups/aes.js',
                         '../client/vendor/crypto/rollups/sha3.js',
 
-                    //    '../client/vendor/socket.io/socket.io.js',
+                        //    '../client/vendor/socket.io/socket.io.js',
 
                         '../client/vendor/dropzone/dropzone.js',
 
@@ -151,7 +153,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    // grunt.task.run('notify_hooks');
+    grunt.task.run('notify_hooks');
 
     grunt.registerTask('default', ['concurrent:target']);
 };

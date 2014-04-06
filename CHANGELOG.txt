@@ -47,3 +47,4 @@ CHANGELOG:
 
 0.9.46 | Added travis.ci and gemnasium
 
+0.9.50 | Added peristant logging support

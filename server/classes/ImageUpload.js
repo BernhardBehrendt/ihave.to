@@ -1,7 +1,5 @@
 /*global CONFIG*/
-/*global console*/
-/*global module*/
-/*global require*/
+/*global logging*/
 
 var ImageUpload = null;
 
@@ -157,8 +155,8 @@ var ImageUpload = null;
             if (!error) {
                 self.sendResponse(CONFIG.IMG_ROOT + '/' + sTarget.split('/').pop(), 200);
             } else {
-                console.log(error);
-                console.log('Cant create Thumbnail. Maybe imagemagick or graphicsmagick missing');
+                logging.error(error);
+                logging.error('Cant create Thumbnail. Maybe imagemagick or graphicsmagick missing');
                 self.sendResponse('503 Service Unavailable', 503);
             }
         });
@@ -187,8 +185,8 @@ var ImageUpload = null;
             if (!error) {
                 self.sendResponse(CONFIG.IMG_ROOT + '/' + self.file.path.split('/').pop() + '.' + self.file.type.replace('image/', ''), 200);
             } else {
-                console.log(error);
-                console.log('Image resize failed');
+                logging.error(error);
+                logging.error('Image resize failed');
                 self.sendResponse('503 Service Unavailable', 503);
             }
         });
@@ -208,8 +206,8 @@ var ImageUpload = null;
                 if (!error) {
                     self.createThumb(sFileTarget, sFileTarget.replace(/(.[A-Za-z]*)$/, '.thumb$1'));
                 } else {
-                    console.log(error);
-                    console.log('Cant create Thumbnail. Maybe imagemagick or graphicsmagick missing');
+                    logging.error(error);
+                    logging.error('Cant create Thumbnail. Maybe imagemagick or graphicsmagick missing');
                     self.sendResponse('503 Service Unavailable', 503);
                 }
             });

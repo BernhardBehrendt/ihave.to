@@ -5,3 +5,5 @@ boards
 .idea/
 ./.sass-cache
 public/js/salt.js
+*.log
+debug

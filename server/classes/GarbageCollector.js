@@ -1,7 +1,5 @@
 /*global CONFIG*/
-/*global console*/
-/*global require*/
-/*global module*/
+/*global logging*/
 var GarbageCollector = null;
 (function () {
     "use strict";
@@ -32,14 +30,14 @@ var GarbageCollector = null;
             self.observeBoards();
             self.observeUploads();
 
-            console.log('Observer finished @ ' + new Date());
+            logging.warning('Outdating board observer finished @ ' + new Date());
 
         }, CONFIG.RUN_CLEANUP);
 
         this.observeBoards();
         this.observeUploads();
 
-        console.log('Observer started @ ' + new Date());
+        logging.warning('Outdating board observer started @ ' + new Date());
     };
 
     /**
@@ -124,7 +122,7 @@ var GarbageCollector = null;
     GarbageCollector.prototype.removeFile = function (sFile) {
         this.fs.unlink(sFile, function (err) {
             if (err) {
-                console.log(err);
+                logging.error(err);
             }
         });
     };
@@ -137,7 +135,7 @@ var GarbageCollector = null;
     GarbageCollector.prototype.removeFolder = function (sFolder) {
         this.cp.exec('rm -rf ' + sFolder, function (error) {
             if (error) {
-                console.log(error);
+                logging.error(error);
             }
         });
     };
