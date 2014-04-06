@@ -50,3 +50,5 @@ CHANGELOG:
 0.9.50 | Added peristant logging support
 
 0.9.51 | Removed issues and code inspection messages
+
+0.9.52 | Added timeline action icons
