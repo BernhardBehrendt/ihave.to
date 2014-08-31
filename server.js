@@ -258,7 +258,7 @@
 
     // The dafault path for the memeo board
     app.get('/do', function (req, res) {
-        res.sendfile(path.resolve(__dirname + '/public/do.html'));
+        res.sendFile(path.resolve(__dirname + '/public/do.html'));
     });
 
 

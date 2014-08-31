@@ -69,7 +69,8 @@
 
                 if (CONF.PROPS.OBJECT.STORAGE !== null) {
                     var sAllBoards = CONF.PROPS.OBJECT.STORAGE.getItem("boards");
-                    if (sAllBoards.search(sBoardName + '-') === -1) {
+
+                    if (sAllBoards === null || sAllBoards.search(sBoardName + '-') === -1) {
                         CONF.PROPS.OBJECT.STORAGE.setItem("boards", (sAllBoards + sBoardName + '-'));
                     }
 

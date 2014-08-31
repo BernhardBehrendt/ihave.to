@@ -108,6 +108,8 @@ module.exports = function (grunt) {
                         '../client/static/config.js',
                         '../client/static/templates.js',
 
+                        '../client/functions/*.js',
+
                         '../client/classes/extends/string.js',
                         '../client/classes/*.js',
 
@@ -131,8 +133,6 @@ module.exports = function (grunt) {
                         //    '../client/vendor/socket.io/socket.io.js',
 
                         '../client/vendor/dropzone/dropzone.js',
-
-                        '../client/functions/*.js',
 
                         '../client/init/*.js',
                         '../client/interactions/*.js',

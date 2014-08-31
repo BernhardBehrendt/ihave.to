@@ -342,6 +342,28 @@ var CONF;
             }
         }
     };
+}();
+
+var isMobile;
+
+!function() {
+    "use strict";
+    isMobile = function(a) {
+        var b;
+        void 0 === a && (a = "");
+        var c = [ "iphone", "ipad", "android", "blackberry", "nokia", "opera mini", "windows mobile" ];
+        for (b = 0; b < c.length; b += 1) if (c[b] !== a && window.navigator.userAgent.toLowerCase().indexOf(c[b]) > 0) return !0;
+        return !1;
+    };
+}();
+
+var log;
+
+!function() {
+    "use strict";
+    log = function(a) {
+        void 0 !== console && CONF.PROPS.BOOLEAN.LOG === !0 && console.log(a);
+    };
 }(), function() {
     "use strict";
     function a(b) {
@@ -12437,28 +12459,6 @@ var CryptoJS = CryptoJS || function(a, b) {
     "object" == typeof exports ? module.exports = a("dropzone") : "function" == typeof define && define.amd ? define(function() {
         return a("dropzone");
     }) : this.Dropzone = a("dropzone");
-}();
-
-var isMobile;
-
-!function() {
-    "use strict";
-    isMobile = function(a) {
-        var b;
-        void 0 === a && (a = "");
-        var c = [ "iphone", "ipad", "android", "blackberry", "nokia", "opera mini", "windows mobile" ];
-        for (b = 0; b < c.length; b += 1) if (c[b] !== a && window.navigator.userAgent.toLowerCase().indexOf(c[b]) > 0) return !0;
-        return !1;
-    };
-}();
-
-var log;
-
-!function() {
-    "use strict";
-    log = function(a) {
-        void 0 !== console && CONF.PROPS.BOOLEAN.LOG === !0 && console.log(a);
-    };
 }(), function() {
     "use strict";
     CONF.DOM.BOARD = $("#board"), CONF.DOM.BOARD.bind("setupBoard", function(a, b) {
@@ -13021,7 +13021,7 @@ var showMessage;
             var f = CryptoJS.SHA3(d + CONF.PROPS.STRING.SALT + e);
             if (null !== CONF.PROPS.OBJECT.STORAGE) {
                 var g = CONF.PROPS.OBJECT.STORAGE.getItem("boards");
-                -1 === g.search(d + "-") && CONF.PROPS.OBJECT.STORAGE.setItem("boards", g + d + "-"), 
+                (null === g || -1 === g.search(d + "-")) && CONF.PROPS.OBJECT.STORAGE.setItem("boards", g + d + "-"), 
                 CONF.PROPS.OBJECT.STORAGE.setItem("lastboard", d);
             }
             $("#login-loader, #login-message").remove(), c.children("h1, p, #login-form").hide(), 
