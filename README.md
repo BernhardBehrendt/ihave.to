@@ -76,6 +76,8 @@ If you want to change things or want to create new features a grunt task is ship
 
 Enter grunt folder from terminal and install grunt and dependencies:
 
+``npm install grunt-cli g``
+
 ``npm install grunt``
 
 ``npm install -l``
