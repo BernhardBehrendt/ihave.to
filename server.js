@@ -117,7 +117,9 @@
         });
     });
 // Express settings
-    app.use(bodyParser());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+
     app.use(express.static(CONFIG.ROOT + '../public/'));
 
     // Give access to uploaded images and update the modification date to determine if the image can be deleted if it's
@@ -272,7 +274,7 @@
 
     // Handle 404 Errors
     app.get('*', function (req, res) {
-        res.send(404, '400 NOT FOUND');
+        res.send(404).send('400 NOT FOUND');
     });
 
     // Set listening port
