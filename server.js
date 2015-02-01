@@ -19,6 +19,7 @@
     var sTargetHost;
     var oSslConfig;
     var oGarbageCollector;
+    var aExceptions = [];
 
     var bSslEnabled = (CONFIG.SSL_CERT !== null && CONFIG.SSL_KEY !== null);
 
@@ -66,6 +67,8 @@
         oHttpRouting.all('*', function (req, res) {
             sCurrentHost = req.headers.host.toString().replace(':' + CONFIG.PORT, '');
             sTargetHost = 'https://' + sCurrentHost + req.url;
+
+            aExceptions.push(req.url);
 
             res.redirect(sTargetHost);
         });
@@ -131,8 +134,13 @@
             iRefPos = req.headers.referer.indexOf(CONFIG.PASS_REFERER);
         }
 
-        // Check the referer domain
-        if ((iRefPos <= 11 && iRefPos > -1) || CONFIG.PASS_REFERER === '*') {
+        var iIndex = aExceptions.indexOf(req.originalUrl);
+
+        if (iIndex !== -1) {
+            aExceptions.splice(iIndex, 1);
+        }
+
+        if (iIndex !== -1 || (iRefPos <= 11 && iRefPos > -1) || CONFIG.PASS_REFERER === '*') {
             fs.exists(sFileTarget, function (exists) {
                 if (exists) {
                     fs.utimes(sFileTarget, iAccessTime, iAccessTime, function (error) {

@@ -54,3 +54,5 @@ CHANGELOG:
 0.9.52 | Added timeline action icons
 
 0.9.53 | Solved runtime issues
+
+0.9.53 | Solved a redirect issue with uploaded images wich occur when protocol was switched after post was created
