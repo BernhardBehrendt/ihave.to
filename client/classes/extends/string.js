@@ -133,31 +133,29 @@
     String.prototype.urlToLink = function urlToLink() {
 
         var text = this;
-
         text = text.replace(/Www/g, 'www').replace(/WWw/g, 'www').replace(/WWW/, 'www');
         if (text.match(/https:\/\//) !== null || text.match(/http:\/\//) !== null || text.match(/www\./) !== null) {
-            //text = text.replace(/https:\/\//g, 'http://');
-            if (text.match(/www\./) !== null) {
+
+            if (text.match(/www\./) !== null && (text.match(/http:\/\//) === null && text.match(/https:\/\//) === null)) {
                 text = text.replace(/www./g, 'http://www.');
             }
-            text = text.replace(/http:\/\/http:\/\/http:\/\/http:\/\/http:\/\//g, 'http://');
-            text = text.replace(/http:\/\/http:\/\/http:\/\/http:\/\//g, 'http://');
-            text = text.replace(/http:\/\/http:\/\/http:\/\//g, 'http://');
-            text = text.replace(/http:\/\/http:\/\//g, 'http://');
+
+            text = text.replace(/(http:\/\/){2,}/g, 'http://');
+            text = text.replace(/(https:\/\/){2,}/g, 'https://');
         }
-        var exp = /\b((http:\/\/|https:\/\/)[\S]*)/g;
+        var exp = /\b((http:\/\/|https:\/\/)[\w\\/\-?=]+)/g;
 
         text = text.replace(exp, function ($1) {
             var oUri = parseUri($1);
             var sReturn = '$1';
-            if ($1.match('http://youtube.com') !== null || $1.match('http://youtu.be') !== null || $1.match('http://www.youtube.com') !== null || $1.match('http://www.youtu.be') !== null) {
+            if ($1.match('https://www.youtube.com') !== null || $1.match('https://youtube.com') !== null || $1.match('http://youtube.com') !== null || $1.match('http://youtu.be') !== null || $1.match('http://www.youtube.com') !== null || $1.match('http://www.youtu.be') !== null) {
                 sReturn = ($1.match('&')) ? $1.substr(0, $1.search(/&/)) + ' ' + $1.substr($1.search(/&/), $1.length) : $1;
                 sReturn = sReturn.replace(/&[\S]*/, '');
                 sReturn = sReturn.replace('youtube.com/watch?v=', 'youtube.com/embed/');
                 sReturn = sReturn.replace('youtu.be', 'youtube.com/embed/');
 
-                if ($1.indexOf('http://youtube.com') === 0 || $1.indexOf('http://www.youtube.com') === 0 || $1.indexOf('http://youtu.be') === 0 || $1.indexOf('http://www.youtu.be') === 0) {
-                    sReturn = sReturn.replace(exp, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>');
+                if ($1.indexOf('https://www.youtube.com') === 0 || $1.indexOf('https://youtube.com') === 0 || $1.indexOf('http://youtube.com') === 0 || $1.indexOf('http://www.youtube.com') === 0 || $1.indexOf('http://youtu.be') === 0 || $1.indexOf('http://www.youtu.be') === 0) {
+                    sReturn = sReturn.replace(exp, '<iframe width="100%" height="114" src="$1" frameborder="0" allowfullscreen></iframe><br/>').replace(/^http:\/\//, 'https://');
                 }
             } else {
                 if ($1.isImageURL()) {
@@ -175,7 +173,8 @@
     };
 
     function parseUri(str) {
-        var o = parseUri.options, m = o.parser[o.strictMode ? "strict" : "loose"].exec(str.toString()), uri = {}, i = 14;
+        var o = parseUri.options, m = o.parser[o.strictMode ? "strict" : "loose"].exec(str.toString()), uri = {},
+            i = 14;
 
         while (i -= 1) {
             uri[o.key[i]] = m[i] || "";

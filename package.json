@@ -1,46 +1,51 @@
 {
-    "name": "ihave.to",
-    "description": "Catch ideas. As they come and let them grow with your team in real time",
-    "version": "0.9.56",
-    "author": {
-        "name": "Bernhard Bezdek",
-        "email": "bernhard.bezdek@googlemail.com"
-    },
-    "license": "MIT",
-    "preferGlobal": "true",
-    "dependencies": {
-        "formidable": "*",
-        "express": "*",
-        "body-parser": "*",
-        "gm": "*",
-        "mime": "*",
-        "socket.io": "*",
-        "clrlog":"*"
-    },
-    "keywords": [
-        "memo",
-        "board",
-        "real time",
-        "collaborate",
-        "aes",
-        "to do",
-        "task",
-        "manager",
-        "clientside encryption"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/BernhardBezdek/ihave.to.git"
-    },
-    "bin": {
-        "ihaveto": "./bin/ihaveto"
-    },
-    "engines": {
-        "node": ">= 0.8.0"
-    },
-    "readmeFilename": "https://github.com/BernhardBezdek/ihave.to/blob/master/README.md",
-    "bugs": {
-        "url": "https://github.com/BernhardBezdek/ihave.to/issues"
-    },
-    "homepage": "http://www.ihave.to"
+  "name": "ihave.to",
+  "description": "Catch ideas. As they come and let them grow with your team in real time",
+  "version": "0.9.7",
+  "author": {
+    "name": "Bernhard Bezdek",
+    "email": "bernhard.bezdek@googlemail.com"
+  },
+  "scripts": {
+    "postinstall": "mkdir ./upload && mkdir ./boards && chmod 777 ./upload && chmod 777 ./boards && chmod -R 777 ./public && chmod -R 777 ./server",
+    "start": "node server.js",
+    "develop": ""
+  },
+  "license": "MIT",
+  "preferGlobal": true,
+  "dependencies": {
+    "formidable": "*",
+    "express": "*",
+    "body-parser": "*",
+    "gm": "*",
+    "mime": "*",
+    "socket.io": "*",
+    "clrlog": "*"
+  },
+  "keywords": [
+    "memo",
+    "board",
+    "real time",
+    "collaborate",
+    "aes",
+    "to do",
+    "task",
+    "manager",
+    "clientside encryption"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BernhardBezdek/ihave.to.git"
+  },
+  "bin": {
+    "ihaveto": "./bin/ihaveto"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "readmeFilename": "https://github.com/BernhardBezdek/ihave.to/blob/master/README.md",
+  "bugs": {
+    "url": "https://github.com/BernhardBezdek/ihave.to/issues"
+  },
+  "homepage": "http://www.ihave.to"
 }

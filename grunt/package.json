@@ -11,6 +11,9 @@
     "grunt-shell-spawn": "*",
     "grunt-contrib-jshint": "*",
     "grunt-notify": "*",
-    "grunt-contrib-uglify":"*"
+    "grunt-contrib-uglify": "*"
+  },
+  "dependencies": {
+    "grunt": "^1.0.1"
   }
 }
