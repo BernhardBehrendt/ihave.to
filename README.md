@@ -1,103 +1,99 @@
 #iHave.to/do#
-##AES secured and real time enabled plain memoboard##
+##End2End encrypted and real time enabled memoboard##
 
-[![Build Status](https://travis-ci.org/BernhardBezdek/ihave.to.svg?branch=master)](https://travis-ci.org/BernhardBezdek/ihave.to)
 [![Dependency Status](https://gemnasium.com/BernhardBezdek/ihave.to.svg)](https://gemnasium.com/BernhardBezdek/ihave.to)
 
 
-iHave.to was created to be creative focusing ideas as they come and bring the tools to follow how those ideas were grown.
-It's also possible to be creative in a collaborative way via realtime multiuser support.
-Your memo data is strongly protected using AES on your device until any authenticated endpoint.
-If you're using iHave.to in a collaborative way only the encryptet data difference is broadcasted to any user who's actually
-on the memo board.
+iHave.to is a simple realtime synced memo board which is encrypted using AES.
 
-**And YES, you can customize your memo board with custom wallpapers ;-)**.
+**Features** 
 
-[ ![Image](http://www.ihave.to/img/media/architecture_simple.jpg "How it works") ](http://www.ihave.to/)
-[ ![Image](http://www.ihave.to/img/preview/desktop/8.png "iHave.to memoboard view") ](http://www.ihave.to/)
+- End2End encryption
+- Drag&Drop image uploads on notes
+- Custom workspaces and wallpapers
+- Full change history
+- Simple time line
+- Translate youtube links in embedded youtube videos
+- Show website icons for links
+- Colors and custom categories
 
-You can find a working demo [here](http://www.ihave.to).
 
 Author:
-iHave.to/do is written and designed by Bernhard Bezdek all rights reserved.
+iHave.to/do was written and designed by Bernhard Behrendt all rights reserved.
 
 Released under MIT License
 
 ###Dependencies###
-####graphicsmagick/imagemagick####
-For creating thumbs and fix image rotations [graphicsmagick](http://www.graphicsmagick.org/) and [imagemagick](http://www.imagemagick.org/script/index.php)
-is required on system running iHave.to/do
+####graphicsmagick####
+For creating thumbs and fix image rotations [graphicsmagick](http://www.graphicsmagick.org/)
+is required.
 
-In Debain/Ubuntu you can install imagemagick and graphicsmagick via ``apt``
+**OSX**
+
+Install graphicsmagick via e.g ``bower`` or ``mac ports``
+```
+bower install imagemagick
+```
+
+**Debian/Ubuntu**
+Install graphicsmagick via ``apt-get``
 ```
 sudo apt-get install graphicsmagick imagemagick
 ```
 
-On OS X you can install via brew or macports
+**Windows**
 
-On Windows you need visit the websites of imagemagick and graphicsmagick and install the windows version of that libraries.
+Visit the websites of graphicsmagick and install the windows version of that libraries.
+Furthermore you maybe set graphicsmagicks path in ``$PATH`` system variable.
 
 
 ####Node.js####
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](http://npmjs.org/ "Node Packaged Modules").
 
-###Install via NPM###
+###Install###
 ``npm install ihave.to -g``
 
 You now can start application by type in your terminal:
 
-``ihaveto`` (Yes without the dot)
+``ihaveto`` Without the dot ;)
 
-
-###Install via cloned github Repository###
-After you have cloned this repository resolve the dependencies by type in your terminal from projects root folder (where package.js is located):
-``npm install -l``
-
-After this step is done, you can runstandalone/deamonize/grunt this project:
-
-
-###Standalone###
-``node app.js``- That's it. You now can open iHave.to in browser at ``http://localhost:3000``
 
 You can change the port in ``server/settings/config.js``.
 
-
-###Daemon###
-If you want to run iHave.to as a daemon I recommend using [pm2](https://npmjs.org/package/pm2 "Modern CLI process manager for Node apps with a builtin load-balancer").
-
-With following command inside server folder you can start the application:
-
-``pm2 start app.js -i max`` - Thats it. You now can open iHave.to in browser at ``http://localhost:3000``
-
-You can change the port in ``server/settings/config.js``.
- 
-###Grunt (for developers)###
-If you want to change things or want to create new features a grunt task is shipped with this project.
-
-Enter grunt folder from terminal and install grunt and dependencies:
-
-``npm install grunt-cli -g``
-
-``npm install grunt``
-
-``npm install -l``
-
-You can start application now and let them watching your changes typing inside grunt folder:
-
-``grunt``
-
-You now can open iHave.to in browser at ``http://localhost:3000``
-
-You can change the port in ``server/settings/config.js``.
+**CONFIG Settings**
 
 
-###Apendix###
-If you need some documentation you can install [yuidoc](http://npmjs.org/package/yuidocjs) in global context:
 
-``npm install -g yuidocjs``
+    CONFIG = {
+        PORT: 3000,
+        
+        PASS_REFERER: '*',          // Determine which domain referers are passed to uploaded data
+                                    // (* means everything and domain without "http://www." (e.g. mydomain.com)
+                                    // means only calls from given domain which is recommended)
 
-After yuidoc was installed just run following command inside the apps root folder:
-
-``apidoc.sh``
-
-Now open index.html file inside documentation folder in your browser.
+        
+        ROOT: __dirname + '/../',   // The servers root folder
+        
+        MAX_UPLOAD_SIZE: 16,        // Determine the max upload file size in MB
+        
+        MAX_DAYS_UNUSED: 60,        // Determine after how many days a non uses borad/image gets deleted by system
+        
+        IMG_ROOT: 'upload',         // The folder where image uploads are stored in
+        
+        THUMB_HGT: 128,             // The Thumb width (double size fox retina displays)
+        
+        THUMB_WID: 128,             // The Thumb width (double size fox retina displays)
+        
+        GM_QUALITY: 95,             // Set the quality level for image optimisations
+        
+        RUN_CLEANUP: 21600000,      // Means 4 times a day
+        
+        SSL_KEY: null,              // The absolute path to a ssl key file
+        
+        SSL_CERT: null,             // The absolute path to a ssl certificates
+        
+        SSL_CA: null,               // The intermediate CA certificate
+        
+        SSL_PORT: 4433,             // The port which provides SSL
+        
+        ALLOWED_UPLOAD_FILES: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'] // The allowed image upload formats
