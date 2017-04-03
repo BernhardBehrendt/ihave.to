@@ -2,7 +2,7 @@ node_modules/
 boards
 .DS_Store
 ./documentation
-.idea/
+.idea
 ./.sass-cache
 public/js/salt.js
 *.log
