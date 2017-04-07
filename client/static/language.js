@@ -127,7 +127,7 @@ window.LANGUAGE = {
 
         REALLY_RESTORE_MEMO: 'Soll das Memo wiederhergestellt werden?',
 
-        EXAMPLE_TEXT: 'Das ist das erste Memo auf deinem Board.<br>Lege deine Notizen, Links  <a style="background-image:url(http://github.com/favicon.ico)" title="https://github.com/BernhardBehrendt" target="_blank" href="https://github.com/BernhardBehrendt"></a> oder Foto oder Youtube Video URL\'s hier ab.<br><br>Viel Spass mit iHave.to'
+        EXAMPLE_TEXT: 'Das ist das erste Memo auf deinem Board.<br>Lege deine Notizen, Links  <a style="background-image:url(http://github.com/favicon.ico)" title="https://github.com/BernhardBezdek" target="_blank" href="https://github.com/BernhardBezdek"></a> oder Foto oder Youtube Video URL\'s hier ab.<br><br>Viel Spass mit iHave.to'
     },
     EN: {
         // BASICS
