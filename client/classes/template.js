@@ -57,7 +57,7 @@ var Template;
      *
      *
      *
-     * @author  Bernhard Bezdek
+     * @author  Bernhard Behrendt
      * @module ToolBox
      * @submodule TemplateEngine
      * @class Template

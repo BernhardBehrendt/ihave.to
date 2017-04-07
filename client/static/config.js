@@ -56,7 +56,7 @@ var CONF;
                 OBJ: 'object',
                 NUM: 'number',
                 SALT: null,
-                SCREEN_DEFAULT_BG: 'http://ihave.to/img/wallpaper-default.jpg',
+                SCREEN_DEFAULT_BG: '/img/wallpaper-default.jpg',
                 BLOCKRESIZE: 'input[type="text"]:focus, textarea'
             },
             ARRAY: {

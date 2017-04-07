@@ -75,7 +75,7 @@ window.LANGUAGE = {
         CHRONO_INFO: 'Hier kannst du deine Memos von neu nach alt sortieren',
         SCREEN_INFO: 'Hier kannst du weitere Boards anlegen & aufrufen',
         SETTINGS_INFO: 'Hier kannst du die den Memofarben Bedeutungen zuweisen',
-        SYSTEM_INFO: 'iHave.to ist ein Projekt von Bernhard Bezdek &copy; 2013/14',
+        SYSTEM_INFO: 'iHave.to ist ein Projekt von Bernhard Behrendt &copy; 2016/17',
         STORE_POST_INFO: 'Hier wird das neue bzw. bearbeitete Memo gespeichert',
         CANCEL_INFO: 'Hier kannst du den aktuellen Vorgang abbrechen',
         BACK_INFO: 'Hier gehts zurück zu den Memos',
@@ -127,7 +127,7 @@ window.LANGUAGE = {
 
         REALLY_RESTORE_MEMO: 'Soll das Memo wiederhergestellt werden?',
 
-        EXAMPLE_TEXT: 'Das ist das erste Memo auf deinem Board.<br>Lege deine Notizen, Links  <a style="background-image:url(http://www.iHave.to/favicon.ico)" title="http://www.iHave.to" target="_blank" href="http://www.iHave.to"></a> oder Foto oder Youtube Video URL\'s hier ab.<br><br>Viel Spass mit iHave.to/do'
+        EXAMPLE_TEXT: 'Das ist das erste Memo auf deinem Board.<br>Lege deine Notizen, Links  <a style="background-image:url(http://github.com/favicon.ico)" title="https://github.com/BernhardBehrendt" target="_blank" href="https://github.com/BernhardBehrendt"></a> oder Foto oder Youtube Video URL\'s hier ab.<br><br>Viel Spass mit iHave.to'
     },
     EN: {
         // BASICS
@@ -204,7 +204,7 @@ window.LANGUAGE = {
         CHRONO_INFO: 'Order your memo by date descending here',
         SCREEN_INFO: 'Create new workspaces here',
         SETTINGS_INFO: 'Here you can change the color meaning',
-        SYSTEM_INFO: 'iHave.to is was found by Bernhard Bezdek &copy; 2013',
+        SYSTEM_INFO: 'iHave.to is was found by Bernhard Behrendt &copy; 2013',
         STORE_POST_INFO: 'Here you can save changes made on a memo',
         CANCEL_INFO: 'Here you can abort your current modification',
         BACK_INFO: 'Back to memo view',

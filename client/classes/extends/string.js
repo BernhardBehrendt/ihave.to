@@ -143,7 +143,7 @@
             text = text.replace(/(http:\/\/){2,}/g, 'http://');
             text = text.replace(/(https:\/\/){2,}/g, 'https://');
         }
-        var exp = /\b((http:\/\/|https:\/\/)[\w\\/\-?=]+)/g;
+        var exp = /\b((http:\/\/|https:\/\/)[\w\\/\-?=\.:]+)/g;
 
         text = text.replace(exp, function ($1) {
             var oUri = parseUri($1);

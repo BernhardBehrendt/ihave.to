@@ -1,5 +1,5 @@
-#iHave.to/do#
-##End2End encrypted and real time enabled memoboard##
+#iHave.to
+##End2End encrypted and real time enabled memoboard
 
 [![Dependency Status](https://gemnasium.com/BernhardBezdek/ihave.to.svg)](https://gemnasium.com/BernhardBezdek/ihave.to)
 
@@ -23,8 +23,8 @@ iHave.to/do was written and designed by Bernhard Behrendt all rights reserved.
 
 Released under MIT License
 
-###Dependencies###
-####graphicsmagick####
+###Dependencies
+####graphicsmagick
 For creating thumbs and fix image rotations [graphicsmagick](http://www.graphicsmagick.org/)
 is required.
 
@@ -47,10 +47,10 @@ Visit the websites of graphicsmagick and install the windows version of that lib
 Furthermore you maybe set graphicsmagicks path in ``$PATH`` system variable.
 
 
-####Node.js####
+####Node.js
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](http://npmjs.org/ "Node Packaged Modules").
 
-###Install###
+###Install
 ``npm install ihave.to -g``
 
 You now can start application by type in your terminal:
@@ -61,8 +61,6 @@ You now can start application by type in your terminal:
 You can change the port in ``server/settings/config.js``.
 
 **CONFIG Settings**
-
-
 
     CONFIG = {
         PORT: 3000,

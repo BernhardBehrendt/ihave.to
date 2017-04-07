@@ -9,7 +9,7 @@ var Board;
      * Board converts a screentimline into a valid screen viewh
      *
      *
-     * @author Bernhard Bezdek <bernahrd.bezdek@googlemail.com>
+     * @author Bernhard Behrendt <bernahrd.bezdek@googlemail.com>
      * @module Client
      * @submodule Classes
      * @class Board

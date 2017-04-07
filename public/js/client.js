@@ -122,7 +122,7 @@ window.LANGUAGE = {
         CHRONO_INFO: "Hier kannst du deine Memos von neu nach alt sortieren",
         SCREEN_INFO: "Hier kannst du weitere Boards anlegen & aufrufen",
         SETTINGS_INFO: "Hier kannst du die den Memofarben Bedeutungen zuweisen",
-        SYSTEM_INFO: "iHave.to ist ein Projekt von Bernhard Bezdek &copy; 2013/14",
+        SYSTEM_INFO: "iHave.to ist ein Projekt von Bernhard Behrendt &copy; 2016/17",
         STORE_POST_INFO: "Hier wird das neue bzw. bearbeitete Memo gespeichert",
         CANCEL_INFO: "Hier kannst du den aktuellen Vorgang abbrechen",
         BACK_INFO: "Hier gehts zurück zu den Memos",
@@ -163,7 +163,7 @@ window.LANGUAGE = {
         NEW_POST: "Neues Memo anlegen",
         EDIT_POST: "Memo bearbeiten",
         REALLY_RESTORE_MEMO: "Soll das Memo wiederhergestellt werden?",
-        EXAMPLE_TEXT: 'Das ist das erste Memo auf deinem Board.<br>Lege deine Notizen, Links  <a style="background-image:url(http://www.iHave.to/favicon.ico)" title="http://www.iHave.to" target="_blank" href="http://www.iHave.to"></a> oder Foto oder Youtube Video URL\'s hier ab.<br><br>Viel Spass mit iHave.to/do'
+        EXAMPLE_TEXT: 'Das ist das erste Memo auf deinem Board.<br>Lege deine Notizen, Links  <a style="background-image:url(http://github.com/favicon.ico)" title="https://github.com/BernhardBehrendt" target="_blank" href="https://github.com/BernhardBehrendt"></a> oder Foto oder Youtube Video URL\'s hier ab.<br><br>Viel Spass mit iHave.to'
     },
     EN: {
         MOBILE_TITLE: "iHave.to",
@@ -229,7 +229,7 @@ window.LANGUAGE = {
         CHRONO_INFO: "Order your memo by date descending here",
         SCREEN_INFO: "Create new workspaces here",
         SETTINGS_INFO: "Here you can change the color meaning",
-        SYSTEM_INFO: "iHave.to is was found by Bernhard Bezdek &copy; 2013",
+        SYSTEM_INFO: "iHave.to is was found by Bernhard Behrendt &copy; 2013",
         STORE_POST_INFO: "Here you can save changes made on a memo",
         CANCEL_INFO: "Here you can abort your current modification",
         BACK_INFO: "Back to memo view",
@@ -330,7 +330,7 @@ var CONF;
                 OBJ: "object",
                 NUM: "number",
                 SALT: null,
-                SCREEN_DEFAULT_BG: "http://ihave.to/img/wallpaper-default.jpg",
+                SCREEN_DEFAULT_BG: "/img/wallpaper-default.jpg",
                 BLOCKRESIZE: 'input[type="text"]:focus, textarea'
             },
             ARRAY: {
@@ -399,7 +399,7 @@ var log;
         var b = this;
         b = b.replace(/Www/g, "www").replace(/WWw/g, "www").replace(/WWW/, "www"), null === b.match(/https:\/\//) && null === b.match(/http:\/\//) && null === b.match(/www\./) || (null !== b.match(/www\./) && null === b.match(/http:\/\//) && null === b.match(/https:\/\//) && (b = b.replace(/www./g, "http://www.")), 
         b = b.replace(/(http:\/\/){2,}/g, "http://"), b = b.replace(/(https:\/\/){2,}/g, "https://"));
-        var c = /\b((http:\/\/|https:\/\/)[\w\\/\-?=]+)/g;
+        var c = /\b((http:\/\/|https:\/\/)[\w\\/\-?=\.:]+)/g;
         return b = b.replace(c, function(b) {
             var d = a(b), e = "$1";
             return null !== b.match("https://www.youtube.com") || null !== b.match("https://youtube.com") || null !== b.match("http://youtube.com") || null !== b.match("http://youtu.be") || null !== b.match("http://www.youtube.com") || null !== b.match("http://www.youtu.be") ? (e = b.match("&") ? b.substr(0, b.search(/&/)) + " " + b.substr(b.search(/&/), b.length) : b, 

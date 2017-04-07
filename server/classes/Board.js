@@ -10,7 +10,7 @@ var Board = null;
     /**
      * The iHave.to
      * Board Class which requires to be called inside the sockt.io framework
-     * @author Bernhard Bezdek
+     * @author Bernhard Behrendt
      * @module Server
      * @submodule Classes
      * @class Board

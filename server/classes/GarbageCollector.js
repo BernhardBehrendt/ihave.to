@@ -8,7 +8,7 @@ var GarbageCollector = null;
      * GarbageCollector class which work cronjob like
      * and ensure that images and board filew which are outdated are deleted
      *
-     * @author Bernhard Bezdek
+     * @author Bernhard Behrendt
      * @module Server
      * @submodule Classes
      * @class GarbageCollector

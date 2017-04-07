@@ -117,7 +117,7 @@
         });
     });
 // Express settings
-    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
 
     app.use(express.static(CONFIG.ROOT + '../public/'));

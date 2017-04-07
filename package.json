@@ -1,9 +1,9 @@
 {
   "name": "ihave.to",
   "description": "Catch ideas. As they come and let them grow with your team in real time",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "author": {
-    "name": "Bernhard Bezdek",
+    "name": "Bernhard Behrendt",
     "email": "bernhard.bezdek@googlemail.com"
   },
   "scripts": {

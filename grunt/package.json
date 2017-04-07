@@ -1,6 +1,9 @@
 {
-  "name": "node_plataform",
+  "name": "iHave.to-Development",
   "version": "0.1.0",
+  "scripts": {
+    "develop": "./node_modules/.bin/grunt"
+  },
   "devDependencies": {
     "grunt": "*",
     "grunt-contrib-watch": "*",
