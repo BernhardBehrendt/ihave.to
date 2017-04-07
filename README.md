@@ -1,4 +1,5 @@
 #iHave.to
+
 ##End2End encrypted and real time enabled memoboard
 
 [![Dependency Status](https://gemnasium.com/BernhardBezdek/ihave.to.svg)](https://gemnasium.com/BernhardBezdek/ihave.to)
@@ -23,20 +24,24 @@ iHave.to/do was written and designed by Bernhard Behrendt all rights reserved.
 
 Released under MIT License
 
-###Dependencies
-####graphicsmagick
+##Dependencies
+
+###Graphicsmagick
 For creating thumbs and fix image rotations [graphicsmagick](http://www.graphicsmagick.org/)
 is required.
 
 **OSX**
 
 Install graphicsmagick via e.g ``bower`` or ``mac ports``
+
 ```
 bower install imagemagick
 ```
 
 **Debian/Ubuntu**
+
 Install graphicsmagick via ``apt-get``
+
 ```
 sudo apt-get install graphicsmagick imagemagick
 ```
@@ -47,10 +52,12 @@ Visit the websites of graphicsmagick and install the windows version of that lib
 Furthermore you maybe set graphicsmagicks path in ``$PATH`` system variable.
 
 
-####Node.js
+###Node.js
+
 iHave.to requires [node.js](http://nodejs.org/ "The node.js environment") and [npm](http://npmjs.org/ "Node Packaged Modules").
 
 ###Install
+
 ``npm install ihave.to -g``
 
 You now can start application by type in your terminal:
