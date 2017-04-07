@@ -7,3 +7,5 @@ boards
 public/js/salt.js
 *.log
 debug
+server/settings/salt
+.idea
