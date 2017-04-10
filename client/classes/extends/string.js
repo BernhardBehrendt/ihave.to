@@ -95,7 +95,12 @@
      * @return {String} the escaped html
      */
     String.prototype.escapeHtml = function () {
-        return this.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        return this.toString()
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     };
     /**
      * Convert linebreaks into HTML Linebreaks
